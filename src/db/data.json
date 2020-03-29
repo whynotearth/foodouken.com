@@ -1,0 +1,103 @@
+{
+  "name": "Bang Bang Bakery",
+  "description": "This bakery is not for bang bang.",
+  "tags": ["abc", "def", "ghi"],
+  "details": {
+    "email": "email@email.com",
+    "phone": "1232224244"
+  },
+  "address": {
+    "pincode": "123224",
+    "street": "that street",
+    "building_no": "",
+    "city": "phnom penh",
+    "country": "Cambodia"
+  },
+  "categories": [
+    "deserts",
+    "cakes",
+    "lunch"
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Chinese platter",
+      "category": "lunch",
+      "price": "24",
+      "currency": "USD",
+      "image": "image_link"
+    },
+    {
+      "id": "2",
+      "name": "Chinese platter",
+      "category": "lunch",
+      "price": "24",
+      "currency": "USD",
+      "image": "image_link"
+    },
+    {
+      "id": "3",
+      "name": "Chinese platter",
+      "category": "lunch",
+      "price": "24",
+      "currency": "USD",
+      "image": "image_link"
+    },
+    {
+      "id": "4",
+      "name": "Chinese platter",
+      "category": "lunch",
+      "price": "24",
+      "currency": "USD",
+      "image": "image_link"
+    },
+    {
+      "id": "5",
+      "name": "Chinese platter",
+      "category": "lunch",
+      "price": "24",
+      "currency": "USD",
+      "image": "image_link"
+    }
+  ],
+  "opening_hours": {
+    "open_always": "true",
+    "days": [
+      {
+        "day": "0",
+        "start_time": "1200",
+        "end_time": "2300"
+      },
+      {
+        "day": "1",
+        "start_time": "1200",
+        "end_time": "2300"
+      },
+      {
+        "day": "2",
+        "start_time": "1200",
+        "end_time": "2300"
+      },
+      {
+        "day": "3",
+        "start_time": "1200",
+        "end_time": "2300"
+      },
+      {
+        "day": "4",
+        "start_time": "1200",
+        "end_time": "2300"
+      },
+      {
+        "day": "5",
+        "start_time": "1200",
+        "end_time": "2300"
+      },
+      {
+        "day": "6",
+        "start_time": "1200",
+        "end_time": "2300"
+      }
+    ]
+  }
+}
