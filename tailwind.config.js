@@ -3,7 +3,8 @@ module.exports = {
     extend: {
       colors: {
         primary: '#003037',
-        secondary: '#173F44'
+        secondary: '#173F44',
+        tertiary: '#437784'
       }
       // screens: {
       //   sm: '640px',
@@ -34,6 +35,8 @@ module.exports = {
       // }
     }
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'active']
+  },
   plugins: []
 };
