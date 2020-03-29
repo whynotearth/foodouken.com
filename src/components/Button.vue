@@ -1,8 +1,10 @@
 <template>
   <component
     :is="type"
-    class="rounded-full bg-tertiary px-10 py-2 active:bg-secondary cursor-pointer"
+    class="rounded-full bg-tertiary px-10 py-2 active:bg-secondary cursor-pointer border-none"
     @click="onClick"
+    :href="href"
+    :to="to"
   >
     <span class="text-white uppercase">
       {{ title }}
