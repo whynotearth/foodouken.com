@@ -26,7 +26,7 @@ export default {
     },
     onClick: {
       type: Function,
-      default: () => console.log('clicked button')
+      default: event => alert(event)
     },
     title: {
       type: String,
