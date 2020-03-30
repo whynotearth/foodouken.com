@@ -1,8 +1,7 @@
 {
   "name": "Bang Bang Bakery",
   "description": "This bakery is not for bang bang.",
-  "tags": ["abc", "def", "ghi"],
-  "details": {
+  "contact_details": {
     "email": "email@email.com",
     "phone": "1232224244"
   },
@@ -14,50 +13,70 @@
     "country": "Cambodia"
   },
   "categories": [
-    "deserts",
-    "cakes",
-    "lunch"
-  ],
-  "products": [
-    {
+    { 
       "id": "1",
-      "name": "Chinese platter",
-      "category": "lunch",
-      "price": "24",
-      "currency": "USD",
-      "image": "image_link"
+      "name": "Cakes & Cream",
+      "slug": "cakes-and-cream"
     },
-    {
+    { 
       "id": "2",
-      "name": "Chinese platter",
-      "category": "lunch",
-      "price": "24",
-      "currency": "USD",
-      "image": "image_link"
+      "name": "Food & Cream",
+      "slug": "food-and-cream"
     },
-    {
+    { 
       "id": "3",
-      "name": "Chinese platter",
-      "category": "lunch",
-      "price": "24",
-      "currency": "USD",
-      "image": "image_link"
+      "name": "Dream & Cream",
+      "slug": "dream-and-cream"
     },
-    {
+    { 
       "id": "4",
-      "name": "Chinese platter",
-      "category": "lunch",
-      "price": "24",
-      "currency": "USD",
-      "image": "image_link"
+      "name": "Juice & Cream",
+      "slug": "juice-and-cream"
     },
-    {
+    { 
       "id": "5",
-      "name": "Chinese platter",
-      "category": "lunch",
-      "price": "24",
-      "currency": "USD",
-      "image": "image_link"
+      "name": "Scream & Cream",
+      "slug": "scream-and-cream"
+    },
+    { 
+      "id": "6",
+      "name": "Bream & Cream",
+      "slug": "bream-and-cream"
+    },
+    { 
+      "id": "7",
+      "name": "Lream & Cream",
+      "slug": "lream-and-cream"
+    },
+    { 
+      "id": "8",
+      "name": "Fream & Cream",
+      "slug": "fream-and-cream"
+    },
+    { 
+      "id": "9",
+      "name": "Kream & Cream",
+      "slug": "kream-and-cream"
+    },
+    { 
+      "id": "11",
+      "name": "Sream & Cream",
+      "slug": "sream-and-cream"
+    },
+    { 
+      "id": "12",
+      "name": "Jream & Cream",
+      "slug": "jream-and-cream"
+    },
+    { 
+      "id": "13",
+      "name": "Pream & Cream",
+      "slug": "pream-and-cream"
+    },
+    { 
+      "id": "14",
+      "name": "Oream & Cream",
+      "slug": "oream-and-cream"
     }
   ],
   "opening_hours": {
