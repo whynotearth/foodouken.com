@@ -8,7 +8,13 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: ':category',
+        component: Home
+      }
+    ]
   }
   // {
   //   path: '/about',
