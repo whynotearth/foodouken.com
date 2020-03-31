@@ -4,7 +4,7 @@ module.exports = {
       colors: {
         primary: '#003037',
         secondary: '#173F44',
-        tertiary: '#437784'
+        tertiary: '#0E9EC2'
       }
       // screens: {
       //   sm: '640px',
