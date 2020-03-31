@@ -1,7 +1,7 @@
 <template>
   <component
     :is="type"
-    class="rounded-full bg-tertiary px-10 py-2 active:bg-secondary cursor-pointer border-none"
+    class="rounded-full bg-tertiary px-10 py-2 ripple cursor-pointer border-none"
     @click="onClick"
     :href="href"
     :to="to"
@@ -48,17 +48,16 @@ export default {
 </script>
 
 <style scoped>
-/* .ripple {
+.ripple {
   background-position: center;
-  transition: background 0.5s;
+  transition: background 0.4s;
 }
 .ripple:hover {
-  background: #437784 radial-gradient(circle, transparent 1%, #437784 1%)
-    center/15000%;
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
 .ripple:active {
-  background-color: #173f44;
+  background-color: #6eb9f7;
   background-size: 100%;
   transition: background 0s;
-} */
+}
 </style>
