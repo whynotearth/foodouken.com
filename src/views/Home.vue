@@ -18,8 +18,8 @@
           Cart
         </h3>
         <cart />
-        <p class="text-gray-500 text-center">
-          Min order $5. 🌱 Vegan-Friendly Estimated Delivery Time: 45 minutes.
+        <p class="text-gray-500 text-center text-lg">
+          Estimated Delivery Time: 45 minutes.
         </p>
         <div class="w-full text-center my-4">
           <Button title="Order now" />
