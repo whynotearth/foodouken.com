@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-secondary shadow-md rounded-lg mb-4 p-4">
+  <div class="bg-secondary shadow-md rounded-lg mb-4 p-4 max-w-sm m-auto">
     <cart-item v-for="x in 2" :key="x" />
     <hr class="my-4" />
     <span class="text-gray-500">Sub total</span>
