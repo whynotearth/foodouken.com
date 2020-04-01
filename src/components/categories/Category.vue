@@ -11,7 +11,7 @@
       />
     </div>
     <p
-      class="text-center text-xs"
+      class="text-center text-sm"
       :class="selected ? 'text-white' : 'text-gray-500'"
     >
       {{ title }}

@@ -28,7 +28,7 @@ export default {
           name: 'Product name',
           image:
             'https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466__340.jpg',
-          price: 8.00
+          price: 8.0
         };
       }
     }
