@@ -7,8 +7,10 @@
         class="h-48 w-48 m-auto rounded-full"
       />
     </div>
-    <h1 class="text-white text-6xl font-semibold">Bang Bang Bakery-Café</h1>
-    <h2 class="text-5xl text-gray-500 font-bold">Delivery</h2>
+    <h1 class="text-white md:text-6xl text-5xl font-bold">
+      Bang Bang Bakery-Café
+    </h1>
+    <h2 class="md:text-5xl text-3xl text-gray-500 font-bold mb-8">Delivery</h2>
     <p class="text-gray-500 mt-2">
       🍞 Small #artisan bakery and café in #SiemReap
       <br />
