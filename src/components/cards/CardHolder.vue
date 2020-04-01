@@ -1,16 +1,16 @@
 <template>
-  <div class="grid md:grid-cols-2 gap-4 md:mr-4">
-    <category-card v-for="x in 5" :key="x" />
+  <div class="grid md:grid-cols-2 gap-6 md:mr-8">
+    <product-card v-for="x in 5" :key="x" />
   </div>
 </template>
 
 <script>
-import CategoryCard from '@/components/cards/CategoryCard.vue';
+import ProductCard from '@/components/cards/ProductCard.vue';
 
 export default {
   name: 'CardHolder',
   components: {
-    CategoryCard
+    ProductCard
   }
 };
 </script>
