@@ -3,7 +3,7 @@
     <hero-section />
     <hr class="my-8 border-gray-700" />
     <section class="flex md:flex-row flex-col-reverse my-4">
-      <div class="md:w-8/12 md:border-r border-gray-700">
+      <div class="md:w-8/12 md:border-r border-white">
         <category-holder />
         <h3 class="text-5xl text-white font-bold text-center mb-4">
           {{ category || 'Select a category' }}
