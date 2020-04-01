@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-row border-b border-gray-700 py-2">
+  <div class="flex flex-row py-2">
     <img
       src="https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466__340.jpg"
-      class="h-12 w-12"
+      class="h-12 w-12 my-auto"
       alt="Product image"
     />
     <div class="w-auto mx-2 w-full">
@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import plus from '@/assets/plus.svg';
-import minus from '@/assets/minus.svg';
+import plus from '@/assets/plus.png';
+import minus from '@/assets/minus.png';
 
 export default {
   name: 'CartItem',
