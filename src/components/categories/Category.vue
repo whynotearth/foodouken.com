@@ -1,7 +1,7 @@
 <template>
   <div class="m-2 cursor-pointer" @click="$emit('clicked')">
     <div
-      class="h-20 w-20 p-1 flex-none rounded-full m-auto"
+      class="md:h-20 md:w-20 h-16 w-16 p-1 flex-none rounded-full m-auto"
       :class="selected ? 'border-white border-2' : ''"
     >
       <img
@@ -11,11 +11,8 @@
       />
     </div>
     <p
-      :class="
-        selected
-          ? 'text-white font-medium text-center'
-          : 'text-gray-500 text-center'
-      "
+      class="text-center text-xs"
+      :class="selected ? 'text-white' : 'text-gray-500'"
     >
       {{ title }}
     </p>

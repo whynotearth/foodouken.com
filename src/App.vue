@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="font-sans bg-primary min-h-screen px-8 pb-5 h-full">
+  <div id="app" class="font-sans bg-primary h-full max-w-screen-xl">
     <Navbar />
-    <router-view />
+    <router-view class="md:mx-8 pb-5 mx-4" />
   </div>
 </template>
 
