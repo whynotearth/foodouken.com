@@ -3,40 +3,58 @@ import { httpClient } from '../../services/httpClient';
 // initial state
 const state = {
   categories: [],
-  selectedCategory: {},
-  selectedProducts: []
+  selectedCategorySlug: 'for-you',
+  pages: []
 };
 
 // getters
 const getters = {
   foodCategories(state) {
-    let foodCategories = state.categories.filter(c => c.id > 15 && c.id <= 22);
+    let foodCategories = state.pages.filter(
+      c =>
+        c.categories[0].name === c.slug && c.brand === 'bang-bang-bakery-cafe'
+    );
     return foodCategories;
+  },
+  categories(state) {
+    let categories = state.pages.filter(c => c.categories[0].name === c.slug);
+
+    return categories;
+  },
+  selectedCategory(state) {
+    return state.pages.filter(c => c.slug === state.selectedCategorySlug)[0];
+  },
+  selectedProducts(state) {
+    console.log(state);
+    return state.pages
+      .filter(
+        c =>
+          c.categories[0].name === c.slug &&
+          c.slug === state.selectedCategorySlug
+      )
+      .map(c => c.custom.products)[0];
   }
 };
 
 // actions
 const actions = {
-  getAllCategories({ commit }) {
-    return httpClient.get('/categories').then(response => {
-      commit('updateCategories', response.data);
+  loadPageData({ commit }) {
+    return httpClient.get('/').then(response => {
+      commit('updatePageData', response.data);
     });
   },
-  getCategoryBySlug({ commit }, slug) {
-    return httpClient.get('/pages/slug/foodouken/' + slug).then(response => {
-      commit('updateSelectedCategory', response.data);
-    });
+  updateSelectedCategory({ commit }, slug) {
+    commit('updateSelectedCategorySlug', slug);
   }
 };
 
 // mutations
 const mutations = {
-  updateCategories(state, categories) {
-    state.categories = categories;
+  updatePageData(state, pages) {
+    state.pages = pages;
   },
-  updateSelectedCategory(state, category) {
-    state.selectedCategory = category;
-    state.selectedProducts = category.custom.products;
+  updateSelectedCategorySlug(state, slug) {
+    state.selectedCategorySlug = slug;
   }
 };
 

@@ -5,7 +5,10 @@
     <section class="flex md:flex-row flex-col-reverse my-4">
       <div class="md:w-8/12 md:border-r border-white">
         <category-holder />
-        <h3 class="text-5xl text-white font-bold text-center mb-4">
+        <h3
+          v-if="selectedCategory"
+          class="text-5xl text-white font-bold text-center mb-4"
+        >
           {{ selectedCategory.title || 'Select a category' }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">
@@ -35,6 +38,7 @@ import CardHolder from '@/components/cards/CardHolder.vue';
 import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
 import Cart from '@/components/checkout/Cart.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Home',
@@ -45,10 +49,16 @@ export default {
     Button,
     Cart
   },
-  computed: {
-    selectedCategory() {
-      return this.$store.state.category.selectedCategory;
+  methods: {
+    fetchSiteData() {
+      this.$store.dispatch('category/loadPageData');
     }
+  },
+  computed: {
+    ...mapGetters('category', ['selectedCategory'])
+  },
+  mounted() {
+    this.fetchSiteData();
   }
 };
 </script>

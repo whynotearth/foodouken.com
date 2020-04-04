@@ -2,7 +2,7 @@
   <div class="grid md:grid-cols-2 gap-6 md:mr-8">
     <product-card
       :product="product"
-      v-for="product in products"
+      v-for="product in selectedProducts"
       :key="product.id"
     />
   </div>
@@ -10,6 +10,7 @@
 
 <script>
 import ProductCard from '@/components/cards/ProductCard.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'CardHolder',
@@ -17,9 +18,7 @@ export default {
     ProductCard
   },
   computed: {
-    products() {
-      return this.$store.state['category'].selectedProducts;
-    }
+    ...mapGetters('category', ['selectedProducts'])
   }
 };
 </script>
