@@ -19,7 +19,7 @@
     </p>
     <div class="relative flex-grow">
       <div
-        class="absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
+        class="ripple absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
       >
         <img src="../../assets/add.png" alt />
       </div>
@@ -50,5 +50,18 @@ export default {
   background: #0f292d;
   border-color: #0e9ec2;
   color: #0e9ec2;
+}
+.ripple {
+  background-position: center;
+  transition: background 0.4s;
+}
+.ripple:hover {
+  background: #1d484f radial-gradient(circle, transparent 1%, #1d484f 1%)
+    center/15000%;
+}
+.ripple:active {
+  background-color: #217e8f;
+  background-size: 100%;
+  transition: background 0s;
 }
 </style>
