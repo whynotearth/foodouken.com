@@ -16,7 +16,7 @@
     </p>
     <div class="relative flex-grow">
       <div
-        class="absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus"
+        class="absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
       >
         <img src="../../assets/add.png" alt />
       </div>
