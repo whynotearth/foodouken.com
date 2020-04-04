@@ -1,6 +1,10 @@
 <template>
   <div class="grid md:grid-cols-2 gap-6 md:mr-8">
-    <product-card v-for="x in 5" :key="x" />
+    <product-card
+      :product="product"
+      v-for="product in products"
+      :key="product.id"
+    />
   </div>
 </template>
 
@@ -11,6 +15,11 @@ export default {
   name: 'CardHolder',
   components: {
     ProductCard
+  },
+  computed: {
+    products() {
+      return this.$store.state['category'].selectedProducts;
+    }
   }
 };
 </script>

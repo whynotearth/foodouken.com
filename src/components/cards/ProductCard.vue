@@ -7,11 +7,11 @@
     />
     <p class="my-auto">
       <span class="mx-4 text-gray-400 my-1 inline-block text-lg">
-        {{ product.name }}
+        {{ this.product.name }}
       </span>
       <br />
       <span class="mx-4 text-gray-500 my-1 inline-block">
-        ${{ product.price }}
+        ${{ this.product.price }}
       </span>
     </p>
   </div>
@@ -20,19 +20,7 @@
 <script>
 export default {
   name: 'ProductCard',
-  props: {
-    product: {
-      type: Object,
-      default: () => {
-        return {
-          name: 'Product name',
-          image:
-            'https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466__340.jpg',
-          price: 8.0
-        };
-      }
-    }
-  }
+  props: ['product']
 };
 </script>
 
