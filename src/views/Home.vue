@@ -1,12 +1,15 @@
 <template>
   <div class="h-full">
-    <hero-section />
+    <hero-section :heroData="orgData" />
     <hr class="my-8 border-gray-700" />
     <section class="flex md:flex-row flex-col-reverse my-4">
       <div class="md:w-8/12 md:border-r border-white">
-        <category-holder />
-        <h3 class="text-5xl text-white font-bold text-center mb-4">
-          {{ category || 'Select a category' }}
+        <category-holder :categories="categories" />
+        <h3
+          v-if="category"
+          class="text-5xl text-white font-bold text-center mb-4"
+        >
+          {{ loadingCategory ? 'Loading category...' : category.title }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">
           Prices per piece
@@ -35,6 +38,7 @@ import CardHolder from '@/components/cards/CardHolder.vue';
 import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
 import Cart from '@/components/checkout/Cart.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
@@ -45,10 +49,19 @@ export default {
     Button,
     Cart
   },
+  created() {
+    this.fetchHomeData();
+  },
+  methods: {
+    ...mapActions('home', ['fetchHomeData'])
+  },
   computed: {
-    category() {
-      return this.$route.params.category;
-    }
+    ...mapGetters({
+      category: 'category/getCategory',
+      loadingCategory: 'category/getCategoryLoading',
+      orgData: 'home/getOrgData',
+      categories: 'home/getCategories'
+    })
   }
 };
 </script>

@@ -8,24 +8,24 @@
       />
     </div>
     <h1 class="text-white md:text-6xl text-5xl font-bold">
-      Bang Bang Bakery-Café
+      {{ heroData.title }}
     </h1>
     <h2 class="md:text-5xl text-3xl text-gray-500 font-bold mb-8">Delivery</h2>
     <p class="text-gray-500 mt-2">
-      🍞 Small #artisan bakery and café in #SiemReap
-      <br />
-      🍪 Visit us Wed - Sun 8am - 6pm
-      <br />
-      🥨 Sustainable 🤝🏼 Responsible 🌏 Eco-friendly
-      <br />
-      🇰🇭 Proudly Cambodian owned 🇰🇭
+      {{ heroData.description }}
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HeroSection'
+  name: 'HeroSection',
+  props: {
+    heroData: {
+      type: Object,
+      required: true
+    }
+  }
 };
 </script>
 

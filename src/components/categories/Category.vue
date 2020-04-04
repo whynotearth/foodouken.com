@@ -5,7 +5,7 @@
       :class="selected ? 'border-white border-2' : ''"
     >
       <img
-        src="https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466__340.jpg"
+        :src="category.image"
         alt="category"
         class="object-cover h-full w-full rounded-full"
       />
@@ -14,7 +14,7 @@
       class="text-center text-sm"
       :class="selected ? 'text-white' : 'text-gray-500'"
     >
-      {{ title }}
+      {{ category.name }}
     </p>
   </div>
 </template>
@@ -23,9 +23,9 @@
 export default {
   name: 'Category',
   props: {
-    title: {
-      type: String,
-      default: 'Category'
+    category: {
+      type: Object,
+      required: true
     },
     selected: {
       type: Boolean,

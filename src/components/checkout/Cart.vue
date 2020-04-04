@@ -1,6 +1,10 @@
 <template>
   <div class="bg-secondary shadow-md rounded-lg mb-4 p-4 max-w-sm m-auto">
-    <cart-item v-for="x in 2" :key="x" />
+    <cart-item
+      v-for="cartItem in cart"
+      :cart-item="cartItem"
+      :key="cartItem.product.id"
+    />
     <hr class="my-4" />
     <span class="text-gray-500">Sub total</span>
     <br />
@@ -17,6 +21,11 @@ export default {
   name: 'Cart',
   components: {
     CartItem
+  },
+  computed: {
+    cart() {
+      return this.$store.state.cart.cartItems;
+    }
   }
 };
 </script>

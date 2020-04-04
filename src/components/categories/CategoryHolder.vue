@@ -5,33 +5,38 @@
     <category
       v-for="category in categories"
       :key="category.id"
-      @clicked="selectCategory(category)"
-      :selected="selectedCategory === category"
-      :title="category.name"
+      @clicked="fetchCategory(category.slug)"
+      :category="category"
+      :selected="getSelectedCategorySlug === category.slug"
     />
   </div>
 </template>
 
 <script>
 import Category from '@/components/categories/Category.vue';
-import data from '@/db/data.json';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'CategoryHolder',
+  props: {
+    categories: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    }
+  },
   components: {
     Category
   },
-  data() {
-    return {
-      categories: data.categories,
-      selectedCategory: {}
-    };
+  created() {
+    this.fetchCategory('For-You');
   },
   methods: {
-    selectCategory(category) {
-      this.selectedCategory = category;
-      this.$router.push(`/${category.slug}`);
-    }
+    ...mapActions('category', ['fetchCategory'])
+  },
+  computed: {
+    ...mapGetters('category', ['getCategory', 'getSelectedCategorySlug'])
   }
 };
 </script>

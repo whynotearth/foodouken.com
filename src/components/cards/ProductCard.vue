@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4">
+  <div
+    v-on:click="addCartProduct(product)"
+    class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer"
+  >
     <img
       :src="product.image"
       alt="Product image"
@@ -25,20 +28,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'ProductCard',
   props: {
     product: {
       type: Object,
-      default: () => {
-        return {
-          name: 'Product name',
-          image:
-            'https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466__340.jpg',
-          price: 8.0
-        };
-      }
+      required: true
     }
+  },
+  methods: {
+    ...mapActions('cart', ['addCartProduct'])
   }
 };
 </script>
