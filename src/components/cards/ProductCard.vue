@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4">
+  <div
+    v-on:click="addCartProduct(product)"
+    class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4"
+  >
     <img
       :src="product.image"
       alt="Product image"
@@ -20,7 +23,12 @@
 <script>
 export default {
   name: 'ProductCard',
-  props: ['product']
+  props: ['product'],
+  methods: {
+    addCartProduct(product) {
+      this.$store.dispatch('cart/addCartProduct', product);
+    }
+  }
 };
 </script>
 

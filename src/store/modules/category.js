@@ -2,7 +2,6 @@ import { httpClient } from '../../services/httpClient';
 
 // initial state
 const state = {
-  categories: [],
   selectedCategorySlug: 'for-you',
   pages: []
 };
@@ -15,11 +14,6 @@ const getters = {
         c.categories[0].name === c.slug && c.brand === 'bang-bang-bakery-cafe'
     );
     return foodCategories;
-  },
-  categories(state) {
-    let categories = state.pages.filter(c => c.categories[0].name === c.slug);
-
-    return categories;
   },
   selectedCategory(state) {
     return state.pages.filter(c => c.slug === state.selectedCategorySlug)[0];
