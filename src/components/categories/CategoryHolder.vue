@@ -5,10 +5,10 @@
     <category
       v-for="category in foodCategories"
       :key="category.id"
-      @clicked="selectCategory(category.name)"
+      @clicked="updateSelectedCategory(category.slug)"
       :category="category"
-      :selected="selectedCategory.id - 189 === category.id"
-      :title="category.name"
+      :selected="selectedCategory.slug === category.slug"
+      :title="category.slug"
     />
   </div>
 </template>
@@ -23,26 +23,12 @@ export default {
     Category
   },
   methods: {
-    selectCategory(slug) {
-      this.$store.dispatch('category/getCategoryBySlug', slug);
-    },
-    updateCategories() {
-      this.$store.dispatch('category/getAllCategories');
-    },
-    loadDefaultCategory() {
-      // TODO: Refactor hard-coded default
-      this.$store.dispatch('category/getCategoryBySlug', 'bagels-and-breads');
+    updateSelectedCategory(slug) {
+      this.$store.dispatch('category/updateSelectedCategory', slug);
     }
   },
   computed: {
-    ...mapGetters('category', ['foodCategories']),
-    selectedCategory() {
-      return this.$store.state.category.selectedCategory;
-    }
-  },
-  mounted() {
-    this.updateCategories();
-    this.loadDefaultCategory();
+    ...mapGetters('category', ['foodCategories', 'selectedCategory'])
   }
 };
 </script>
