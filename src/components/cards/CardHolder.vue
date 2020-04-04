@@ -2,7 +2,7 @@
   <div class="grid md:grid-cols-2 gap-6 md:mr-8">
     <product-card
       :product="product"
-      v-for="product in selectedProducts"
+      v-for="product in getProducts"
       :key="product.id"
     />
   </div>
@@ -18,7 +18,7 @@ export default {
     ProductCard
   },
   computed: {
-    ...mapGetters('category', ['selectedProducts'])
+    ...mapGetters('category', ['getProducts'])
   }
 };
 </script>
