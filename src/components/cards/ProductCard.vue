@@ -14,6 +14,13 @@
         ${{ product.price }}
       </span>
     </p>
+    <div class="relative flex-grow">
+      <div
+        class="absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus"
+      >
+        <img src="../../assets/add.png" alt />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,4 +43,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.btn-plus {
+  right: 10px;
+  bottom: -20px;
+  background: #0f292d;
+  border-color: #0e9ec2;
+  color: #0e9ec2;
+}
+</style>
