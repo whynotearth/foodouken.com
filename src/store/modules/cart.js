@@ -21,7 +21,6 @@ const actions = {
   },
   decrementCartProduct({ commit }, product) {
     let cartItem = state.cartItems.filter(ci => ci.product === product)[0];
-    console.log(cartItem);
     if (!cartItem || cartItem.count < 1) {
       return;
     }
@@ -43,9 +42,7 @@ const mutations = {
   },
   incrementCartProduct(state, product) {
     let cartItem = state.cartItems.filter(ci => ci.product == product)[0];
-    console.log(cartItem);
     if (cartItem.count < 999) {
-      console.log('inc cart item');
       cartItem.count = cartItem.count + 1;
     }
   },
