@@ -3,10 +3,11 @@
     class="disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mb-4"
   >
     <category
-      v-for="category in categories"
+      v-for="category in foodCategories"
       :key="category.id"
-      @clicked="selectCategory(category)"
-      :selected="selectedCategory === category"
+      @clicked="selectCategory(category.name)"
+      :category="category"
+      :selected="selectedCategory.id - 189 === category.id"
       :title="category.name"
     />
   </div>
@@ -14,24 +15,34 @@
 
 <script>
 import Category from '@/components/categories/Category.vue';
-import data from '@/db/data.json';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'CategoryHolder',
   components: {
     Category
   },
-  data() {
-    return {
-      categories: data.categories,
-      selectedCategory: {}
-    };
-  },
   methods: {
-    selectCategory(category) {
-      this.selectedCategory = category;
-      this.$router.push(`/${category.slug}`);
+    selectCategory(slug) {
+      this.$store.dispatch('category/getCategoryBySlug', slug);
+    },
+    updateCategories() {
+      this.$store.dispatch('category/getAllCategories');
+    },
+    loadDefaultCategory() {
+      // TODO: Refactor hard-coded default
+      this.$store.dispatch('category/getCategoryBySlug', 'bagels-and-breads');
     }
+  },
+  computed: {
+    ...mapGetters('category', ['foodCategories']),
+    selectedCategory() {
+      return this.$store.state.category.selectedCategory;
+    }
+  },
+  mounted() {
+    this.updateCategories();
+    this.loadDefaultCategory();
   }
 };
 </script>

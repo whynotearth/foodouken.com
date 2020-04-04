@@ -6,7 +6,7 @@
       <div class="md:w-8/12 md:border-r border-white">
         <category-holder />
         <h3 class="text-5xl text-white font-bold text-center mb-4">
-          {{ category || 'Select a category' }}
+          {{ selectedCategory.title || 'Select a category' }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">
           Prices per piece
@@ -46,8 +46,8 @@ export default {
     Cart
   },
   computed: {
-    category() {
-      return this.$route.params.category;
+    selectedCategory() {
+      return this.$store.state.category.selectedCategory;
     }
   }
 };
