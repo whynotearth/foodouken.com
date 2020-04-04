@@ -1,54 +1,65 @@
-import { httpClient } from '../../services/httpClient';
+import { httpClient } from '@/services/httpClient';
 
 // initial state
 const state = {
-  selectedCategorySlug: 'for-you',
-  pages: []
+  loading: false,
+  category: {},
+  products: [],
+  selectedCategorySlug: ''
 };
 
 // getters
 const getters = {
-  foodCategories(state) {
-    let foodCategories = state.pages.filter(
-      c =>
-        c.categories[0].name === c.slug && c.brand === 'bang-bang-bakery-cafe'
-    );
-    return foodCategories;
+  getCategory(state) {
+    return state.category;
   },
-  selectedCategory(state) {
-    return state.pages.filter(c => c.slug === state.selectedCategorySlug)[0];
+  getProducts(state) {
+    return state.products;
   },
-  selectedProducts(state) {
-    console.log(state);
-    return state.pages
-      .filter(
-        c =>
-          c.categories[0].name === c.slug &&
-          c.slug === state.selectedCategorySlug
-      )
-      .map(c => c.custom.products)[0];
+  getSelectedCategorySlug(state) {
+    return state.selectedCategorySlug;
+  },
+  getCategoryLoading(state) {
+    return state.loading;
   }
 };
 
 // actions
 const actions = {
-  loadPageData({ commit }) {
-    return httpClient.get('/').then(response => {
-      commit('updatePageData', response.data);
-    });
-  },
-  updateSelectedCategory({ commit }, slug) {
+  fetchCategory({ commit }, slug) {
     commit('updateSelectedCategorySlug', slug);
+    commit('changeCategoryLoading', true);
+    let org = process.env.VUE_APP_ORG_NAME;
+    return new Promise((resolve, reject) => {
+      httpClient.get(`/pages/slug/${org}/${slug}`).then(
+        response => {
+          commit('updateCategory', response.data);
+          commit('updateProducts', response.data.custom.products);
+          commit('changeCategoryLoading', false);
+          resolve(response.data);
+        },
+        error => {
+          commit('changeCategoryLoading', false);
+          reject(error);
+        }
+      );
+    });
   }
 };
 
 // mutations
 const mutations = {
-  updatePageData(state, pages) {
-    state.pages = pages;
+  changeCategoryLoading(state, payload) {
+    state.loading = payload;
   },
-  updateSelectedCategorySlug(state, slug) {
-    state.selectedCategorySlug = slug;
+  updateSelectedCategorySlug(state, payload) {
+    state.selectedCategorySlug = payload;
+  },
+  updateCategory(state, payload) {
+    state.category = payload;
+  },
+  updateProducts(state, payload) {
+    state.products = payload;
   }
 };
 
