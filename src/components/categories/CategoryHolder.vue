@@ -3,32 +3,40 @@
     class="disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mb-4"
   >
     <category
-      v-for="category in foodCategories"
+      v-for="category in categories"
       :key="category.id"
-      @clicked="updateSelectedCategory(category.slug)"
+      @clicked="fetchCategory(category.slug)"
       :category="category"
-      :selected="selectedCategory.slug === category.slug"
-      :title="category.slug"
+      :selected="getSelectedCategorySlug === category.slug"
     />
   </div>
 </template>
 
 <script>
 import Category from '@/components/categories/Category.vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'CategoryHolder',
+  props: {
+    categories: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    }
+  },
   components: {
     Category
   },
+  created() {
+    this.fetchCategory('For-You');
+  },
   methods: {
-    updateSelectedCategory(slug) {
-      this.$store.dispatch('category/updateSelectedCategory', slug);
-    }
+    ...mapActions('category', ['fetchCategory'])
   },
   computed: {
-    ...mapGetters('category', ['foodCategories', 'selectedCategory'])
+    ...mapGetters('category', ['getCategory', 'getSelectedCategorySlug'])
   }
 };
 </script>
