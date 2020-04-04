@@ -1,7 +1,7 @@
 <template>
   <div
     v-on:click="addCartProduct(product)"
-    class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4"
+    class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer"
   >
     <img
       :src="product.image"
@@ -10,11 +10,11 @@
     />
     <p class="my-auto">
       <span class="mx-4 text-gray-400 my-1 inline-block text-lg">
-        {{ this.product.name }}
+        {{ product.name }}
       </span>
       <br />
       <span class="mx-4 text-gray-500 my-1 inline-block">
-        ${{ this.product.price }}
+        ${{ product.price }}
       </span>
     </p>
     <div class="relative flex-grow">
@@ -28,13 +28,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'ProductCard',
   props: ['product'],
   methods: {
-    addCartProduct(product) {
-      this.$store.dispatch('cart/addCartProduct', product);
-    }
+    ...mapActions('cart', ['addCartProduct'])
   }
 };
 </script>
