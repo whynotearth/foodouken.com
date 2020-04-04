@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-row py-2">
     <img
-      src="https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466__340.jpg"
+      :src="cartItem.product.image"
       class="h-12 w-12 my-auto"
       alt="Product image"
     />
     <div class="w-auto mx-2 w-full">
-      <span class="text-gray-400">{{ trimmedTitle }} </span>
+      <span class="text-gray-400">{{ cartItem.product.name }} </span>
       <br />
-      <span class="text-gray-500">${{ price }}</span>
+      <span class="text-gray-500">${{ cartItem.product.price }}</span>
     </div>
     <div class="flex text-gray-500 font-bold text-lg">
       <div class="cursor-pointer w-6 select-none" @click="decrement">
@@ -23,7 +23,7 @@
         type="number"
         name="quantity"
         min="1"
-        v-model="quantity"
+        v-model="cartItem.count"
         class="bg-transparent w-8 py-3 text-center"
       />
       <div class="cursor-pointer w-6 select-none" @click="increment">
@@ -46,25 +46,17 @@ export default {
   name: 'CartItem',
   data() {
     return {
-      trimmedTitle: 'Eggs Benedict...',
-      price: 8,
-      quantity: 1,
       plus: plus,
       minus: minus
     };
   },
+  props: ['cartItem'],
   methods: {
     increment() {
-      if (this.quantity >= 10) {
-        return;
-      }
-      this.quantity++;
+      this.$store.dispatch('cart/incrementCartProduct', this.cartItem.product);
     },
     decrement() {
-      if (this.quantity <= 1) {
-        return;
-      }
-      this.quantity--;
+      this.$store.dispatch('cart/decrementCartProduct', this.cartItem.product);
     }
   }
 };
