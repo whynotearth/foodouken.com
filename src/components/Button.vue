@@ -2,7 +2,7 @@
   <component
     :is="type"
     class="rounded-full bg-button px-10 py-2 ripple cursor-pointer border-none"
-    @click="onClick"
+    @click="$emit('clicked')"
     :href="href"
     :to="to"
   >
@@ -17,16 +17,10 @@ export default {
   name: 'Button',
   props: {
     href: {
-      type: String,
-      default: null
+      type: String
     },
     to: {
-      type: String,
-      default: null
-    },
-    onClick: {
-      type: Function,
-      default: event => alert(event)
+      type: String
     },
     title: {
       type: String,
