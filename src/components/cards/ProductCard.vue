@@ -1,6 +1,6 @@
 <template>
   <div
-    v-on:click="addCartProduct(product)"
+    @click="addCartProduct(product)"
     class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer"
   >
     <img
@@ -21,7 +21,12 @@
       <div
         class="ripple absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
       >
-        <img src="../../assets/add.png" alt />
+        <img
+          src="../../assets/add.png"
+          class="pointer-events-none"
+          draggable="false"
+          alt="+"
+        />
       </div>
     </div>
   </div>
