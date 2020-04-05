@@ -37,6 +37,13 @@ const actions = {
     } else {
       commit('decrementCartProduct', product);
     }
+  },
+  removeCartProduct({ commit }, product) {
+    let cartItem = state.cartItems.filter(ci => ci.product === product)[0];
+    if (!cartItem || cartItem.count < 1) {
+      return;
+    }
+    commit('removeCartProduct', product);
   }
 };
 

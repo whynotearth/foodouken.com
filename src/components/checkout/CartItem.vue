@@ -1,5 +1,11 @@
 <template>
-  <div class="flex flex-row py-2">
+  <div class="flex flex-row my-2 px-2 relative items-center">
+    <div
+      class="absolute top-0 left-0 bg-button rounded-full h-4 w-4"
+      @click="remove"
+    >
+      <img :src="cancel" alt="Remove from cart" draggable="false" />
+    </div>
     <img
       :src="cartItem.product.image"
       class="h-12 w-12 my-auto"
@@ -40,13 +46,15 @@
 <script>
 import plus from '@/assets/plus.png';
 import minus from '@/assets/minus.png';
+import cancel from '@/assets/cancel.png';
 
 export default {
   name: 'CartItem',
   data() {
     return {
       plus: plus,
-      minus: minus
+      minus: minus,
+      cancel: cancel
     };
   },
   props: ['cartItem'],
@@ -56,6 +64,9 @@ export default {
     },
     decrement() {
       this.$store.dispatch('cart/decrementCartProduct', this.cartItem.product);
+    },
+    remove() {
+      this.$store.dispatch('cart/removeCartProduct', this.cartItem.product);
     }
   }
 };
