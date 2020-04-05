@@ -8,23 +8,16 @@
         <h3
           v-if="category"
           class="text-5xl text-white font-bold text-center mb-4"
-        >
-          {{ loadingCategory ? 'Loading category...' : category.title }}
-        </h3>
-        <p class="text-gray-500 text-center mb-8 text-lg">
-          Prices per piece
-        </p>
+        >{{ loadingCategory ? 'Loading category...' : category.title }}</h3>
+        <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
         <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
-        <h3 class="text-5xl text-white font-bold text-center mb-8">
-          Cart
-        </h3>
-        <cart />
-        <p class="text-gray-500 text-center text-lg">
-          Estimated Delivery Time: 45 minutes.
-        </p>
-        <div class="w-full text-center my-4">
+        <h3 class="text-5xl text-white font-bold text-center mb-8">Cart</h3>
+        <cart v-if="cart.length" />
+        <empty-cart v-else />
+        <p class="text-gray-500 text-center text-lg">Estimated Delivery Time: 45 minutes.</p>
+        <div class="w-full text-center my-4" v-if="cart.length">
           <Button title="Order now" />
         </div>
       </div>
@@ -38,6 +31,7 @@ import CardHolder from '@/components/cards/CardHolder.vue';
 import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
 import Cart from '@/components/checkout/Cart.vue';
+import EmptyCart from '@/components/checkout/EmptyCart.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -47,7 +41,8 @@ export default {
     CardHolder,
     CategoryHolder,
     Button,
-    Cart
+    Cart,
+    EmptyCart
   },
   created() {
     this.fetchHomeData();
@@ -56,6 +51,9 @@ export default {
     ...mapActions('home', ['fetchHomeData'])
   },
   computed: {
+    cart() {
+      return this.$store.state.cart.cartItems;
+    },
     ...mapGetters({
       category: 'category/getCategory',
       loadingCategory: 'category/getCategoryLoading',
