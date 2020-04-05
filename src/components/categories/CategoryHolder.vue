@@ -1,6 +1,6 @@
 <template>
   <div
-    class="disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mb-4"
+    class="deleteMargins disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mt-6"
   >
     <category
       v-for="category in categories"
@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .disable-scrollbars::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* Chrome/Safari/Webkit */
@@ -50,5 +50,10 @@ export default {
 .disable-scrollbars {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
+}
+
+.deleteMargins {
+  margin-left: -1.2rem;
+  margin-right: -1.2rem;
 }
 </style>
