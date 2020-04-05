@@ -5,12 +5,11 @@
       class="h-12 w-12 my-auto"
       alt="Product image"
     />
-    <div class="w-auto mx-2 w-full">
-      <span class="text-gray-400">{{ cartItem.product.name }} </span>
-      <br />
+    <div class="w-auto mx-2 w-full flex flex-col truncate">
+      <span class="text-gray-400 truncate">{{ cartItem.product.name }} </span>
       <span class="text-gray-500">${{ cartItem.product.price }}</span>
     </div>
-    <div class="flex text-gray-500 font-bold text-lg">
+    <div class="flex items-center text-gray-500 font-bold text-lg">
       <div class="cursor-pointer w-6 select-none" @click="decrement">
         <img
           :src="minus"
@@ -24,7 +23,7 @@
         name="quantity"
         min="1"
         v-model="cartItem.count"
-        class="bg-transparent w-8 py-3 text-center"
+        class="bg-transparent w-8 py-3 text-center font-bold"
       />
       <div class="cursor-pointer w-6 select-none" @click="increment">
         <img
