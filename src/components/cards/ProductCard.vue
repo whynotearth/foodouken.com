@@ -64,7 +64,7 @@ export default {
   background: #1d484f radial-gradient(circle, transparent 1%, #1d484f 1%)
     center/15000%;
 }
-.ripple:active {
+.ripple:focus {
   background-color: #217e8f;
   background-size: 100%;
   transition: background 0s;

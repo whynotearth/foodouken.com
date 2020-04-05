@@ -2,8 +2,8 @@
   <div class="h-full">
     <hero-section :heroData="orgData" />
     <hr class="my-8 border-gray-700" />
-    <section class="flex md:flex-row flex-col-reverse my-4">
-      <div class="md:w-8/12 md:border-r border-white">
+    <section class="flex lg:flex-row flex-col-reverse my-4">
+      <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
         <category-holder :categories="categories" />
         <h3
           v-if="category"
@@ -16,7 +16,7 @@
         </p>
         <card-holder />
       </div>
-      <div class="md:w-4/12 md:ml-4">
+      <div class="lg:w-4/12 lg:ml-4">
         <h3 class="text-5xl text-white font-bold text-center mb-8">
           Cart
         </h3>
