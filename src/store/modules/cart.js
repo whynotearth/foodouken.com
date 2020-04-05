@@ -4,7 +4,15 @@ const state = {
 };
 
 // getters
-const getters = {};
+const getters = {
+  subTotal: state => {
+    return state.cartItems.reduce(
+      (runningTotal, cartItem) =>
+        runningTotal + cartItem.product.price * cartItem.count,
+      0
+    );
+  }
+};
 
 // actions
 const actions = {
