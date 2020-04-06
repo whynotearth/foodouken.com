@@ -6,7 +6,7 @@
       alt="Product image"
     />
     <div class="w-auto mx-2 w-full">
-      <span class="text-gray-400">{{ cartItem.product.name }} </span>
+      <span class="text-gray-400">{{ cartItemTitle }} </span>
       <br />
       <span class="text-gray-500">${{ cartItem.product.price }}</span>
     </div>
@@ -50,13 +50,21 @@ export default {
       minus: minus
     };
   },
-  props: ['cartItem'],
+  props: ['cartItem'],  
   methods: {
     increment() {
       this.$store.dispatch('cart/incrementCartProduct', this.cartItem.product);
     },
     decrement() {
       this.$store.dispatch('cart/decrementCartProduct', this.cartItem.product);
+    }
+  },
+  computed: {
+    cartItemTitle() {
+      let cartItemTitle = this.cartItem.product.name;
+      return cartItemTitle.length > 15
+        ? cartItemTitle.slice(0, 15) + '...'
+        : cartItemTitle;
     }
   }
 };
