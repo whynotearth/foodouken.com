@@ -8,6 +8,7 @@
       @input="$emit('input', $event.target.value)"
       :required="required"
       :pattern="pattern"
+      :placeholder="placeholder"
     />
     <label
       for="email"
@@ -29,6 +30,10 @@ export default {
     label: {
       type: String,
       default: 'Label'
+    },
+    placeholder: {
+      type: String,
+      default: 'placeholder'
     },
     type: {
       type: String,
@@ -71,7 +76,7 @@ export default {
 .label {
   transition: all 0.2s ease-out;
   transition: all 200ms;
-  opacity: 0.5;
+  opacity: 0;
   padding: 0 5px;
   z-index: 1;
 }
