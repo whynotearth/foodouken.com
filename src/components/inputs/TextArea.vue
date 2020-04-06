@@ -5,7 +5,7 @@
       :class="value.length > 0 ? 'filled' : ''"
       :value="value"
       @input="$emit('input', $event.target.value)"
-      :placeholder="placeholder"
+      :placeholder="placeholder || label"
     ></textarea>
     <label
       for="email"
@@ -29,8 +29,7 @@ export default {
       default: 'Label'
     },
     placeholder: {
-      type: String,
-      default: 'placeholder'
+      type: String
     }
   },
   data() {

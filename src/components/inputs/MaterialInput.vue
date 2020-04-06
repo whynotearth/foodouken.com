@@ -8,7 +8,7 @@
       @input="$emit('input', $event.target.value)"
       :required="required"
       :pattern="pattern"
-      :placeholder="placeholder"
+      :placeholder="placeholder || label"
     />
     <label
       for="email"
@@ -32,8 +32,7 @@ export default {
       default: 'Label'
     },
     placeholder: {
-      type: String,
-      default: 'placeholder'
+      type: String
     },
     type: {
       type: String,
