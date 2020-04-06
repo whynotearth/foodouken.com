@@ -1,16 +1,21 @@
 <template>
-  <div class="flex flex-row py-2">
+  <div class="flex flex-row my-2 px-2 relative items-center">
+    <div
+      class="absolute top-0 left-0 bg-button rounded-full h-4 w-4"
+      @click="remove"
+    >
+      <img :src="cancel" alt="Remove from cart" draggable="false" />
+    </div>
     <img
       :src="cartItem.product.image"
       class="h-12 w-12 my-auto"
       alt="Product image"
     />
-    <div class="w-auto mx-2 w-full">
-      <span class="text-gray-400">{{ cartItemTitle }} </span>
-      <br />
+    <div class="w-auto mx-2 w-full flex flex-col truncate">
+      <span class="text-gray-400 truncate">{{ cartItem.product.name }} </span>
       <span class="text-gray-500">${{ cartItem.product.price }}</span>
     </div>
-    <div class="flex text-gray-500 font-bold text-lg">
+    <div class="flex items-center text-gray-500 font-bold text-lg">
       <div class="cursor-pointer w-6 select-none" @click="decrement">
         <img
           :src="minus"
@@ -24,7 +29,7 @@
         name="quantity"
         min="1"
         v-model="cartItem.count"
-        class="bg-transparent w-8 py-3 text-center"
+        class="bg-transparent w-8 py-3 text-center font-bold"
       />
       <div class="cursor-pointer w-6 select-none" @click="increment">
         <img
@@ -41,13 +46,15 @@
 <script>
 import plus from '@/assets/plus.png';
 import minus from '@/assets/minus.png';
+import cancel from '@/assets/cancel.png';
 
 export default {
   name: 'CartItem',
   data() {
     return {
       plus: plus,
-      minus: minus
+      minus: minus,
+      cancel: cancel
     };
   },
   props: ['cartItem'],  
@@ -57,6 +64,9 @@ export default {
     },
     decrement() {
       this.$store.dispatch('cart/decrementCartProduct', this.cartItem.product);
+    },
+    remove() {
+      this.$store.dispatch('cart/removeCartProduct', this.cartItem.product);
     }
   },
   computed: {

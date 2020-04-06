@@ -4,7 +4,18 @@ const state = {
 };
 
 // getters
-const getters = {};
+const getters = {
+  cartItems: state => {
+    return state.cartItems;
+  },
+  subTotal: state => {
+    return state.cartItems.reduce(
+      (runningTotal, cartItem) =>
+        runningTotal + cartItem.product.price * cartItem.count,
+      0
+    );
+  }
+};
 
 // actions
 const actions = {
@@ -29,6 +40,13 @@ const actions = {
     } else {
       commit('decrementCartProduct', product);
     }
+  },
+  removeCartProduct({ commit }, product) {
+    let cartItem = state.cartItems.filter(ci => ci.product === product)[0];
+    if (!cartItem || cartItem.count < 1) {
+      return;
+    }
+    commit('removeCartProduct', product);
   }
 };
 
