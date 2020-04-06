@@ -15,21 +15,20 @@
         <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
-        <h3
-          v-if="!renderForm"
-          class="text-5xl text-white font-bold text-center mb-8"
-        >
+        <checkout-form v-if="form" />
+        <h3 class="text-5xl text-white font-bold text-center mb-8">
           Cart
         </h3>
-        <checkout-form v-if="renderForm" />
-        <cart v-if="cart.length" />
+        <template v-if="cart.length">
+          <cart />
+          <p class="text-gray-500 text-center text-lg my-4">
+            Estimated Delivery Time: 45 minutes.
+          </p>
+          <div v-if="!form" class="w-full text-center my-4">
+            <Button title="Order now" @clicked="form = true" />
+          </div>
+        </template>
         <empty-cart v-else />
-        <p class="text-gray-500 text-center text-lg">
-          Estimated Delivery Time: 45 minutes.
-        </p>
-        <div v-if="cart.length || !renderForm" class="w-full text-center my-4">
-          <Button title="Order now" @clicked="renderForm = true" />
-        </div>
       </div>
     </section>
   </div>
@@ -57,7 +56,7 @@ export default {
   },
   data() {
     return {
-      renderForm: false
+      form: false
     };
   },
   created() {
@@ -67,14 +66,12 @@ export default {
     ...mapActions('home', ['fetchHomeData'])
   },
   computed: {
-    cart() {
-      return this.$store.state.cart.cartItems;
-    },
     ...mapGetters({
       category: 'category/getCategory',
       loadingCategory: 'category/getCategoryLoading',
       orgData: 'home/getOrgData',
-      categories: 'home/getCategories'
+      categories: 'home/getCategories',
+      cart: 'cart/cartItems'
     })
   }
 };
