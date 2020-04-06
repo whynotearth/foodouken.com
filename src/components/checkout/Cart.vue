@@ -1,7 +1,7 @@
 <template>
   <div class="bg-secondary shadow-md rounded-lg mb-4 p-4 max-w-sm m-auto">
     <cart-item
-      v-for="cartItem in cart"
+      v-for="cartItem in cartItems"
       :cart-item="cartItem"
       :key="cartItem.product.id"
     />
@@ -38,10 +38,7 @@ export default {
     CartItem
   },
   computed: {
-    cart() {
-      return this.$store.state.cart.cartItems;
-    },
-    ...mapGetters('cart', ['subTotal'])
+    ...mapGetters('cart', ['cartItems', 'subTotal'])
   },
   filters: {
     formatPrice: price => {

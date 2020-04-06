@@ -5,6 +5,9 @@ const state = {
 
 // getters
 const getters = {
+  cartItems: state => {
+    return state.cartItems;
+  },
   subTotal: state => {
     return state.cartItems.reduce(
       (runningTotal, cartItem) =>
