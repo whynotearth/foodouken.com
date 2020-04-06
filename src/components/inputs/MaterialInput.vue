@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4 relative text-gray-500">
     <input
-      class="input w-full relative bg-transparent border border-gray-600 appearance-none rounded px-4 py-3 focus:border-gray-500 focus:outline-none active:outline-none active:border-gray-500"
+      class="input appearance-none relative bg-transparent border border-gray-600 rounded w-full px-4 py-3 focus:border-gray-500 active:border-gray-500"
       :class="value.length > 0 ? 'filled' : ''"
       :type="type"
       :value="value"
@@ -11,7 +11,7 @@
     />
     <label
       for="email"
-      class="label absolute bg-primary mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
+      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
     >
       {{ label }}
     </label>
@@ -39,7 +39,7 @@ export default {
       default: false
     },
     pattern: {
-      type: RegExp,
+      type: String,
       default: null
     }
   },
@@ -65,7 +65,6 @@ export default {
   top: -1.3rem;
   opacity: 1;
   display: block;
-  padding: 0 5px;
   z-index: 3;
 }
 
@@ -73,6 +72,7 @@ export default {
   transition: all 0.2s ease-out;
   transition: all 200ms;
   opacity: 0.5;
+  padding: 0 5px;
   z-index: 1;
 }
 </style>
