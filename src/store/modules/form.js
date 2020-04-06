@@ -27,7 +27,12 @@ const getters = {
   getName: state => state.formData.customerInfo.name,
   getEmail: state => state.formData.customerInfo.email,
   getPhone: state => state.formData.customerInfo.phone,
-  getSpecialRequest: state => state.formData.customerInfo.specialRequest
+  getSpecialRequest: state => state.formData.customerInfo.specialRequest,
+  getStreet: state => state.formData.customerAddress.street,
+  getTown: state => state.formData.customerAddress.town,
+  getFloor: state => state.formData.customerAddress.floor,
+  getApartment: state => state.formData.customerAddress.apartment,
+  getParking: state => state.formData.customerAddress.parking
 };
 
 // actions
@@ -46,6 +51,21 @@ const mutations = {
   },
   updateSpecialRequest(state, payload) {
     state.formData.customerInfo.specialRequest = payload;
+  },
+  updateStreet(state, payload) {
+    state.formData.customerAddress.street = payload;
+  },
+  updateTown(state, payload) {
+    state.formData.customerAddress.town = payload;
+  },
+  updateCity(state, payload) {
+    state.formData.customerAddress.city = payload;
+  },
+  updateApartment(state, payload) {
+    state.formData.customerAddress.apartment = payload;
+  },
+  updateParking(state, payload) {
+    state.formData.customerAddress.parking = payload;
   }
 };
 
