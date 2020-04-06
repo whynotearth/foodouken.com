@@ -16,13 +16,13 @@
 
       <div><span class="text-gray-500 text-sm">Delivery Fee</span></div>
       <div class="text-right">
-        <span class="text-gray-500 text-sm">-</span>
+        <span class="text-gray-500 text-sm">${{ deliveryFee }}</span>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1 mt-2">
       <div><span class="text-gray-400 text-2xl font-bold">Total</span></div>
       <div class="text-right">
-        <div><span class="text-gray-400 text-2xl font-bold">-</span></div>
+        <span class="text-gray-400 text-2xl font-bold">${{ total }}</span>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@ export default {
     CartItem
   },
   computed: {
-    ...mapGetters('cart', ['cartItems', 'subTotal'])
+    ...mapGetters('cart', ['cartItems', 'subTotal', 'total', 'deliveryFee'])
   },
   filters: {
     formatPrice: price => {
