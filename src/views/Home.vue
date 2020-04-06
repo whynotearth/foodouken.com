@@ -15,8 +15,6 @@
         <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
-        <cart v-if="cart.length" />
-        <empty-cart v-else />
         <h3
           v-if="!renderForm"
           class="text-5xl text-white font-bold text-center mb-8"
