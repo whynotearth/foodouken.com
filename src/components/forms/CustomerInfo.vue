@@ -5,29 +5,22 @@
         v-model="name"
         type="text"
         label="Name"
-        placeholder="Name"
         :required="true"
       />
       <material-input
         v-model="email"
         type="email"
         label="Email"
-        placeholder="Email"
         :required="true"
       />
       <material-input
         v-model="phone"
         type="tel"
         label="Phone number"
-        placeholder="Phone number"
         pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
         :required="true"
       />
-      <text-area
-        v-model="specialRequest"
-        label="Special requests"
-        placeholder="Special requests"
-      />
+      <text-area v-model="specialRequest" label="Special requests" />
     </div>
     <div class="w-full text-center my-4">
       <Button title="Add address" />
