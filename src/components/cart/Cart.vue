@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import CartItem from '@/components/checkout/CartItem.vue';
+import CartItem from '@/components/cart/CartItem.vue';
 
 export default {
   name: 'Cart',

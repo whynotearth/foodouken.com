@@ -41,7 +41,7 @@ import HeroSection from '@/components/HeroSection.vue';
 import CardHolder from '@/components/cards/CardHolder.vue';
 import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
-import Cart from '@/components/checkout/Cart.vue';
+import Cart from '@/components/cart/Cart.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
