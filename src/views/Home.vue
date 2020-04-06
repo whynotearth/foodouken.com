@@ -17,15 +17,19 @@
         <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
-        <h3 class="text-5xl text-white font-bold text-center mb-8">
+        <h3
+          v-if="!renderForm" 
+          class="text-5xl text-white font-bold text-center mb-8"
+        >
           Cart
         </h3>
+        <checkout-form v-if="renderForm" />
         <cart />
         <p class="text-gray-500 text-center text-lg">
           Estimated Delivery Time: 45 minutes.
         </p>
-        <div class="w-full text-center my-4">
-          <Button title="Order now" />
+        <div v-if="!renderForm" class="w-full text-center my-4">
+          <Button title="Order now" @clicked="renderForm = true" />
         </div>
       </div>
     </section>
@@ -37,7 +41,7 @@ import HeroSection from '@/components/HeroSection.vue';
 import CardHolder from '@/components/cards/CardHolder.vue';
 import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
-import Cart from '@/components/checkout/Cart.vue';
+import Cart from '@/components/cart/Cart.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -47,7 +51,13 @@ export default {
     CardHolder,
     CategoryHolder,
     Button,
-    Cart
+    Cart,
+    CheckoutForm: () => import('@/components/forms/CheckoutForm.vue')
+  },
+  data() {
+    return {
+      renderForm: false
+    };
   },
   created() {
     this.fetchHomeData();
