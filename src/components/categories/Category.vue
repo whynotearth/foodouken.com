@@ -8,8 +8,8 @@
         class="flex-none rounded-full h-16 md:h-20 w-16 md:w-20 self-center"
         :class="
           selected
-            ? 'selected border-white border-2 p-0.5'
-            : 'unselected p-1'
+            ? 'selected border-white border-2 p-1'
+            : 'unselected p-1.5'
         "
       >
         <img :src="category.image" alt="category" class="rounded-full" />
