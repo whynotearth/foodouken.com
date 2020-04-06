@@ -1,10 +1,15 @@
 <template>
   <div class="flex flex-row my-2 px-2 relative items-center">
     <div
-      class="absolute top-0 left-0 bg-button rounded-full h-4 w-4"
+      class="absolute top-0 left-0 bg-button rounded-full h-4 w-4 cursor-pointer select-none"
       @click="remove"
     >
-      <img :src="cancel" alt="Remove from cart" draggable="false" />
+      <img
+        :src="cancel"
+        alt="Remove from cart"
+        draggable="false"
+        class="pointer-events-none"
+      />
     </div>
     <img
       :src="cartItem.product.image"
@@ -57,7 +62,12 @@ export default {
       cancel: cancel
     };
   },
-  props: ['cartItem'],  
+  props: {
+    cartItem: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
     increment() {
       this.$store.dispatch('cart/incrementCartProduct', this.cartItem.product);

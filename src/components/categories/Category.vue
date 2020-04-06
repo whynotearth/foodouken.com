@@ -1,15 +1,10 @@
 <template>
-  <div
-    class="m-2 cursor-pointer flex flex-col"
-    @click="$emit('clicked')"
-  >
+  <div class="m-2 cursor-pointer flex flex-col" @click="$emit('clicked')">
     <div class="flex justify-center h-16 md:h-20 w-16 md:w-20 self-center">
       <div
         class="flex-none rounded-full h-16 md:h-20 w-16 md:w-20 self-center"
         :class="
-          selected
-            ? 'selected border-white border-2 p-1'
-            : 'unselected p-1.5'
+          selected ? 'selected border-white border-2 p-1' : 'unselected p-1.5'
         "
       >
         <img :src="category.image" alt="category" class="rounded-full" />
