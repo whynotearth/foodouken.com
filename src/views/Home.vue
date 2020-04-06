@@ -17,15 +17,19 @@
         <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
-        <h3 class="text-5xl text-white font-bold text-center mb-8">
+        <h3
+          v-if="!renderForm" 
+          class="text-5xl text-white font-bold text-center mb-8"
+        >
           Cart
         </h3>
+        <checkout-form v-if="renderForm" />
         <cart />
         <p class="text-gray-500 text-center text-lg">
           Estimated Delivery Time: 45 minutes.
         </p>
-        <div class="w-full text-center my-4">
-          <Button title="Order now" />
+        <div v-if="!renderForm" class="w-full text-center my-4">
+          <Button title="Order now" @clicked="renderForm = true" />
         </div>
       </div>
     </section>
@@ -47,7 +51,13 @@ export default {
     CardHolder,
     CategoryHolder,
     Button,
-    Cart
+    Cart,
+    CheckoutForm: () => import('@/components/forms/CheckoutForm.vue')
+  },
+  data() {
+    return {
+      renderForm: false
+    };
   },
   created() {
     this.fetchHomeData();
