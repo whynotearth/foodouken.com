@@ -8,7 +8,9 @@
         <h3
           v-if="category"
           class="text-5xl text-white font-bold text-center mb-4"
-        >{{ loadingCategory ? 'Loading category...' : category.title }}</h3>
+        >
+          {{ loadingCategory ? 'Loading category...' : category.title }}
+        </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
         <card-holder />
       </div>
@@ -16,7 +18,7 @@
         <cart v-if="cart.length" />
         <empty-cart v-else />
         <h3
-          v-if="!renderForm" 
+          v-if="!renderForm"
           class="text-5xl text-white font-bold text-center mb-8"
         >
           Cart

@@ -57,7 +57,7 @@ export default {
       cancel: cancel
     };
   },
-  props: ['cartItem'],  
+  props: ['cartItem'],
   methods: {
     increment() {
       this.$store.dispatch('cart/incrementCartProduct', this.cartItem.product);
