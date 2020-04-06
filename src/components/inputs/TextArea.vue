@@ -1,14 +1,11 @@
 <template>
   <div class="mb-4 relative text-gray-500">
-    <input
-      class="input appearance-none relative bg-transparent border border-gray-600 rounded w-full px-4 py-3 focus:border-gray-500 active:border-gray-500"
+    <textarea
+      class="input disable-scrollbars appearance-none relative bg-transparent border border-gray-600 rounded h-32 w-full px-4 py-3 focus:border-gray-500 active:border-gray-500"
       :class="value.length > 0 ? 'filled' : ''"
-      :type="type"
       :value="value"
       @input="$emit('input', $event.target.value)"
-      :required="required"
-      :pattern="pattern"
-    />
+    ></textarea>
     <label
       for="email"
       class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
@@ -29,18 +26,6 @@ export default {
     label: {
       type: String,
       default: 'Label'
-    },
-    type: {
-      type: String,
-      default: 'text'
-    },
-    required: {
-      type: Boolean,
-      default: false
-    },
-    pattern: {
-      type: String,
-      default: null
     }
   },
   data() {
@@ -74,5 +59,15 @@ export default {
   opacity: 0.5;
   padding: 0 5px;
   z-index: 1;
+}
+
+.disable-scrollbars::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Chrome/Safari/Webkit */
+}
+
+.disable-scrollbars {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 </style>

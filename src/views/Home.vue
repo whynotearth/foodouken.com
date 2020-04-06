@@ -19,6 +19,19 @@
         <p class="text-gray-500 text-center text-lg">Estimated Delivery Time: 45 minutes.</p>
         <div class="w-full text-center my-4" v-if="cart.length">
           <Button title="Order now" />
+        <h3
+          v-if="!renderForm" 
+          class="text-5xl text-white font-bold text-center mb-8"
+        >
+          Cart
+        </h3>
+        <checkout-form v-if="renderForm" />
+        <cart />
+        <p class="text-gray-500 text-center text-lg">
+          Estimated Delivery Time: 45 minutes.
+        </p>
+        <div v-if="!renderForm" class="w-full text-center my-4">
+          <Button title="Order now" @clicked="renderForm = true" />
         </div>
       </div>
     </section>
@@ -43,6 +56,12 @@ export default {
     Button,
     Cart,
     EmptyCart
+    CheckoutForm: () => import('@/components/forms/CheckoutForm.vue')
+  },
+  data() {
+    return {
+      renderForm: false
+    };
   },
   created() {
     this.fetchHomeData();
