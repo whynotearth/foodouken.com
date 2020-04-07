@@ -23,7 +23,7 @@
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
           </p>
-          <div v-if="!form" class="w-full text-center my-4">
+          <div v-if="!form" class="w-full text-center my-4 hidden lg:block">
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
@@ -35,7 +35,7 @@
       class="sticky inset-x-0 bottom-0 mt-8 pb-4"
     >
       <div
-        class="flex flex-row items-center p-2 bg-button rounded-lg shadow-md md:hidden"
+        class="flex flex-row items-center p-2 bg-button rounded-lg shadow-md lg:hidden"
       >
         <div class="flex-1" />
         <div class="flex-grow text-center">
