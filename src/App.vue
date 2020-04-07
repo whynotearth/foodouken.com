@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="font-sans bg-primary h-full text-gray-100 text-lg">
+  <div id="app" class="font-sans bg-primary h-full text-gray-300 text-lg">
     <Navbar />
     <router-view
       class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
