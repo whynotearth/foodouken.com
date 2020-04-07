@@ -1,18 +1,73 @@
 <template>
-  <footer class="h-full bg-footer text-lg text-white static">
+  <footer class="h-full bg-footer text-lg text-white static flex">
     <div
-      class="max-w-screen-xxl flex md:flex-row flex-col justify-between px-4 md:px-8 py-12 mx-auto"
+      class="max-w-screen-xxl flex flex-col justify-between py-8 px-10 mx-auto lg:flex-row lg:flex-wrap"
     >
-      <span>Taphul Rd, Opposite Idea Decor</span>
-      <span>098 976 987</span>
-      <span>/BakeryBangBang</span>
-      <span>097 947 7799</span>
+      <template v-if="this.orgData.custom !== undefined">
+        <div
+          v-for="(contact, i) in getContactLinks()"
+          :key="i"
+          class="py-3 flex mr-auto items-center lg:mx-auto lg:px-3"
+        >
+          <img
+            :src="require(`@/assets/${contact.icon}.png`)"
+            class="w-8 lg:w-6 mr-4"
+          />
+          <span class="w-auto">
+            <a
+              v-if="contact.link"
+              v-text="contact.label"
+              :href="contact.link"
+              :target="contact.newTab ? '_blank' : '_self'"
+            ></a>
+            <template v-else>
+              {{ contact.label }}
+            </template>
+          </span>
+        </div>
+      </template>
     </div>
   </footer>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters({
+      orgData: 'home/getOrgData',
+    }),
+  },
+  methods: {
+    getContactLinks() {
+      return [
+        {
+          label: this.orgData.custom.address.friendlyName,
+          icon: 'location',
+          link: null,
+        },
+        {
+          label: this.orgData.custom.details.phone,
+          icon: 'phone',
+          link: `tel:${this.orgData.custom.details.phone}`,
+        },
+        {
+          label: this.orgData.custom.details.facebook,
+          icon: 'facebook',
+          link: `https://facebook.com/${this.orgData.custom.details.facebook}`,
+          newTab: true,
+        },
+        {
+          label: this.orgData.custom.details.whatsapp,
+          icon: 'whatsapp',
+          link: `https://wa.me/${this.orgData.custom.details.whatsapp}`,
+          newTab: true,
+        },
+      ];
+    },
+  },
+};
 </script>
 
 <style></style>
