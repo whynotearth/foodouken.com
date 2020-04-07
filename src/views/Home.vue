@@ -38,6 +38,7 @@ import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
 import Cart from '@/components/cart/Cart.vue';
 import EmptyCart from '@/components/cart/EmptyCart.vue';
+import CheckoutForm from '@/components/forms/CheckoutForm.vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
@@ -49,7 +50,7 @@ export default {
     Button,
     Cart,
     EmptyCart,
-    CheckoutForm: () => import('@/components/forms/CheckoutForm.vue')
+    CheckoutForm
   },
   created() {
     this.fetchHomeData();
