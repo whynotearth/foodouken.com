@@ -35,7 +35,7 @@
       />
     </div>
     <div class="w-full text-center my-4">
-      <Button title="Choose delivery time" />
+      <Button title="Choose delivery time" @clicked="pageChange(3)" />
     </div>
   </div>
 </template>
@@ -43,6 +43,7 @@
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import Button from '@/components/Button.vue';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'CustomerAddress',
@@ -50,14 +51,64 @@ export default {
     MaterialInput,
     Button
   },
-  data() {
-    return {
-      street: '',
-      town: '',
-      floor: '',
-      apartment: '',
-      parking: ''
-    };
+  computed: {
+    ...mapGetters('form', [
+      'getTown',
+      'getFloor',
+      'getApartment',
+      'getParking',
+      'getStreet'
+    ]),
+    town: {
+      get() {
+        return this.getTown;
+      },
+      set(value) {
+        this.updateTown(value);
+      }
+    },
+    floor: {
+      get() {
+        return this.getFloor;
+      },
+      set(value) {
+        this.updateFloor(value);
+      }
+    },
+    street: {
+      get() {
+        return this.getStreet;
+      },
+      set(value) {
+        this.updateStreet(value);
+      }
+    },
+    parking: {
+      get() {
+        return this.getParking;
+      },
+      set(value) {
+        this.updateParking(value);
+      }
+    },
+    apartment: {
+      get() {
+        return this.getApartment;
+      },
+      set(value) {
+        this.updateApartment(value);
+      }
+    }
+  },
+  methods: {
+    ...mapMutations('form', [
+      'updateTown',
+      'updateFloor',
+      'updateStreet',
+      'updateParking',
+      'updateApartment',
+      'pageChange'
+    ])
   }
 };
 </script>
