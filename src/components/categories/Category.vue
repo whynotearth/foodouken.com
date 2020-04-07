@@ -13,9 +13,7 @@
     <p
       class="text-center text-sm w-20 self-center"
       :class="selected ? 'text-white' : 'text-gray-500'"
-    >
-      {{ category.name }}
-    </p>
+    >{{ category.name }}</p>
   </div>
 </template>
 
@@ -37,12 +35,12 @@ export default {
 
 <style scoped>
 .selected {
-  animation: shrink-mobile 0.4s ease-in-out 0.1s;
+  animation: shrink-mobile 0.2s ease-in-out;
 }
 
 @media (min-width: 768px) {
   .selected {
-    animation: shrink 0.4s ease-in-out 0.1s;
+    animation: shrink 0.2s ease-in-out;
   }
 }
 
