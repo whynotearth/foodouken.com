@@ -9,6 +9,12 @@ If you are a restraunt that would be interested in trialing this service, feel f
 Love,
 Chris
 
+## design file
+
+https://www.figma.com/file/Q671pbdFk3omco20xmxk5o/foodouken.com?node-id=1245%3A57965
+
+If you have a question about design feel free to reference our design doc, add a comment, or reach out on https://discord.gg/5T7D33c
+
 ## frontend (vue.js/tailwind css)
 
 Most of the site is setup using endpoints provided by meredith-core, our REST API:
