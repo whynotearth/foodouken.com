@@ -12,7 +12,9 @@
         <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
-        <checkout-form v-if="form && cart.length" />
+        <div ref="checkoutFormContainer">
+          <checkout-form v-if="form && cart.length" />
+        </div>
         <h3 class="text-5xl text-white font-bold text-center mb-8">
           Cart
         </h3>
@@ -28,6 +30,22 @@
         <empty-cart v-else />
       </div>
     </section>
+    <div
+      v-if="cart.length && !form"
+      class="sticky inset-x-0 bottom-0 mt-8 pb-4"
+    >
+      <div
+        class="flex flex-row items-center p-2 bg-button rounded-lg shadow-md md:hidden"
+      >
+        <div class="flex-1" />
+        <div class="flex-grow text-center">
+          <a href="#" @click.prevent="showForm">Order Now</a>
+        </div>
+        <div class="flex-1 text-right">
+          {{ total | formatPrice }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -56,6 +74,10 @@ export default {
     this.fetchHomeData();
   },
   methods: {
+    showForm() {
+      this.triggerForm(true);
+      this.$refs.checkoutFormContainer.scrollIntoView();
+    },
     ...mapActions('home', ['fetchHomeData']),
     ...mapMutations('form', ['triggerForm'])
   },
