@@ -1,14 +1,13 @@
 <template>
   <component
     :is="type"
-    class="rounded-full bg-button px-10 py-2 ripple cursor-pointer border-none"
+    class="rounded-full px-10 py-2 ripple cursor-pointer border-none"
+    :class="`hover:${color} ${color}`"
     @click="$emit('clicked')"
     :href="href"
     :to="to"
   >
-    <span class="text-white uppercase">
-      {{ title }}
-    </span>
+    <span class="text-white uppercase">{{ title }}</span>
   </component>
 </template>
 
@@ -25,6 +24,10 @@ export default {
     title: {
       type: String,
       default: 'Button'
+    },
+    color: {
+      type: String,
+      default: 'bg-button'
     }
   },
   computed: {
@@ -43,16 +46,23 @@ export default {
 
 <style scoped>
 .ripple {
-  background-position: center;
+  position: relative;
+  overflow: hidden;
   transition: background 0.4s;
 }
-.ripple:hover {
-  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
-    center/15000%;
+
+.ripple:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background ease-in-out 0.3s;
 }
-.ripple:active {
-  background-color: #6eb9f7;
-  background-size: 100%;
-  transition: background 0s;
+
+.ripple:hover:after {
+  background: rgba(255, 255, 255, 0.8);
 }
 </style>
