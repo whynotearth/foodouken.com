@@ -34,6 +34,14 @@
         <empty-cart v-else />
       </div>
     </section>
+    <sticky-cta
+      v-if="cart.length"
+      centerContent="View Cart"
+      v-bind:rightContent="total | formatPrice"
+      ctaLink="#cartHeader"
+      v-bind:mobileOnly="true"
+      class="mt-8 pb-4"
+    />
   </div>
 </template>
 
@@ -44,6 +52,7 @@ import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
 import Cart from '@/components/cart/Cart.vue';
 import EmptyCart from '@/components/cart/EmptyCart.vue';
+import StickyCta from '@/components/sticky-cta/StickyCta.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -55,6 +64,7 @@ export default {
     Button,
     Cart,
     EmptyCart,
+    StickyCta,
     CheckoutForm: () => import('@/components/forms/CheckoutForm.vue')
   },
   data() {
@@ -74,8 +84,14 @@ export default {
       loadingCategory: 'category/getCategoryLoading',
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
-      cart: 'cart/cartItems'
+      cart: 'cart/cartItems',
+      total: 'cart/total'
     })
+  },
+  filters: {
+    formatPrice: price => {
+      return `$${price.toFixed(2)}`;
+    }
   }
 };
 </script>

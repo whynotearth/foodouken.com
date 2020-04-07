@@ -1,15 +1,17 @@
 <template>
   <div
-    class="fixed p-4 inset-x-0 bottom-0 w-full"
-    v-bind:class="[
-      backgroundColor,
-      border,
-      borderColor,
-      fontColor,
-      mobileOnly ? 'md:hidden' : ''
-    ]"
+    class="sticky inset-x-0 bottom-0 w-full"
+    v-bind:class="[mobileOnly ? 'md:hidden' : '']"
   >
-    <div class="flex flex-row items-center">
+    <div
+      class="flex flex-row items-center p-2"
+      v-bind:class="[
+        backgroundColor,
+        border,
+        fontColor,
+        mobileOnly ? 'md:hidden' : ''
+      ]"
+    >
       <div class="flex-1">{{ leftContent }}</div>
       <div class="flex-grow text-center">
         <a v-if="ctaLink" :href="ctaLink">{{ centerContent }}</a>
@@ -34,11 +36,7 @@ export default {
     },
     border: {
       type: String,
-      default: 'border-t'
-    },
-    borderColor: {
-      type: String,
-      default: 'border-gray-500'
+      default: 'border border-gray-500 rounded-lg'
     },
     fontColor: {
       type: String,
@@ -49,7 +47,7 @@ export default {
       default: false
     }
   }
-}
+};
 </script>
 
 <style />
