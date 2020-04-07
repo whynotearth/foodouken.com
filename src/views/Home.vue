@@ -39,7 +39,7 @@
       >
         <div class="flex-1" />
         <div class="flex-grow text-center">
-          <a href="#" @click.prevent="showForm">Order Now</a>
+          <a @click.prevent="showForm" class="font-semibold">Order Now</a>
         </div>
         <div class="flex-1 text-right">
           {{ total | formatPrice }}
