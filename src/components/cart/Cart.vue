@@ -10,7 +10,7 @@
       <div><span class="text-gray-500 text-sm">Sub-Total</span></div>
       <div class="text-right">
         <span class="text-gray-500 text-sm">
-          ${{ subTotal | formatPrice }}
+          {{ subTotal | formatPrice }}
         </span>
       </div>
 
@@ -42,7 +42,7 @@ export default {
   },
   filters: {
     formatPrice: price => {
-      return price.toFixed(2);
+      return `$${price.toFixed(2)}`;
     }
   }
 };
