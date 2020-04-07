@@ -66,7 +66,7 @@ export default {
     },
     phone: {
       get() {
-        return this.getName;
+        return this.getPhone;
       },
       set(value) {
         this.updatePhone(value);
@@ -74,7 +74,7 @@ export default {
     },
     specialRequest: {
       get() {
-        return this.getName;
+        return this.getSpecialRequest;
       },
       set(value) {
         this.updateSpecialRequest(value);
