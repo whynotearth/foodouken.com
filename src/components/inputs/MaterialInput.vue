@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4 relative text-gray-500">
+  <div class="mb-4 relative text-lg">
     <input
       class="input appearance-none relative bg-transparent border border-gray-600 rounded w-full px-4 py-3 focus:border-gray-500 active:border-gray-500"
       :class="value.length > 0 ? 'filled' : ''"
@@ -11,7 +11,7 @@
       :placeholder="placeholder || label"
     />
     <label
-      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
+      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text text-gray-500"
     >
       {{ label }}
     </label>
