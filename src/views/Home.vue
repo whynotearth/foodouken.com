@@ -16,7 +16,10 @@
       </div>
       <div class="lg:w-4/12 lg:ml-4">
         <checkout-form v-if="form" />
-        <h3 class="text-5xl text-white font-bold text-center mb-8">
+        <h3
+          class="text-5xl text-white font-bold text-center mb-8"
+          id="cartHeader"
+        >
           Cart
         </h3>
         <template v-if="cart.length">
@@ -50,6 +53,7 @@ import CategoryHolder from '@/components/categories/CategoryHolder.vue';
 import Button from '@/components/Button.vue';
 import Cart from '@/components/cart/Cart.vue';
 import EmptyCart from '@/components/cart/EmptyCart.vue';
+import StickyCta from '@/components/sticky-cta/StickyCta.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -61,6 +65,7 @@ export default {
     Button,
     Cart,
     EmptyCart,
+    StickyCta,
     CheckoutForm: () => import('@/components/forms/CheckoutForm.vue')
   },
   data() {
@@ -80,8 +85,14 @@ export default {
       loadingCategory: 'category/getCategoryLoading',
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
-      cart: 'cart/cartItems'
+      cart: 'cart/cartItems',
+      total: 'cart/total'
     })
+  },
+  filters: {
+    formatPrice: price => {
+      return `$${price.toFixed(2)}`;
+    }
   }
 };
 </script>

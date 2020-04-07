@@ -10,19 +10,23 @@
       <div><span class="text-gray-500 text-sm">Sub-Total</span></div>
       <div class="text-right">
         <span class="text-gray-500 text-sm">
-          ${{ subTotal | formatPrice }}
+          {{ subTotal | formatPrice }}
         </span>
       </div>
 
       <div><span class="text-gray-500 text-sm">Delivery Fee</span></div>
       <div class="text-right">
-        <span class="text-gray-500 text-sm">${{ deliveryFee }}</span>
+        <span class="text-gray-500 text-sm">{{
+          deliveryFee | formatPrice
+        }}</span>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-1 mt-2">
       <div><span class="text-gray-400 text-2xl font-bold">Total</span></div>
       <div class="text-right">
-        <span class="text-gray-400 text-2xl font-bold">${{ total }}</span>
+        <span class="text-gray-400 text-2xl font-bold">{{
+          total | formatPrice
+        }}</span>
       </div>
     </div>
   </div>
@@ -42,7 +46,7 @@ export default {
   },
   filters: {
     formatPrice: price => {
-      return price.toFixed(2);
+      return `$${price.toFixed(2)}`;
     }
   }
 };
