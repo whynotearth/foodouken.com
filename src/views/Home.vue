@@ -87,8 +87,14 @@ export default {
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
+      total: 'cart/total',
       form: 'form/getFormActive'
     })
+  },
+  filters: {
+    formatPrice: price => {
+      return `$${price.toFixed(2)}`;
+    }
   }
 };
 </script>
