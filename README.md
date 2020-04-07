@@ -7,7 +7,23 @@ If you would like to get involved, we are seeking programmers, experienced marke
 If you are a restraunt that would be interested in trialing this service, feel free to drop a comment below or pm me for more details.
 
 Love,
-Chris.
+Chris
+
+## frontend (vue.js/tailwind css)
+
+Most of the site is setup using endpoints provided by meredith-core, our REST API:
+
+https://stagingapi.whynot.earth/api/v0/pages/slug/bang-bang-bakery-cafe/
+
+Your job is to style and beautify those endpoints. Since we are working with tailwind css, many of the finer nuances of loading, animations, transitions still need to be done. 
+
+## backend (.net)
+
+We host on Google Cloud Platform, postgres database. Our API, meredith core can be found here:
+
+https://github.com/whynotearth/meredith-core
+
+Your job is to create manipulate the API to be better suited for food delivery. Currently, we are mashing a lot json in a single cell in our database and punching out endpoints. We will want to segment that into better modules. 
 
 
 ## Project setup
