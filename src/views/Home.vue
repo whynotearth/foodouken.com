@@ -16,7 +16,10 @@
       </div>
       <div class="lg:w-4/12 lg:ml-4">
         <checkout-form v-if="form" />
-        <h3 class="text-5xl text-white font-bold text-center mb-8">
+        <h3
+          class="text-5xl text-white font-bold text-center mb-8"
+          id="cartHeader"
+        >
           Cart
         </h3>
         <template v-if="cart.length">

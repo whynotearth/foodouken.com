@@ -25,17 +25,25 @@
         <div><span class="text-gray-400 text-2xl font-bold">-</span></div>
       </div>
     </div>
+    <sticky-cta
+      centerContent="View Cart"
+      v-bind:rightContent="subTotal | formatPrice"
+      v-bind:mobileOnly="true"
+      ctaLink="#cartHeader"
+    />
   </div>
 </template>
 
 <script>
 import CartItem from '@/components/cart/CartItem.vue';
+import StickyCta from '@/components/sticky-cta/StickyCta.vue';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'Cart',
   components: {
-    CartItem
+    CartItem,
+    StickyCta
   },
   computed: {
     ...mapGetters('cart', ['cartItems', 'subTotal'])
