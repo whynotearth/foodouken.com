@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="bg-secondary px-2 py-4 rounded-lg">
+    <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
       <material-input
         v-model="street"
         type="text"

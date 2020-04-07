@@ -1,9 +1,9 @@
 <template>
   <div class="bg-secondary shadow-md rounded-lg mb-4 p-4 max-w-sm m-auto">
     <cart-item
-      v-for="cartItem in cartItems"
+      v-for="(cartItem, index) in cartItems"
       :cart-item="cartItem"
-      :key="cartItem.product.id"
+      :key="index"
     />
     <hr class="my-4" />
     <div class="grid grid-cols-2 gap-1">

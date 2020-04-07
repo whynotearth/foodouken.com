@@ -17,13 +17,15 @@ const state = {
     deliveryTime: {},
     paymentMethod: ''
   },
-  page: 1
+  page: 1,
+  form: false
 };
 
 // getters
 const getters = {
   formData: state => state.formData,
   page: state => state.page,
+  getFormActive: state => state.form,
   getName: state => state.formData.customerInfo.name,
   getEmail: state => state.formData.customerInfo.email,
   getPhone: state => state.formData.customerInfo.phone,
@@ -40,6 +42,9 @@ const actions = {};
 
 // mutations
 const mutations = {
+  triggerForm(state, payload) {
+    state.form = payload;
+  },
   pageChange(state, payload) {
     state.page = payload;
   },

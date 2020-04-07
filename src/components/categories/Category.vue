@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .selected {
   animation: shrink-mobile 0.4s ease-in-out 0.1s;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="bg-secondary px-2 py-4 rounded-lg">
+    <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
       <material-input
         v-model="name"
         type="text"
@@ -66,7 +66,7 @@ export default {
     },
     phone: {
       get() {
-        return this.getName;
+        return this.getPhone;
       },
       set(value) {
         this.updatePhone(value);
@@ -74,7 +74,7 @@ export default {
     },
     specialRequest: {
       get() {
-        return this.getName;
+        return this.getSpecialRequest;
       },
       set(value) {
         this.updateSpecialRequest(value);
