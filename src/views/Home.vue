@@ -24,13 +24,22 @@
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
           </p>
-          <div v-if="!form" class="w-full text-center my-4">
+          <div v-if="!form" class="w-full text-center my-4 hidden md:block">
             <Button title="Order now" @clicked="form = true" />
           </div>
         </template>
         <empty-cart v-else />
       </div>
     </section>
+    <sticky-cta
+      v-if="cart.length"
+      centerContent="Order Now"
+      v-bind:rightContent="total | formatPrice"
+      border="rounded-lg"
+      v-bind:boxShadow="true"
+      v-bind:mobileOnly="true"
+      class="mt-8 pb-4"
+    />
   </div>
 </template>
 
