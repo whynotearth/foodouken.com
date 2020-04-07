@@ -5,11 +5,8 @@
     <section class="flex lg:flex-row flex-col-reverse my-4">
       <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
         <category-holder :categories="categories" />
-        <h3
-          v-if="category"
-          class="text-5xl text-white font-bold text-center mb-4"
-        >
-          {{ loadingCategory ? 'Loading category...' : category.title }}
+        <h3 class="text-5xl text-white font-bold text-center mb-4">
+          {{ category.title }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
         <card-holder />
@@ -64,7 +61,6 @@ export default {
   computed: {
     ...mapGetters({
       category: 'category/getCategory',
-      loadingCategory: 'category/getCategoryLoading',
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
