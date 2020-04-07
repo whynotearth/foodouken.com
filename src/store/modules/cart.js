@@ -1,6 +1,9 @@
 // initial state
 const state = {
-  cartItems: []
+  cartItems: [],
+  deliveryFee: 1,
+  subTotal: 0,
+  total: 0
 };
 
 // getters
@@ -9,11 +12,19 @@ const getters = {
     return state.cartItems;
   },
   subTotal: state => {
-    return state.cartItems.reduce(
+    state.subTotal = state.cartItems.reduce(
       (runningTotal, cartItem) =>
         runningTotal + cartItem.product.price * cartItem.count,
       0
     );
+    return state.subTotal;
+  },
+  deliveryFee: state => {
+    return state.deliveryFee;
+  },
+  total: state => {
+    state.total = state.subTotal + state.deliveryFee;
+    return state.total;
   }
 };
 

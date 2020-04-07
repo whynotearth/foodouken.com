@@ -23,7 +23,7 @@
       <text-area v-model="specialRequest" label="Special requests" />
     </div>
     <div class="w-full text-center my-4">
-      <Button title="Add address" />
+      <Button title="Add address" @clicked="pageChange(2)" />
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
 import Button from '@/components/Button.vue';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'CustomerInfo',
@@ -40,13 +41,54 @@ export default {
     TextArea,
     Button
   },
-  data() {
-    return {
-      name: '',
-      email: '',
-      phone: '',
-      specialRequest: ''
-    };
+  computed: {
+    ...mapGetters('form', [
+      'getName',
+      'getEmail',
+      'getPhone',
+      'getSpecialRequest'
+    ]),
+    name: {
+      get() {
+        return this.getName;
+      },
+      set(value) {
+        this.updateName(value);
+      }
+    },
+    email: {
+      get() {
+        return this.getEmail;
+      },
+      set(value) {
+        this.updateEmail(value);
+      }
+    },
+    phone: {
+      get() {
+        return this.getName;
+      },
+      set(value) {
+        this.updatePhone(value);
+      }
+    },
+    specialRequest: {
+      get() {
+        return this.getName;
+      },
+      set(value) {
+        this.updateSpecialRequest(value);
+      }
+    }
+  },
+  methods: {
+    ...mapMutations('form', [
+      'updateName',
+      'updateEmail',
+      'updatePhone',
+      'updateSpecialRequest',
+      'pageChange'
+    ])
   }
 };
 </script>
