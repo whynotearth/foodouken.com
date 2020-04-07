@@ -12,7 +12,9 @@
         <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
-        <checkout-form v-if="form && cart.length" />
+        <div ref="checkoutFormContainer">
+          <checkout-form v-if="form && cart.length" />
+        </div>
         <h3 class="text-5xl text-white font-bold text-center mb-8">
           Cart
         </h3>
@@ -21,13 +23,29 @@
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
           </p>
-          <div v-if="!form" class="w-full text-center my-4">
+          <div v-if="!form" class="w-full text-center my-4 hidden lg:block">
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
         <empty-cart v-else />
       </div>
     </section>
+    <div
+      v-if="cart.length && !form"
+      class="sticky inset-x-0 bottom-0 mt-8 pb-4"
+    >
+      <div
+        class="flex flex-row items-center p-2 bg-button rounded-lg shadow-md lg:hidden"
+      >
+        <div class="flex-1" />
+        <div class="flex-grow text-center">
+          <a @click.prevent="showForm" class="font-semibold">Order Now</a>
+        </div>
+        <div class="flex-1 text-right">
+          {{ total | formatPrice }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -56,6 +74,10 @@ export default {
     this.fetchHomeData();
   },
   methods: {
+    showForm() {
+      this.triggerForm(true);
+      this.$refs.checkoutFormContainer.scrollIntoView();
+    },
     ...mapActions('home', ['fetchHomeData']),
     ...mapMutations('form', ['triggerForm'])
   },
@@ -65,8 +87,14 @@ export default {
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
+      total: 'cart/total',
       form: 'form/getFormActive'
     })
+  },
+  filters: {
+    formatPrice: price => {
+      return `$${price.toFixed(2)}`;
+    }
   }
 };
 </script>
