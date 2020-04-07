@@ -40,6 +40,9 @@ const actions = {};
 
 // mutations
 const mutations = {
+  pageChange(state, payload) {
+    state.page = payload;
+  },
   updateName(state, payload) {
     state.formData.customerInfo.name = payload;
   },
@@ -58,8 +61,8 @@ const mutations = {
   updateTown(state, payload) {
     state.formData.customerAddress.town = payload;
   },
-  updateCity(state, payload) {
-    state.formData.customerAddress.city = payload;
+  updateFloor(state, payload) {
+    state.formData.customerAddress.floor = payload;
   },
   updateApartment(state, payload) {
     state.formData.customerAddress.apartment = payload;
