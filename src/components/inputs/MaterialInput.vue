@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4 relative text-lg">
+  <div class="mb-4 relative">
     <input
       class="input appearance-none relative bg-transparent border border-gray-600 rounded w-full px-4 py-3 focus:border-gray-500 active:border-gray-500"
       :class="value.length > 0 ? 'filled' : ''"
