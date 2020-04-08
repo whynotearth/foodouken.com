@@ -13,7 +13,9 @@
     <p
       class="text-center text-sm w-20 self-center"
       :class="selected ? 'text-white' : 'text-gray-500'"
-    >{{ category.name }}</p>
+    >
+      {{ category.name }}
+    </p>
   </div>
 </template>
 
