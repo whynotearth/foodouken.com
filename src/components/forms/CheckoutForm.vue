@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import CheckoutStepper from '@/components/forms/CheckoutStepper'
+import CheckoutStepper from '@/components/forms/CheckoutStepper';
 import CustomerInfo from '@/components/forms/CustomerInfo';
 import CustomerAddress from '@/components/forms/CustomerAddress';
 import DeliveryTime from '@/components/forms/DeliveryTime';
