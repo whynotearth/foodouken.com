@@ -18,6 +18,7 @@
               v-if="contact.link"
               v-text="contact.label"
               :href="contact.link"
+              :title="contact.title"
               :target="contact.newTab ? '_blank' : '_self'"
             ></a>
             <template v-else>
@@ -36,37 +37,42 @@ import { mapGetters } from 'vuex';
 export default {
   computed: {
     ...mapGetters({
-      orgData: 'home/getOrgData',
-    }),
+      orgData: 'home/getOrgData'
+    })
   },
   methods: {
     getContactLinks() {
       return [
         {
+          title: `${this.orgData.title} on Google Maps`,
           label: this.orgData.custom.address.friendlyName,
           icon: 'location',
-          link: null,
+          link: this.orgData.custom.address.googleMaps,
+          newTab: true
         },
         {
+          title: `Call ${this.orgData.title}`,
           label: this.orgData.custom.details.phone,
           icon: 'phone',
-          link: `tel:${this.orgData.custom.details.phone}`,
+          link: `tel:${this.orgData.custom.details.phone}`
         },
         {
+          title: `${this.orgData.title} on Facebook`,
           label: this.orgData.custom.details.facebook,
           icon: 'facebook',
           link: `https://facebook.com/${this.orgData.custom.details.facebook}`,
-          newTab: true,
+          newTab: true
         },
         {
+          title: `${this.orgData.title} on WhatsApp`,
           label: this.orgData.custom.details.whatsapp,
           icon: 'whatsapp',
           link: `https://wa.me/${this.orgData.custom.details.whatsapp}`,
-          newTab: true,
-        },
+          newTab: true
+        }
       ];
-    },
-  },
+    }
+  }
 };
 </script>
 
