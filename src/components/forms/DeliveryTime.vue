@@ -1,58 +1,48 @@
 <template>
   <div class="select-none">
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
-      <RadioInput
-        v-model="selectedOption"
-        :selectedOption="selectedOption"
-        option="Now"
-        class="p-5"
-      />
+      <RadioInput v-model="selectedTime" option="Now" class="p-5" />
       <hr class="border-gray-700" />
-      <RadioInput
-        v-model="selectedOption"
-        :selectedOption="selectedOption"
-        option="Later"
-        class="p-5"
-      />
+      <RadioInput v-model="selectedTime" option="Later" class="p-5" />
     </div>
-    <div class="w-full bg-secondary rounded-lg shadow p-5 mb-2 cursor-pointer">
-      <img
-        :src="calendar"
-        alt="Calendar"
-        class="inline-block align-baseline mr-5 -mb-0.5 pointer-events-none"
-      />
-      <span class="text-gray-500">Dropdown</span>
-      <img
-        :src="down"
-        alt="down arrow"
-        class="inline-block py-3 float-right pointer-events-none"
-      />
-    </div>
+    <Dropdown
+      v-if="selectedTime === 'Later'"
+      :icon="calendar"
+      v-model="day"
+      :options="days"
+    />
+    <Dropdown v-if="day" :icon="clock" v-model="time" />
     <div class="w-full text-center my-4">
-      <Button title="Choose delivery time" @clicked="pageChange(4)" />
+      <Button title="Pick payment method" @clicked="pageChange(4)" />
     </div>
   </div>
 </template>
 
 <script>
 import RadioInput from '@/components/inputs/RadioInput';
-import calendar from '@/assets/calendar.png';
-import down from '@/assets/down.png';
 import Button from '@/components/Button.vue';
-import { mapMutations } from 'vuex';
+import Dropdown from '@/components/Dropdown.vue';
+import calendar from '@/assets/calendar.png';
+import clock from '@/assets/clock.png';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'DeliveryTime',
-  components: { RadioInput, Button },
+  components: { RadioInput, Button, Dropdown },
   data() {
     return {
-      selectedOption: '',
+      selectedTime: '',
+      day: '',
+      time: '',
       calendar: calendar,
-      down: down
+      clock: clock
     };
   },
   methods: {
     ...mapMutations('form', ['pageChange'])
+  },
+  computed: {
+    ...mapGetters('home', ['getOpeningHours'])
   }
 };
 </script>
