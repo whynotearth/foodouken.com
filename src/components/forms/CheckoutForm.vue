@@ -2,14 +2,28 @@
   <div>
     <div class="max-w-sm m-auto bg-footer shadow-md mb-4">
       <div class="flex items-center p-2">
-        <div class="flex-1 text-2xl">
-          <a @click="decrementPage" v-if="page != 1">←</a>
+        <div class="">
+          <a @click="decrementPage" v-if="page != 1">
+            <img
+              :src="left"
+              alt="Back"
+              class="pointer-events-none w-6 h-6"
+              draggable="false"
+            />
+          </a>
         </div>
         <div class="flex-grow text-center">
           <h3 class="text-2xl font-bold">{{ pageHeader }}</h3>
         </div>
-        <div class="flex-1 text-2xl text-right">
-          <a @click="incrementPage" v-if="page != pageCount">→</a>
+        <div class="text-right">
+          <a @click="incrementPage" v-if="page != pageCount">
+            <img
+              :src="right"
+              alt="Forward"
+              class="pointer-events-none w-6 h-6"
+              draggable="false"
+            />
+          </a>
         </div>
       </div>
       <div class="flex justify-center pb-4">
@@ -37,12 +51,16 @@ import CustomerInfo from '@/components/forms/CustomerInfo';
 import CustomerAddress from '@/components/forms/CustomerAddress';
 import DeliveryTime from '@/components/forms/DeliveryTime';
 import PaymentMethod from '@/components/forms/PaymentMethod';
+import left from '@/assets/left.png';
+import right from '@/assets/right.png';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'CheckoutForm',
   data() {
     return {
+      left,
+      right,
       pageCount: 4
     };
   },
