@@ -14,6 +14,9 @@ const getters = {
   },
   getCategories(state) {
     return state.categories;
+  },
+  getOpeningHours(state) {
+    return state.orgData.custom.openingHours;
   }
 };
 
