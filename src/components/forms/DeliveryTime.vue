@@ -11,7 +11,11 @@
       v-model="day"
       :options="days"
     />
-    <Dropdown v-if="day" :icon="clock" v-model="time" />
+    <Dropdown
+      v-if="selectedTime === 'Later' && day"
+      :icon="clock"
+      v-model="time"
+    />
     <div class="w-full text-center my-4">
       <Button title="Pick payment method" @clicked="pageChange(4)" />
     </div>
