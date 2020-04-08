@@ -56,6 +56,10 @@ export default {
   z-index: 3;
 }
 
+.input:focus::placeholder {
+  color: transparent;
+}
+
 .label {
   transition: all 0.2s ease-out;
   transition: all 200ms;
