@@ -20,6 +20,7 @@
               :href="contact.link"
               :title="contact.title"
               :target="contact.newTab ? '_blank' : '_self'"
+              rel="noopener"
             ></a>
             <template v-else>
               {{ contact.label }}
