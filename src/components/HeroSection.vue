@@ -2,7 +2,7 @@
   <div class="text-center">
     <div class="mt-8">
       <img
-        src="https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466__340.jpg"
+        :src="heroData.custom.logo"
         alt="Logo image"
         class="h-48 w-48 m-auto rounded-full"
       />
