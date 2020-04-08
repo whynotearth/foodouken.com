@@ -34,7 +34,7 @@
         name="quantity"
         min="1"
         v-model="cartItem.count"
-        class="bg-transparent w-8 py-3 text-center font-bold"
+        class="bg-transparent w-8 py-3 text-center font-bold text-white"
       />
       <div class="cursor-pointer w-6 select-none" @click="increment">
         <img
