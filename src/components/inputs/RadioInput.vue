@@ -1,7 +1,7 @@
 <template>
   <div class="w-full cursor-pointer text-lg" @click="selectOption">
     <div
-      class="rounded-full h-5 w-5 p-1 border-2 border-gray-500 inline-block align-baseline mr-5 -mb-0.5"
+      class="rounded-full h-5 w-5 p-1 border-2 border-gray-500 inline-block align-baseline mr-4 -mb-0.5"
       :class="{ 'border-button': selectedOption === option }"
     >
       <div
@@ -9,7 +9,9 @@
         :class="{ 'bg-button': selectedOption === option }"
       ></div>
     </div>
-    <span>{{ option }}</span>
+    <span>
+      {{ option }}
+    </span>
   </div>
 </template>
 
