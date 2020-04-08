@@ -5,7 +5,8 @@ module.exports = {
         primary: '#003037',
         secondary: '#173F44',
         button: '#0E9EC2',
-        footer: '#437784'
+        footer: '#437784',
+        inactive: '#8BABB3'
       },
       screens: {
         xl: '1280px',

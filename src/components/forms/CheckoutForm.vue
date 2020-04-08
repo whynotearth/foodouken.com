@@ -1,5 +1,6 @@
 <template>
   <form action="" class="max-w-sm m-auto">
+    <checkout-stepper />
     <customer-info v-if="page === 1" />
     <customer-address v-if="page === 2" />
     <delivery-time v-if="page === 3" />
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import CheckoutStepper from '@/components/forms/CheckoutStepper'
 import CustomerInfo from '@/components/forms/CustomerInfo';
 import CustomerAddress from '@/components/forms/CustomerAddress';
 import DeliveryTime from '@/components/forms/DeliveryTime';
@@ -17,6 +19,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'CheckoutForm',
   components: {
+    CheckoutStepper,
     CustomerInfo,
     CustomerAddress,
     DeliveryTime,
