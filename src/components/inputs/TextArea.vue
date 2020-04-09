@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4 relative">
     <textarea
-      class="input disable-scrollbars appearance-none relative bg-transparent border border-gray-600 rounded h-32 w-full px-4 py-3 focus:border-gray-500 active:border-gray-500"
+      class="input disable-scrollbars appearance-none relative bg-transparent border border-gray-600 rounded h-32 w-full px-4 py-3 focus:outline-none focus:border-gray-500 focus:border-2 active:border-gray-500 active:border-2"
       :class="value.length > 0 ? 'filled' : ''"
       :value="value"
       @input="$emit('input', $event.target.value)"
