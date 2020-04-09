@@ -1,5 +1,8 @@
 <template>
-  <div class="m-2 cursor-pointer flex flex-col" @click="$emit('clicked')">
+  <div
+    class="my-2 mx-0.5 cursor-pointer flex flex-col"
+    @click="$emit('clicked')"
+  >
     <div class="flex justify-center h-16 md:h-20 w-16 md:w-20 self-center">
       <div
         class="flex-none rounded-full h-16 md:h-20 w-16 md:w-20 self-center"
@@ -11,8 +14,8 @@
       </div>
     </div>
     <p
-      class="text-center text-sm w-20 self-center"
-      :class="selected ? 'text-white' : 'text-gray-500'"
+      class="text-center text-xs mt-1 sm:w-16 md:w-20 self-center"
+      :class="selected ? 'text-white font-semibold' : 'text-gray-500'"
     >
       {{ category.name }}
     </p>
