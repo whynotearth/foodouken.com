@@ -14,16 +14,6 @@
       <div class="flex-grow text-center">
         <h3 class="text-2xl font-bold">{{ pageHeader }}</h3>
       </div>
-      <div class="text-right">
-        <a @click="incrementPage" v-if="page != pageCount">
-          <img
-            :src="right"
-            alt="Forward"
-            class="pointer-events-none w-6 h-6"
-            draggable="false"
-          />
-        </a>
-      </div>
     </div>
     <div class="flex justify-center pb-4">
       <div v-for="pageNum in pageCount" :key="pageNum" class="rounded-full">
@@ -40,7 +30,6 @@
 
 <script>
 import left from '@/assets/left.png';
-import right from '@/assets/right.png';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
@@ -48,7 +37,6 @@ export default {
   data() {
     return {
       left,
-      right,
       pageCount: 4
     };
   },
