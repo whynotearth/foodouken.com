@@ -1,15 +1,15 @@
 <template>
-  <form action="" class="max-w-sm m-auto">
+  <div class="max-w-sm m-auto">
     <checkout-stepper />
     <customer-info v-if="page === 1" />
     <customer-address v-if="page === 2" />
     <delivery-time v-if="page === 3" />
     <payment-method v-if="page === 4" />
-  </form>
+  </div>
 </template>
 
 <script>
-import CheckoutStepper from '@/components/forms/CheckoutStepper'
+import CheckoutStepper from '@/components/forms/CheckoutStepper';
 import CustomerInfo from '@/components/forms/CustomerInfo';
 import CustomerAddress from '@/components/forms/CustomerAddress';
 import DeliveryTime from '@/components/forms/DeliveryTime';

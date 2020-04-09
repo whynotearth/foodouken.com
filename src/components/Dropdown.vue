@@ -10,7 +10,7 @@
         alt="icon"
         class="inline-block align-baseline mr-4 h-5 w-5 -mb-0.5 pointer-events-none"
       />
-      <span :class="selectedOption ? 'text-white' : 'text-gray-500'">
+      <span :class="selectedOption ? '' : 'text-gray-500'">
         {{ selectedOption || placeholder }}
       </span>
       <img

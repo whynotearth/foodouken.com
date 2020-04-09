@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <div class="mt-8">
+    <div class="mt-8" v-if="heroData.custom">
       <img
         :src="heroData.custom.logo"
         alt="Logo image"
@@ -11,7 +11,7 @@
       {{ heroData.title }}
     </h1>
     <h2 class="md:text-5xl text-3xl text-gray-500 font-bold mb-8">Delivery</h2>
-    <div class="text-gray-500 mt-2 whitespace-pre mx-auto max-w-lg">
+    <div class="text-gray-500 mt-2 whitespace-pre-wrap mx-auto max-w-lg">
       {{ heroData.description }}
     </div>
   </div>
