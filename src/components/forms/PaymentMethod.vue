@@ -4,14 +4,14 @@
       <RadioInput
         v-model="selectedOption"
         :selectedOption="selectedOption"
-        option="Cash"
+        value="Cash"
         class="p-5"
       />
       <hr class="border-gray-700" />
       <RadioInput
         v-model="selectedOption"
         :selectedOption="selectedOption"
-        option="ABA Bank Transfer"
+        value="ABA Bank Transfer"
         class="p-5"
       />
     </div>
