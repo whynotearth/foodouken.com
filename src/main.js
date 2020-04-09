@@ -4,6 +4,9 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import './assets/tailwind.css';
+import Vuelidate from 'vuelidate';
+
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 
