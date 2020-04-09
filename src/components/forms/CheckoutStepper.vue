@@ -42,10 +42,6 @@ export default {
   },
   methods: {
     ...mapMutations('form', ['pageChange']),
-    incrementPage() {
-      const pageToGo = this.page + 1;
-      this.pageChange(pageToGo);
-    },
     decrementPage() {
       const pageToGo = this.page - 1;
       this.pageChange(pageToGo);
