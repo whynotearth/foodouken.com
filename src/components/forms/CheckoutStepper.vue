@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-sm m-auto bg-footer shadow-md mb-4">
     <div class="flex items-center p-2">
-      <div class="">
+      <div class="cursor-pointer">
         <a @click="decrementPage" v-if="page != 1">
           <img
             :src="left"
