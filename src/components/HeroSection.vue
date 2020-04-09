@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <div class="mt-8">
+    <div class="mt-8" v-if="heroData.custom">
       <img
         :src="heroData.custom.logo"
         alt="Logo image"
