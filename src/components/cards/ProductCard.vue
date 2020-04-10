@@ -1,7 +1,7 @@
 <template>
   <div
     @click="addCartProduct(product)"
-    class="bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer"
+    class="product-card bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer transition duration-300 transform hover:opacity-75"
   >
     <img
       :src="product.image"
@@ -60,7 +60,7 @@ export default {
   background-position: center;
   transition: background 0.4s;
 }
-.ripple:hover {
+.product-card:hover .ripple {
   background: #1d484f radial-gradient(circle, transparent 1%, #1d484f 1%)
     center/15000%;
 }
