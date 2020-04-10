@@ -9,7 +9,11 @@
           :key="i"
           class="py-3 flex mr-auto items-center lg:mx-auto lg:px-3"
         >
-          <img :src="contact.icon" class="w-8 lg:w-6 mr-4" />
+          <img
+            :src="contact.icon"
+            class="w-8 lg:w-6 mr-4"
+            :alt="contact.title"
+          />
           <span class="w-auto">
             <a
               v-if="contact.link"
