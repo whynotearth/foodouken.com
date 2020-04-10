@@ -26,7 +26,7 @@
       class="dropdown mt-2 w-48 bg-secondary w-full rounded-lg shadow-xl overflow-x-hidden overflow-y-auto"
     >
       <div
-        class="p-5 first:rounded-t-lg last:rounded-b-lg hover:bg-footer cursor-default"
+        class="p-5 first:rounded-t-lg last:rounded-b-lg hover:bg-footer cursor-pointer"
         v-for="(option, index) in options"
         :key="index"
         @click="updateDay(option)"
