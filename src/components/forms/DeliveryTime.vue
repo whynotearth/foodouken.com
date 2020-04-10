@@ -85,9 +85,8 @@ export default {
       let d = Date.now();
       let days = [];
       for (let i = 0; i < 7; i++) {
-        d = d + 8640000;
-        console.log(d);
-        days.push(d);
+        let a = d + i * 86400000;
+        days.push(a);
       }
       return days;
     },
