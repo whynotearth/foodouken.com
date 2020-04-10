@@ -2,14 +2,15 @@
 const state = {
   formData: {
     customerInfo: {
-      name: 'a',
-      email: 'a@a.com',
-      phone: '12312312',
+      name: '',
+      email: '',
+      phone: '',
       specialRequest: ''
     },
     customerAddress: {
-      street: 'a',
-      town: 'a',
+      buildingName: '',
+      street: '',
+      town: '',
       floor: '',
       apartment: '',
       parking: ''
@@ -30,6 +31,7 @@ const getters = {
   getEmail: state => state.formData.customerInfo.email,
   getPhone: state => state.formData.customerInfo.phone,
   getSpecialRequest: state => state.formData.customerInfo.specialRequest,
+  getBuildingName: state => state.formData.customerAddress.buildingName,
   getStreet: state => state.formData.customerAddress.street,
   getTown: state => state.formData.customerAddress.town,
   getFloor: state => state.formData.customerAddress.floor,
@@ -60,6 +62,9 @@ const mutations = {
   },
   updateSpecialRequest(state, payload) {
     state.formData.customerInfo.specialRequest = payload;
+  },
+  updateBuildingName(state, payload) {
+    state.formData.customerAddress.buildingName = payload;
   },
   updateStreet(state, payload) {
     state.formData.customerAddress.street = payload;
