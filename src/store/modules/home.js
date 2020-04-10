@@ -17,6 +17,9 @@ const getters = {
   },
   getOpeningHours(state) {
     return state.orgData.custom.openingHours;
+  },
+  getLoading(state) {
+    return state.loading;
   }
 };
 
