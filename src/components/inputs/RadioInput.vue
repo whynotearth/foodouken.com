@@ -1,16 +1,20 @@
 <template>
-  <div class="w-full cursor-pointer text-lg" @click="selectOption">
+  <div
+    class="w-full cursor-pointer text-lg"
+    :class="{ 'opacity-50 cursor-not-allowed': disabled }"
+    @click="selectOption"
+  >
     <div
       class="rounded-full h-5 w-5 p-1 border-2 border-gray-500 inline-block align-baseline mr-4 -mb-0.5"
-      :class="{ 'border-button': selectedOption === option }"
+      :class="{ 'border-button': selectedOption === value }"
     >
       <div
         class="h-full w-full rounded-full"
-        :class="{ 'bg-button': selectedOption === option }"
+        :class="{ 'bg-button': selectedOption === value }"
       ></div>
     </div>
     <span>
-      {{ option }}
+      <slot name="title">{{ value }}</slot>
     </span>
   </div>
 </template>
@@ -26,14 +30,18 @@ export default {
     selectedOption: {
       type: String
     },
-    option: {
+    value: {
       type: String,
       default: 'Option'
+    },
+    disabled: {
+      type: Boolean
     }
   },
   methods: {
     selectOption() {
-      this.$emit('updateSelectedOption', this.option);
+      if (this.disabled) return;
+      else this.$emit('updateSelectedOption', this.value);
     }
   }
 };

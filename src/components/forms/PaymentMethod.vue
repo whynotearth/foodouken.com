@@ -1,17 +1,11 @@
 <template>
   <div class="select-none">
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
-      <RadioInput
-        v-model="selectedOption"
-        :selectedOption="selectedOption"
-        option="Cash"
-        class="p-5"
-      />
+      <RadioInput v-model="paymentMethod" value="Cash" class="p-5" />
       <hr class="border-gray-700" />
       <RadioInput
-        v-model="selectedOption"
-        :selectedOption="selectedOption"
-        option="ABA Bank Transfer"
+        v-model="paymentMethod"
+        value="ABA Bank Transfer"
         class="p-5"
       />
     </div>
@@ -26,20 +20,30 @@ import RadioInput from '@/components/inputs/RadioInput';
 import calendar from '@/assets/calendar.png';
 import down from '@/assets/down.png';
 import Button from '@/components/Button.vue';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'PaymentMethod',
   components: { RadioInput, Button },
   data() {
     return {
-      selectedOption: '',
       calendar: calendar,
       down: down
     };
   },
   methods: {
-    ...mapMutations('form', ['pageChange'])
+    ...mapMutations('form', ['pageChange', 'updatePaymentMethod'])
+  },
+  computed: {
+    ...mapGetters('form', ['getPaymentMethod']),
+    paymentMethod: {
+      get() {
+        return this.getPaymentMethod;
+      },
+      set(value) {
+        this.updatePaymentMethod(value);
+      }
+    }
   }
 };
 </script>
