@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-row my-2 px-2 relative items-center">
+  <div
+    class="flex flex-row my-2 px-2 relative items-center transition-all duration-300"
+  >
     <div
       class="absolute top-0 left-0 bg-button rounded-full h-4 w-4 cursor-pointer select-none"
       @click="remove"

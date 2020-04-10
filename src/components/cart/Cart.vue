@@ -1,10 +1,12 @@
 <template>
   <div class="bg-secondary shadow-md rounded-lg mb-4 p-4 max-w-sm m-auto">
-    <cart-item
-      v-for="(cartItem, index) in cartItems"
-      :cart-item="cartItem"
-      :key="index"
-    />
+    <transition-group name="cart">
+      <cart-item
+        v-for="cartItem in cartItems"
+        :cart-item="cartItem"
+        :key="cartItem.product.id"
+      />
+    </transition-group>
     <hr class="my-4" />
     <div class="grid grid-cols-2 gap-1">
       <div><span class="text-gray-500 text-sm">Sub-Total</span></div>
@@ -48,4 +50,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.cart-enter,
+.cart-leave-to {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+</style>
