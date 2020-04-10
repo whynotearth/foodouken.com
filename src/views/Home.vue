@@ -9,7 +9,10 @@
           {{ category.title }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
-        <card-holder />
+        <transition name="products-container" mode="out-in">
+          <Spinner v-if="loadingCategory" />
+          <card-holder v-else />
+        </transition>
       </div>
       <div class="lg:w-4/12 lg:ml-4">
         <div ref="checkoutFormContainer">
@@ -60,6 +63,7 @@ import Button from '@/components/Button.vue';
 import Cart from '@/components/cart/Cart.vue';
 import EmptyCart from '@/components/cart/EmptyCart.vue';
 import CheckoutForm from '@/components/forms/CheckoutForm.vue';
+import Spinner from '@/components/Spinner.vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
@@ -71,7 +75,8 @@ export default {
     Button,
     Cart,
     EmptyCart,
-    CheckoutForm
+    CheckoutForm,
+    Spinner
   },
   created() {
     this.fetchHomeData();
@@ -87,6 +92,7 @@ export default {
   computed: {
     ...mapGetters({
       category: 'category/getCategory',
+      loadingCategory: 'category/getCategoryLoading',
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
@@ -102,3 +108,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.products-container-enter-active,
+.products-container-leave-active {
+  transition: opacity 0.3s ease;
+}
+.products-container-enter,
+.products-container-leave-to {
+  opacity: 0;
+}
+</style>
