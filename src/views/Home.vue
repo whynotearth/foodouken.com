@@ -30,7 +30,7 @@
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
-        <empty-cart v-else />
+        <empty-cart v-else-if="!cart.length" />
       </div>
     </section>
     <div
@@ -91,7 +91,8 @@ export default {
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
       total: 'cart/total',
-      form: 'form/getFormActive'
+      form: 'form/getFormActive',
+      page: 'form/page'
     })
   },
   filters: {

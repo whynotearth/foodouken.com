@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-sm m-auto bg-footer shadow-md mb-4">
+  <div class="max-w-sm m-auto bg-footer shadow-md mb-4" v-if="page < 6">
     <div class="flex items-center p-2">
       <div class="cursor-pointer">
         <a @click="decrementPage" v-if="page != 1">
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       left,
-      pageCount: 4
+      pageCount: 6
     };
   },
   methods: {
@@ -62,6 +62,9 @@ export default {
         }
         case 4: {
           return 'Payment Method';
+        }
+        case 5: {
+          return 'Review & Order';
         }
         default: {
           return '';

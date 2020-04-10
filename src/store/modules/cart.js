@@ -58,11 +58,17 @@ const actions = {
       return;
     }
     commit('removeCartProduct', product);
+  },
+  clearAllCartItems({ commit }) {
+    commit('resetCartItems');
   }
 };
 
 // mutations
 const mutations = {
+  resetCartItems(state) {
+    state.cartItems = [];
+  },
   addCartProduct(state, product) {
     state.cartItems.push({
       product: product,

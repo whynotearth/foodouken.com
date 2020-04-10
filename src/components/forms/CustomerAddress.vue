@@ -2,6 +2,12 @@
   <div class="w-full">
     <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
       <material-input
+        v-model="buildingName"
+        type="text"
+        label="Building Name"
+        placeholder="Building Name"
+      />
+      <material-input
         v-model="street"
         type="text"
         label="Street Address"
@@ -20,7 +26,7 @@
         :error="!$v.town.required"
       >
         <span v-if="!$v.town.required" class="text-xs text-red-600">
-          Town name is required
+          Town/City is required
         </span>
       </material-input>
       <material-input v-model="floor" type="text" label="Floor" />
@@ -28,7 +34,7 @@
       <material-input v-model="parking" type="text" label="Where to park" />
     </div>
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
-      Please fill the form properly.
+      You are missing required fields, please fill out "Street Address" and "Town/City".
     </span>
     <div class="w-full text-center my-4">
       <Button title="Choose delivery time" @clicked="submit" />
@@ -67,6 +73,7 @@ export default {
       'getFloor',
       'getApartment',
       'getParking',
+      'getBuildingName',
       'getStreet'
     ]),
     town: {
@@ -93,6 +100,14 @@ export default {
         this.updateStreet(value);
       }
     },
+    buildingName: {
+      get() {
+        return this.getBuildingName;
+      },
+      set(value) {
+        this.updateBuildingName(value);
+      }
+    },
     parking: {
       get() {
         return this.getParking;
@@ -115,6 +130,7 @@ export default {
       'updateTown',
       'updateFloor',
       'updateStreet',
+      'updateBuildingName',
       'updateParking',
       'updateApartment',
       'pageChange'
