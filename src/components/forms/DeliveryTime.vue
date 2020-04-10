@@ -39,7 +39,7 @@
       :icon="clock"
       v-model="time"
       :options="timeSlots()"
-      plaveholder="Select time"
+      placeholder="Select time"
       class="mb-2"
     />
     <div class="w-full text-center my-4">
