@@ -15,8 +15,12 @@ const state = {
       apartment: '',
       parking: ''
     },
-    deliveryTime: {},
-    paymentMethod: ''
+    deliveryDate: {
+      option: 'Now',
+      day: '',
+      time: ''
+    },
+    paymentMethod: 'Cash'
   },
   page: 1,
   form: false
@@ -37,6 +41,9 @@ const getters = {
   getFloor: state => state.formData.customerAddress.floor,
   getApartment: state => state.formData.customerAddress.apartment,
   getParking: state => state.formData.customerAddress.parking,
+  getDeliveryDateOption: state => state.formData.deliveryDate.option,
+  getDeliveryDateDay: state => state.formData.deliveryDate.day,
+  getDeliveryDateTime: state => state.formData.deliveryDate.time,
   getPaymentMethod: state => state.formData.paymentMethod
 };
 
@@ -80,6 +87,15 @@ const mutations = {
   },
   updateParking(state, payload) {
     state.formData.customerAddress.parking = payload;
+  },
+  updateDeliveryDateOption(state, payload) {
+    state.formData.deliveryDate.option = payload;
+  },
+  updateDeliveryDateDay(state, payload) {
+    state.formData.deliveryDate.day = payload;
+  },
+  updateDeliveryDateTime(state, payload) {
+    state.formData.deliveryDate.time = payload;
   },
   updatePaymentMethod(state, payload) {
     state.formData.paymentMethod = payload;

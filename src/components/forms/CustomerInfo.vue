@@ -21,15 +21,12 @@
       <material-input
         v-model="phone"
         label="Phone number"
-        :error="!$v.phone.required || !$v.phone.minLength || !$v.phone.numeric"
+        :error="!$v.phone.required || !$v.phone.minLength"
       >
         <span v-if="!$v.phone.required" class="text-red-600 text-xs">
           Phone number is required
         </span>
-        <span
-          v-if="!$v.phone.minLength || !$v.phone.numeric"
-          class="text-red-600 text-xs"
-        >
+        <span v-if="!$v.phone.minLength" class="text-red-600 text-xs">
           Please enter a valid phone number
         </span>
       </material-input>
@@ -49,7 +46,7 @@ import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
 import Button from '@/components/Button.vue';
 import { mapGetters, mapMutations } from 'vuex';
-import { required, email, minLength, numeric } from 'vuelidate/lib/validators';
+import { required, email, minLength } from 'vuelidate/lib/validators';
 
 export default {
   name: 'CustomerInfo',
@@ -73,7 +70,6 @@ export default {
     },
     phone: {
       required,
-      numeric,
       minLength: minLength(7)
     }
   },

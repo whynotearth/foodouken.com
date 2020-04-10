@@ -11,7 +11,9 @@
         class="inline-block align-baseline mr-4 h-5 w-5 -mb-0.5 pointer-events-none"
       />
       <span :class="selectedOption ? '' : 'text-gray-500'">
-        {{ selectedOption || placeholder }}
+        <slot name="title" :selectedOption="selectedOption">
+          {{ selectedOption || placeholder }}
+        </slot>
       </span>
       <img
         :src="down"
@@ -29,7 +31,7 @@
         :key="index"
         @click="updateDay(option)"
       >
-        {{ option }}
+        <slot name="option" :option="option">{{ option }}</slot>
       </div>
     </div>
   </div>
@@ -50,7 +52,7 @@ export default {
       default: null
     },
     selectedOption: {
-      type: String
+      type: [String, Date, Number]
     },
     options: {
       type: Array,

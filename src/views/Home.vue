@@ -15,11 +15,13 @@
         <div ref="checkoutFormContainer">
           <checkout-form v-if="form && cart.length" />
         </div>
-
-        <template v-if="cart.length && page <= 4">
-          <h3 class="text-5xl text-white font-bold text-center mb-8">
-            Cart
-          </h3>
+        <h3
+          class="text-5xl text-white font-bold text-center mb-8"
+          :class="cart.length ? 'block' : 'hidden lg:block'"
+        >
+          Cart
+        </h3>
+        <template v-if="cart.length">
           <cart />
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
