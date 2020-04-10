@@ -1,9 +1,15 @@
 <template>
   <div class="select-none">
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
-      <RadioInput v-model="option" value="Now" class="p-5">
-        <template v-slot:title>
-          <span>Now</span>
+      <RadioInput
+        v-model="option"
+        value="Now"
+        class="p-5"
+        :disabled="oh.days[new Date().getDay()].isClosed"
+      >
+        <template #title>
+          <span v-if="oh.days[new Date().getDay()].isClosed">Now (Closed)</span>
+          <span v-else>Now</span>
         </template>
       </RadioInput>
       <hr class="border-gray-700" />
@@ -17,19 +23,19 @@
       placeholder="Select day"
       class="mb-2"
     >
-      <template v-slot:title="slotProps">
-        <span v-if="slotProps.selectedOption">
+      <template #title="{ selectedOption }">
+        <span v-if="selectedOption">
           {{
-            `${week[new Date(slotProps.selectedOption).getDay()]} 
-            ${new Date(slotProps.selectedOption).getDate()}`
+            `${week[new Date(selectedOption).getDay()]} 
+            ${new Date(selectedOption).getDate()}`
           }}
         </span>
       </template>
-      <template v-slot:option="slotProps">
+      <template #option="{ option }">
         <span>
           {{
-            `${week[new Date(slotProps.option).getDay()]} 
-            ${new Date(slotProps.option).getDate()}`
+            `${week[new Date(option).getDay()]} 
+            ${new Date(option).getDate()}`
           }}
         </span>
       </template>
@@ -41,7 +47,18 @@
       :options="timeSlots()"
       placeholder="Select time"
       class="mb-2"
-    />
+    >
+      <template #title="{ selectedOption }">
+        <span v-if="selectedOption">
+          {{ millisecondToTime(selectedOption) }}
+        </span>
+      </template>
+      <template #option="{ option }">
+        <span>
+          {{ millisecondToTime(option) }}
+        </span>
+      </template>
+    </Dropdown>
     <div class="w-full text-center my-4">
       <Button title="Pick payment method" @clicked="pageChange(4)" />
     </div>
@@ -83,6 +100,7 @@ export default {
     ]),
     days() {
       let d = Date.now();
+      d = d - (d % 86400000);
       let days = [];
       for (let i = 0; i < 7; i++) {
         let a = d + i * 86400000;
@@ -91,26 +109,47 @@ export default {
       return days;
     },
     timeSlots() {
-      let hours, minutes, ampm;
+      let d = new Date(this.day);
+      d.setHours(0, 0, 0, 0);
+      let start = this.oh.days[d.getDay()].start_time;
+      let end = this.oh.days[d.getDay()].end_time;
+      let startHours = Math.floor(start / 100) * 3600000;
+      let endHours = (Math.floor(end / 100) - 1) * 3600000;
+      let startMinutes = (start % 100) * 60000;
+      let endMinutes = (end % 100) * 60000;
+      let startTime = startHours + startMinutes;
+      let endTime = endHours + endMinutes;
       let time = [];
-      for (let i = 0; i <= 1440; i += 15) {
-        hours = Math.floor(i / 60);
-        minutes = i % 60;
-        if (minutes < 10) {
-          minutes = '0' + minutes; // adding leading zero
-        }
-        ampm = hours % 24 < 12 ? 'AM' : 'PM';
-        hours = hours % 12;
-        if (hours === 0) {
-          hours = 12;
-        }
-        time.push(hours + ':' + minutes + ' ' + ampm);
+      console.log(
+        d,
+        start,
+        end,
+        startHours,
+        endHours,
+        startMinutes,
+        endMinutes,
+        startTime,
+        endTime,
+        new Date(this.day + startTime),
+        new Date(this.day + endTime)
+      );
+      for (let i = startTime; i <= endTime; i += 900000) {
+        time.push(startTime + i);
       }
       return time;
+    },
+    millisecondToTime(duration) {
+      let minutes = parseInt((duration / (1000 * 60)) % 60),
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+
+      return hours + ':' + minutes;
     }
   },
   computed: {
-    ...mapGetters(['home/getOpeningHours']),
+    ...mapGetters({ oh: 'home/getOpeningHours' }),
     ...mapGetters('form', [
       'getDeliveryDateOption',
       'getDeliveryDateDay',
