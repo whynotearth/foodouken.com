@@ -15,10 +15,11 @@
         <div ref="checkoutFormContainer">
           <checkout-form v-if="form && cart.length" />
         </div>
-        <h3 class="text-5xl text-white font-bold text-center mb-8">
-          Cart
-        </h3>
-        <template v-if="cart.length">
+
+        <template v-if="cart.length && page <= 4">
+          <h3 class="text-5xl text-white font-bold text-center mb-8">
+            Cart
+          </h3>
           <cart />
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
@@ -27,7 +28,7 @@
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
-        <empty-cart v-else />
+        <empty-cart v-else-if="!cart.length" />
       </div>
     </section>
     <div
@@ -88,7 +89,8 @@ export default {
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
       total: 'cart/total',
-      form: 'form/getFormActive'
+      form: 'form/getFormActive',
+      page: 'form/page'
     })
   },
   filters: {
