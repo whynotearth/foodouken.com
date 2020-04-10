@@ -1,6 +1,6 @@
 <template>
   <div
-    class="deleteMargins disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap md:justify-center mt-6"
+    class="deleteMargins disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mt-6"
   >
     <category
       v-for="(category, index) in categories"
