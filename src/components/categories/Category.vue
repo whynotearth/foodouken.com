@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="my-2 mx-0.5 cursor-pointer flex flex-col"
-    @click="$emit('clicked')"
-  >
+  <div class="my-2 mx-1 cursor-pointer flex flex-col" @click="$emit('clicked')">
     <div class="flex justify-center h-16 md:h-20 w-16 md:w-20 self-center">
       <div
         class="flex-none rounded-full h-16 md:h-20 w-16 md:w-20 self-center"
