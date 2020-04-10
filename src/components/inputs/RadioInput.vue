@@ -28,10 +28,10 @@ export default {
   },
   props: {
     selectedOption: {
-      type: String
+      type: [String, Number]
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: 'Option'
     },
     disabled: {
