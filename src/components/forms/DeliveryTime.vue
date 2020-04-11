@@ -19,7 +19,7 @@
       v-if="option === 'Later'"
       :icon="calendar"
       v-model="day"
-      :options="days()"
+      :options="days"
       placeholder="Select day"
       class="mb-2"
     >
@@ -44,12 +44,15 @@
       v-if="option === 'Later' && day"
       :icon="clock"
       v-model="time"
-      :options="timeSlots()"
+      :options="timeSlots"
       placeholder="Select time"
       class="mb-2"
     >
       <template #title="{ selectedOption }">
-        <span v-if="selectedOption">
+        <span v-if="timeSlots.length === 0" class="text-gray-500">
+          Store closed on this day
+        </span>
+        <span v-else-if="selectedOption">
           {{ millisecondToTime(selectedOption) }}
         </span>
       </template>
@@ -98,33 +101,6 @@ export default {
       'updateDeliveryDateDay',
       'updateDeliveryDateTime'
     ]),
-    days() {
-      let d = Date.now();
-      d = d - (d % 86400000);
-      let days = [];
-      for (let i = 0; i < 7; i++) {
-        let a = d + i * 86400000;
-        days.push(a);
-      }
-      return days;
-    },
-    timeSlots() {
-      let d = new Date(this.day);
-      d.setHours(0, 0, 0, 0);
-      let start = this.oh.days[d.getDay()].start_time;
-      let end = this.oh.days[d.getDay()].end_time;
-      let startHours = Math.floor(start / 100) * 3600000;
-      let endHours = (Math.floor(end / 100) - 1) * 3600000;
-      let startMinutes = (start % 100) * 60000;
-      let endMinutes = (end % 100) * 60000;
-      let startTime = startHours + startMinutes;
-      let endTime = endHours + endMinutes;
-      let time = [];
-      for (let i = startTime; i <= endTime; i += 900000) {
-        time.push(i);
-      }
-      return time;
-    },
     millisecondToTime(duration) {
       let minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)) % 24);
@@ -165,6 +141,39 @@ export default {
       set(value) {
         this.updateDeliveryDateTime(value);
       }
+    },
+    timeSlots() {
+      let d = new Date(this.day);
+      d.setHours(0, 0, 0, 0);
+      let start = this.oh.days[d.getDay()].start_time;
+      let end = this.oh.days[d.getDay()].end_time;
+      let startHours = Math.floor(start / 100) * 3600000;
+      let endHours = (Math.floor(end / 100) - 1) * 3600000;
+      let startMinutes = (start % 100) * 60000;
+      let endMinutes = (end % 100) * 60000;
+      let startTime = startHours + startMinutes;
+      let endTime = endHours + endMinutes;
+      let time = [];
+      if (this.oh.days[d.getDay()].is_closed) {
+        return time;
+      }
+      if (Date.now() >= d.getTime() + startTime) {
+        startTime = Date.now() - d + 2700000;
+      }
+      for (let i = startTime; i <= endTime; i += 900000) {
+        time.push(i);
+      }
+      return time;
+    },
+    days() {
+      let d = Date.now();
+      d = d - (d % 86400000);
+      let days = [];
+      for (let i = 0; i < 7; i++) {
+        let a = d + i * 86400000;
+        days.push(a);
+      }
+      return days;
     }
   }
 };
