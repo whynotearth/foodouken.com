@@ -6,7 +6,7 @@
     :href="href"
     :to="to"
   >
-    <span class="text-white uppercase">
+    <span class="text-white">
       {{ title }}
     </span>
   </component>
