@@ -38,7 +38,7 @@
       class="sticky inset-x-0 bottom-0 mt-8 pb-4"
     >
       <div
-        class="flex flex-row items-center p-2 bg-button rounded-lg shadow-md lg:hidden"
+        class="flex flex-row items-center p-2 bg-button rounded-full shadow-md lg:hidden"
       >
         <div class="flex-1" />
         <div class="flex-grow text-center">
