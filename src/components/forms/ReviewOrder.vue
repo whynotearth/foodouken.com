@@ -1,36 +1,36 @@
 <template>
   <div class="w-full">
     <cart />
-    <div class="w-full text-left">
-      <h4 class="text-white text-2xl mb-5">Customer Details</h4>
+    <div class="w-full text-left text-white">
+      <h4 class="text-4xl font-bold mb-5">Customer Details</h4>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="home" alt="" />
-        <h6 class="text-gray-500">Delivery Address</h6>
+        <h6 class="text-gray-500 text-xl font-bold">Delivery Address</h6>
       </div>
       <p class=" mb-5">{{ getStreet }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="person" alt="" />
-        <h6>Customer Name</h6>
+        <h6 class="text-gray-500 text-xl font-bold">Customer Name</h6>
       </div>
       <p class=" mb-5">{{ getName }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="phone" alt="" />
-        <h6>Phone Number</h6>
+        <h6 class="text-gray-500 text-xl font-bold">Phone Number</h6>
       </div>
       <p class=" mb-5">{{ getPhone }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="email" alt="" />
-        <h6>Email</h6>
+        <h6 class="text-gray-500 text-xl font-bold">Email</h6>
       </div>
       <p class=" mb-5">{{ getEmail }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="dollar" alt="" />
-        <h6>Payment Method</h6>
+        <h6 class="text-gray-500 text-xl font-bold">Payment Method</h6>
       </div>
       <p class=" mb-5">{{ getPaymentMethod }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="clock" alt="" />
-        <h6>Estimated Delivery Time</h6>
+        <h6 class="text-gray-500 text-xl font-bold">Estimated Delivery Time</h6>
       </div>
       <p class=" mb-5">{{ getDeliveryTime }}</p>
     </div>
