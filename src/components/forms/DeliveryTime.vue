@@ -120,21 +120,8 @@ export default {
       let startTime = startHours + startMinutes;
       let endTime = endHours + endMinutes;
       let time = [];
-      console.log(
-        d,
-        start,
-        end,
-        startHours,
-        endHours,
-        startMinutes,
-        endMinutes,
-        startTime,
-        endTime,
-        new Date(this.day + startTime),
-        new Date(this.day + endTime)
-      );
       for (let i = startTime; i <= endTime; i += 900000) {
-        time.push(startTime + i);
+        time.push(i);
       }
       return time;
     },
