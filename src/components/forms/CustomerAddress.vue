@@ -34,7 +34,8 @@
       <material-input v-model="parking" type="text" label="Where to park" />
     </div>
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
-      You are missing required fields, please fill out "Street Address" and "Town/City".
+      You are missing required fields, please fill out "Street Address" and
+      "Town/City".
     </span>
     <div class="w-full text-center my-4">
       <Button title="Choose delivery time" @clicked="submit" />

@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       hadooken
-    }
+    };
   },
   computed: {
     getHeadingCopy() {
@@ -43,5 +43,5 @@ export default {
       this.pageChange(1);
     }
   }
-}
+};
 </script>
