@@ -62,7 +62,10 @@
         </span>
       </template>
     </Dropdown>
-    <div class="w-full text-center my-4">
+    <div
+      class="w-full text-center my-4"
+      v-if="option === 'Now' || timeSlots.length !== 0"
+    >
       <Button title="Pick payment method" @clicked="pageChange(4)" />
     </div>
   </div>
