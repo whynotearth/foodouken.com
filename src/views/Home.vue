@@ -30,7 +30,7 @@
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
-        <empty-cart v-else />
+        <empty-cart v-else-if="!cart.length" />
       </div>
     </section>
     <div
@@ -38,7 +38,7 @@
       class="sticky inset-x-0 bottom-0 mt-8 pb-4"
     >
       <div
-        class="flex flex-row items-center p-2 bg-button rounded-lg shadow-md lg:hidden"
+        class="flex flex-row items-center p-2 bg-button rounded-full shadow-md lg:hidden"
       >
         <div class="flex-1" />
         <div class="flex-grow text-center">
@@ -91,7 +91,8 @@ export default {
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
       total: 'cart/total',
-      form: 'form/getFormActive'
+      form: 'form/getFormActive',
+      page: 'form/page'
     })
   },
   filters: {

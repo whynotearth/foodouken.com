@@ -36,7 +36,7 @@
       Please fill the form properly.
     </span>
     <div class="w-full text-center my-4">
-      <Button title="Add address" @clicked="submit" />
+      <Button title="Delivery Information" @clicked="submit" />
     </div>
   </div>
 </template>
