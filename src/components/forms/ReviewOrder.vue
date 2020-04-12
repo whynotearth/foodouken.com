@@ -46,7 +46,7 @@
         class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
         @clicked="submit"
       >
-        Submit Order
+        Submit Order ►
       </div>
     </div>
   </div>
