@@ -163,25 +163,27 @@ export default {
       }
     },
     timeSlots() {
-      let d = new Date(this.day);
-      d.setHours(0, 0, 0, 0);
-      let start = this.oh.days[d.getDay()].start_time;
-      let end = this.oh.days[d.getDay()].end_time;
-      let startHours = Math.floor(start / 100) * 3600000;
-      let endHours = (Math.floor(end / 100) - 1) * 3600000;
-      let startMinutes = (start % 100) * 60000;
-      let endMinutes = (end % 100) * 60000;
-      let startTime = startHours + startMinutes;
-      let endTime = endHours + endMinutes;
       let time = [];
-      if (this.oh.days[d.getDay()].is_closed) {
-        return time;
-      }
-      if (Date.now() >= d.getTime() + startTime) {
-        startTime = Date.now() - d + 2700000;
-      }
-      for (let i = startTime; i <= endTime; i += 900000) {
-        time.push(i);
+      if (this.day) {
+        let d = new Date(this.day);
+        d.setHours(0, 0, 0, 0);
+        let start = this.oh.days[d.getDay()].start_time;
+        let end = this.oh.days[d.getDay()].end_time;
+        let startHours = Math.floor(start / 100) * 3600000;
+        let endHours = (Math.floor(end / 100) - 1) * 3600000;
+        let startMinutes = (start % 100) * 60000;
+        let endMinutes = (end % 100) * 60000;
+        let startTime = startHours + startMinutes;
+        let endTime = endHours + endMinutes;
+        if (this.oh.days[d.getDay()].is_closed) {
+          return time;
+        }
+        if (Date.now() >= d.getTime() + startTime) {
+          startTime = Date.now() - d + 2700000;
+        }
+        for (let i = startTime; i <= endTime; i += 900000) {
+          time.push(i);
+        }
       }
       return time;
     },

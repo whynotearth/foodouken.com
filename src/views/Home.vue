@@ -18,10 +18,11 @@
         <h3
           class="text-5xl text-white font-bold text-center mb-8"
           :class="cart.length ? 'block' : 'hidden lg:block'"
+          v-if="page < 5"
         >
           Cart
         </h3>
-        <template v-if="cart.length">
+        <template v-if="cart.length && page < 5">
           <cart />
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
