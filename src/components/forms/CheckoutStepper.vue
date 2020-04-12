@@ -1,5 +1,7 @@
 <template>
-  <div class="max-w-sm m-auto bg-footer shadow-md mb-4 flex items-center">
+  <div
+    class="max-w-sm m-auto bg-footer shadow-md mb-4 flex items-center sticky lg:relative inset-x-0 top-0 z-10"
+  >
     <div>
       <svg class="w-20 h-20 text-inactive stroke-current">
         <circle :cx="centerX" :cy="centerY" :r="radius" fill="transparent" />

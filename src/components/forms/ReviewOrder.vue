@@ -34,7 +34,7 @@
       </div>
       <p class=" mb-5">{{ getDeliveryTime }}</p>
     </div>
-    <div class="w-full text-center my-4 flex">
+    <div class="w-full text-center my-4 flex sticky inset-x-0 bottom-0 z-10">
       <div
         class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
         @click="decrementPage"

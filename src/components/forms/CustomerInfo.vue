@@ -35,7 +35,7 @@
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
       Please fill the form properly.
     </span>
-    <div class="w-full text-center my-4 flex">
+    <div class="w-full text-center my-4 flex sticky inset-x-0 bottom-0 z-10">
       <div
         class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
         @click="decrementPage"

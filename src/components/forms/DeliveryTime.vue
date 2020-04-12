@@ -63,7 +63,7 @@
       </template>
     </Dropdown>
     <div
-      class="w-full text-center my-4 flex"
+      class="w-full text-center my-4 flex sticky inset-x-0 bottom-0 z-10"
       v-if="option === 'Now' || timeSlots.length !== 0"
     >
       <div
