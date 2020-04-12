@@ -9,8 +9,20 @@
         class="p-5"
       />
     </div>
-    <div class="w-full text-center my-4">
-      <Button title="Review and submit order" @clicked="pageChange(5)" />
+    <div class="w-full text-center my-4 flex">
+      <div
+        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
+        @click="decrementPage"
+        v-if="page != 1"
+      >
+        ◄ Back
+      </div>
+      <div
+        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
+        @click="pageChange(5)"
+      >
+        Review and order ►
+      </div>
     </div>
   </div>
 </template>
@@ -19,12 +31,11 @@
 import RadioInput from '@/components/inputs/RadioInput';
 import calendar from '@/assets/calendar.png';
 import down from '@/assets/down.png';
-import Button from '@/components/Button.vue';
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'PaymentMethod',
-  components: { RadioInput, Button },
+  components: { RadioInput },
   data() {
     return {
       calendar: calendar,
@@ -32,10 +43,14 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('form', ['pageChange', 'updatePaymentMethod'])
+    ...mapMutations('form', ['pageChange', 'updatePaymentMethod']),
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
+    }
   },
   computed: {
-    ...mapGetters('form', ['getPaymentMethod']),
+    ...mapGetters('form', ['getPaymentMethod', 'page']),
     paymentMethod: {
       get() {
         return this.getPaymentMethod;

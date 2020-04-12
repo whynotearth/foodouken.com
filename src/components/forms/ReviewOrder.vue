@@ -34,11 +34,24 @@
       </div>
       <p class=" mb-5">{{ getDeliveryTime }}</p>
     </div>
-    <div class="w-full text-center my-4">
-      <Button title="Submit Order" @clicked="submit" />
+    <div class="w-full text-center my-4 flex">
+      <div
+        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
+        @click="decrementPage"
+        v-if="page != 1"
+      >
+        ◄ Back
+      </div>
+      <div
+        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
+        @clicked="submit"
+      >
+        Submit Order
+      </div>
     </div>
   </div>
 </template>
+
 <script>
 import home from '@/assets/home.png';
 import person from '@/assets/person.png';
@@ -47,14 +60,12 @@ import email from '@/assets/email.png';
 import dollar from '@/assets/dollar.png';
 import clock from '@/assets/clock.png';
 import Cart from '@/components/cart/Cart.vue';
-import Button from '@/components/Button.vue';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'ReviewOrder',
   components: {
-    Cart,
-    Button
+    Cart
   },
   data() {
     return {
@@ -73,7 +84,8 @@ export default {
       'getPhone',
       'getEmail',
       'getSpecialRequest',
-      'getPaymentMethod'
+      'getPaymentMethod',
+      'page'
     ]),
     getDeliveryTime() {
       return '45 Minutes';
@@ -81,6 +93,10 @@ export default {
   },
   methods: {
     ...mapMutations('form', ['pageChange']),
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
+    },
     submit() {
       // TODO: push customer data to database
       this.pageChange(6);

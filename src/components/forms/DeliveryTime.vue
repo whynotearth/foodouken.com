@@ -26,7 +26,7 @@
       <template #title="{ selectedOption }">
         <span v-if="selectedOption">
           {{
-            `${week[new Date(selectedOption).getDay()]} 
+            `${week[new Date(selectedOption).getDay()]}
             ${new Date(selectedOption).getDate()}`
           }}
         </span>
@@ -34,7 +34,7 @@
       <template #option="{ option }">
         <span>
           {{
-            `${week[new Date(option).getDay()]} 
+            `${week[new Date(option).getDay()]}
             ${new Date(option).getDate()}`
           }}
         </span>
@@ -62,15 +62,29 @@
         </span>
       </template>
     </Dropdown>
-    <div class="w-full text-center my-4">
-      <Button title="Pick payment method" @clicked="pageChange(4)" />
+    <div
+      class="w-full text-center my-4 flex"
+      v-if="option === 'Now' || timeSlots.length !== 0"
+    >
+      <div
+        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
+        @click="decrementPage"
+        v-if="page != 1"
+      >
+        ◄ Back
+      </div>
+      <div
+        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
+        @click="pageChange(4)"
+      >
+        Pick Payment Method ►
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import RadioInput from '@/components/inputs/RadioInput';
-import Button from '@/components/Button.vue';
 import Dropdown from '@/components/Dropdown.vue';
 import calendar from '@/assets/calendar.png';
 import clock from '@/assets/clock.png';
@@ -78,7 +92,7 @@ import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'DeliveryTime',
-  components: { RadioInput, Button, Dropdown },
+  components: { RadioInput, Dropdown },
   data() {
     return {
       calendar: calendar,
@@ -99,7 +113,8 @@ export default {
       'pageChange',
       'updateDeliveryDateOption',
       'updateDeliveryDateDay',
-      'updateDeliveryDateTime'
+      'updateDeliveryDateTime',
+      'pageChange'
     ]),
     millisecondToTime(duration) {
       let minutes = parseInt((duration / (1000 * 60)) % 60),
@@ -109,6 +124,10 @@ export default {
       minutes = minutes < 10 ? '0' + minutes : minutes;
 
       return hours + ':' + minutes;
+    },
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
     }
   },
   computed: {
@@ -116,7 +135,8 @@ export default {
     ...mapGetters('form', [
       'getDeliveryDateOption',
       'getDeliveryDateDay',
-      'getDeliveryDateTime'
+      'getDeliveryDateTime',
+      'page'
     ]),
     option: {
       get() {

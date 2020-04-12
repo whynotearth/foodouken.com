@@ -35,8 +35,20 @@
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
       Please fill the form properly.
     </span>
-    <div class="w-full text-center my-4">
-      <Button title="Delivery Information" @clicked="submit" />
+    <div class="w-full text-center my-4 flex">
+      <div
+        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
+        @click="decrementPage"
+        v-if="page != 1"
+      >
+        ◄ Back
+      </div>
+      <div
+        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
+        @click="submit"
+      >
+        Delivery Information ►
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +56,6 @@
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
-import Button from '@/components/Button.vue';
 import { mapGetters, mapMutations } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 
@@ -52,8 +63,7 @@ export default {
   name: 'CustomerInfo',
   components: {
     MaterialInput,
-    TextArea,
-    Button
+    TextArea
   },
   data() {
     return {
@@ -78,7 +88,8 @@ export default {
       'getName',
       'getEmail',
       'getPhone',
-      'getSpecialRequest'
+      'getSpecialRequest',
+      'page'
     ]),
     name: {
       get() {
@@ -128,6 +139,10 @@ export default {
       } else {
         this.pageChange(2);
       }
+    },
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
     }
   }
 };
