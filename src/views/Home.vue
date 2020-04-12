@@ -9,7 +9,7 @@
           {{ category.title }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
-        <transition name="products-container" mode="out-in">
+        <transition name="fade" mode="out-in">
           <Spinner v-if="loadingCategory" />
           <card-holder v-else />
         </transition>
@@ -110,12 +110,10 @@ export default {
 </script>
 
 <style scoped>
-.products-container-enter-active,
-.products-container-leave-active {
+.fade-leave-active {
   transition: opacity 0.3s ease;
 }
-.products-container-enter,
-.products-container-leave-to {
+.fade-leave-to {
   opacity: 0;
 }
 </style>
