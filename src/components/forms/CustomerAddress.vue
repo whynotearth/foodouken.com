@@ -37,33 +37,25 @@
       You are missing required fields, please fill out "Street Address" and
       "Town/City".
     </span>
-    <div class="w-full text-center my-4 flex sticky inset-x-0 bottom-0 z-10">
-      <div
-        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
-        @click="decrementPage"
-        v-if="page != 1"
-      >
-        ◄ Back
-      </div>
-      <div
-        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
-        @click="submit"
-      >
-        Choose Delivery Time ►
-      </div>
-    </div>
+    <CheckoutNavBar
+      nextStepText="Pick Delivery Time ►"
+      @previousStep="decrementPage"
+      @nextStep="submit"
+    />
   </div>
 </template>
 
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
 
 export default {
   name: 'CustomerAddress',
   components: {
-    MaterialInput
+    MaterialInput,
+    CheckoutNavBar
   },
   data() {
     return {

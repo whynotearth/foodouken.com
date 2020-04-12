@@ -34,21 +34,11 @@
       </div>
       <p class=" mb-5">{{ getDeliveryTime }}</p>
     </div>
-    <div class="w-full text-center my-4 flex sticky inset-x-0 bottom-0 z-10">
-      <div
-        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
-        @click="decrementPage"
-        v-if="page != 1"
-      >
-        ◄ Back
-      </div>
-      <div
-        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
-        @clicked="submit"
-      >
-        Submit Order ►
-      </div>
-    </div>
+    <CheckoutNavBar
+      nextStepText="Submit Order ►"
+      @previousStep="decrementPage"
+      @nextStep="submit"
+    />
   </div>
 </template>
 
@@ -60,12 +50,14 @@ import email from '@/assets/email.png';
 import dollar from '@/assets/dollar.png';
 import clock from '@/assets/clock.png';
 import Cart from '@/components/cart/Cart.vue';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'ReviewOrder',
   components: {
-    Cart
+    Cart,
+    CheckoutNavBar
   },
   data() {
     return {

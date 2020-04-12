@@ -9,33 +9,25 @@
         class="p-5"
       />
     </div>
-    <div class="w-full text-center my-4 flex sticky inset-x-0 bottom-0 z-10">
-      <div
-        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
-        @click="decrementPage"
-        v-if="page != 1"
-      >
-        ◄ Back
-      </div>
-      <div
-        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
-        @click="pageChange(5)"
-      >
-        Review and order ►
-      </div>
-    </div>
+    <CheckoutNavBar
+      nextStepText="Review & order ►"
+      @previousStep="decrementPage"
+      @nextStep="pageChange(5)"
+    />
   </div>
 </template>
 
 <script>
 import RadioInput from '@/components/inputs/RadioInput';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import calendar from '@/assets/calendar.png';
+
 import down from '@/assets/down.png';
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'PaymentMethod',
-  components: { RadioInput },
+  components: { RadioInput, CheckoutNavBar },
   data() {
     return {
       calendar: calendar,

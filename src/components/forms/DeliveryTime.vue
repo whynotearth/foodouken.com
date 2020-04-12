@@ -62,24 +62,12 @@
         </span>
       </template>
     </Dropdown>
-    <div
-      class="w-full text-center my-4 flex sticky inset-x-0 bottom-0 z-10"
+    <CheckoutNavBar
+      nextStepText="Payment Method ►"
+      @previousStep="decrementPage"
+      @nextStep="pageChange(4)"
       v-if="option === 'Now' || timeSlots.length !== 0"
-    >
-      <div
-        class="bg-footer w-1/3 uppercase text-left text-sm font-semibold px-4 py-4"
-        @click="decrementPage"
-        v-if="page != 1"
-      >
-        ◄ Back
-      </div>
-      <div
-        class="bg-button flex-grow uppercase text-right text-sm font-semibold px-4 py-4"
-        @click="pageChange(4)"
-      >
-        Pick Payment Method ►
-      </div>
-    </div>
+    />
   </div>
 </template>
 
@@ -88,11 +76,12 @@ import RadioInput from '@/components/inputs/RadioInput';
 import Dropdown from '@/components/Dropdown.vue';
 import calendar from '@/assets/calendar.png';
 import clock from '@/assets/clock.png';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'DeliveryTime',
-  components: { RadioInput, Dropdown },
+  components: { RadioInput, Dropdown, CheckoutNavBar },
   data() {
     return {
       calendar: calendar,
