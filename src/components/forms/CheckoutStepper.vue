@@ -25,8 +25,8 @@
       </svg>
     </div>
     <div class="flex-grow text-right leading-tight p-4">
-      <h3 class="text-2xl font-bold">{{ pageHeader(page) }}</h3>
-      <h4 class="text-inactive">
+      <h3 class="text-xl md:text-2xl font-bold">{{ pageHeader(page) }}</h3>
+      <h4 class="text-base md:text-xl text-inactive">
         {{ pageSubheader(page) | formatPageSubHeader }}
       </h4>
     </div>
