@@ -35,16 +35,18 @@
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
       Please fill the form properly.
     </span>
-    <div class="w-full text-center my-4">
-      <Button title="Delivery Information" @clicked="submit" />
-    </div>
+    <CheckoutNavBar
+      nextStepText="Add your address ►"
+      @previousStep="decrementPage"
+      @nextStep="submit"
+    />
   </div>
 </template>
 
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
-import Button from '@/components/Button.vue';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 
@@ -53,7 +55,7 @@ export default {
   components: {
     MaterialInput,
     TextArea,
-    Button
+    CheckoutNavBar
   },
   data() {
     return {
@@ -78,7 +80,8 @@ export default {
       'getName',
       'getEmail',
       'getPhone',
-      'getSpecialRequest'
+      'getSpecialRequest',
+      'page'
     ]),
     name: {
       get() {
@@ -128,6 +131,10 @@ export default {
       } else {
         this.pageChange(2);
       }
+    },
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
     }
   }
 };

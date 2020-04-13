@@ -34,11 +34,14 @@
       </div>
       <p class=" mb-5">{{ getDeliveryTime }}</p>
     </div>
-    <div class="w-full text-center my-4">
-      <Button title="Submit Order" @clicked="submit" />
-    </div>
+    <CheckoutNavBar
+      nextStepText="Submit Order ►"
+      @previousStep="decrementPage"
+      @nextStep="submit"
+    />
   </div>
 </template>
+
 <script>
 import home from '@/assets/home.png';
 import person from '@/assets/person.png';
@@ -47,14 +50,14 @@ import email from '@/assets/email.png';
 import dollar from '@/assets/dollar.png';
 import clock from '@/assets/clock.png';
 import Cart from '@/components/cart/Cart.vue';
-import Button from '@/components/Button.vue';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'ReviewOrder',
   components: {
     Cart,
-    Button
+    CheckoutNavBar
   },
   data() {
     return {
@@ -73,7 +76,8 @@ export default {
       'getPhone',
       'getEmail',
       'getSpecialRequest',
-      'getPaymentMethod'
+      'getPaymentMethod',
+      'page'
     ]),
     getDeliveryTime() {
       return '45 Minutes';
@@ -81,6 +85,10 @@ export default {
   },
   methods: {
     ...mapMutations('form', ['pageChange']),
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
+    },
     submit() {
       // TODO: push customer data to database
       this.pageChange(6);

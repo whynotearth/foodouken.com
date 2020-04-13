@@ -37,15 +37,17 @@
       You are missing required fields, please fill out "Street Address" and
       "Town/City".
     </span>
-    <div class="w-full text-center my-4">
-      <Button title="Choose delivery time" @clicked="submit" />
-    </div>
+    <CheckoutNavBar
+      nextStepText="Set delivery time ►"
+      @previousStep="decrementPage"
+      @nextStep="submit"
+    />
   </div>
 </template>
 
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
-import Button from '@/components/Button.vue';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
 
@@ -53,7 +55,7 @@ export default {
   name: 'CustomerAddress',
   components: {
     MaterialInput,
-    Button
+    CheckoutNavBar
   },
   data() {
     return {
@@ -75,7 +77,8 @@ export default {
       'getApartment',
       'getParking',
       'getBuildingName',
-      'getStreet'
+      'getStreet',
+      'page'
     ]),
     town: {
       get() {
@@ -143,6 +146,10 @@ export default {
       } else {
         this.pageChange(3);
       }
+    },
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
     }
   }
 };

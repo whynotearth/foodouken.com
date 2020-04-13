@@ -9,22 +9,25 @@
         class="p-5"
       />
     </div>
-    <div class="w-full text-center my-4">
-      <Button title="Review and submit order" @clicked="pageChange(5)" />
-    </div>
+    <CheckoutNavBar
+      nextStepText="Review your order ►"
+      @previousStep="decrementPage"
+      @nextStep="pageChange(5)"
+    />
   </div>
 </template>
 
 <script>
 import RadioInput from '@/components/inputs/RadioInput';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import calendar from '@/assets/calendar.png';
+
 import down from '@/assets/down.png';
-import Button from '@/components/Button.vue';
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'PaymentMethod',
-  components: { RadioInput, Button },
+  components: { RadioInput, CheckoutNavBar },
   data() {
     return {
       calendar: calendar,
@@ -32,10 +35,14 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('form', ['pageChange', 'updatePaymentMethod'])
+    ...mapMutations('form', ['pageChange', 'updatePaymentMethod']),
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
+    }
   },
   computed: {
-    ...mapGetters('form', ['getPaymentMethod']),
+    ...mapGetters('form', ['getPaymentMethod', 'page']),
     paymentMethod: {
       get() {
         return this.getPaymentMethod;
