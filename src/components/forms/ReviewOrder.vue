@@ -108,8 +108,8 @@ export default {
         paymentMethod: this.getPaymentMethod,
         message: this.getSpecialRequest
       };
-      console.log(this.ping().status);
-      this.submit(formData);
+      await this.ping();
+      await this.submit(formData);
       this.pageChange(6);
     }
   }
