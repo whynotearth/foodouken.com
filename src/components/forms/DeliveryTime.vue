@@ -61,14 +61,11 @@
         </span>
       </template>
     </Dropdown>
-    <div class="w-full text-center my-4" v-if="option === 'Now' || time">
-      <Button title="Pick payment method" @clicked="submit" />
-    </div>
     <CheckoutNavBar
       nextStepText="Payment method ►"
       @previousStep="decrementPage"
-      @nextStep="pageChange(4)"
-      v-if="option === 'Now' || timeSlots.length !== 0"
+      @nextStep="submit"
+      v-if="option === 'Now' || time"
     />
   </div>
 </template>
@@ -105,7 +102,7 @@ export default {
       'updateDeliveryDateOption',
       'updateDeliveryDateDay',
       'updateDeliveryDateTime',
-      'updateTotalTime'
+      'updateTotalTime',
       'pageChange'
     ]),
     millisecondToTime(duration) {
@@ -139,6 +136,7 @@ export default {
         return false;
       }
       return true;
+    },
     decrementPage() {
       const pageToGo = this.page - 1;
       this.pageChange(pageToGo);
