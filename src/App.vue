@@ -33,6 +33,7 @@ html,
 body {
   scroll-behavior: smooth;
   background-color: #003037;
+  touch-action: manipulation;
 }
 
 #app {
