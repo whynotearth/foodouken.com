@@ -1,12 +1,14 @@
 <template>
   <div id="app" class="font-sans bg-primary h-full text-gray-300 text-lg">
     <Spinner class="min-h-screen" v-if="getLoading" />
-    <div v-show="!getLoading">
-      <router-view
-        class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
-      />
-      <Footer />
-    </div>
+    <transition name="fade">
+      <div v-show="!getLoading">
+        <router-view
+          class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
+        />
+        <Footer />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -36,5 +38,12 @@ body {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.fade-enter-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
