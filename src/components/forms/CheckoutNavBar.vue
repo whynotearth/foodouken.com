@@ -4,7 +4,7 @@
   >
     <Button
       title="◄ Back"
-      :width="'w-1/3'"
+      :width="hideNext ? 'flex-grow' : 'w-1/3'"
       :backgroundColor="'bg-footer'"
       :fontSize="'text-sm'"
       :fontWeight="'font-semibold'"
@@ -28,6 +28,7 @@
       :paddingRight="'py-4'"
       :borderRadius="'rounded-none'"
       @clicked="$emit('nextStep')"
+      v-if="!hideNext"
     />
   </div>
 </template>
@@ -44,6 +45,10 @@ export default {
   props: {
     nextStepText: {
       type: String
+    },
+    hideNext: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
