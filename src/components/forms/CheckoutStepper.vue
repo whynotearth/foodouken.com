@@ -25,8 +25,8 @@
       </svg>
     </div>
     <div class="flex-grow text-right leading-tight p-4">
-      <h3 class="text-xl md:text-2xl font-bold">{{ pageHeader(page) }}</h3>
-      <h4 class="text-base md:text-xl text-inactive">
+      <h3 class="text-xl font-bold">{{ pageHeader(page) }}</h3>
+      <h4 class="text-base text-inactive">
         {{ pageSubheader(page) | formatPageSubHeader }}
       </h4>
     </div>
@@ -50,10 +50,10 @@ export default {
     pageHeader(pageNum) {
       switch (pageNum) {
         case 1: {
-          return 'Customer Info';
+          return 'Your Info';
         }
         case 2: {
-          return 'Customer Address';
+          return 'Your Address';
         }
         case 3: {
           return 'Delivery Time';
@@ -62,7 +62,7 @@ export default {
           return 'Payment Method';
         }
         case 5: {
-          return 'Review & Order';
+          return 'Review Your Order';
         }
         case 6: {
           return '';

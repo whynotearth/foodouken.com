@@ -36,7 +36,7 @@
       Please fill the form properly.
     </span>
     <CheckoutNavBar
-      nextStepText="Delivery Info ►"
+      nextStepText="Add your address ►"
       @previousStep="decrementPage"
       @nextStep="submit"
     />

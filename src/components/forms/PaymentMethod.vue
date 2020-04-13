@@ -10,7 +10,7 @@
       />
     </div>
     <CheckoutNavBar
-      nextStepText="Review & order ►"
+      nextStepText="Review your order ►"
       @previousStep="decrementPage"
       @nextStep="pageChange(5)"
     />

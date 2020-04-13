@@ -38,7 +38,7 @@
       "Town/City".
     </span>
     <CheckoutNavBar
-      nextStepText="Pick Delivery Time ►"
+      nextStepText="Set delivery time ►"
       @previousStep="decrementPage"
       @nextStep="submit"
     />

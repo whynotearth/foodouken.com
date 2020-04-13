@@ -63,7 +63,7 @@
       </template>
     </Dropdown>
     <CheckoutNavBar
-      nextStepText="Payment Method ►"
+      nextStepText="Payment method ►"
       @previousStep="decrementPage"
       @nextStep="pageChange(4)"
       v-if="option === 'Now' || timeSlots.length !== 0"
