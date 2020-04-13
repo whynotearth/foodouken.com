@@ -1,61 +1,59 @@
 <template>
-  <div class="max-w-sm m-auto bg-footer shadow-md mb-4" v-if="page < 6">
-    <div class="flex items-center p-2">
-      <div class="cursor-pointer">
-        <a @click="decrementPage" v-if="page != 1">
-          <img
-            :src="left"
-            alt="Back"
-            class="pointer-events-none w-6 h-6"
-            draggable="false"
-          />
-        </a>
-      </div>
-      <div class="flex-grow text-center">
-        <h3 class="text-2xl font-bold">{{ pageHeader }}</h3>
-      </div>
-    </div>
-    <div class="flex justify-center pb-4">
-      <div v-for="pageNum in pageCount" :key="pageNum" class="rounded-full">
-        <svg
-          class="h-4 w-4 stroke-current fill-current"
-          :class="[pageNum === page ? 'text-button' : 'text-inactive']"
+  <div
+    class="max-w-sm m-auto bg-footer shadow-md mb-4 flex items-center sticky lg:relative inset-x-0 top-0 z-10"
+  >
+    <div>
+      <svg class="w-20 h-20 text-inactive stroke-current">
+        <circle :cx="centerX" :cy="centerY" :r="radius" fill="transparent" />
+        <circle
+          class="text-button stroke-current progress-bar"
+          :cx="centerX"
+          :cy="centerY"
+          :r="radius"
+          fill="transparent"
+          :stroke-dasharray="strokeDashArray"
+        />
+        <text
+          x="50%"
+          y="50%"
+          dominant-baseline="middle"
+          text-anchor="middle"
+          class="text-white text-sm fill-current stroke-0"
         >
-          <circle cx="8" cy="8" r="4" />
-        </svg>
-      </div>
+          {{ pageProgress }}
+        </text>
+      </svg>
+    </div>
+    <div class="flex-grow text-right leading-tight p-4">
+      <h3 class="text-xl font-bold">{{ pageHeader(page) }}</h3>
+      <h4 class="text-base text-inactive">
+        {{ pageSubheader(page) | formatPageSubHeader }}
+      </h4>
     </div>
   </div>
 </template>
 
 <script>
-import left from '@/assets/left.png';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'CheckoutStepper',
   data() {
     return {
-      left,
-      pageCount: 6
+      pageCount: 5,
+      radius: 25,
+      centerX: 40,
+      centerY: 40
     };
   },
   methods: {
-    ...mapMutations('form', ['pageChange']),
-    decrementPage() {
-      const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
-    }
-  },
-  computed: {
-    ...mapGetters('form', ['page']),
-    pageHeader() {
-      switch (this.page) {
+    pageHeader(pageNum) {
+      switch (pageNum) {
         case 1: {
-          return 'Customer Info';
+          return 'Your Info';
         }
         case 2: {
-          return 'Customer Address';
+          return 'Your Address';
         }
         case 3: {
           return 'Delivery Time';
@@ -64,13 +62,51 @@ export default {
           return 'Payment Method';
         }
         case 5: {
-          return 'Review & Order';
+          return 'Review Your Order';
+        }
+        case 6: {
+          return '';
         }
         default: {
           return '';
         }
       }
+    },
+    pageSubheader(pageNum) {
+      return this.pageHeader(pageNum + 1);
+    }
+  },
+  computed: {
+    ...mapGetters('form', ['page']),
+    circumference() {
+      return 2 * Math.PI * this.radius;
+    },
+    percentageProgress() {
+      const pageProgressPercentage = this.page / this.pageCount;
+      return this.circumference * pageProgressPercentage;
+    },
+    strokeDashArray() {
+      return `${this.percentageProgress} ${this.circumference}`;
+    },
+    pageProgress() {
+      return `${this.page} of ${this.pageCount}`;
+    }
+  },
+  filters: {
+    formatPageSubHeader(subheader) {
+      return subheader ? `Next: ${subheader}` : '';
     }
   }
 };
 </script>
+
+<style scoped>
+svg {
+  transform: rotate(-90deg);
+  stroke-width: 0.25rem;
+}
+
+svg text {
+  transform: rotate(90deg) translate(0, -5rem);
+}
+</style>

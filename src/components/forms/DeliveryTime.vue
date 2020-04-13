@@ -25,7 +25,7 @@
       <template #title="{ selectedOption }">
         <span v-if="selectedOption">
           {{
-            `${week[new Date(selectedOption).getDay()]} 
+            `${week[new Date(selectedOption).getDay()]}
             ${new Date(selectedOption).getDate()}`
           }}
         </span>
@@ -33,7 +33,7 @@
       <template #option="{ option }">
         <span>
           {{
-            `${week[new Date(option).getDay()]} 
+            `${week[new Date(option).getDay()]}
             ${new Date(option).getDate()}`
           }}
         </span>
@@ -64,20 +64,26 @@
     <div class="w-full text-center my-4" v-if="option === 'Now' || time">
       <Button title="Pick payment method" @clicked="submit" />
     </div>
+    <CheckoutNavBar
+      nextStepText="Payment method ►"
+      @previousStep="decrementPage"
+      @nextStep="pageChange(4)"
+      v-if="option === 'Now' || timeSlots.length !== 0"
+    />
   </div>
 </template>
 
 <script>
 import RadioInput from '@/components/inputs/RadioInput';
-import Button from '@/components/Button.vue';
 import Dropdown from '@/components/Dropdown.vue';
 import calendar from '@/assets/calendar.png';
 import clock from '@/assets/clock.png';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'DeliveryTime',
-  components: { RadioInput, Button, Dropdown },
+  components: { RadioInput, Dropdown, CheckoutNavBar },
   data() {
     return {
       calendar: calendar,
@@ -100,6 +106,7 @@ export default {
       'updateDeliveryDateDay',
       'updateDeliveryDateTime',
       'updateTotalTime'
+      'pageChange'
     ]),
     millisecondToTime(duration) {
       let minutes = parseInt((duration / (1000 * 60)) % 60),
@@ -132,6 +139,9 @@ export default {
         return false;
       }
       return true;
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
     }
   },
   computed: {
@@ -139,7 +149,8 @@ export default {
     ...mapGetters('form', [
       'getDeliveryDateOption',
       'getDeliveryDateDay',
-      'getDeliveryDateTime'
+      'getDeliveryDateTime',
+      'page'
     ]),
     option: {
       get() {

@@ -1,17 +1,27 @@
 <template>
   <div class="w-full">
     <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
-      <material-input v-model="name" label="Name" :error="!$v.name.required">
-        <span v-if="!$v.name.required" class="text-red-600 text-xs">
+      <material-input
+        v-model="name"
+        label="Name"
+        :error="$v.name.$dirty && !$v.name.required"
+      >
+        <span
+          v-if="$v.name.$dirty && !$v.name.required"
+          class="text-red-600 text-xs"
+        >
           Name is required
         </span>
       </material-input>
       <material-input
         v-model="email"
         label="Email"
-        :error="!$v.email.required || !$v.email.email"
+        :error="$v.email.$dirty && (!$v.email.required || !$v.email.email)"
       >
-        <span v-if="!$v.email.required" class="text-red-600 text-xs">
+        <span
+          v-if="$v.email.$dirty && !$v.email.required"
+          class="text-red-600 text-xs"
+        >
           Email is required
         </span>
         <span v-if="!$v.email.email" class="text-red-600 text-xs">
@@ -21,9 +31,12 @@
       <material-input
         v-model="phone"
         label="Phone number"
-        :error="!$v.phone.required || !$v.phone.minLength"
+        :error="$v.phone.$dirty && (!$v.phone.required || !$v.phone.minLength)"
       >
-        <span v-if="!$v.phone.required" class="text-red-600 text-xs">
+        <span
+          v-if="$v.phone.$dirty && !$v.phone.required"
+          class="text-red-600 text-xs"
+        >
           Phone number is required
         </span>
         <span v-if="!$v.phone.minLength" class="text-red-600 text-xs">
@@ -33,18 +46,20 @@
       <text-area v-model="specialRequest" label="Special requests" />
     </div>
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
-      Please fill the form properly.
+      Please fill out the form properly.
     </span>
-    <div class="w-full text-center my-4">
-      <Button title="Delivery Information" @clicked="submit" />
-    </div>
+    <CheckoutNavBar
+      nextStepText="Add your address ►"
+      @previousStep="decrementPage"
+      @nextStep="submit"
+    />
   </div>
 </template>
 
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
-import Button from '@/components/Button.vue';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 
@@ -53,7 +68,7 @@ export default {
   components: {
     MaterialInput,
     TextArea,
-    Button
+    CheckoutNavBar
   },
   data() {
     return {
@@ -78,7 +93,8 @@ export default {
       'getName',
       'getEmail',
       'getPhone',
-      'getSpecialRequest'
+      'getSpecialRequest',
+      'page'
     ]),
     name: {
       get() {
@@ -128,6 +144,10 @@ export default {
       } else {
         this.pageChange(2);
       }
+    },
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
     }
   }
 };
