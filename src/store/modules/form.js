@@ -10,6 +10,8 @@ const state = {
       specialRequest: ''
     },
     customerAddress: {
+      addressOption: 'Use my location',
+      googleLocation: '',
       buildingName: '',
       street: '',
       town: '',
@@ -40,12 +42,14 @@ const getters = {
   getEmail: state => state.formData.customerInfo.email,
   getPhone: state => state.formData.customerInfo.phone,
   getSpecialRequest: state => state.formData.customerInfo.specialRequest,
+  getGoogleLocation: state => state.formData.customerAddress.googleLocation,
   getBuildingName: state => state.formData.customerAddress.buildingName,
   getStreet: state => state.formData.customerAddress.street,
   getTown: state => state.formData.customerAddress.town,
   getFloor: state => state.formData.customerAddress.floor,
   getApartment: state => state.formData.customerAddress.apartment,
   getParking: state => state.formData.customerAddress.parking,
+  getAddressOption: state => state.formData.customerAddress.addressOption,
   getDeliveryDateOption: state => state.formData.deliveryDate.option,
   getDeliveryDateDay: state => state.formData.deliveryDate.day,
   getDeliveryDateTime: state => state.formData.deliveryDate.time,
@@ -57,11 +61,17 @@ const getters = {
 const actions = {
   register({ commit, getters }) {
     commit('changeFormsLoading', true);
+    let address;
+    if (getters.getAddressOption === 'Use my location') {
+      address = getters.getGoogleLocation;
+    } else {
+      address = `Apartment: ${getters.getApartment}, Floor: ${getters.getFloor}, Building: ${getters.getBuildingName}, Street: ${getters.getStreet}, Town: ${getters.getTown}, Parking: ${getters.getParking}`;
+    }
     const userData = {
       name: getters.getName,
       email: getters.getEmail,
       phoneNumber: getters.getPhone,
-      address: `Apartment: ${getters.getApartment}, Floor: ${getters.getFloor}, Building: ${getters.getBuildingName}, Street: ${getters.getStreet}, Town: ${getters.getTown}, Parking: ${getters.getParking}`
+      address: address
     };
     return new Promise((resolve, reject) => {
       httpClient.post('/authentication/register', userData).then(
@@ -135,6 +145,9 @@ const mutations = {
   updateSpecialRequest(state, payload) {
     state.formData.customerInfo.specialRequest = payload;
   },
+  updateGoogleLocation(state, payload) {
+    state.formData.customerAddress.googleLocation = payload;
+  },
   updateBuildingName(state, payload) {
     state.formData.customerAddress.buildingName = payload;
   },
@@ -152,6 +165,9 @@ const mutations = {
   },
   updateParking(state, payload) {
     state.formData.customerAddress.parking = payload;
+  },
+  updateAddressOption(state, payload) {
+    state.formData.customerAddress.addressOption = payload;
   },
   updateDeliveryDateOption(state, payload) {
     state.formData.deliveryDate.option = payload;
