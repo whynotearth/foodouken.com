@@ -8,7 +8,9 @@
         :disabled="!nowAvailable()"
       >
         <template #title>
-          <span v-if="!nowAvailable()">Now (Closed)</span>
+          <span v-if="!nowAvailable()">
+            Now (Closed)
+          </span>
         </template>
       </RadioInput>
       <hr class="border-gray-700" />
@@ -24,18 +26,14 @@
     >
       <template #title="{ selectedOption }">
         <span v-if="selectedOption">
-          {{
-            `${week[new Date(selectedOption).getDay()]}
-            ${new Date(selectedOption).getDate()}`
-          }}
+          {{ week[new Date(selectedOption).getDay()] }}
+          {{ new Date(selectedOption).getDate() }}
         </span>
       </template>
       <template #option="{ option }">
         <span>
-          {{
-            `${week[new Date(option).getDay()]}
-            ${new Date(option).getDate()}`
-          }}
+          {{ week[new Date(option).getDay()] }}
+          {{ new Date(option).getDate() }}
         </span>
       </template>
     </Dropdown>
