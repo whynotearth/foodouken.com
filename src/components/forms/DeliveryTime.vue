@@ -5,11 +5,10 @@
         v-model="option"
         value="Now"
         class="p-5"
-        :disabled="oh.days[new Date().getDay()].isClosed"
+        :disabled="!nowAvailable()"
       >
         <template #title>
-          <span v-if="oh.days[new Date().getDay()].isClosed">Now (Closed)</span>
-          <span v-else>Now</span>
+          <span v-if="!nowAvailable()">Now (Closed)</span>
         </template>
       </RadioInput>
       <hr class="border-gray-700" />
@@ -124,6 +123,18 @@ export default {
       }
       this.updateTotalTime(d.toJSON());
       this.pageChange(4);
+    },
+    nowAvailable() {
+      let d = new Date();
+      let end = this.oh.days[d.getDay()].end_time;
+      let endHours = (Math.floor(end / 100) - 1) * 3600000;
+      let endMinutes = (end % 100) * 60000;
+      let endTime = endHours + endMinutes;
+      if (this.oh.days[d.getDay()].isClosed || d.getTime() > endTime) {
+        this.option = 'Later';
+        return false;
+      }
+      return true;
     }
   },
   computed: {
