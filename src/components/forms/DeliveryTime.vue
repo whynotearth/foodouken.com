@@ -63,7 +63,7 @@
       nextStepText="Payment method ►"
       @previousStep="decrementPage"
       @nextStep="submit"
-      v-if="option === 'Now' || time"
+      :hideNext="!(option === 'Now' || time)"
     />
   </div>
 </template>
