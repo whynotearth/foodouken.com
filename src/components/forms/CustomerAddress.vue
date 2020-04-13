@@ -54,7 +54,7 @@
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
 
 export default {
@@ -136,6 +136,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('form', ['register']),
     ...mapMutations('form', [
       'updateTown',
       'updateFloor',
@@ -150,7 +151,9 @@ export default {
       if (this.$v.$invalid) {
         this.submitError = true;
       } else {
-        this.pageChange(3);
+        this.register().then(() => {
+          this.pageChange(3);
+        });
       }
     },
     decrementPage() {
