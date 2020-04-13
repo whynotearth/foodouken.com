@@ -61,10 +61,7 @@
         </span>
       </template>
     </Dropdown>
-    <div
-      class="w-full text-center my-4"
-      v-if="option === 'Now' || timeSlots.length !== 0"
-    >
+    <div class="w-full text-center my-4" v-if="option === 'Now' || time">
       <Button title="Pick payment method" @clicked="submit" />
     </div>
   </div>
@@ -157,6 +154,7 @@ export default {
         return this.getDeliveryDateDay;
       },
       set(value) {
+        this.time = '';
         this.updateDeliveryDateDay(value);
       }
     },
