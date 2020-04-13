@@ -66,7 +66,7 @@
       class="w-full text-center my-4"
       v-if="option === 'Now' || timeSlots.length !== 0"
     >
-      <Button title="Pick payment method" @clicked="pageChange(4)" />
+      <Button title="Pick payment method" @clicked="submit" />
     </div>
   </div>
 </template>
@@ -102,7 +102,8 @@ export default {
       'pageChange',
       'updateDeliveryDateOption',
       'updateDeliveryDateDay',
-      'updateDeliveryDateTime'
+      'updateDeliveryDateTime',
+      'updateTotalTime'
     ]),
     millisecondToTime(duration) {
       let minutes = parseInt((duration / (1000 * 60)) % 60),
@@ -112,6 +113,17 @@ export default {
       minutes = minutes < 10 ? '0' + minutes : minutes;
 
       return hours + ':' + minutes;
+    },
+    submit() {
+      let d;
+      if (this.option === 'Now') {
+        d = Date.now() + 2700000;
+        d = new Date(d);
+      } else if (this.option === 'Later') {
+        d = new Date(this.day + this.time);
+      }
+      this.updateTotalTime(d.toJSON());
+      this.pageChange(4);
     }
   },
   computed: {
