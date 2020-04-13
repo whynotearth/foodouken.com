@@ -80,7 +80,7 @@ const actions = {
   ping({ commit }) {
     commit('changeFormsLoading', true);
     return new Promise((resolve, reject) => {
-      httpClient.post('/authentication/ping').then(
+      httpClient.get('/authentication/ping').then(
         response => {
           commit('changeFormsLoading', false);
           resolve(response.data);
@@ -169,7 +169,7 @@ const mutations = {
     state.formData.deliveryDate.totalTime = payload;
   },
   logError(state, payload) {
-    state.formData.submitError = payload;
+    state.submitError = payload;
   }
 };
 
