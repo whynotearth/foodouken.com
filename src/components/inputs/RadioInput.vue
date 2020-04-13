@@ -13,8 +13,10 @@
         :class="{ 'bg-button': selectedOption === value }"
       ></div>
     </div>
-    <span>
-      <slot name="title">{{ value }}</slot>
+    <span class="inline-block">
+      <slot name="title">
+        {{ value }}
+      </slot>
     </span>
   </div>
 </template>
