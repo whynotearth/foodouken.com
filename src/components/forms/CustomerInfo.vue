@@ -1,17 +1,27 @@
 <template>
   <div class="w-full">
     <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
-      <material-input v-model="name" label="Name" :error="!$v.name.required">
-        <span v-if="!$v.name.required" class="text-red-600 text-xs">
+      <material-input
+        v-model="name"
+        label="Name"
+        :error="$v.name.$dirty && !$v.name.required"
+      >
+        <span
+          v-if="$v.name.$dirty && !$v.name.required"
+          class="text-red-600 text-xs"
+        >
           Name is required
         </span>
       </material-input>
       <material-input
         v-model="email"
         label="Email"
-        :error="!$v.email.required || !$v.email.email"
+        :error="$v.email.$dirty && (!$v.email.required || !$v.email.email)"
       >
-        <span v-if="!$v.email.required" class="text-red-600 text-xs">
+        <span
+          v-if="$v.email.$dirty && !$v.email.required"
+          class="text-red-600 text-xs"
+        >
           Email is required
         </span>
         <span v-if="!$v.email.email" class="text-red-600 text-xs">
@@ -21,9 +31,12 @@
       <material-input
         v-model="phone"
         label="Phone number"
-        :error="!$v.phone.required || !$v.phone.minLength"
+        :error="$v.phone.$dirty && (!$v.phone.required || !$v.phone.minLength)"
       >
-        <span v-if="!$v.phone.required" class="text-red-600 text-xs">
+        <span
+          v-if="$v.phone.$dirty && !$v.phone.required"
+          class="text-red-600 text-xs"
+        >
           Phone number is required
         </span>
         <span v-if="!$v.phone.minLength" class="text-red-600 text-xs">
@@ -33,7 +46,7 @@
       <text-area v-model="specialRequest" label="Special requests" />
     </div>
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
-      Please fill the form properly.
+      Please fill out the form properly.
     </span>
     <CheckoutNavBar
       nextStepText="Add your address ►"

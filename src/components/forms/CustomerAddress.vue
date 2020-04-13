@@ -12,9 +12,12 @@
         type="text"
         label="Street Address"
         placeholder="Street name and number"
-        :error="!$v.street.required"
+        :error="$v.street.$dirty && !$v.street.required"
       >
-        <span v-if="!$v.street.required" class="text-xs text-red-600">
+        <span
+          v-if="$v.street.$dirty && !$v.street.required"
+          class="text-xs text-red-600"
+        >
           Street address is required
         </span>
       </material-input>
@@ -23,9 +26,12 @@
         type="text"
         label="City"
         placeholder="Town or City Area"
-        :error="!$v.town.required"
+        :error="$v.town.$dirty && !$v.town.required"
       >
-        <span v-if="!$v.town.required" class="text-xs text-red-600">
+        <span
+          v-if="$v.town.$dirty && !$v.town.required"
+          class="text-xs text-red-600"
+        >
           Town/City is required
         </span>
       </material-input>
