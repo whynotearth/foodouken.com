@@ -39,19 +39,15 @@
     </section>
     <div
       v-if="cart.length && !form"
-      class="sticky inset-x-0 bottom-0 mt-8 pb-4"
+      class="sticky inset-x-0 bottom-0 mt-8 pb-2"
     >
-      <div
-        class="flex flex-row items-center p-2 bg-button rounded-full shadow-md lg:hidden"
-      >
-        <div class="flex-1" />
-        <div class="flex-grow text-center">
-          <a @click.prevent="showForm" class="font-semibold">Order Now</a>
-        </div>
-        <div class="flex-1 text-right">
-          {{ total | formatPrice }}
-        </div>
-      </div>
+      <Button
+        class="lg:hidden"
+        title="Order now"
+        :titleRight="total | formatPrice"
+        :width="'w-full'"
+        @clicked="showForm()"
+      />
     </div>
   </div>
 </template>

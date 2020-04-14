@@ -5,21 +5,37 @@
     :class="[
       width,
       backgroundColor,
+      fontColor,
       fontSize,
       fontWeight,
-      textAlign,
       textTransform,
       paddingLeft,
       paddingRight,
+      paddingX,
+      paddingY,
       borderRadius
     ]"
     @click="$emit('clicked')"
     :href="href"
     :to="to"
   >
-    <span class="text-white">
-      {{ title }}
-    </span>
+    <div class="flex flex-row items-center">
+      <div
+        class="text-left"
+        :class="[titleLeft || title ? 'flex-1' : 'hidden']"
+      >
+        {{ titleLeft }}
+      </div>
+      <div class="flex-grow text-center" v-if="title">
+        {{ title }}
+      </div>
+      <div
+        class="text-right"
+        :class="[titleRight || title ? 'flex-1' : 'hidden']"
+      >
+        {{ titleRight }}
+      </div>
+    </div>
   </component>
 </template>
 
@@ -35,7 +51,15 @@ export default {
     },
     title: {
       type: String,
-      default: 'Button'
+      default: ''
+    },
+    titleLeft: {
+      type: String,
+      default: ''
+    },
+    titleRight: {
+      type: String,
+      default: ''
     },
     width: {
       type: String
@@ -44,25 +68,35 @@ export default {
       type: String,
       default: 'bg-button'
     },
+    fontColor: {
+      type: String,
+      default: 'text-white'
+    },
     fontSize: {
-      type: String
+      type: String,
+      default: 'text-sm'
     },
     fontWeight: {
-      type: String
-    },
-    textAlign: {
-      type: String
+      type: String,
+      default: 'font-semibold'
     },
     textTransform: {
-      type: String
+      type: String,
+      default: 'uppercase'
     },
     paddingLeft: {
-      type: String,
-      default: 'px-10'
+      type: String
     },
     paddingRight: {
+      type: String
+    },
+    paddingX: {
       type: String,
-      default: 'py-2'
+      default: 'px-4'
+    },
+    paddingY: {
+      type: String,
+      default: 'py-4'
     },
     border: {
       type: String,
@@ -70,7 +104,7 @@ export default {
     },
     borderRadius: {
       type: String,
-      default: 'rounded-full'
+      default: 'rounded-none'
     }
   },
   computed: {
