@@ -4,7 +4,9 @@ import { httpClient } from '@/services/httpClient';
 const state = {
   loading: false,
   orgData: {},
-  categories: []
+  categories: [],
+  bannerData: null,
+  siteBanner: false
 };
 
 // getters
@@ -20,6 +22,12 @@ const getters = {
   },
   getLoading(state) {
     return state.loading;
+  },
+  getBannerData(state) {
+    return state.bannerData;
+  },
+  getBannerInfo() {
+    return state.siteBanner;
   }
 };
 
@@ -42,6 +50,22 @@ const actions = {
         }
       );
     });
+  },
+  fetchSiteBannerData({ commit }) {
+    let org = process.env.VUE_APP_ORG_NAME;
+    return new Promise((resolve, reject) => {
+      httpClient.get(`/pages/slug/${org}/${org}`).then(
+        response => {
+          commit('loadSiteBannerData', response.data.custom.siteBanner);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+  },
+  changeSiteBannerVisibility({ commit }, val) {
+    commit('siteBannerVisibility', val);
   }
 };
 
@@ -55,6 +79,12 @@ const mutations = {
   },
   changeHomeLoading(state, payload) {
     state.loading = payload;
+  },
+  loadSiteBannerData(state, payload) {
+    state.bannerData = payload;
+  },
+  siteBannerVisibility(state, payload) {
+    state.siteBanner = payload;
   }
 };
 
