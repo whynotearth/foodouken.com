@@ -1,20 +1,8 @@
 <template>
   <component
     :is="type"
-    class="ripple cursor-pointer border-none"
-    :class="[
-      width,
-      backgroundColor,
-      fontColor,
-      fontSize,
-      fontWeight,
-      textTransform,
-      paddingLeft,
-      paddingRight,
-      paddingX,
-      paddingY,
-      borderRadius
-    ]"
+    class="ripple cursor-pointer text-white text-sm font-semibold uppercase p-4 bg-button"
+    :class="width"
     @click="$emit('clicked')"
     :href="href"
     :to="to"
@@ -62,49 +50,8 @@ export default {
       default: ''
     },
     width: {
-      type: String
-    },
-    backgroundColor: {
       type: String,
-      default: 'bg-button'
-    },
-    fontColor: {
-      type: String,
-      default: 'text-white'
-    },
-    fontSize: {
-      type: String,
-      default: 'text-sm'
-    },
-    fontWeight: {
-      type: String,
-      default: 'font-semibold'
-    },
-    textTransform: {
-      type: String,
-      default: 'uppercase'
-    },
-    paddingLeft: {
-      type: String
-    },
-    paddingRight: {
-      type: String
-    },
-    paddingX: {
-      type: String,
-      default: 'px-4'
-    },
-    paddingY: {
-      type: String,
-      default: 'py-4'
-    },
-    border: {
-      type: String,
-      default: 'border-none'
-    },
-    borderRadius: {
-      type: String,
-      default: 'rounded-none'
+      default: 'w-full'
     }
   },
   computed: {
