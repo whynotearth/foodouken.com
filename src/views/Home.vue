@@ -30,7 +30,7 @@
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
           </p>
-          <div v-if="!form" class="w-full text-center my-4 hidden lg:block">
+          <div v-if="!form" class="max-w-sm my-4 m-auto hidden lg:block">
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
