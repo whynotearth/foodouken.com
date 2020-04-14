@@ -45,7 +45,6 @@
         class="lg:hidden"
         title="Order now"
         :titleRight="total | formatPrice"
-        :width="'w-full'"
         @clicked="showForm()"
       />
     </div>
