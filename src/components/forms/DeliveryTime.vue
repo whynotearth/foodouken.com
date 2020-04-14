@@ -5,11 +5,12 @@
         v-model="option"
         value="Now"
         class="p-5"
-        :disabled="oh.days[new Date().getDay()].isClosed"
+        :disabled="!nowAvailable()"
       >
         <template #title>
-          <span v-if="oh.days[new Date().getDay()].isClosed">Now (Closed)</span>
-          <span v-else>Now</span>
+          <span v-if="!nowAvailable()">
+            Now (Closed)
+          </span>
         </template>
       </RadioInput>
       <hr class="border-gray-700" />
@@ -25,18 +26,14 @@
     >
       <template #title="{ selectedOption }">
         <span v-if="selectedOption">
-          {{
-            `${week[new Date(selectedOption).getDay()]} 
-            ${new Date(selectedOption).getDate()}`
-          }}
+          {{ week[new Date(selectedOption).getDay()] }}
+          {{ new Date(selectedOption).getDate() }}
         </span>
       </template>
       <template #option="{ option }">
         <span>
-          {{
-            `${week[new Date(option).getDay()]} 
-            ${new Date(option).getDate()}`
-          }}
+          {{ week[new Date(option).getDay()] }}
+          {{ new Date(option).getDate() }}
         </span>
       </template>
     </Dropdown>
@@ -62,23 +59,26 @@
         </span>
       </template>
     </Dropdown>
-    <div class="w-full text-center my-4">
-      <Button title="Pick payment method" @clicked="pageChange(4)" />
-    </div>
+    <CheckoutNavBar
+      nextStepText="Payment method ►"
+      @previousStep="decrementPage"
+      @nextStep="submit"
+      :hideNext="!(option === 'Now' || time)"
+    />
   </div>
 </template>
 
 <script>
 import RadioInput from '@/components/inputs/RadioInput';
-import Button from '@/components/Button.vue';
 import Dropdown from '@/components/Dropdown.vue';
 import calendar from '@/assets/calendar.png';
 import clock from '@/assets/clock.png';
+import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'DeliveryTime',
-  components: { RadioInput, Button, Dropdown },
+  components: { RadioInput, Dropdown, CheckoutNavBar },
   data() {
     return {
       calendar: calendar,
@@ -99,7 +99,9 @@ export default {
       'pageChange',
       'updateDeliveryDateOption',
       'updateDeliveryDateDay',
-      'updateDeliveryDateTime'
+      'updateDeliveryDateTime',
+      'updateTotalTime',
+      'pageChange'
     ]),
     millisecondToTime(duration) {
       let minutes = parseInt((duration / (1000 * 60)) % 60),
@@ -109,6 +111,33 @@ export default {
       minutes = minutes < 10 ? '0' + minutes : minutes;
 
       return hours + ':' + minutes;
+    },
+    submit() {
+      let d;
+      if (this.option === 'Now') {
+        d = Date.now() + 2700000;
+        d = new Date(d);
+      } else if (this.option === 'Later') {
+        d = new Date(this.day + this.time);
+      }
+      this.updateTotalTime(d.toJSON());
+      this.pageChange(4);
+    },
+    nowAvailable() {
+      let d = new Date();
+      let end = this.oh.days[d.getDay()].end_time;
+      let endHours = (Math.floor(end / 100) - 1) * 3600000;
+      let endMinutes = (end % 100) * 60000;
+      let endTime = endHours + endMinutes;
+      if (this.oh.days[d.getDay()].isClosed || d.getTime() > endTime) {
+        this.option = 'Later';
+        return false;
+      }
+      return true;
+    },
+    decrementPage() {
+      const pageToGo = this.page - 1;
+      this.pageChange(pageToGo);
     }
   },
   computed: {
@@ -116,7 +145,8 @@ export default {
     ...mapGetters('form', [
       'getDeliveryDateOption',
       'getDeliveryDateDay',
-      'getDeliveryDateTime'
+      'getDeliveryDateTime',
+      'page'
     ]),
     option: {
       get() {
@@ -131,6 +161,7 @@ export default {
         return this.getDeliveryDateDay;
       },
       set(value) {
+        this.time = '';
         this.updateDeliveryDateDay(value);
       }
     },
@@ -143,25 +174,27 @@ export default {
       }
     },
     timeSlots() {
-      let d = new Date(this.day);
-      d.setHours(0, 0, 0, 0);
-      let start = this.oh.days[d.getDay()].start_time;
-      let end = this.oh.days[d.getDay()].end_time;
-      let startHours = Math.floor(start / 100) * 3600000;
-      let endHours = (Math.floor(end / 100) - 1) * 3600000;
-      let startMinutes = (start % 100) * 60000;
-      let endMinutes = (end % 100) * 60000;
-      let startTime = startHours + startMinutes;
-      let endTime = endHours + endMinutes;
       let time = [];
-      if (this.oh.days[d.getDay()].is_closed) {
-        return time;
-      }
-      if (Date.now() >= d.getTime() + startTime) {
-        startTime = Date.now() - d + 2700000;
-      }
-      for (let i = startTime; i <= endTime; i += 900000) {
-        time.push(i);
+      if (this.day) {
+        let d = new Date(this.day);
+        d.setHours(0, 0, 0, 0);
+        let start = this.oh.days[d.getDay()].start_time;
+        let end = this.oh.days[d.getDay()].end_time;
+        let startHours = Math.floor(start / 100) * 3600000;
+        let endHours = (Math.floor(end / 100) - 1) * 3600000;
+        let startMinutes = (start % 100) * 60000;
+        let endMinutes = (end % 100) * 60000;
+        let startTime = startHours + startMinutes;
+        let endTime = endHours + endMinutes;
+        if (this.oh.days[d.getDay()].is_closed) {
+          return time;
+        }
+        if (Date.now() >= d.getTime() + startTime) {
+          startTime = Date.now() - d + 2700000;
+        }
+        for (let i = startTime; i <= endTime; i += 900000) {
+          time.push(i);
+        }
       }
       return time;
     },

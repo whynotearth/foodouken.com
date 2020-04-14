@@ -9,7 +9,10 @@
           {{ category.title }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
-        <card-holder />
+        <transition name="fade" mode="out-in">
+          <Spinner v-if="loadingCategory" />
+          <card-holder v-else />
+        </transition>
       </div>
       <div class="lg:w-4/12 lg:ml-4">
         <div ref="checkoutFormContainer">
@@ -18,10 +21,11 @@
         <h3
           class="text-5xl text-white font-bold text-center mb-8"
           :class="cart.length ? 'block' : 'hidden lg:block'"
+          v-if="page < 5"
         >
           Cart
         </h3>
-        <template v-if="cart.length">
+        <template v-if="cart.length && page < 5">
           <cart />
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
@@ -60,6 +64,7 @@ import Button from '@/components/Button.vue';
 import Cart from '@/components/cart/Cart.vue';
 import EmptyCart from '@/components/cart/EmptyCart.vue';
 import CheckoutForm from '@/components/forms/CheckoutForm.vue';
+import Spinner from '@/components/Spinner.vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
@@ -71,7 +76,8 @@ export default {
     Button,
     Cart,
     EmptyCart,
-    CheckoutForm
+    CheckoutForm,
+    Spinner
   },
   created() {
     this.fetchHomeData();
@@ -87,6 +93,7 @@ export default {
   computed: {
     ...mapGetters({
       category: 'category/getCategory',
+      loadingCategory: 'category/getCategoryLoading',
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
@@ -102,3 +109,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

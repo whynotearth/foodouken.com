@@ -4,7 +4,7 @@
     <h4 class="text-white text-3xl font-bold mb-6">{{ getHeadingCopy }}</h4>
     <p>{{ getDescriptionCopy }}</p>
     <div class="w-full text-center my-4">
-      <Button title="Submit Order" @clicked="submit" />
+      <Button title="Order more" @clicked="submit" />
     </div>
   </div>
 </template>
