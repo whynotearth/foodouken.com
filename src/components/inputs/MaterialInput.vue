@@ -1,25 +1,20 @@
 <template>
   <div class="mb-4 relative">
     <input
-      class="input appearance-none outline-none relative bg-transparent border border-gray-600 rounded w-full px-4 py-3 focus:border-2 active:border-2"
-      :class="[
-        { filled: value.length > 0 },
-        error
-          ? 'focus:border-red-600 active:border-red-600'
-          : 'focus:border-gray-500 active:border-gray-500'
-      ]"
+      class="input appearance-none relative bg-transparent border border-gray-600 rounded w-full px-4 py-3 focus:border-gray-500 active:border-gray-500"
+      :class="value.length > 0 ? 'filled' : ''"
       :type="type"
       :value="value"
       @input="$emit('input', $event.target.value)"
+      :required="required"
+      :pattern="pattern"
       :placeholder="placeholder || label"
     />
     <label
-      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
-      :class="error ? 'text-red-600' : 'text-gray-500'"
+      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text text-gray-500"
     >
       {{ label }}
     </label>
-    <slot></slot>
   </div>
 </template>
 
@@ -42,8 +37,13 @@ export default {
       type: String,
       default: 'text'
     },
-    error: {
-      default: Boolean
+    required: {
+      type: Boolean,
+      default: false
+    },
+    pattern: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -69,10 +69,6 @@ export default {
   opacity: 1;
   display: block;
   z-index: 3;
-}
-
-.input:focus::placeholder {
-  color: transparent;
 }
 
 .label {

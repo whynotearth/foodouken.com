@@ -2,7 +2,7 @@ import { httpClient } from '@/services/httpClient';
 
 // initial state
 const state = {
-  loading: true,
+  loading: false,
   orgData: {},
   categories: []
 };
@@ -14,18 +14,13 @@ const getters = {
   },
   getCategories(state) {
     return state.categories;
-  },
-  getOpeningHours(state) {
-    return state.orgData.custom.openingHours;
-  },
-  getLoading(state) {
-    return state.loading;
   }
 };
 
 // actions
 const actions = {
   fetchHomeData({ commit }) {
+    commit('changeHomeLoading', true);
     let org = process.env.VUE_APP_ORG_NAME;
     return new Promise((resolve, reject) => {
       httpClient.get(`/pages/slug/${org}/${org}`).then(

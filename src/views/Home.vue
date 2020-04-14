@@ -9,23 +9,16 @@
           {{ category.title }}
         </h3>
         <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
-        <transition name="fade" mode="out-in">
-          <Spinner v-if="loadingCategory" />
-          <card-holder v-else />
-        </transition>
+        <card-holder />
       </div>
       <div class="lg:w-4/12 lg:ml-4">
         <div ref="checkoutFormContainer">
           <checkout-form v-if="form && cart.length" />
         </div>
-        <h3
-          class="text-5xl text-white font-bold text-center mb-8"
-          :class="cart.length ? 'block' : 'hidden lg:block'"
-          v-if="page < 5"
-        >
+        <h3 class="text-5xl text-white font-bold text-center mb-8">
           Cart
         </h3>
-        <template v-if="cart.length && page < 5">
+        <template v-if="cart.length">
           <cart />
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
@@ -34,7 +27,7 @@
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
-        <empty-cart v-else-if="!cart.length" />
+        <empty-cart v-else />
       </div>
     </section>
     <div
@@ -42,7 +35,7 @@
       class="sticky inset-x-0 bottom-0 mt-8 pb-4"
     >
       <div
-        class="flex flex-row items-center p-2 bg-button rounded-full shadow-md lg:hidden"
+        class="flex flex-row items-center p-2 bg-button rounded-lg shadow-md lg:hidden"
       >
         <div class="flex-1" />
         <div class="flex-grow text-center">
@@ -64,7 +57,6 @@ import Button from '@/components/Button.vue';
 import Cart from '@/components/cart/Cart.vue';
 import EmptyCart from '@/components/cart/EmptyCart.vue';
 import CheckoutForm from '@/components/forms/CheckoutForm.vue';
-import Spinner from '@/components/Spinner.vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
@@ -76,8 +68,7 @@ export default {
     Button,
     Cart,
     EmptyCart,
-    CheckoutForm,
-    Spinner
+    CheckoutForm
   },
   created() {
     this.fetchHomeData();
@@ -93,13 +84,11 @@ export default {
   computed: {
     ...mapGetters({
       category: 'category/getCategory',
-      loadingCategory: 'category/getCategoryLoading',
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
       total: 'cart/total',
-      form: 'form/getFormActive',
-      page: 'form/page'
+      form: 'form/getFormActive'
     })
   },
   filters: {
@@ -109,12 +98,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

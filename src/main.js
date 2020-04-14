@@ -4,11 +4,6 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import './assets/tailwind.css';
-import Vuelidate from 'vuelidate';
-
-require('typeface-open-sans');
-
-Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 

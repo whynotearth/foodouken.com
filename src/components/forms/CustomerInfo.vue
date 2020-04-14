@@ -3,98 +3,50 @@
     <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
       <material-input
         v-model="name"
+        type="text"
         label="Name"
-        :error="$v.name.$dirty && !$v.name.required"
-      >
-        <span
-          v-if="$v.name.$dirty && !$v.name.required"
-          class="text-red-600 text-xs"
-        >
-          Name is required
-        </span>
-      </material-input>
+        :required="true"
+      />
       <material-input
         v-model="email"
+        type="email"
         label="Email"
-        :error="$v.email.$dirty && (!$v.email.required || !$v.email.email)"
-      >
-        <span
-          v-if="$v.email.$dirty && !$v.email.required"
-          class="text-red-600 text-xs"
-        >
-          Email is required
-        </span>
-        <span v-if="!$v.email.email" class="text-red-600 text-xs">
-          Please enter valid email
-        </span>
-      </material-input>
+        :required="true"
+      />
       <material-input
         v-model="phone"
+        type="tel"
         label="Phone number"
-        :error="$v.phone.$dirty && (!$v.phone.required || !$v.phone.minLength)"
-      >
-        <span
-          v-if="$v.phone.$dirty && !$v.phone.required"
-          class="text-red-600 text-xs"
-        >
-          Phone number is required
-        </span>
-        <span v-if="!$v.phone.minLength" class="text-red-600 text-xs">
-          Please enter a valid phone number
-        </span>
-      </material-input>
+        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+        :required="true"
+      />
       <text-area v-model="specialRequest" label="Special requests" />
     </div>
-    <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
-      Please fill out the form properly.
-    </span>
-    <CheckoutNavBar
-      nextStepText="Add your address ►"
-      @previousStep="decrementPage"
-      @nextStep="submit"
-    />
+    <div class="w-full text-center my-4">
+      <Button title="Add address" @clicked="pageChange(2)" />
+    </div>
   </div>
 </template>
 
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
-import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
+import Button from '@/components/Button.vue';
 import { mapGetters, mapMutations } from 'vuex';
-import { required, email, minLength } from 'vuelidate/lib/validators';
 
 export default {
   name: 'CustomerInfo',
   components: {
     MaterialInput,
     TextArea,
-    CheckoutNavBar
-  },
-  data() {
-    return {
-      submitError: false
-    };
-  },
-  validations: {
-    name: {
-      required
-    },
-    email: {
-      required,
-      email
-    },
-    phone: {
-      required,
-      minLength: minLength(7)
-    }
+    Button
   },
   computed: {
     ...mapGetters('form', [
       'getName',
       'getEmail',
       'getPhone',
-      'getSpecialRequest',
-      'page'
+      'getSpecialRequest'
     ]),
     name: {
       get() {
@@ -136,19 +88,7 @@ export default {
       'updatePhone',
       'updateSpecialRequest',
       'pageChange'
-    ]),
-    submit() {
-      this.$v.$touch();
-      if (this.$v.$invalid) {
-        this.submitError = true;
-      } else {
-        this.pageChange(2);
-      }
-    },
-    decrementPage() {
-      const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
-    }
+    ])
   }
 };
 </script>

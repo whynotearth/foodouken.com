@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-lg max-w-xs p-8 mb-8 m-auto border border-dashed border-white text-center hidden lg:block"
+    class="rounded-lg max-w-xs p-8 mb-8 m-auto border border-dashed border-white text-center"
   >
     <img
       src="https://res.cloudinary.com/whynotearth/image/upload/v1586099571/foodouken/heart-1x_axcey4.png"

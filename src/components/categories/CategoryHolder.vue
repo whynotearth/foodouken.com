@@ -3,12 +3,11 @@
     class="deleteMargins disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mt-6"
   >
     <category
-      v-for="(category, index) in categories"
+      v-for="category in categories"
       :key="category.id"
       @clicked="fetchCategory(category.slug)"
       :category="category"
       :selected="getSelectedCategorySlug === category.slug"
-      :class="{ 'ml-4': index === 0, 'mr-4': index === categories.length - 1 }"
     />
   </div>
 </template>

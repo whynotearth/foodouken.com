@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-row my-2 px-2 relative items-center transition-all duration-300"
-  >
+  <div class="flex flex-row my-2 px-2 relative items-center">
     <div
       class="absolute top-0 left-0 bg-button rounded-full h-4 w-4 cursor-pointer select-none"
       @click="remove"
@@ -36,7 +34,7 @@
         name="quantity"
         min="1"
         v-model="cartItem.count"
-        class="bg-transparent w-8 py-3 text-center font-bold text-white"
+        class="bg-transparent w-8 py-3 text-center font-bold"
       />
       <div class="cursor-pointer w-6 select-none" @click="increment">
         <img
