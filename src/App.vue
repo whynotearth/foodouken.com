@@ -1,14 +1,16 @@
 <template>
   <div id="app" class="font-sans bg-primary h-full text-gray-300 text-lg">
     <Spinner class="min-h-screen" v-if="getLoading" />
-    <div v-show="!getLoading">
-      <SiteBanner />
-      <router-view
-        class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
-        :class="getBannerInfo ? ' pt-16' : ''"
-      />
-      <Footer />
-    </div>
+    <transition name="fade">
+      <div v-show="!getLoading">
+        <SiteBanner />
+        <router-view
+          class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
+          :class="getBannerInfo ? ' pt-16' : ''"
+        />
+        <Footer />
+      </div>
+    </transition>
   </div>
 </template>
 
