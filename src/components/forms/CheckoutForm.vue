@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-sm m-auto">
-    <checkout-stepper />
+    <checkout-stepper v-if="page < 6" />
     <customer-info v-if="page === 1" />
     <customer-address v-if="page === 2" />
     <delivery-time v-if="page === 3" />
