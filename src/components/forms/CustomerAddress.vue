@@ -13,11 +13,19 @@
       v-if="option === 'Use my location'"
       class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
     >
-      <a v-if="location.length > 0" :href="location" class="underline">
-        View my location
-      </a>
-      <p v-if="locationError.length > 0" class="text-red-600">
-        {{ locationError }}
+      <iframe
+        v-if="embedUrl.length > 0"
+        class="w-full rounded border-none"
+        frameborder="0"
+        :src="embedUrl"
+        allowfullscreen
+      ></iframe>
+      <p
+        v-if="locationError.length > 0 && location.length === 0"
+        class="text-red-600 cursor-pointer"
+        @click="getCoordinates"
+      >
+        {{ locationError }} (retry)
       </p>
     </div>
     <div v-else>
@@ -69,6 +77,9 @@
         "Town/City".
       </span>
     </div>
+    <span class="text-red-600" v-if="registerError">
+      {{ registerError }}
+    </span>
     <CheckoutNavBar
       nextStepText="Set delivery time ►"
       @previousStep="decrementPage"
@@ -94,7 +105,9 @@ export default {
   data() {
     return {
       submitError: false,
-      locationError: ''
+      locationError: '',
+      registerError: '',
+      embedUrl: ''
     };
   },
   validations: {
@@ -208,9 +221,13 @@ export default {
           return false;
         }
       }
-      this.register().then(() => {
-        this.pageChange(3);
-      });
+      this.register()
+        .then(() => {
+          this.pageChange(3);
+        })
+        .catch(error => {
+          this.registerError = error.response.data[0].description;
+        });
     },
     decrementPage() {
       const pageToGo = this.page - 1;
@@ -222,7 +239,8 @@ export default {
     success(position) {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
-      this.location = `http://maps.google.com/maps?q=${latitude},${longitude}&z=13`;
+      this.location = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCjJV8snXaYvOj-_OAX5g0XrAkF3PoQCKU&q=${latitude},${longitude}`;
     },
     error() {
       this.locationError = 'Unable to retrieve your location';
