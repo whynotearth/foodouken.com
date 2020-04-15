@@ -48,6 +48,9 @@
     <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
       Please fill out the form properly.
     </span>
+    <span class="text-red-600" v-if="registerError">
+      {{ registerError }}
+    </span>
     <CheckoutNavBar
       nextStepText="Add your address ►"
       @previousStep="decrementPage"
@@ -60,7 +63,7 @@
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
 import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 
 export default {
@@ -72,7 +75,8 @@ export default {
   },
   data() {
     return {
-      submitError: false
+      submitError: false,
+      registerError: ''
     };
   },
   validations: {
@@ -130,6 +134,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('form', ['register']),
     ...mapMutations('form', [
       'updateName',
       'updateEmail',
@@ -141,9 +146,14 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
         this.submitError = true;
-      } else {
-        this.pageChange(2);
       }
+      this.register()
+        .then(() => {
+          this.pageChange(2);
+        })
+        .catch(error => {
+          this.registerError = error.response.data[0].description;
+        });
     },
     decrementPage() {
       const pageToGo = this.page - 1;
