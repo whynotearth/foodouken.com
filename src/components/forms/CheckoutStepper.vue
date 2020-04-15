@@ -106,7 +106,12 @@ svg {
   stroke-width: 0.25rem;
 }
 
+svg .progress-bar {
+  transition: stroke-dasharray 0.5s ease-in-out;
+}
+
 svg text {
-  transform: rotate(90deg) translate(0, -5rem);
+  transform: rotate(90deg);
+  transform-origin: 50% 50%;
 }
 </style>
