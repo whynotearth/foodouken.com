@@ -29,8 +29,7 @@ const state = {
   },
   page: 1,
   form: false,
-  loading: false,
-  submitError: ''
+  loading: false
 };
 
 // getters
@@ -77,10 +76,10 @@ const actions = {
       httpClient.post('/authentication/register', userData).then(
         response => {
           commit('changeFormsLoading', false);
+          commit('setToken', response.data);
           resolve(response.data);
         },
         error => {
-          commit('logError', error);
           commit('changeFormsLoading', false);
           reject(error);
         }
@@ -96,7 +95,6 @@ const actions = {
           resolve(response.data);
         },
         error => {
-          commit('logError', error);
           commit('changeFormsLoading', false);
           reject(error);
         }
@@ -113,7 +111,6 @@ const actions = {
           resolve(response.data);
         },
         error => {
-          commit('logError', error);
           commit('changeFormsLoading', false);
           reject(error);
         }
@@ -184,8 +181,9 @@ const mutations = {
   updateTotalTime(state, payload) {
     state.formData.deliveryDate.totalTime = payload;
   },
-  logError(state, payload) {
-    state.submitError = payload;
+  setToken(payload) {
+    console.log(payload);
+    httpClient.defaults.headers.common['Authorisation'] = 'Bearer ' + payload;
   }
 };
 

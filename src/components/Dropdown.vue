@@ -12,7 +12,7 @@
       />
       <span
         class="inline-block truncate w-4/5"
-        :class="{ 'text-gray-500': selectedOption }"
+        :class="selectedOption ? '' : 'text-gray-500'"
       >
         <slot name="title" :selectedOption="selectedOption">
           {{ selectedOption || placeholder }}
