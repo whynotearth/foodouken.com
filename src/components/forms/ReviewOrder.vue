@@ -7,7 +7,18 @@
         <img class="w-6 h-6 mr-6" :src="home" alt="" />
         <h6 class="text-gray-500 text-xl font-bold">Delivery Address</h6>
       </div>
-      <p class=" mb-5">{{ getStreet }}</p>
+      <div class="mb-5">
+        <a
+          v-if="address.type === 'link'"
+          class="underline"
+          :href="address.value"
+        >
+          View location
+        </a>
+        <p v-if="address.type === 'text'">
+          {{ address.value }}
+        </p>
+      </div>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="person" alt="" />
         <h6 class="text-gray-500 text-xl font-bold">Customer Name</h6>
@@ -36,6 +47,9 @@
         {{ new Date(getTotalTime).toString().substring(0, 21) }}
       </p>
     </div>
+    <span class="text-red-600" v-if="orderError">
+      {{ orderError }}
+    </span>
     <CheckoutNavBar
       nextStepText="Submit Order ►"
       @previousStep="decrementPage"
@@ -68,21 +82,62 @@ export default {
       phone,
       email,
       dollar,
-      clock
+      clock,
+      orderError: ''
     };
   },
   computed: {
     ...mapGetters('form', [
       'getName',
+      'getTown',
+      'getFloor',
+      'getApartment',
+      'getParking',
+      'getBuildingName',
       'getStreet',
+      'getAddressOption',
+      'getGoogleLocation',
       'getPhone',
       'getEmail',
       'getSpecialRequest',
       'getPaymentMethod',
       'page',
-      'getTotalTime'
+      'getTotalTime',
+      'getGoogleLocation'
     ]),
-    ...mapGetters('cart', ['cartItems', 'subTotal', 'deliveryFee', 'total'])
+    ...mapGetters('cart', ['cartItems', 'subTotal', 'deliveryFee', 'total']),
+    address() {
+      let address = {
+        type: '',
+        value: ''
+      };
+      if (this.getAddressOption === 'Use my location') {
+        address.type = 'link';
+        address.value = this.getGoogleLocation;
+        return address;
+      } else {
+        this.getApartment.length > 0
+          ? (address.value += `Apartment: ${this.getApartment}, `)
+          : '';
+        this.getFloor.length > 0
+          ? (address.value += `Floor: ${this.getFloor}, `)
+          : '';
+        this.getBuildingName.length > 0
+          ? (address.value += `Floor: ${this.getBuildingName}, `)
+          : '';
+        this.getStreet.length > 0
+          ? (address.value += `Street: ${this.getStreet}, `)
+          : '';
+        this.getTown.length > 0
+          ? (address.value += `Town: ${this.getTown}, `)
+          : '';
+        this.getParking.length > 0
+          ? (address.value += `Street: ${this.getTown}, `)
+          : '';
+        address.type = 'text';
+        return address;
+      }
+    }
   },
   methods: {
     ...mapMutations('form', ['pageChange']),
@@ -91,7 +146,7 @@ export default {
       const pageToGo = this.page - 1;
       this.pageChange(pageToGo);
     },
-    async submitForm() {
+    submitForm() {
       let orders = this.cartItems.map(ci => {
         return {
           name: ci.product.name,
@@ -108,9 +163,21 @@ export default {
         paymentMethod: this.getPaymentMethod,
         message: this.getSpecialRequest
       };
-      await this.ping();
-      await this.submit(formData);
-      this.pageChange(6);
+      this.ping()
+        .catch(() => {
+          this.register().catch(error => {
+            this.orderError = error.response.data[0].description;
+          });
+        })
+        .finally(() => {
+          this.submit(formData)
+            .then(() => {
+              this.pageChange(6);
+            })
+            .catch(() => {
+              this.orderError = 'Something went wrong, please try again';
+            });
+        });
     }
   }
 };
