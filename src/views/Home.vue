@@ -30,7 +30,7 @@
           <p class="text-gray-500 text-center text-lg my-4">
             Estimated Delivery Time: 45 minutes.
           </p>
-          <div v-if="!form" class="w-full text-center my-4 hidden lg:block">
+          <div v-if="!form" class="max-w-sm my-4 m-auto hidden lg:block">
             <Button title="Order now" @clicked="triggerForm(true)" />
           </div>
         </template>
@@ -39,19 +39,14 @@
     </section>
     <div
       v-if="cart.length && !form"
-      class="sticky inset-x-0 bottom-0 mt-8 pb-4"
+      class="sticky inset-x-0 bottom-0 mt-8 pb-2"
     >
-      <div
-        class="flex flex-row items-center p-2 bg-button rounded-full shadow-md lg:hidden"
-      >
-        <div class="flex-1" />
-        <div class="flex-grow text-center">
-          <a @click.prevent="showForm" class="font-semibold">Order Now</a>
-        </div>
-        <div class="flex-1 text-right">
-          {{ total | formatPrice }}
-        </div>
-      </div>
+      <Button
+        class="lg:hidden"
+        title="Order now"
+        :titleRight="total | formatPrice"
+        @clicked="showForm()"
+      />
     </div>
   </div>
 </template>
