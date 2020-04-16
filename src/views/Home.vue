@@ -44,7 +44,7 @@
       <Button
         class="lg:hidden"
         title="Order now"
-        :titleRight="total | formatPrice"
+        :titleRight="subTotal | formatPrice"
         @clicked="showForm()"
       />
     </div>
@@ -92,7 +92,7 @@ export default {
       orgData: 'home/getOrgData',
       categories: 'home/getCategories',
       cart: 'cart/cartItems',
-      total: 'cart/total',
+      subTotal: 'cart/subTotal',
       form: 'form/getFormActive',
       page: 'form/page'
     })
