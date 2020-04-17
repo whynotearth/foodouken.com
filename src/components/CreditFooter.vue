@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-center justify-center text-white align-items-center w-full h-8">
+  <div
+    class="flex items-center justify-center text-white align-items-center w-full h-8 text-xs leading-4 primary opacity-38"
+  >
     <div id="credit">
       <span>
         ⚡by
@@ -15,13 +17,5 @@ export default {
 };
 </script>
 
-<style scoped>
-#credit {
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 16px;
-  color: #ffffff 38%;
-}
+<style>
 </style>
