@@ -4,6 +4,7 @@ import category from './modules/category';
 import cart from './modules/cart';
 import home from './modules/home';
 import form from './modules/form';
+import welcome from './modules/welcome';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     home,
     category,
     cart,
-    form
+    form,
+    welcome
   }
 });
