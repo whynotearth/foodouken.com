@@ -28,7 +28,7 @@ const actions = {
   fetchHomeData({ commit }) {
     let org = process.env.VUE_APP_ORG_NAME;
     return new Promise((resolve, reject) => {
-      httpClient.get(`/pages/slug/${org}/${org}`).then(
+      httpClient.get(`/pages/slug/foodouken/${org}/shop`).then(
         response => {
           commit('loadOrgData', response.data);
           commit('loadCategories', response.data.custom.categories);
