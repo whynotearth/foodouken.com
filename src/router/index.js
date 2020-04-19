@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import DefaultLayout from '@/layouts/Default.vue';
 import StoreLayout from '@/layouts/Store.vue';
 import Home from '@/views/Home.vue';
-import Welcome from '@/views/Welcome.vue';
+import Store from '@/views/Store.vue';
 
 Vue.use(VueRouter);
 
@@ -12,13 +12,13 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: { layout: StoreLayout }
+    meta: { layout: DefaultLayout }
   },
   {
-    path: '/welcome',
-    name: 'Welcome',
-    component: Welcome,
-    meta: { layout: DefaultLayout }
+    path: '/store/:slug',
+    name: 'Store',
+    component: Store,
+    meta: { layout: StoreLayout }
   },
   {
     path: '/*',
