@@ -182,7 +182,7 @@ const mutations = {
     state.formData.deliveryDate.totalTime = payload;
   },
   setToken(state, payload) {
-    httpClient.defaults.headers.common['authorisation'] = 'Bearer ' + payload;
+    httpClient.defaults.headers.common['authorization'] = 'Bearer ' + payload;
   }
 };
 
