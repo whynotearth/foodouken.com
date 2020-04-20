@@ -11,3 +11,17 @@ export default {
   name: 'App'
 };
 </script>
+
+<style>
+html,
+body {
+  scroll-behavior: smooth;
+  background-color: #003037;
+  touch-action: manipulation;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
