@@ -56,7 +56,7 @@
                   :key="i"
                   class="tag pr-2 py-2"
                 >
-                  <span v-text="tag" class="px-3 py-1 rounded mx-auto" />
+                  <span v-text="tag" class="px-3 py-1 rounded mx-auto bg-tag" />
                 </li>
               </ul>
             </router-link>
@@ -101,10 +101,5 @@ export default {
 
 .logo {
   background: #002b31;
-}
-
-li.tag > span {
-  /* content: '|'; */
-  background: #074a51;
 }
 </style>
