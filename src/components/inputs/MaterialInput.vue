@@ -1,19 +1,21 @@
 <template>
   <div class="mb-4 relative">
     <input
-      class="input appearance-none outline-none relative bg-transparent border border-gray-600 rounded w-full px-4 py-3 focus:border-2 active:border-2"
+      class="input appearance-none outline-none relative bg-transparent border rounded w-full px-4 py-3 focus:border-2 active:border-2"
       :class="[
         { filled: value.length > 0 },
         error
-          ? 'focus:border-red-600 active:border-red-600'
-          : 'focus:border-gray-500 active:border-gray-500'
+          ? 'border-red-600 focus:border-red-600 active:border-red-600'
+          : 'border-gray-600 focus:border-gray-500 active:border-gray-500'
       ]"
+      :id="idName"
       :type="type"
       :value="value"
-      @input="$emit('input', $event.target.value)"
+      @blur="$emit('input', $event.target.value)"
       :placeholder="placeholder || label"
     />
     <label
+      :for="idName"
       class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
       :class="error ? 'text-red-600' : 'text-gray-500'"
     >
@@ -24,12 +26,14 @@
 </template>
 
 <script>
+import { randomId } from '@/helpers.js';
+
 export default {
   name: 'TextInput',
   props: {
     value: {
       type: String,
-      default: null
+      default: ''
     },
     label: {
       type: String,
@@ -44,12 +48,11 @@ export default {
     },
     error: {
       default: Boolean
+    },
+    idName: {
+      type: String,
+      default: randomId
     }
-  },
-  data() {
-    return {
-      labelClicked: false
-    };
   }
 };
 </script>

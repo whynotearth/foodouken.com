@@ -20,14 +20,14 @@ import CreditFooter from '@/components/CreditFooter.vue';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'StoreLayout',
+  name: 'ShopLayout',
   components: {
     Footer,
     Spinner,
     CreditFooter
   },
   computed: {
-    ...mapGetters('store', ['getLoading'])
+    ...mapGetters('shop', ['getLoading'])
   }
 };
 </script>

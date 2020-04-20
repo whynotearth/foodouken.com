@@ -4,7 +4,7 @@
     class="product-card bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer transition duration-300 transform hover:opacity-75"
   >
     <img
-      :src="product.image"
+      :src="product.images[0]"
       alt="Product image"
       class="w-3/12 h-full object-cover rounded-l-lg"
     />
@@ -22,7 +22,7 @@
         class="ripple absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
       >
         <img
-          src="../../assets/add.png"
+          src="@/assets/add.png"
           class="pointer-events-none"
           draggable="false"
           alt="+"

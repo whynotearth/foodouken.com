@@ -141,7 +141,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ oh: 'home/getOpeningHours' }),
+    ...mapGetters({ oh: 'shop/getOpeningHours' }),
     ...mapGetters('form', [
       'getDeliveryDateOption',
       'getDeliveryDateDay',

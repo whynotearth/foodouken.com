@@ -3,11 +3,13 @@
     <textarea
       class="input disable-scrollbars appearance-none relative bg-transparent border border-gray-600 rounded h-32 w-full px-4 py-3 focus:outline-none focus:border-gray-500 focus:border-2 active:border-gray-500 active:border-2"
       :class="value.length > 0 ? 'filled' : ''"
+      :id="idName"
       :value="value"
-      @input="$emit('input', $event.target.value)"
+      @blur="$emit('input', $event.target.value)"
       :placeholder="placeholder || label"
     ></textarea>
     <label
+      :for="idName"
       class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text text-gray-500"
     >
       {{ label }}
@@ -16,12 +18,14 @@
 </template>
 
 <script>
+import { randomId } from '@/helpers.js';
+
 export default {
   name: 'TextInput',
   props: {
     value: {
       type: String,
-      default: null
+      default: ''
     },
     label: {
       type: String,
@@ -29,12 +33,11 @@ export default {
     },
     placeholder: {
       type: String
+    },
+    idName: {
+      type: String,
+      default: randomId
     }
-  },
-  data() {
-    return {
-      labelClicked: false
-    };
   }
 };
 </script>
