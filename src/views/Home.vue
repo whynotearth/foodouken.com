@@ -34,7 +34,7 @@
             class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
           >
             <router-link
-              :to="{ name: 'Store', params: { slug: tenant.slug } }"
+              :to="{ name: 'Shop', params: { slug: tenant.slug } }"
               class="bg-secondary rounded-md overflow-hidden flex flex-col  h-full"
             >
               <div
