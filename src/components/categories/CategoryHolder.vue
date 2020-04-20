@@ -1,7 +1,7 @@
 <template>
   <section>
     <div
-      class="deleteMargins disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mt-6"
+      class="deleteMargins disable-scrollbars overflow-x-auto flex flex-no-wrap mt-6"
     >
       <category
         v-for="(category, index) in getCategories"
