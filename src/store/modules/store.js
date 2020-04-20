@@ -27,7 +27,7 @@ const getters = {
 const actions = {
   fetchStoreData({ commit }, slug) {
     return new Promise((resolve, reject) => {
-      httpClient.get(`/pages/slug/foodouken/${slug}/shop`).then(
+      httpClient.get(`/pages/slug/${slug}/${slug}`).then(
         response => {
           commit('loadOrgData', response.data);
           commit('loadCategories', response.data.custom.categories);
