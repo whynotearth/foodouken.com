@@ -101,11 +101,11 @@ const actions = {
       );
     });
   },
-  submit({ commit }, payload) {
+  submit({ commit, rootState }, payload) {
     commit('changeFormsLoading', true);
-    const tenantId = process.env.VUE_APP_TENANT_ID;
+    const shopSlug = rootState.shop.shopSlug;
     return new Promise((resolve, reject) => {
-      httpClient.post(`/salon/reservations/${tenantId}/reserve`, payload).then(
+      httpClient.post(`/tenants/${shopSlug}/reservations`, payload).then(
         response => {
           commit('changeFormsLoading', false);
           resolve(response.data);
