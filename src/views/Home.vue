@@ -1,106 +1,92 @@
 <template>
-  <div class="h-full">
-    <hero-section :heroData="orgData" />
-    <hr class="my-8 border-gray-700" />
-    <section class="flex lg:flex-row flex-col-reverse my-4">
-      <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
-        <category-holder :categories="categories" />
-        <h3 class="text-5xl text-white font-bold text-center mb-4">
-          {{ category.title }}
-        </h3>
-        <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
-        <transition name="fade" mode="out-in">
-          <Spinner v-if="loadingCategory" />
-          <card-holder v-else />
-        </transition>
-      </div>
-      <div class="lg:w-4/12 lg:ml-4">
-        <div ref="checkoutFormContainer">
-          <checkout-form v-if="form && cart.length" />
+  <div class="">
+    <div class="text-center">
+      <div class="my-8">
+        <div class="logo mx-auto h-40 w-40 p-5 rounded-full">
+          <img src="@/assets/foodouken.png" alt="Logo image" />
         </div>
-        <h3
-          class="text-5xl text-white font-bold text-center mb-8"
-          :class="cart.length ? 'block' : 'hidden lg:block'"
-          v-if="page < 5"
-        >
-          Cart
-        </h3>
-        <template v-if="cart.length && page < 5">
-          <cart />
-          <p class="text-gray-500 text-center text-lg my-4">
-            Estimated Delivery Time: 45 minutes.
-          </p>
-          <div v-if="!form" class="max-w-sm my-4 m-auto hidden lg:block">
-            <Button title="Order now" @clicked="triggerForm(true)" />
-          </div>
-        </template>
-        <empty-cart v-else-if="!cart.length" />
       </div>
-    </section>
-    <div
-      v-if="cart.length && !form"
-      class="sticky inset-x-0 bottom-0 mt-8 pb-2"
-    >
-      <Button
-        class="lg:hidden"
-        title="Order now"
-        :titleRight="subTotal | formatPrice"
-        @clicked="showForm()"
-      />
+      <h1 class="text-white text-4xl font-bold">
+        Foodouken
+      </h1>
+      <h2 class="text-2xl text-gray-500 font-semibold mb-8">
+        Food Delivery for Siem Reap
+      </h2>
+      <p
+        class="text-gray-500 text-base mt-2 text-justify lg:text-center mx-auto max-w-lg"
+      >
+        Foodouken was made in a weekend hackathon at Why Not Eath in Siem Reap,
+        Cambodia as a way to support the wonderful restaurant owners, an
+        integral part of our community.
+      </p>
     </div>
+    <hr class="my-8 border-gray-700" />
+    <section class="flex my-4 lg:max-w-3xl xl:max-w-5xl mx-auto">
+      <transition name="fade" mode="out-in">
+        <Spinner v-if="loading" class="m-auto" />
+        <ul
+          class="flex flex-wrap w-full items-stretch justify-center h-full mx-auto"
+          v-else
+        >
+          <li
+            v-for="tenant in tenants"
+            :key="tenant.slug"
+            class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
+          >
+            <router-link
+              :to="{ name: 'Store', params: { slug: tenant.slug } }"
+              class="bg-secondary rounded-md overflow-hidden flex flex-col  h-full"
+            >
+              <div
+                class="relative overflow-hidden w-full"
+                style="padding-bottom: 45%"
+              >
+                <img
+                  :src="tenant.logo"
+                  class="absolute w-full object-cover"
+                  :alt="tenant.name"
+                />
+              </div>
+              <h3 class="font-bold px-5 pt-5 text-xl">{{ tenant.name }}</h3>
+              <ul
+                class="text-sm text-gray-500 flex flex-wrap items-center mr-auto ml-0 self-end px-5 pb-5 mt-auto"
+              >
+                <li
+                  v-for="(tag, i) in tenant.tags"
+                  :key="i"
+                  class="tag pr-2 py-2"
+                >
+                  <span v-text="tag" class="px-3 py-1 rounded mx-auto" />
+                </li>
+              </ul>
+            </router-link>
+          </li>
+        </ul>
+      </transition>
+    </section>
   </div>
 </template>
 
 <script>
-import HeroSection from '@/components/HeroSection.vue';
-import CardHolder from '@/components/cards/CardHolder.vue';
-import CategoryHolder from '@/components/categories/CategoryHolder.vue';
-import Button from '@/components/Button.vue';
-import Cart from '@/components/cart/Cart.vue';
-import EmptyCart from '@/components/cart/EmptyCart.vue';
-import CheckoutForm from '@/components/forms/CheckoutForm.vue';
 import Spinner from '@/components/Spinner.vue';
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
   components: {
-    HeroSection,
-    CardHolder,
-    CategoryHolder,
-    Button,
-    Cart,
-    EmptyCart,
-    CheckoutForm,
     Spinner
   },
   created() {
     this.fetchHomeData();
   },
   methods: {
-    showForm() {
-      this.triggerForm(true);
-      this.$refs.checkoutFormContainer.scrollIntoView();
-    },
-    ...mapActions('home', ['fetchHomeData']),
-    ...mapMutations('form', ['triggerForm'])
+    ...mapActions('home', ['fetchHomeData'])
   },
   computed: {
     ...mapGetters({
-      category: 'category/getCategory',
-      loadingCategory: 'category/getCategoryLoading',
-      orgData: 'home/getOrgData',
-      categories: 'home/getCategories',
-      cart: 'cart/cartItems',
-      subTotal: 'cart/subTotal',
-      form: 'form/getFormActive',
-      page: 'form/page'
+      tenants: 'home/getTenants',
+      loading: 'home/getLoading'
     })
-  },
-  filters: {
-    formatPrice: price => {
-      return `$${price.toFixed(2)}`;
-    }
   }
 };
 </script>
@@ -111,5 +97,14 @@ export default {
 }
 .fade-leave-to {
   opacity: 0;
+}
+
+.logo {
+  background: #002b31;
+}
+
+li.tag > span {
+  /* content: '|'; */
+  background: #074a51;
 }
 </style>

@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      orgData: 'home/getOrgData'
+      orgData: 'store/getOrgData'
     }),
     contactLinks() {
       return [
