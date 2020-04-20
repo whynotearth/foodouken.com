@@ -32,9 +32,7 @@ export default {
   },
   created() {
     this.fetchCategories().then(() => {
-      this.fetchCategoryProducts(
-        this.getCategories.find(el => el.slug === 'for-you')
-      );
+      this.fetchCategoryProducts(this.getCategories[0]);
     });
   },
   methods: {
