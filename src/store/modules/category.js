@@ -3,6 +3,7 @@ import { httpClient } from '@/services/httpClient';
 // initial state
 const state = {
   loading: false,
+  categories: [],
   category: {},
   products: [],
   selectedCategorySlug: ''
@@ -12,6 +13,9 @@ const state = {
 const getters = {
   getCategory(state) {
     return state.category;
+  },
+  getCategories(state) {
+    return state.categories;
   },
   getProducts(state) {
     return state.products;
@@ -26,15 +30,33 @@ const getters = {
 
 // actions
 const actions = {
-  fetchCategory({ commit }, slug) {
+  fetchCategoryProducts({ commit, rootState }, category) {
+    const shopSlug = rootState.shop.shopSlug;
+    const slug = category.slug;
+    commit('updateCategory', category);
     commit('updateSelectedCategorySlug', slug);
     commit('changeCategoryLoading', true);
-    let org = process.env.VUE_APP_ORG_NAME;
     return new Promise((resolve, reject) => {
-      httpClient.get(`/pages/slug/${org}/${slug}`).then(
+      httpClient.get(`/tenants/${shopSlug}/categories/${slug}/products`).then(
         response => {
-          commit('updateCategory', response.data);
-          commit('updateProducts', response.data.custom.products);
+          commit('updateProducts', response.data);
+          commit('changeCategoryLoading', false);
+          resolve(response.data);
+        },
+        error => {
+          commit('changeCategoryLoading', false);
+          reject(error);
+        }
+      );
+    });
+  },
+  fetchCategories({ commit, rootState }) {
+    const shopSlug = rootState.shop.shopSlug;
+    commit('changeCategoryLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient.get(`/tenants/${shopSlug}/categories`).then(
+        response => {
+          commit('loadCategories', response.data);
           commit('changeCategoryLoading', false);
           resolve(response.data);
         },
@@ -60,6 +82,9 @@ const mutations = {
   },
   updateProducts(state, payload) {
     state.products = payload;
+  },
+  loadCategories(state, payload) {
+    state.categories = payload;
   }
 };
 
