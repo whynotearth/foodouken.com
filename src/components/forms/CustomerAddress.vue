@@ -37,7 +37,7 @@
           placeholder="Building Name"
         />
         <material-input
-          v-model="street"
+          v-model="$v.street.$model"
           type="text"
           label="Street Address"
           placeholder="Street name and number"
@@ -51,7 +51,7 @@
           </span>
         </material-input>
         <material-input
-          v-model="town"
+          v-model="$v.town.$model"
           type="text"
           label="City"
           placeholder="Town or City Area"
