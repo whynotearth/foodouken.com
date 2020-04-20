@@ -1,25 +1,29 @@
 <template>
   <component
     :is="type"
-    class="ripple cursor-pointer border-none"
-    :class="[
-      width,
-      backgroundColor,
-      fontSize,
-      fontWeight,
-      textAlign,
-      textTransform,
-      paddingLeft,
-      paddingRight,
-      borderRadius
-    ]"
+    class="ripple cursor-pointer text-white text-sm font-semibold uppercase p-4 bg-button"
+    :class="width"
     @click="$emit('clicked')"
     :href="href"
     :to="to"
   >
-    <span class="text-white">
-      {{ title }}
-    </span>
+    <div class="flex flex-row items-center">
+      <div
+        class="text-left"
+        :class="[titleLeft || title ? 'flex-1' : 'hidden']"
+      >
+        {{ titleLeft }}
+      </div>
+      <div class="flex-grow text-center" v-if="title">
+        {{ title }}
+      </div>
+      <div
+        class="text-right"
+        :class="[titleRight || title ? 'flex-1' : 'hidden']"
+      >
+        {{ titleRight }}
+      </div>
+    </div>
   </component>
 </template>
 
@@ -35,42 +39,19 @@ export default {
     },
     title: {
       type: String,
-      default: 'Button'
+      default: ''
+    },
+    titleLeft: {
+      type: String,
+      default: ''
+    },
+    titleRight: {
+      type: String,
+      default: ''
     },
     width: {
-      type: String
-    },
-    backgroundColor: {
       type: String,
-      default: 'bg-button'
-    },
-    fontSize: {
-      type: String
-    },
-    fontWeight: {
-      type: String
-    },
-    textAlign: {
-      type: String
-    },
-    textTransform: {
-      type: String
-    },
-    paddingLeft: {
-      type: String,
-      default: 'px-10'
-    },
-    paddingRight: {
-      type: String,
-      default: 'py-2'
-    },
-    border: {
-      type: String,
-      default: 'border-none'
-    },
-    borderRadius: {
-      type: String,
-      default: 'rounded-full'
+      default: 'w-full'
     }
   },
   computed: {

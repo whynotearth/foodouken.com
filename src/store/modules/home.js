@@ -3,20 +3,13 @@ import { httpClient } from '@/services/httpClient';
 // initial state
 const state = {
   loading: true,
-  orgData: {},
-  categories: []
+  tenants: []
 };
 
 // getters
 const getters = {
-  getOrgData(state) {
-    return state.orgData;
-  },
-  getCategories(state) {
-    return state.categories;
-  },
-  getOpeningHours(state) {
-    return state.orgData.custom.openingHours;
+  getTenants(state) {
+    return state.tenants;
   },
   getLoading(state) {
     return state.loading;
@@ -26,12 +19,10 @@ const getters = {
 // actions
 const actions = {
   fetchHomeData({ commit }) {
-    let org = process.env.VUE_APP_ORG_NAME;
     return new Promise((resolve, reject) => {
-      httpClient.get(`/pages/slug/${org}/${org}`).then(
+      httpClient.get(`/companies/foodouken/tenants`).then(
         response => {
-          commit('loadOrgData', response.data);
-          commit('loadCategories', response.data.custom.categories);
+          commit('loadTenants', response.data);
           commit('changeHomeLoading', false);
           resolve(response.data);
         },
@@ -46,11 +37,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  loadOrgData(state, payload) {
-    state.orgData = payload;
-  },
-  loadCategories(state, payload) {
-    state.categories = payload;
+  loadTenants(state, payload) {
+    state.tenants = payload;
   },
   changeHomeLoading(state, payload) {
     state.loading = payload;

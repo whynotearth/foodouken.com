@@ -11,9 +11,9 @@
       {{ heroData.title }}
     </h1>
     <h2 class="md:text-5xl text-3xl text-gray-500 font-bold mb-8">Delivery</h2>
-    <div class="text-gray-500 mt-2 whitespace-pre-wrap mx-auto max-w-lg">
+    <p class="text-gray-500 mt-2 whitespace-pre-wrap mx-auto max-w-lg">
       {{ heroData.description }}
-    </div>
+    </p>
   </div>
 </template>
 

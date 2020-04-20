@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import DefaultLayout from '@/layouts/Default.vue';
+import StoreLayout from '@/layouts/Store.vue';
+import Home from '@/views/Home.vue';
+import Store from '@/views/Store.vue';
 
 Vue.use(VueRouter);
 
@@ -8,7 +11,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { layout: DefaultLayout }
+  },
+  {
+    path: '/store/:slug',
+    name: 'Store',
+    component: Store,
+    meta: { layout: StoreLayout }
   },
   {
     path: '/*',
