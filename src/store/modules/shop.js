@@ -17,6 +17,12 @@ const getters = {
   },
   getLoading(state) {
     return state.loading;
+  },
+  getDeliveryFee(state) {
+    return state.orgData.custom.deliveryFee;
+  },
+  getTaxRate(state) {
+    return state.orgData.custom.taxRate;
   }
 };
 
