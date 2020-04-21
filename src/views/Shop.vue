@@ -74,14 +74,14 @@ export default {
     Spinner
   },
   created() {
-    this.fetchshopData(this.$route.params.slug);
+    this.fetchShopData(this.$route.params.slug);
   },
   methods: {
     showForm() {
       this.triggerForm(true);
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
-    ...mapActions('shop', ['fetchshopData']),
+    ...mapActions('shop', ['fetchShopData']),
     ...mapMutations('form', ['triggerForm'])
   },
   computed: {

@@ -22,7 +22,7 @@ const getters = {
 
 // actions
 const actions = {
-  fetchshopData({ commit }, slug) {
+  fetchShopData({ commit }, slug) {
     commit('setshopSlug', slug);
     return new Promise((resolve, reject) => {
       httpClient.get(`/pages/slug/foodouken/${slug}/shop`).then(
