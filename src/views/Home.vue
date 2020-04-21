@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <div class="text-center">
       <div class="my-8">
         <div class="logo mx-auto h-40 w-40 p-5 rounded-full">
