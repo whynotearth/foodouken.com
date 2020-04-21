@@ -1,8 +1,6 @@
 <template>
-  <div
-    class="flex items-center justify-center text-white align-items-center w-full h-8 text-xs leading-4 primary opacity-38"
-  >
-    <div id="credit">
+  <div class="flex justify-center text-white w-full h-12 text-xs leading-4 opacity-38">
+    <div>
       <span>
         ⚡by
         <a class="underline" href="foodouken.com">Foodouken.com</a>
@@ -16,5 +14,3 @@ export default {
   name: 'CreditFooter'
 };
 </script>
-
-<style></style>
