@@ -129,7 +129,11 @@ export default {
       let endHours = (Math.floor(end / 100) - 1) * 3600000;
       let endMinutes = (end % 100) * 60000;
       let endTime = endHours + endMinutes;
-      if (this.oh.days[d.getDay()].isClosed || d.getTime() > endTime) {
+      d.setHours(0, 0, 0, 0);
+      if (
+        this.oh.days[d.getDay()].is_closed ||
+        Date.now() - d.getTime() > endTime
+      ) {
         this.option = 'Later';
         return false;
       }
