@@ -2,15 +2,12 @@
   <div class="h-full">
     <hero-section :heroData="orgData" />
     <hr class="my-8 border-gray-700" />
-    <section class="flex lg:flex-row flex-col-reverse my-4">
+    <section class="flex lg:flex-row flex-col-reverse my-4 min-h-screen">
       <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
-        <category-holder :categories="categories" />
-        <h3 class="text-5xl text-white font-bold text-center mb-4">
-          {{ category.title }}
-        </h3>
+        <category-holder />
         <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
         <transition name="fade" mode="out-in">
-          <Spinner v-if="loadingCategory" />
+          <Spinner v-if="loadingCategory" class="min-h-screen" />
           <card-holder v-else />
         </transition>
       </div>
@@ -63,7 +60,7 @@ import Spinner from '@/components/Spinner.vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
-  name: 'Store',
+  name: 'shop',
   components: {
     HeroSection,
     CardHolder,
@@ -75,22 +72,20 @@ export default {
     Spinner
   },
   created() {
-    this.fetchStoreData(this.$route.params.slug);
+    this.fetchshopData(this.$route.params.slug);
   },
   methods: {
     showForm() {
       this.triggerForm(true);
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
-    ...mapActions('store', ['fetchStoreData']),
+    ...mapActions('shop', ['fetchshopData']),
     ...mapMutations('form', ['triggerForm'])
   },
   computed: {
     ...mapGetters({
-      category: 'category/getCategory',
+      orgData: 'shop/getOrgData',
       loadingCategory: 'category/getCategoryLoading',
-      orgData: 'store/getOrgData',
-      categories: 'store/getCategories',
       cart: 'cart/cartItems',
       subTotal: 'cart/subTotal',
       form: 'form/getFormActive',

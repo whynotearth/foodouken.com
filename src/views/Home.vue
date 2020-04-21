@@ -34,7 +34,7 @@
             class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
           >
             <router-link
-              :to="{ name: 'Store', params: { slug: tenant.slug } }"
+              :to="{ name: 'Shop', params: { slug: tenant.slug } }"
               class="bg-secondary rounded-md overflow-hidden flex flex-col  h-full"
             >
               <div
@@ -56,7 +56,7 @@
                   :key="i"
                   class="tag pr-2 py-2"
                 >
-                  <span v-text="tag" class="px-3 py-1 rounded mx-auto" />
+                  <span v-text="tag" class="px-3 py-1 rounded mx-auto bg-tag" />
                 </li>
               </ul>
             </router-link>
@@ -101,10 +101,5 @@ export default {
 
 .logo {
   background: #002b31;
-}
-
-li.tag > span {
-  /* content: '|'; */
-  background: #074a51;
 }
 </style>
