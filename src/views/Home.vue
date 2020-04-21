@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- Structured SEO Data starts -->
-    <script v-html="home.custom" type="application/ld+json" />
-    <!-- Structured SEO Data ends -->
     <div class="text-center">
       <div class="my-8">
         <div class="logo mx-auto h-40 w-40 p-5 rounded-full">
@@ -82,6 +79,17 @@ export default {
       tenants: 'home/getTenants',
       loading: 'home/getLoading'
     })
+  },
+  metaInfo() {
+    return {
+      title: this.home.title,
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.home.custom
+        }
+      ]
+    };
   }
 };
 </script>

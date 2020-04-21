@@ -1,8 +1,5 @@
 <template>
   <div class="h-full">
-    <!-- Structured SEO Data starts -->
-    <script v-html="orgData.custom" type="application/ld+json" />
-    <!-- Structured SEO Data ends -->
     <hero-section :heroData="orgData" />
     <hr class="my-8 border-gray-700" />
     <section class="flex lg:flex-row flex-col-reverse my-4 min-h-screen">
@@ -98,6 +95,18 @@ export default {
     formatPrice: price => {
       return `$${price.toFixed(2)}`;
     }
+  },
+  metaInfo() {
+    return {
+      title: this.orgData.title,
+      titleTemplate: 'Foodouken | %s',
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.orgData.custom
+        }
+      ]
+    };
   }
 };
 </script>
