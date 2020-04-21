@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .btn-plus {
   right: 10px;
   bottom: -20px;
