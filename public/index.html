@@ -18,11 +18,9 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 
     <!-- preconnects -->
-    <link rel="dns-prefetch" crossorigin="use-credentials" href="https://stagingapi.whynot.earth" />
-    <link rel="dns-prefetch" crossorigin href="https://res.cloudinary.com" />
-    <link rel="dns-prefetch" crossorigin href='https://www.googletagmanager.com' />
-    <link rel="dns-prefetch" crossorigin href='https://www.google-analytics.com' />
-    
+    <link rel="preload" crossorigin href="https://res.cloudinary.com" />
+    <link rel="preload" crossorigin href='https://www.googletagmanager.com' />
+    <link rel="preload" crossorigin href='https://www.google-analytics.com' />
 
   </head>
   <body>
