@@ -71,14 +71,14 @@ export default {
     Spinner
   },
   created() {
-    this.fetchshopData(this.$route.params.slug);
+    this.fetchShopData(this.$route.params.slug);
   },
   methods: {
     showForm() {
       this.triggerForm(true);
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
-    ...mapActions('shop', ['fetchshopData']),
+    ...mapActions('shop', ['fetchShopData']),
     ...mapMutations('form', ['triggerForm'])
   },
   computed: {
@@ -95,6 +95,18 @@ export default {
     formatPrice: price => {
       return `$${price.toFixed(2)}`;
     }
+  },
+  metaInfo() {
+    return {
+      title: this.orgData.title,
+      titleTemplate: 'Foodouken | %s',
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.orgData.custom
+        }
+      ]
+    };
   }
 };
 </script>

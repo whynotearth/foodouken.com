@@ -14,6 +14,7 @@
     "tailwindcss": "^1.2.0",
     "typeface-open-sans": "0.0.75",
     "vue": "^2.6.11",
+    "vue-meta": "^2.3.3",
     "vue-router": "^3.1.5",
     "vuelidate": "^0.7.5",
     "vuex": "^3.1.2"
