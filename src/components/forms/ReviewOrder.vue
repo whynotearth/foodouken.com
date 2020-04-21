@@ -161,7 +161,8 @@ export default {
         amount: this.total,
         deliveryDateTime: this.getTotalTime,
         paymentMethod: this.getPaymentMethod,
-        message: this.getSpecialRequest
+        message: this.getSpecialRequest,
+        userTimeZoneOffset: new Date().getTimezoneOffset()
       };
       this.ping()
         .catch(() => {

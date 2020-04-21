@@ -5,7 +5,6 @@
     <section class="flex lg:flex-row flex-col-reverse my-4 min-h-screen">
       <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
         <category-holder />
-        <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
         <transition name="fade" mode="out-in">
           <Spinner v-if="loadingCategory" class="min-h-screen" />
           <card-holder v-else />
