@@ -22,12 +22,7 @@ module.exports = {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans]
       },
       opacity: {
-        '0': '0',
-        '25': '.25',
-        '38': '.38',
-        '50': '.5',
-        '75': '.75',
-        '100': '1'
+        '38': '.38'
       },
       inset: {
         '1/2': '50%'

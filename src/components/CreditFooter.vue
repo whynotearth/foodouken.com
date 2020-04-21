@@ -1,12 +1,14 @@
 <template>
-  <div
-    class="flex items-center justify-center text-white align-items-center w-full h-8 text-xs leading-4 primary"
-  >
-    <div id="credit">
+  <div class="flex items-center justify-center text-white w-full h-12 text-xs leading-4">
+    <div>
       ⚡
       <span class="opacity-38">
         by
-        <a class="underline" href="https://patreon.com/paulchrisluke">Foodouken.com</a>
+        <a
+          class="underline"
+          href="https://patreon.com/paulchrisluke"
+          target="_blank"
+        >Foodouken.com</a>
       </span>
     </div>
   </div>
