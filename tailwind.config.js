@@ -9,7 +9,8 @@ module.exports = {
         button: '#0E9EC2',
         footer: '#437784',
         inactive: '#8BABB3',
-        tag: '#074A51'
+        tag: '#074A51',
+        logo: '#002b31'
       },
       screens: {
         xl: '1280px',
