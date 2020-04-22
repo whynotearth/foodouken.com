@@ -110,12 +110,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
