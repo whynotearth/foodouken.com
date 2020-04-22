@@ -3,9 +3,16 @@
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
       <RadioInput v-model="option" value="Use my location" class="p-5" />
       <hr class="border-gray-700" />
-      <RadioInput v-model="option" value="Enter location manually" class="p-5" />
+      <RadioInput
+        v-model="option"
+        value="Enter location manually"
+        class="p-5"
+      />
     </div>
-    <div v-if="option === 'Use my location'" class="w-full bg-secondary rounded-lg shadow mb-2 p-5">
+    <div
+      v-if="option === 'Use my location'"
+      class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
+    >
       <iframe
         v-if="embedUrl.length > 0"
         class="w-full rounded border-none"
@@ -17,7 +24,9 @@
         v-if="locationError.length > 0 && location.length === 0"
         class="text-red-600 cursor-pointer"
         @click="getCoordinates"
-      >{{ locationError }} (retry)</p>
+      >
+        {{ locationError }} (retry)
+      </p>
     </div>
     <div v-else>
       <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
@@ -31,7 +40,8 @@
           <span
             v-if="$v.street.$dirty && !$v.street.required"
             class="text-xs text-red-600"
-          >Street address is required</span>
+            >Street address is required</span
+          >
         </material-input>
         <material-input
           v-model="$v.town.$model"
@@ -43,13 +53,18 @@
           <span
             v-if="$v.town.$dirty && !$v.town.required"
             class="text-xs text-red-600"
-          >Town/City is required</span>
+            >Town/City is required</span
+          >
         </material-input>
         <material-input v-model="floor" type="text" label="Floor" />
         <material-input v-model="apartment" type="text" label="Apartment #" />
         <material-input v-model="parking" type="text" label="Where to park" />
       </div>
-      <span class="text-sm text-red-600" v-if="$v.$invalid" v-show="submitError">
+      <span
+        class="text-sm text-red-600"
+        v-if="$v.$invalid"
+        v-show="submitError"
+      >
         You are missing required fields, please fill out "Street Address" and
         "Town/City".
       </span>
