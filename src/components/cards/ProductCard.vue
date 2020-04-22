@@ -3,17 +3,30 @@
     @click="addCartProduct(product)"
     class="product-card bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer transition duration-300 transform hover:opacity-75"
   >
-    <img :src="product.image" alt="Product image" class="p-1/2 h-full object-cover rounded-l-lg" />
+    <img
+      :src="product.image"
+      alt="Product image"
+      class="p-1/2 h-full object-cover rounded-l-lg"
+    />
     <p class="my-auto">
-      <span class="mx-4 text-gray-400 my-1 inline-block text-lg">{{ product.name }}</span>
+      <span class="mx-4 text-gray-400 my-1 inline-block text-lg">{{
+        product.name
+      }}</span>
       <br />
-      <span class="mx-4 text-gray-500 my-1 inline-block">${{ product.price }}</span>
+      <span class="mx-4 text-gray-500 my-1 inline-block"
+        >${{ product.price }}</span
+      >
     </p>
     <div class="relative flex-grow">
       <div
         class="ripple absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
       >
-        <img src="../../assets/add.png" class="pointer-events-none" draggable="false" alt="+" />
+        <img
+          src="../../assets/add.png"
+          class="pointer-events-none"
+          draggable="false"
+          alt="+"
+        />
       </div>
     </div>
   </div>
