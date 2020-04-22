@@ -105,7 +105,7 @@ export default {
       'getTotalTime',
       'getGoogleLocation'
     ]),
-    ...mapGetters('cart', ['cartItems', 'subTotal', 'total']),
+    ...mapGetters('cart', ['cartItems', 'subTotal', 'total', 'totalTax']),
     ...mapGetters('shop', ['getDeliveryFee']),
     address() {
       let address = {
@@ -160,6 +160,7 @@ export default {
         subTotal: this.subTotal,
         deliveryFee: this.getDeliveryFee,
         amount: this.total,
+        tax: this.totalTax,
         deliveryDateTime: this.getTotalTime,
         paymentMethod: this.getPaymentMethod,
         message: this.getSpecialRequest,

@@ -25,12 +25,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.fade-enter-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-</style>
