@@ -2,7 +2,7 @@
   <div>
     <div class="text-center">
       <div class="my-8">
-        <div class="logo mx-auto h-40 w-40 p-5 rounded-full">
+        <div class="bg-logo mx-auto h-40 w-40 p-5 rounded-full">
           <img :src="home.custom.logo" alt="Logo image" />
         </div>
       </div>
@@ -85,6 +85,7 @@ export default {
       title: this.home.custom.name,
       meta: [
         { name: 'keywords', content: this.home.custom.keyword },
+        { name: 'description', content: this.home.custom.description },
         // OpenGraph data
         { property: 'og:title', content: this.home.custom.name },
         { property: 'og:site_name', content: 'Foodouken' },
@@ -118,9 +119,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.logo {
-  background: #002b31;
-}
-</style>

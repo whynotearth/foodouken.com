@@ -101,6 +101,7 @@ export default {
       title: this.orgData.custom.name,
       meta: [
         { name: 'keywords', content: this.orgData.custom.keyword },
+        { name: 'description', content: this.orgData.custom.description },
         // OpenGraph data
         { property: 'og:title', content: this.orgData.custom.name },
         { property: 'og:site_name', content: 'Foodouken' },
