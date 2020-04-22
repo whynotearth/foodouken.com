@@ -82,7 +82,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.home.title,
+      title: this.home.custom.name,
       meta: [
         { name: 'keywords', content: this.home.custom.keyword },
         // OpenGraph data
