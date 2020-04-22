@@ -25,6 +25,7 @@ const getters = {
 // actions
 const actions = {
   fetchHomeData({ commit }) {
+    commit('changeHomeLoading', true);
     return new Promise((resolve, reject) => {
       httpClient
         .get(`/pages/slug/foodouken/foodouken-cambodia-food-delivery`)
@@ -42,6 +43,7 @@ const actions = {
     });
   },
   fetchTenants({ commit }) {
+    commit('changeHomeLoading', true);
     return new Promise((resolve, reject) => {
       httpClient.get(`/companies/foodouken/tenants`).then(
         response => {

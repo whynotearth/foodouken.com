@@ -68,6 +68,8 @@ export default {
   name: 'Home',
   created() {
     this.fetchHomeData();
+  },
+  mounted() {
     this.fetchTenants();
   },
   methods: {
