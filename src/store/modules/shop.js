@@ -3,7 +3,12 @@ import { httpClient } from '@/services/httpClient';
 // initial state
 const state = {
   loading: true,
-  orgData: {},
+  orgData: {
+    custom: {
+      address: {},
+      details: {}
+    }
+  },
   shopSlug: ''
 };
 
