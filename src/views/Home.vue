@@ -83,6 +83,31 @@ export default {
   metaInfo() {
     return {
       title: this.home.title,
+      meta: [
+        { name: 'keywords', content: this.home.custom.keyword },
+        // OpenGraph data
+        { property: 'og:title', content: this.home.custom.name },
+        { property: 'og:site_name', content: 'Foodouken' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: this.home.custom.url },
+        { property: 'og:image', content: this.home.custom.image },
+        {
+          property: 'og:description',
+          content: this.home.custom.description
+        },
+        // Twitter card
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: this.home.custom.name },
+        {
+          name: 'twitter:description',
+          content: this.home.custom.description
+        },
+        { name: 'twitter:image', content: this.home.custom.image },
+        // Google / Schema.org markup:
+        { itemprop: 'name', content: this.home.custom.name },
+        { itemprop: 'description', content: this.home.custom.description },
+        { itemprop: 'image', content: this.home.custom.image }
+      ],
       script: [
         {
           type: 'application/ld+json',
