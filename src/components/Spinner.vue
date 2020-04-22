@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .lds-heart {
   display: inline-block;
   position: relative;
