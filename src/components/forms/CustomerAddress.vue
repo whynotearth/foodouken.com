@@ -223,15 +223,19 @@ export default {
       }
       this.register()
         .then(() => {
-          this.pageChange(3);
+          this.pageChangeWrapper(3);
         })
         .catch(error => {
           this.registerError = error.response.data[0].description;
         });
     },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
+    },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     },
     getCoordinates() {
       navigator.geolocation.getCurrentPosition(this.success, this.error);

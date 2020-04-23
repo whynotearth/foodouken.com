@@ -40,7 +40,11 @@ export default {
       // TODO: push customer data to database
       this.unloadCheckoutForm(false);
       this.clearCart();
-      this.pageChange(1);
+      this.pageChangeWrapper(1);
+    },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
     }
   }
 };

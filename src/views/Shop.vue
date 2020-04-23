@@ -12,6 +12,7 @@
       </div>
       <div class="lg:w-4/12 lg:ml-4">
         <div ref="checkoutFormContainer">
+          <!-- checkout form -->
           <checkout-form v-if="form && cart.length" />
         </div>
         <h3
@@ -27,7 +28,7 @@
             Estimated Delivery Time: 45 minutes.
           </p>
           <div v-if="!form" class="max-w-sm my-4 m-auto hidden lg:block">
-            <Button title="Order now" @clicked="triggerForm(true)" />
+            <Button title="Order now" @clicked="triggerFormWrapper(true)" />
           </div>
         </template>
         <empty-cart v-else-if="!cart.length" />
@@ -41,7 +42,7 @@
         class="lg:hidden"
         title="Order now"
         :titleRight="subTotal | formatPrice"
-        @clicked="showForm()"
+        @clicked="showForm({ orderingStepSlug: 'your-info' })"
       />
     </div>
   </div>
@@ -74,6 +75,23 @@ export default {
     this.fetchShopData(this.$route.params.slug);
   },
   methods: {
+    triggerFormWrapper(value) {
+      this.triggerForm(value);
+      this.changeRoute({ orderingStepSlug: 'your-info' });
+    },
+    changeRoute(params) {
+      const nextStepRoute = {
+        ...this.$router.currentRoute,
+        params: {
+          ...this.$router.currentRoute.params,
+          ...params
+        }
+      };
+
+      this.$router.push(nextStepRoute).catch(() => {
+        // nothing
+      });
+    },
     showForm() {
       this.triggerForm(true);
       this.$refs.checkoutFormContainer.scrollIntoView();

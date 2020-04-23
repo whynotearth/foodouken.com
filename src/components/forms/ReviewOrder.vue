@@ -143,9 +143,13 @@ export default {
   methods: {
     ...mapMutations('form', ['pageChange']),
     ...mapActions('form', ['ping', 'register', 'submit']),
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
+    },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     },
     submitForm() {
       let orders = this.cartItems.map(ci => {
@@ -175,7 +179,7 @@ export default {
         .finally(() => {
           this.submit(formData)
             .then(() => {
-              this.pageChange(6);
+              this.pageChangeWrapper(6);
             })
             .catch(() => {
               this.orderError = 'Something went wrong, please try again';
