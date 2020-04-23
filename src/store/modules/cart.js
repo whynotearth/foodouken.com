@@ -1,17 +1,17 @@
 // initial state
 const state = {
   cartItems: [],
-  deliveryFee: 1,
   subTotal: 0,
+  totalTax: 0,
   total: 0
 };
 
 // getters
 const getters = {
-  cartItems: state => {
+  cartItems(state) {
     return state.cartItems;
   },
-  subTotal: state => {
+  subTotal(state) {
     state.subTotal = state.cartItems.reduce(
       (runningTotal, cartItem) =>
         runningTotal + cartItem.product.price * cartItem.count,
@@ -19,11 +19,13 @@ const getters = {
     );
     return state.subTotal;
   },
-  deliveryFee: state => {
-    return state.deliveryFee;
+  totalTax(state, getters, rootState, rootGetters) {
+    state.totalTax = (rootGetters['shop/getTaxRate'] * state.subTotal) / 100;
+    return state.totalTax;
   },
-  total: state => {
-    state.total = state.subTotal + state.deliveryFee;
+  total(state, getters, rootState, rootGetters) {
+    state.total =
+      state.subTotal + rootGetters['shop/getDeliveryFee'] + state.totalTax;
     return state.total;
   }
 };
