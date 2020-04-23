@@ -105,7 +105,8 @@ export default {
       'getTotalTime',
       'getGoogleLocation'
     ]),
-    ...mapGetters('cart', ['cartItems', 'subTotal', 'deliveryFee', 'total']),
+    ...mapGetters('cart', ['cartItems', 'subTotal', 'total', 'totalTax']),
+    ...mapGetters('shop', ['getDeliveryFee']),
     address() {
       let address = {
         type: '',
@@ -157,11 +158,13 @@ export default {
       const formData = {
         orders: orders,
         subTotal: this.subTotal,
-        deliveryFee: this.deliveryFee,
+        deliveryFee: this.getDeliveryFee,
         amount: this.total,
+        tax: this.totalTax,
         deliveryDateTime: this.getTotalTime,
         paymentMethod: this.getPaymentMethod,
-        message: this.getSpecialRequest
+        message: this.getSpecialRequest,
+        userTimeZoneOffset: new Date().getTimezoneOffset()
       };
       this.ping()
         .catch(() => {
