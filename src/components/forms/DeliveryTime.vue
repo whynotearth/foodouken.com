@@ -125,10 +125,6 @@ export default {
     },
     nowAvailable() {
       let d = new Date();
-      let start = this.oh.days[d.getDay()].start_time;
-      let startHours = Math.floor(start / 100) * 3600000;
-      let startMinutes = (start % 100) * 60000;
-      let startTime = startHours + startMinutes;
       let end = this.oh.days[d.getDay()].end_time;
       let endHours = (Math.floor(end / 100) - 1) * 3600000;
       let endMinutes = (end % 100) * 60000;
@@ -136,8 +132,7 @@ export default {
       d.setHours(0, 0, 0, 0);
       if (
         this.oh.days[d.getDay()].is_closed ||
-        startTime > Date.now() - d.getTime() ||
-        endTime < Date.now() - d.getTime()
+        Date.now() - d.getTime() > endTime
       ) {
         this.option = 'Later';
         return false;

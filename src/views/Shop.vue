@@ -5,6 +5,7 @@
     <section class="flex lg:flex-row flex-col-reverse my-4 min-h-screen">
       <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
         <category-holder />
+        <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
         <transition name="fade" mode="out-in">
           <Spinner v-if="loadingCategory" class="min-h-screen" />
           <card-holder v-else />
@@ -71,14 +72,14 @@ export default {
     Spinner
   },
   created() {
-    this.fetchShopData(this.$route.params.slug);
+    this.fetchshopData(this.$route.params.slug);
   },
   methods: {
     showForm() {
       this.triggerForm(true);
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
-    ...mapActions('shop', ['fetchShopData']),
+    ...mapActions('shop', ['fetchshopData']),
     ...mapMutations('form', ['triggerForm'])
   },
   computed: {
@@ -95,43 +96,15 @@ export default {
     formatPrice: price => {
       return `$${price.toFixed(2)}`;
     }
-  },
-  metaInfo() {
-    return {
-      title: this.orgData.custom.name,
-      meta: [
-        { name: 'keywords', content: this.orgData.custom.keyword },
-        { name: 'description', content: this.orgData.custom.description },
-        // OpenGraph data
-        { property: 'og:title', content: this.orgData.custom.name },
-        { property: 'og:site_name', content: 'Foodouken' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: this.orgData.custom.url },
-        { property: 'og:image', content: this.orgData.custom.image },
-        {
-          property: 'og:description',
-          content: this.orgData.custom.description
-        },
-        // Twitter card
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: this.orgData.custom.name },
-        {
-          name: 'twitter:description',
-          content: this.orgData.custom.description
-        },
-        { name: 'twitter:image', content: this.orgData.custom.image },
-        // Google / Schema.org markup:
-        { itemprop: 'name', content: this.orgData.custom.name },
-        { itemprop: 'description', content: this.orgData.custom.description },
-        { itemprop: 'image', content: this.orgData.custom.image }
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.orgData.custom
-        }
-      ]
-    };
   }
 };
 </script>
+
+<style scoped>
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

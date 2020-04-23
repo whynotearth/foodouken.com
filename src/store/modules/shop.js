@@ -3,12 +3,7 @@ import { httpClient } from '@/services/httpClient';
 // initial state
 const state = {
   loading: true,
-  orgData: {
-    custom: {
-      address: {},
-      details: {}
-    }
-  },
+  orgData: {},
   shopSlug: ''
 };
 
@@ -22,18 +17,12 @@ const getters = {
   },
   getLoading(state) {
     return state.loading;
-  },
-  getDeliveryFee(state) {
-    return state.orgData.custom.deliveryFee;
-  },
-  getTaxRate(state) {
-    return state.orgData.custom.taxRate;
   }
 };
 
 // actions
 const actions = {
-  fetchShopData({ commit }, slug) {
+  fetchshopData({ commit }, slug) {
     commit('setshopSlug', slug);
     return new Promise((resolve, reject) => {
       httpClient.get(`/pages/slug/foodouken/${slug}/shop`).then(

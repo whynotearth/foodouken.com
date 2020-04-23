@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import DefaultLayout from '@/layouts/Default.vue';
+import ShopLayout from '@/layouts/ShopLayout.vue';
+import Home from '@/views/Home.vue';
+import Shop from '@/views/Shop.vue';
 
 Vue.use(VueRouter);
 
@@ -7,14 +11,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/Home.vue'),
-    meta: { layout: () => import('@/layouts/Default.vue') }
+    component: Home,
+    meta: { layout: DefaultLayout }
   },
   {
     path: '/shop/:slug',
     name: 'Shop',
-    component: () => import('@/views/Shop.vue'),
-    meta: { layout: () => import('@/layouts/ShopLayout.vue') }
+    component: Shop,
+    meta: { layout: ShopLayout }
   },
   {
     path: '/*',
