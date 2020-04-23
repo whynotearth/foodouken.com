@@ -6,16 +6,16 @@
     <img
       :src="product.images[0]"
       alt="Product image"
-      class="p-1/2 h-full object-cover rounded-l-lg"
+      class="w-3/12 h-full object-cover rounded-l-lg"
     />
     <p class="my-auto">
-      <span class="mx-4 text-gray-400 my-1 inline-block text-lg">{{
-        product.name
-      }}</span>
+      <span class="mx-4 text-gray-400 my-1 inline-block text-lg">
+        {{ product.name }}
+      </span>
       <br />
-      <span class="mx-4 text-gray-500 my-1 inline-block"
-        >${{ product.price }}</span
-      >
+      <span class="mx-4 text-gray-500 my-1 inline-block">
+        ${{ product.price }}
+      </span>
     </p>
     <div class="relative flex-grow">
       <div
@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .btn-plus {
   right: 10px;
   bottom: -20px;

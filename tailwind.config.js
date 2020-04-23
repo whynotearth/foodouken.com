@@ -9,8 +9,7 @@ module.exports = {
         button: '#0E9EC2',
         footer: '#437784',
         inactive: '#8BABB3',
-        tag: '#074A51',
-        logo: '#002b31'
+        tag: '#074A51'
       },
       screens: {
         xl: '1280px',
@@ -24,8 +23,12 @@ module.exports = {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans]
       },
       opacity: {
+        '0': '0',
         '25': '.25',
-        '38': '.38'
+        '38': '.38',
+        '50': '.5',
+        '75': '.75',
+        '100': '1'
       },
       inset: {
         '1/2': '50%'

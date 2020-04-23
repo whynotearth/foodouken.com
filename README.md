@@ -21,7 +21,7 @@ Most of the site is setup using endpoints provided by meredith-core, our REST AP
 
 https://stagingapi.whynot.earth/api/v0/pages/slug/bang-bang-bakery-cafe/
 
-Your job is to style and beautify those endpoints. Since we are working with tailwind css, many of the finer nuances of loading, animations, transitions still need to be done.
+Your job is to style and beautify those endpoints. Since we are working with tailwind css, many of the finer nuances of loading, animations, transitions still need to be done. 
 
 ## backend (.net)
 
@@ -29,36 +29,28 @@ We host on Google Cloud Platform, postgres database. Our API, meredith core can 
 
 https://github.com/whynotearth/meredith-core
 
-Your job is to create manipulate the API to be better suited for food delivery. Currently, we are mashing a lot json in a single cell in our database and punching out endpoints. We will want to segment that into better modules.
+Your job is to create manipulate the API to be better suited for food delivery. Currently, we are mashing a lot json in a single cell in our database and punching out endpoints. We will want to segment that into better modules. 
+
 
 ## Project setup
-
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-
 ```
 npm run serve
 ```
 
 ### Compiles and minifies for production
-
 ```
 npm run build
 ```
 
 ### Lints and fixes files
-
 ```
 npm run lint
 ```
 
 ### Customize configuration
-
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### Detailed new contributor guide
-
-For more detailed assistance Visit **[New contributor guide](https://github.com/whynotearth/whynot.earth/wiki/New-Contributor-Guide)**
