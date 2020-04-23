@@ -150,15 +150,19 @@ export default {
       }
       this.register()
         .then(() => {
-          this.pageChange(2);
+          this.pageChangeWrapper(2);
         })
         .catch(error => {
           this.registerError = error.response.data[0].description;
         });
     },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
+    },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     }
   }
 };

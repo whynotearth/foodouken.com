@@ -121,7 +121,11 @@ export default {
         d = new Date(this.day + this.time);
       }
       this.updateTotalTime(d.toISOString());
-      this.pageChange(4);
+      this.pageChangeWrapper(4);
+    },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
     },
     nowAvailable() {
       let d = new Date();
@@ -146,7 +150,7 @@ export default {
     },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     }
   },
   computed: {

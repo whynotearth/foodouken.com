@@ -11,7 +11,7 @@ const routes = [
     meta: { layout: () => import('@/layouts/Default.vue') }
   },
   {
-    path: '/shop/:slug',
+    path: '/shop/:slug/:orderingStepSlug?',
     name: 'Shop',
     component: () => import('@/views/Shop.vue'),
     meta: { layout: () => import('@/layouts/ShopLayout.vue') }
