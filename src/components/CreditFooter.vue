@@ -1,11 +1,17 @@
 <template>
   <div
-    class="flex justify-center text-white w-full h-12 text-xs leading-4 opacity-38"
+    class="flex items-center justify-center text-white w-full h-12 text-xs leading-4"
   >
     <div>
-      <span>
-        ⚡by
-        <a class="underline" href="foodouken.com">Foodouken.com</a>
+      ⚡
+      <span class="opacity-38">
+        powered by
+        <a
+          class="underline"
+          target="_blank"
+          href="https://patreon.com/paulchrisluke"
+          >Foodouken.com</a
+        >
       </span>
     </div>
   </div>
