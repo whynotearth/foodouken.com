@@ -120,16 +120,29 @@ export default {
       } else if (this.option === 'Later') {
         d = new Date(this.day + this.time);
       }
-      this.updateTotalTime(d.toJSON());
-      this.pageChange(4);
+      this.updateTotalTime(d.toISOString());
+      this.pageChangeWrapper(4);
+    },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
     },
     nowAvailable() {
       let d = new Date();
+      let start = this.oh.days[d.getDay()].start_time;
+      let startHours = Math.floor(start / 100) * 3600000;
+      let startMinutes = (start % 100) * 60000;
+      let startTime = startHours + startMinutes;
       let end = this.oh.days[d.getDay()].end_time;
       let endHours = (Math.floor(end / 100) - 1) * 3600000;
       let endMinutes = (end % 100) * 60000;
       let endTime = endHours + endMinutes;
-      if (this.oh.days[d.getDay()].isClosed || d.getTime() > endTime) {
+      d.setHours(0, 0, 0, 0);
+      if (
+        this.oh.days[d.getDay()].is_closed ||
+        startTime > Date.now() - d.getTime() ||
+        endTime < Date.now() - d.getTime()
+      ) {
         this.option = 'Later';
         return false;
       }
@@ -137,11 +150,11 @@ export default {
     },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     }
   },
   computed: {
-    ...mapGetters({ oh: 'home/getOpeningHours' }),
+    ...mapGetters({ oh: 'shop/getOpeningHours' }),
     ...mapGetters('form', [
       'getDeliveryDateOption',
       'getDeliveryDateDay',
@@ -177,15 +190,15 @@ export default {
       let time = [];
       if (this.day) {
         let d = new Date(this.day);
-        d.setHours(0, 0, 0, 0);
         let start = this.oh.days[d.getDay()].start_time;
         let end = this.oh.days[d.getDay()].end_time;
         let startHours = Math.floor(start / 100) * 3600000;
         let endHours = (Math.floor(end / 100) - 1) * 3600000;
         let startMinutes = (start % 100) * 60000;
         let endMinutes = (end % 100) * 60000;
-        let startTime = startHours + startMinutes;
+        let startTime = startHours + startMinutes + 2700000; // Store will deliver after 45 mins of store opening
         let endTime = endHours + endMinutes;
+        d.setHours(0, 0, 0, 0);
         if (this.oh.days[d.getDay()].is_closed) {
           return time;
         }
@@ -199,8 +212,9 @@ export default {
       return time;
     },
     days() {
-      let d = Date.now();
-      d = d - (d % 86400000);
+      let d = new Date();
+      d.setHours(0, 0, 0, 0);
+      d = d.getTime();
       let days = [];
       for (let i = 0; i < 7; i++) {
         let a = d + i * 86400000;

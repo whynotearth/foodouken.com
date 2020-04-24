@@ -12,7 +12,7 @@
     <CheckoutNavBar
       nextStepText="Review your order ►"
       @previousStep="decrementPage"
-      @nextStep="pageChange(5)"
+      @nextStep="pageChangeWrapper(5)"
     />
   </div>
 </template>
@@ -38,7 +38,11 @@ export default {
     ...mapMutations('form', ['pageChange', 'updatePaymentMethod']),
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
+    },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
     }
   },
   computed: {

@@ -22,5 +22,3 @@ export default {
   name: 'CreditFooter'
 };
 </script>
-
-<style></style>

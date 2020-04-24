@@ -37,7 +37,7 @@
           placeholder="Building Name"
         />
         <material-input
-          v-model="street"
+          v-model="$v.street.$model"
           type="text"
           label="Street Address"
           placeholder="Street name and number"
@@ -51,7 +51,7 @@
           </span>
         </material-input>
         <material-input
-          v-model="town"
+          v-model="$v.town.$model"
           type="text"
           label="City"
           placeholder="Town or City Area"
@@ -223,15 +223,19 @@ export default {
       }
       this.register()
         .then(() => {
-          this.pageChange(3);
+          this.pageChangeWrapper(3);
         })
         .catch(error => {
           this.registerError = error.response.data[0].description;
         });
     },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
+    },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     },
     getCoordinates() {
       navigator.geolocation.getCurrentPosition(this.success, this.error);

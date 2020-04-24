@@ -105,7 +105,8 @@ export default {
       'getTotalTime',
       'getGoogleLocation'
     ]),
-    ...mapGetters('cart', ['cartItems', 'subTotal', 'deliveryFee', 'total']),
+    ...mapGetters('cart', ['cartItems', 'subTotal', 'total', 'totalTax']),
+    ...mapGetters('shop', ['getDeliveryFee']),
     address() {
       let address = {
         type: '',
@@ -142,9 +143,13 @@ export default {
   methods: {
     ...mapMutations('form', ['pageChange']),
     ...mapActions('form', ['ping', 'register', 'submit']),
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
+    },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     },
     submitForm() {
       let orders = this.cartItems.map(ci => {
@@ -157,11 +162,13 @@ export default {
       const formData = {
         orders: orders,
         subTotal: this.subTotal,
-        deliveryFee: this.deliveryFee,
+        deliveryFee: this.getDeliveryFee,
         amount: this.total,
+        tax: this.totalTax,
         deliveryDateTime: this.getTotalTime,
         paymentMethod: this.getPaymentMethod,
-        message: this.getSpecialRequest
+        message: this.getSpecialRequest,
+        userTimeZoneOffset: new Date().getTimezoneOffset()
       };
       this.ping()
         .catch(() => {
@@ -172,7 +179,7 @@ export default {
         .finally(() => {
           this.submit(formData)
             .then(() => {
-              this.pageChange(6);
+              this.pageChangeWrapper(6);
             })
             .catch(() => {
               this.orderError = 'Something went wrong, please try again';

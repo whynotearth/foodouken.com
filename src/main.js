@@ -5,10 +5,18 @@ import router from './router';
 import store from './store';
 import './assets/tailwind.css';
 import Vuelidate from 'vuelidate';
+import VueMeta from 'vue-meta';
 
 require('typeface-open-sans');
 
 Vue.use(Vuelidate);
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  keyName: 'metaInfo',
+  attribute: 'data-vue-meta',
+  tagIDKeyName: 'vmid',
+  refreshOnceOnNavigation: true
+});
 
 Vue.config.productionTip = false;
 

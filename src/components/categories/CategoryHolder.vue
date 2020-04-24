@@ -1,16 +1,27 @@
 <template>
-  <div
-    class="deleteMargins disable-scrollbars overflow-x-auto scrolling-touch flex flex-no-wrap mt-6"
-  >
-    <category
-      v-for="(category, index) in categories"
-      :key="category.id"
-      @clicked="fetchCategory(category.slug)"
-      :category="category"
-      :selected="getSelectedCategorySlug === category.slug"
-      :class="{ 'ml-4': index === 0, 'mr-4': index === categories.length - 1 }"
-    />
-  </div>
+  <section>
+    <div
+      class="deleteMargins disable-scrollbars overflow-x-auto flex flex-no-wrap mt-6"
+    >
+      <category
+        v-for="(category, index) in getCategories"
+        :key="category.id"
+        @clicked="fetchCategoryProducts(category)"
+        :category="category"
+        :selected="getSelectedCategorySlug === category.slug"
+        :class="{
+          'ml-4': index === 0,
+          'mr-4': index === getCategories.length - 1
+        }"
+      />
+    </div>
+    <h3 class="text-5xl text-white font-bold text-center mb-4">
+      {{ getCategory.name }}
+    </h3>
+    <p class="text-gray-500 text-center mb-8 text-lg">
+      {{ getCategory.description || '' }}
+    </p>
+  </section>
 </template>
 
 <script>
@@ -19,25 +30,23 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'CategoryHolder',
-  props: {
-    categories: {
-      type: Array,
-      default: () => {
-        return [];
-      }
-    }
-  },
   components: {
     Category
   },
   created() {
-    this.fetchCategory('For-You');
+    this.fetchCategories().then(() => {
+      this.fetchCategoryProducts(this.getCategories[0]);
+    });
   },
   methods: {
-    ...mapActions('category', ['fetchCategory'])
+    ...mapActions('category', ['fetchCategories', 'fetchCategoryProducts'])
   },
   computed: {
-    ...mapGetters('category', ['getCategory', 'getSelectedCategorySlug'])
+    ...mapGetters('category', [
+      'getCategories',
+      'getCategory',
+      'getSelectedCategorySlug'
+    ])
   }
 };
 </script>

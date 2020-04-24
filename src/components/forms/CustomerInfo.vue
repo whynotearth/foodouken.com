@@ -2,7 +2,7 @@
   <div class="w-full">
     <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
       <material-input
-        v-model="name"
+        v-model="$v.name.$model"
         label="Name"
         :error="$v.name.$dirty && !$v.name.required"
       >
@@ -14,7 +14,7 @@
         </span>
       </material-input>
       <material-input
-        v-model="email"
+        v-model="$v.email.$model"
         label="Email"
         :error="$v.email.$dirty && (!$v.email.required || !$v.email.email)"
       >
@@ -29,7 +29,7 @@
         </span>
       </material-input>
       <material-input
-        v-model="phone"
+        v-model="$v.phone.$model"
         label="Phone number"
         :error="$v.phone.$dirty && (!$v.phone.required || !$v.phone.minLength)"
       >
@@ -150,15 +150,19 @@ export default {
       }
       this.register()
         .then(() => {
-          this.pageChange(2);
+          this.pageChangeWrapper(2);
         })
         .catch(error => {
           this.registerError = error.response.data[0].description;
         });
     },
+    pageChangeWrapper(page) {
+      this.$emit('pageChange', page);
+      this.pageChange(page);
+    },
     decrementPage() {
       const pageToGo = this.page - 1;
-      this.pageChange(pageToGo);
+      this.pageChangeWrapper(pageToGo);
     }
   }
 };

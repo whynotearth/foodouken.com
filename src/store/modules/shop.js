@@ -3,8 +3,13 @@ import { httpClient } from '@/services/httpClient';
 // initial state
 const state = {
   loading: true,
-  orgData: {},
-  categories: []
+  orgData: {
+    custom: {
+      address: {},
+      details: {}
+    }
+  },
+  shopSlug: ''
 };
 
 // getters
@@ -12,30 +17,33 @@ const getters = {
   getOrgData(state) {
     return state.orgData;
   },
-  getCategories(state) {
-    return state.categories;
-  },
   getOpeningHours(state) {
     return state.orgData.custom.openingHours;
   },
   getLoading(state) {
     return state.loading;
+  },
+  getDeliveryFee(state) {
+    return state.orgData.custom.deliveryFee;
+  },
+  getTaxRate(state) {
+    return state.orgData.custom.taxRate;
   }
 };
 
 // actions
 const actions = {
-  fetchStoreData({ commit }, slug) {
+  fetchShopData({ commit }, slug) {
+    commit('setshopSlug', slug);
     return new Promise((resolve, reject) => {
-      httpClient.get(`/pages/slug/${slug}/${slug}`).then(
+      httpClient.get(`/pages/slug/foodouken/${slug}/shop`).then(
         response => {
           commit('loadOrgData', response.data);
-          commit('loadCategories', response.data.custom.categories);
-          commit('changeStoreLoading', false);
+          commit('changeshopLoading', false);
           resolve(response.data);
         },
         error => {
-          commit('changeStoreLoading', false);
+          commit('changeshopLoading', false);
           reject(error);
         }
       );
@@ -48,11 +56,11 @@ const mutations = {
   loadOrgData(state, payload) {
     state.orgData = payload;
   },
-  loadCategories(state, payload) {
-    state.categories = payload;
-  },
-  changeStoreLoading(state, payload) {
+  changeshopLoading(state, payload) {
     state.loading = payload;
+  },
+  setshopSlug(state, payload) {
+    state.shopSlug = payload;
   }
 };
 

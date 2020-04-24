@@ -2,20 +2,17 @@
   <div class="h-full">
     <hero-section :heroData="orgData" />
     <hr class="my-8 border-gray-700" />
-    <section class="flex lg:flex-row flex-col-reverse my-4">
+    <section class="flex lg:flex-row flex-col-reverse my-4 min-h-screen">
       <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
-        <category-holder :categories="categories" />
-        <h3 class="text-5xl text-white font-bold text-center mb-4">
-          {{ category.title }}
-        </h3>
-        <p class="text-gray-500 text-center mb-8 text-lg">Prices per piece</p>
+        <category-holder />
         <transition name="fade" mode="out-in">
-          <Spinner v-if="loadingCategory" />
+          <Spinner v-if="loadingCategory" class="min-h-screen" />
           <card-holder v-else />
         </transition>
       </div>
       <div class="lg:w-4/12 lg:ml-4">
         <div ref="checkoutFormContainer">
+          <!-- checkout form -->
           <checkout-form v-if="form && cart.length" />
         </div>
         <h3
@@ -31,7 +28,7 @@
             Estimated Delivery Time: 45 minutes.
           </p>
           <div v-if="!form" class="max-w-sm my-4 m-auto hidden lg:block">
-            <Button title="Order now" @clicked="triggerForm(true)" />
+            <Button title="Order now" @clicked="triggerFormWrapper(true)" />
           </div>
         </template>
         <empty-cart v-else-if="!cart.length" />
@@ -45,7 +42,7 @@
         class="lg:hidden"
         title="Order now"
         :titleRight="subTotal | formatPrice"
-        @clicked="showForm()"
+        @clicked="showForm({ orderingStepSlug: 'your-info' })"
       />
     </div>
   </div>
@@ -63,7 +60,7 @@ import Spinner from '@/components/Spinner.vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
-  name: 'Store',
+  name: 'shop',
   components: {
     HeroSection,
     CardHolder,
@@ -75,22 +72,37 @@ export default {
     Spinner
   },
   created() {
-    this.fetchStoreData(this.$route.params.slug);
+    this.fetchShopData(this.$route.params.slug);
   },
   methods: {
+    triggerFormWrapper(value) {
+      this.triggerForm(value);
+      this.changeRoute({ orderingStepSlug: 'your-info' });
+    },
+    changeRoute(params) {
+      const nextStepRoute = {
+        ...this.$router.currentRoute,
+        params: {
+          ...this.$router.currentRoute.params,
+          ...params
+        }
+      };
+
+      this.$router.push(nextStepRoute).catch(() => {
+        // nothing
+      });
+    },
     showForm() {
       this.triggerForm(true);
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
-    ...mapActions('store', ['fetchStoreData']),
+    ...mapActions('shop', ['fetchShopData']),
     ...mapMutations('form', ['triggerForm'])
   },
   computed: {
     ...mapGetters({
-      category: 'category/getCategory',
+      orgData: 'shop/getOrgData',
       loadingCategory: 'category/getCategoryLoading',
-      orgData: 'store/getOrgData',
-      categories: 'store/getCategories',
       cart: 'cart/cartItems',
       subTotal: 'cart/subTotal',
       form: 'form/getFormActive',
@@ -101,15 +113,43 @@ export default {
     formatPrice: price => {
       return `$${price.toFixed(2)}`;
     }
+  },
+  metaInfo() {
+    return {
+      title: this.orgData.custom.name,
+      meta: [
+        { name: 'keywords', content: this.orgData.custom.keyword },
+        { name: 'description', content: this.orgData.custom.description },
+        // OpenGraph data
+        { property: 'og:title', content: this.orgData.custom.name },
+        { property: 'og:site_name', content: 'Foodouken' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: this.orgData.custom.url },
+        { property: 'og:image', content: this.orgData.custom.image },
+        {
+          property: 'og:description',
+          content: this.orgData.custom.description
+        },
+        // Twitter card
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: this.orgData.custom.name },
+        {
+          name: 'twitter:description',
+          content: this.orgData.custom.description
+        },
+        { name: 'twitter:image', content: this.orgData.custom.image },
+        // Google / Schema.org markup:
+        { itemprop: 'name', content: this.orgData.custom.name },
+        { itemprop: 'description', content: this.orgData.custom.description },
+        { itemprop: 'image', content: this.orgData.custom.image }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.orgData.custom
+        }
+      ]
+    };
   }
 };
 </script>
-
-<style scoped>
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
