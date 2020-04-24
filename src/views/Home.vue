@@ -58,14 +58,19 @@
         </li>
       </ul>
     </section>
+    <CreditFooter />
   </div>
 </template>
 
 <script>
+import CreditFooter from '@/components/CreditFooter.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
+  components: {
+    CreditFooter
+  },
   created() {
     this.fetchHomeData();
   },
