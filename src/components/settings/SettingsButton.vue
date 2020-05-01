@@ -1,0 +1,42 @@
+<template>
+  <div>
+    <div class="flex">
+      <router-link
+        :to="{ name: toLink }"
+        class="block flex-grow justify-between flex h-full items-center cursor-pointer select-none px-4 pr-6 py-5"
+      >
+        <span v-if="title" class="mr-2">{{ title }}</span>
+        <span v-if="subtitle" class="mr-2 text-white opacity-50">{{ subtitle }}</span>
+        <img :src="arrowForward" />
+      </router-link>
+    </div>  
+    <hr class="border-white opacity-25">
+  </div>
+</template>
+
+<script>
+import arrowForward from '@/assets/arrow-forward.png';
+
+export default {
+  name: 'SettingsButton',
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    subtitle: {
+      type: String,
+      default: 'test',
+    },
+    toLink: {
+      type: String,
+      default: '/',
+    },
+  },
+  data() {
+    return {
+      arrowForward
+    };
+  },
+}
+</script>

@@ -4,13 +4,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#003037',
+        primary: '#437784',
         secondary: '#173F44',
         button: '#0E9EC2',
+        background: '#003037',
         footer: '#437784',
         inactive: '#8BABB3',
         tag: '#074A51',
-        logo: '#002b31'
+        logo: '#002b31',
+        error: '#ED4A2B',
       },
       screens: {
         xl: '1280px',

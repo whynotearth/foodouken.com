@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="font-sans bg-primary h-full text-gray-300 text-lg">
+  <div id="app" class="font-sans bg-background h-full text-gray-300 text-lg">
     <component :is="this.$route.meta.layout || 'div'">
       <router-view />
     </component>
