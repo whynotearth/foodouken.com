@@ -10,8 +10,10 @@
           class="underline"
           target="_blank"
           href="https://patreon.com/paulchrisluke"
-          >Foodouken.com</a
+          rel="noopener"
         >
+          Foodouken.com
+        </a>
       </span>
     </div>
   </div>
