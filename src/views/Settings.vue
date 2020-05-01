@@ -40,8 +40,7 @@ export default {
         await this.$store.dispatch('auth/logout');
         return this.$router.push({ name: 'AuthLogin' });
       } catch (error) {
-        // TODO: snackbar
-        console.log('logout failed');
+        return error;
       }
     }
   }
