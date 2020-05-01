@@ -1,5 +1,7 @@
 <template>
-  <nav class="flex items-stretch items-center px-4 py-4 flex-wrap shadow-md z-10 bg-primary">
+  <nav
+    class="flex items-stretch items-center px-4 py-4 flex-wrap shadow-md z-10 bg-primary"
+  >
     <div class="container flex px-0 md:px-6">
       <div class="flex-start mr-3 flex-shrink-0">
         <router-link class="inline-block align-middle" :to="toLink">
@@ -49,8 +51,8 @@ export default {
   },
   data() {
     return {
-      arrowBack,
-    }
+      arrowBack
+    };
   },
   methods: {
     emitAction() {

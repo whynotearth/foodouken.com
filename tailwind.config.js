@@ -12,7 +12,7 @@ module.exports = {
         inactive: '#8BABB3',
         tag: '#074A51',
         logo: '#002b31',
-        error: '#ED4A2B',
+        error: '#ED4A2B'
       },
       screens: {
         xl: '1280px',
