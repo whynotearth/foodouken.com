@@ -1,8 +1,7 @@
 <template>
   <div>
-    <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
-      <div v-show="!getLoading">
+      <div>
         <router-view class="max-w-screen-xxl mx-auto min-h-screen" />
       </div>
     </transition>
@@ -10,18 +9,13 @@
 </template>
 
 <script>
-import Spinner from '@/components/Spinner.vue';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'TenantLayout',
-  components: {
-    Spinner
-  },
   computed: {
     ...mapGetters({
-      orgData: 'shop/getOrgData',
-      getLoading: 'home/getLoading',
+      orgData: 'shop/getOrgData'
     })
   },
   metaInfo() {

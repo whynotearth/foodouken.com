@@ -31,11 +31,9 @@ export default {
       arrowForward
     };
   },
-  mounted() {
-    this.$store.commit('home/changeHomeLoading', false);
-  },
   methods: {
-    async logout() { // Auth is not yet implemented; Copied from Volkswagen
+    async logout() {
+      // Auth is not yet implemented; Copied from Volkswagen
       try {
         await this.$store.dispatch('auth/logout');
         return this.$router.push({ name: 'AuthLogin' });
