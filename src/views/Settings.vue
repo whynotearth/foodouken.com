@@ -46,8 +46,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-.text-gray {
-  color: rgba(0, 0, 0, 0.54);
-}
-</style>
