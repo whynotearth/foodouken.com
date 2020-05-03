@@ -23,13 +23,13 @@ const routes = [
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
-    path: '/account',
+    path: '/settings/account',
     name: 'Account',
     component: () => import('@/views/Account.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
-    path: '/business',
+    path: '/settings/business',
     name: 'Business',
     component: () => import('@/views/Business.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
