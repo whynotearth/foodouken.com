@@ -14,7 +14,7 @@
           <img :src="arrowForward" />
         </button>
       </div>
-      <hr class="border-white opacity-25" />
+      <hr class="border-white opacity-12" />
     </div>
   </div>
 </template>
