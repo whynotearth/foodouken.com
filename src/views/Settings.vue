@@ -35,7 +35,7 @@ export default {
     this.$store.commit('home/changeHomeLoading', false);
   },
   methods: {
-    async logout() {
+    async logout() { // Auth is not yet implemented; Copied from Volkswagen
       try {
         await this.$store.dispatch('auth/logout');
         return this.$router.push({ name: 'AuthLogin' });
