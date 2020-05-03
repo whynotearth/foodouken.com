@@ -4,17 +4,16 @@
     <div class="container">
       <settings-button title="My Account" to-link="Account"></settings-button>
       <settings-button title="My Business" to-link="Business"></settings-button>
-
-      <div class="flex items-stretch items-center">
+      <settings-button >
         <button
           @click.prevent="logout()"
-          class="block flex-grow justify-between flex h-full items-center cursor-pointer select-none px-4 pr-6 py-5"
+          v-slot="{ linkStyling }"
+          :class="linkStyling"
         >
           <span class="mr-2 text-error">Log Out</span>
           <img :src="arrowForward" />
         </button>
-      </div>
-      <hr class="border-white opacity-12" />
+      </settings-button>
     </div>
   </div>
 </template>
