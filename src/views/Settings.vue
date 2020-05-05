@@ -4,12 +4,8 @@
     <div class="container">
       <settings-button title="My Account" to-link="Account"></settings-button>
       <settings-button title="My Business" to-link="Business"></settings-button>
-      <settings-button >
-        <button
-          @click.prevent="logout()"
-          v-slot="{ linkStyling }"
-          :class="linkStyling"
-        >
+      <settings-button v-slot="{ linkStyling }">
+        <button @click.prevent="logout()" :class="linkStyling">
           <span class="mr-2 text-error">Log Out</span>
           <img :src="arrowForward" />
         </button>
