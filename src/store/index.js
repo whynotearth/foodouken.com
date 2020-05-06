@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import category from './modules/category';
 import cart from './modules/cart';
 import home from './modules/home';
+import auth from './modules/auth';
 import form from './modules/form';
 import shop from './modules/shop';
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
+    auth,
     home,
     category,
     cart,
