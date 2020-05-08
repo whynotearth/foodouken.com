@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div>
     <slot :linkStyling="linkStyling">
       <router-link
         :to="{ name: toLink }"
@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     linkStyling() {
-      return "block flex-grow justify-between flex h-full items-center cursor-pointer select-none px-4 pr-6 py-5"; 
+      return "w-full block flex-grow justify-between flex h-full items-center cursor-pointer select-none px-4 pr-6 py-5"; 
     }
   },
 };
