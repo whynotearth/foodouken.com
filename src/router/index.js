@@ -17,6 +17,24 @@ const routes = [
     meta: { layout: () => import('@/layouts/ShopLayout.vue') }
   },
   {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('@/views/Settings.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+  },
+  {
+    path: '/settings/account',
+    name: 'Account',
+    component: () => import('@/views/Account.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+  },
+  {
+    path: '/settings/business',
+    name: 'Business',
+    component: () => import('@/views/Business.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+  },
+  {
     path: '/*',
     redirect: '/'
   }
