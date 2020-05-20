@@ -33,6 +33,20 @@
         </div>
       </div>
       <hr />
+      <div class="container mx-auto px-4 py-8">
+        <div class="pb-8">
+          <h2 class="tg-h2-mobile text-button">In Progress</h2>
+        </div>
+        <div>
+          <DeliveryTicket v-for="n in 3" :key="n" />
+        </div>
+        <div class="pt-4 px-2">
+          <div class="flex justify-between tg-body-mobile em-high">
+            <span>View all orders in progress</span>
+            <span>></span>
+          </div>
+        </div>
+      </div>
     </template>
   </LayoutFixedScrollable>
 </template>
@@ -42,6 +56,7 @@ import LayoutFixedScrollable from '@/components/LayoutFixedScrollable';
 import BaseAppBarHeader from '@/components/BaseAppBarHeader';
 import CompanyCard from '@/components/BaseCompanyCard';
 import ProductTicket from '@/components/ProductTicketCard';
+import DeliveryTicket from '@/components/DeliveryTicketCard';
 
 export default {
   name: 'Dashboard',
@@ -49,7 +64,8 @@ export default {
     LayoutFixedScrollable,
     BaseAppBarHeader,
     CompanyCard,
-    ProductTicket
+    ProductTicket,
+    DeliveryTicket
   },
   computed: {},
   methods: {}
