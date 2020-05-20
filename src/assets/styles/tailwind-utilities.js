@@ -95,6 +95,12 @@ const customUtils = plugin(function({ addUtilities, theme }) {
     '.bg-secondary-012': {
       backgroundColor: `${hexToRGBA(theme('colors.secondary'), 0.12)}`
     },
+    '.bg-button-065': {
+      backgroundColor: `${hexToRGBA(theme('colors.button'), 0.65)}`
+    },
+    '.bg-error-065': {
+      backgroundColor: `${hexToRGBA(theme('colors.error'), 0.65)}`
+    },
     '.bg-brand-gradient': {
       background: `radial-gradient(50% 49.2% at 0% 0.8%, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%), ${theme(
         'colors.primary'
