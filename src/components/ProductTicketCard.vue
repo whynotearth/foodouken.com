@@ -20,13 +20,13 @@
             <h3 class="tg-h3-mobile">x2</h3>
           </div>
           <div class="pl-4 tg-caption-mobile">
-            <div class="inlcudes bg-button mb-2">
+            <div class="inlcudes bg-button-065 mb-2">
               <div class="em-high">
                 <span class="pr-2">&check;</span>
                 <span>Iced</span>
               </div>
             </div>
-            <div class="excludes bg-error">
+            <div class="excludes bg-error-065">
               <div class="em-high">
                 <span class="pr-2">&times;</span>
                 <span>No sugar</span>
