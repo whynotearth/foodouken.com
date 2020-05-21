@@ -20,6 +20,10 @@
           <h4 class="pl-4 tg-caption-mobile em-high">2450 Flagstone Drive, Union City, 3rd Floor Apartment 7</h4>
         </div>
       </div>
+      <div class="mt-6">
+        <GoogleMaps>
+        </GoogleMaps>
+      </div>
     </div>
     <hr class="opacity-12" />
     <div>
@@ -47,8 +51,10 @@
 </template>
 
 <script>
+import GoogleMaps from '@/components/BaseGoogleMaps.vue';
 export default {
-  name: 'ProductTicket'
+  name: 'ProductTicket',
+  components: { GoogleMaps }
 };
 </script>
 
