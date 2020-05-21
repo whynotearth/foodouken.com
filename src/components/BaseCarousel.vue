@@ -36,19 +36,18 @@ export default {
 }
 
 /deep/ .VueCarousel-dot-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @apply flex items-center justify-center mt-0 !important;
+}
 
-  @apply mt-0 !important;
+/deep/ .VueCarousel-dot {
+  @apply p-1 !important;
 }
 
 /deep/ .VueCarousel-dot:focus {
-  outline: none;
+  @apply outline-none;
 }
 
 /deep/ .VueCarousel-dot--active {
-  width: 10px !important;
-  height: 10px !important;
+  @apply w-3 h-3 !important;
 }
 </style>
