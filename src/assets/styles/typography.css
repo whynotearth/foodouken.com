@@ -75,15 +75,15 @@
 
   .tg-h2-mobile {
     font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 26px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
   }
 
   .tg-h3-mobile {
     font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 18px;
     line-height: 25px;
   }
 
@@ -91,7 +91,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 22px;
   }
 
   .tg-body-emphasis-mobile {
@@ -124,10 +124,9 @@
 
   .tg-color-label-mobile {
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.02em;
+    line-height: 19px;
     text-transform: uppercase;
   }
 

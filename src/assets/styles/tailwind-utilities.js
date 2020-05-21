@@ -111,6 +111,12 @@ const customUtils = plugin(function({ addUtilities, theme }) {
     }
   };
 
+  const cardUtils = {
+    '.card-box-shadow': {
+      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.14)'
+    },
+  };
+
   const scrollbarUtils = {
     '.narrow-scrollbars::-webkit-scrollbar': {
       width: '6px'
@@ -128,6 +134,7 @@ const customUtils = plugin(function({ addUtilities, theme }) {
   });
   addUtilities(backgroundUtils);
   addUtilities(scrollbarUtils);
+  addUtilities(cardUtils);
 });
 
 module.exports = [customUtils];

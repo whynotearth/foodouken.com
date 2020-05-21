@@ -8,7 +8,7 @@
           <img :src="arrowBack" />
         </router-link>
       </div>
-      <div class="tg-h2-mobile text-white font-bold text-xl truncate">{{ title }}</div>
+      <div class="tg-h2-mobile truncate">{{ title }}</div>
       <!-- The action only has routing -->
       <router-link
         v-if="action && !action.method"

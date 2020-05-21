@@ -4,7 +4,8 @@
       <BaseAppBarHeader title="Foodouken" to-link="/" />
       <router-link
         to="/settings"
-        class="absolute top-0 right-0 p-4 md:px-6 text-sm z-10"
+        style="height: 65px;"
+        class="flex justfiy-center items-center absolute top-0 right-0 p-4 md:px-6 text-sm z-10"
       >
         <img
           src="https://res.cloudinary.com/whynotearth/image/upload/v1588775654/Volkswagen/cms/wheel_2_prifka.svg"
@@ -51,7 +52,6 @@
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </template>

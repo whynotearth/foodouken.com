@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 bg-secondary mb-4 rounded card">
+  <div class="px-4 bg-secondary mb-4 rounded card-box-shadow">
     <div class="py-4">
       <div class="flex justify-between items-center">
         <div class="flex items-center">
@@ -62,10 +62,6 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.14);
-}
-
 hr {
   @apply -mx-4;
   @apply border-white;
