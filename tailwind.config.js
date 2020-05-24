@@ -1,5 +1,4 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const customUtils = require('./src/assets/styles/tailwind-utilities');
 
 module.exports = {
   theme: {
@@ -41,5 +40,5 @@ module.exports = {
     backgroundColor: ['responsive', 'hover', 'focus', 'active'],
     borderWidth: ['responsive', 'hover', 'focus', 'active']
   },
-  plugins: [...customUtils]
+  plugins: []
 };
