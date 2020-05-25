@@ -1,10 +1,7 @@
 <template>
   <div>
     <slot :linkStyling="linkStyling">
-      <router-link
-        :to="{ name: toLink }"
-        :class="linkStyling"
-      >
+      <router-link :to="{ name: toLink }" :class="linkStyling">
         <span v-if="title" class="mr-2">{{ title }}</span>
         <span v-if="subtitle" class="mr-2 text-white opacity-54">{{
           subtitle
@@ -42,8 +39,8 @@ export default {
   },
   computed: {
     linkStyling() {
-      return "w-full block flex-grow justify-between flex h-full items-center cursor-pointer select-none px-4 pr-6 py-5"; 
+      return 'w-full block flex-grow justify-between flex h-full items-center cursor-pointer select-none px-4 pr-6 py-5';
     }
-  },
+  }
 };
 </script>
