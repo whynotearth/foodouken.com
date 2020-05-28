@@ -25,13 +25,31 @@ const routes = [
   {
     path: '/settings/account',
     name: 'Account',
-    component: () => import('@/views/Account.vue'),
+    component: () => import('@/views/settings/Account.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
     path: '/settings/business',
     name: 'Business',
-    component: () => import('@/views/Business.vue'),
+    component: () => import('@/views/settings/Business.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+  },
+  {
+    path: '/settings/business/info',
+    name: 'BusinessInfo',
+    component: () => import('@/views/settings/myBusiness/BusinessInfo.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+  },
+  {
+    path: '/settings/business/hours',
+    name: 'BusinessHours',
+    component: () => import('@/views/settings/myBusiness/BusinessHours.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+  },
+  {
+    path: '/settings/business/location',
+    name: 'BusinessLocation',
+    component: () => import('@/views/settings/myBusiness/Location.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
