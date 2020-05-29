@@ -1,7 +1,7 @@
 <template>
   <Carousel v-bind="$attrs" :paginationSize="6">
     <Slide v-for="(slide, key) in $slots.slides" :key="key">
-      <vnodes :vnodes="slide"/>
+      <vnodes :vnodes="slide" />
     </Slide>
   </Carousel>
 </template>
@@ -21,10 +21,9 @@ export default {
   mounted() {
     // To remove pagination default tooltip
     this.$nextTick(() => {
-      document.getElementsByClassName('VueCarousel-dot')
-        .forEach((button) => {
-          button.removeAttribute('title');
-        });
+      document.getElementsByClassName('VueCarousel-dot').forEach(button => {
+        button.removeAttribute('title');
+      });
     });
   }
 };

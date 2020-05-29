@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-white">
     <div>
       <BaseAppBarHeader title="Foodouken" to-link="/" />
       <router-link
@@ -30,7 +30,9 @@
             </div>
             <div class="pt-4 px-2">
               <router-link :to="{ name: 'UpcomingOrders' }">
-                <div class="flex justify-between tg-body-mobile opacity-84">
+                <div
+                  class="flex justify-between tg-body-mobile text-opacity-84"
+                >
                   <span>View all upcoming orders</span>
                   <span>></span>
                 </div>
@@ -47,7 +49,9 @@
             </div>
             <div class="pt-4 px-2">
               <router-link :to="{ name: 'UpcomingOrders' }">
-                <div class="flex justify-between tg-body-mobile opacity-84">
+                <div
+                  class="flex justify-between tg-body-mobile text-opacity-84"
+                >
                   <span>View all orders in progress</span>
                   <span>></span>
                 </div>

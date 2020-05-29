@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-flow-col mx-4">
     <BaseCarousel
-      :perPage='3'
+      :perPage="3"
       paginationActiveColor="#0E9EC2"
       paginationColor="#0E9EC2"
     >
@@ -10,7 +10,11 @@
           v-for="(stat, key) in stats"
           :key="key"
           :orderInfo="stat"
-          :classes="[1, 4].includes(key) ? 'border-l border-r order-info-middle-item--border-color mx-2 px-2' : ''"
+          :classes="
+            [1, 4].includes(key)
+              ? 'border-l border-r order-info-middle-item--border-color mx-2 px-2'
+              : ''
+          "
         />
       </template>
     </BaseCarousel>

@@ -17,8 +17,7 @@
 export default {
   name: 'GoogleMaps',
   data() {
-    return {
-    };
-  },
+    return {};
+  }
 };
 </script>
