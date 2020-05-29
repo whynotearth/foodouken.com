@@ -16,7 +16,7 @@
           <checkout-form v-if="form && cart.length" />
         </div>
         <h3
-          class="text-5xl text-white font-bold text-center mb-8"
+          class="text-5xl font-bold text-center mb-8"
           :class="cart.length ? 'block' : 'hidden lg:block'"
           v-if="page < 5"
         >

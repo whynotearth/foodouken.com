@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-white text-opacity-54">
     <div
       @click="showDropdown = !showDropdown"
       class="w-full bg-secondary rounded-lg shadow p-5 mb-2 cursor-pointer"
@@ -8,11 +8,11 @@
         :src="icon"
         v-if="icon"
         alt="icon"
-        class="inline-block align-baseline mr-4 h-5 w-5 -mb-0.5 pointer-events-none"
+        class="inline-block align-baseline mr-4 h-5 w-5 pointer-events-none"
       />
       <span
         class="inline-block truncate w-4/5"
-        :class="selectedOption ? '' : 'text-gray-500'"
+        :class="selectedOption ? 'text-white text-opacity-100' : ''"
       >
         <slot name="title" :selectedOption="selectedOption">
           {{ selectedOption || placeholder }}
@@ -26,7 +26,7 @@
     </div>
     <div
       v-if="showDropdown"
-      class="dropdown mt-2 w-48 bg-secondary w-full rounded-lg shadow-xl overflow-x-hidden overflow-y-auto"
+      class="dropdown narrow-scrollbar mt-2 w-48 bg-secondary w-full rounded-lg shadow-xl overflow-x-hidden overflow-y-auto"
     >
       <div
         class="p-5 first:rounded-t-lg last:rounded-b-lg hover:bg-footer cursor-pointer"
@@ -86,16 +86,5 @@ export default {
 <style scoped>
 .dropdown {
   max-height: 13rem;
-}
-.dropdown::-webkit-scrollbar {
-  width: 3px;
-  padding: 2px 0;
-}
-.dropdown::-webkit-scrollbar-track {
-  box-shadow: none;
-}
-.dropdown::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.54);
-  outline: transparent;
 }
 </style>
