@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="font-sans bg-background h-full text-white text-lg">
+  <div
+    id="app"
+    class="font-sans bg-background h-full text-white text-lg antialiased"
+  >
     <component :is="this.$route.meta.layout || 'div'">
       <router-view />
     </component>
@@ -18,10 +21,5 @@ body {
   scroll-behavior: smooth;
   background-color: #003037;
   touch-action: manipulation;
-}
-
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 </style>
