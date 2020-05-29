@@ -42,7 +42,9 @@
                 :alt="tenant.name"
               />
             </div>
-            <h3 class="font-bold px-5 pt-5 text-xl">{{ tenant.name }}</h3>
+            <h3 class="font-bold text-white text-opacity-95 px-5 pt-5 text-xl">
+              {{ tenant.name }}
+            </h3>
             <ul
               class="text-sm text-gray-500 flex flex-wrap items-center mr-auto ml-0 self-end px-5 pb-5 mt-auto"
             >
