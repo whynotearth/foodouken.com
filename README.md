@@ -62,3 +62,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Detailed new contributor guide
 
 For more detailed assistance Visit **[New contributor guide](https://github.com/whynotearth/whynot.earth/wiki/New-Contributor-Guide)**
+
+### Special notes
+
+When using `text-opacity-{opacity}` utilities, make sure to provide a `text-{color}` class too, do not rely on base color.
