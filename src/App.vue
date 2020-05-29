@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="font-sans bg-background h-full text-gray-300 text-lg">
+  <div id="app" class="font-sans bg-background h-full text-white text-lg">
     <component :is="this.$route.meta.layout || 'div'">
       <router-view />
     </component>
@@ -23,18 +23,5 @@ body {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>
