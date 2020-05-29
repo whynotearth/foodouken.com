@@ -18,8 +18,9 @@ export default {
 <style>
 html,
 body {
+  @apply bg-background;
+
   scroll-behavior: smooth;
-  background-color: #003037;
   touch-action: manipulation;
 }
 </style>
