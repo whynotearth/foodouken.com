@@ -70,14 +70,4 @@ export default {
   padding: 0 5px;
   z-index: 1;
 }
-
-.disable-scrollbars::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* Chrome/Safari/Webkit */
-}
-
-.disable-scrollbars {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-}
 </style>

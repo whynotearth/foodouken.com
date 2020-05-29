@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
-      <RadioInput v-model="option" value="Use my location" class="p-5" />
+      <RadioInput v-model="option" value="Share location" class="p-5" />
       <hr class="border-gray-700" />
       <RadioInput
         v-model="option"
@@ -10,7 +10,7 @@
       />
     </div>
     <div
-      v-if="option === 'Use my location'"
+      v-if="option === 'Share location'"
       class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
     >
       <iframe
