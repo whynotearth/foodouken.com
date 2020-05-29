@@ -9,7 +9,6 @@
           : 'border-white border-opacity-38'
       ]"
       :id="idName"
-      :type="type"
       :value="value"
       @blur="$emit('input', $event.target.value)"
       :placeholder="placeholder || label"

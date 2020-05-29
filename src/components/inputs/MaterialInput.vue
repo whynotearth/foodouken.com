@@ -10,6 +10,7 @@
       ]"
       :id="idName"
       :type="type"
+      min="0"
       :value="value"
       @blur="$emit('input', $event.target.value)"
       :placeholder="placeholder || label"
@@ -32,8 +33,8 @@ export default {
   name: 'TextInput',
   props: {
     value: {
-      type: String,
-      default: ''
+      type: [String, Number],
+      default: null
     },
     label: {
       type: String,
