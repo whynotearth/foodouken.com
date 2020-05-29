@@ -8,7 +8,7 @@
         <h2 class="tg-h2-mobile">Bang Bang Bakery Cafe</h2>
       </div>
       <div class="py-4">
-        <h6 class="tg-caption-mobile em-medium">foodouken.com/bang-bang-bakery</h6>
+        <h6 class="tg-caption-mobile opacity-54">foodouken.com/bang-bang-bakery</h6>
       </div>
     </div>
     <OrderInfoBox />

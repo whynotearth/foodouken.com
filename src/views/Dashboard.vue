@@ -1,6 +1,6 @@
 <template>
-  <LayoutFixedScrollable>
-    <template #header>
+  <div>
+    <div>
       <BaseAppBarHeader title="Foodouken" to-link="/" />
       <router-link
         to="/settings"
@@ -11,55 +11,56 @@
           src="https://res.cloudinary.com/whynotearth/image/upload/v1588775654/Volkswagen/cms/wheel_2_prifka.svg"
         />
       </router-link>
-    </template>
-    <template #content>
+    </div>
+    <div class="">
       <div class="">
-        <div class="">
-          <div class="container max-w-screen-md mx-auto p-4">
-            <div class="min-h-full relative bg-background">
-              <CompanyCard />
-            </div>
+        <div class="container max-w-screen-md mx-auto p-4">
+          <div class="min-h-full relative bg-background">
+            <CompanyCard />
           </div>
-          <hr />
-          <div class="container mx-auto max-w-screen-md">
-            <div class="px-4 py-8">
-              <div class="pb-8">
-                <h2 class="tg-h2-mobile text-button">Upcoming</h2>
-              </div>
-              <div>
-                <ProductTicket v-for="n in 3" :key="n" />
-              </div>
-              <div class="pt-4 px-2">
-                <div class="flex justify-between tg-body-mobile em-high">
+        </div>
+        <hr />
+        <div class="container mx-auto max-w-screen-md">
+          <div class="px-4 py-8">
+            <div class="pb-8">
+              <h2 class="tg-h2-mobile text-button">Upcoming</h2>
+            </div>
+            <div>
+              <ProductTicket v-for="n in 3" :key="n" />
+            </div>
+            <div class="pt-4 px-2">
+              <router-link :to="{ name: 'UpcomingOrders' }">
+                <div class="flex justify-between tg-body-mobile opacity-84">
                   <span>View all upcoming orders</span>
                   <span>></span>
                 </div>
-              </div>
+              </router-link>
             </div>
-            <hr />
-            <div class="px-4 py-8">
-              <div class="pb-8">
-                <h2 class="tg-h2-mobile text-button">In Progress</h2>
-              </div>
-              <div>
-                <DeliveryTicket v-for="n in 3" :key="n" />
-              </div>
-              <div class="pt-4 px-2">
-                <div class="flex justify-between tg-body-mobile em-high">
+          </div>
+          <hr />
+          <div class="px-4 py-8">
+            <div class="pb-8">
+              <h2 class="tg-h2-mobile text-button">In Progress</h2>
+            </div>
+            <div>
+              <DeliveryTicket v-for="n in 3" :key="n" />
+            </div>
+            <div class="pt-4 px-2">
+              <router-link :to="{ name: 'UpcomingOrders' }">
+                <div class="flex justify-between tg-body-mobile opacity-84">
                   <span>View all orders in progress</span>
                   <span>></span>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
-    </template>
-  </LayoutFixedScrollable>
+    </div>
+  </div>
 </template>
 
 <script>
-import LayoutFixedScrollable from '@/components/LayoutFixedScrollable';
 import BaseAppBarHeader from '@/components/BaseAppBarHeader';
 import CompanyCard from '@/components/BaseCompanyCard';
 import ProductTicket from '@/components/ProductTicketCard';
@@ -68,7 +69,6 @@ import DeliveryTicket from '@/components/DeliveryTicketCard';
 export default {
   name: 'Dashboard',
   components: {
-    LayoutFixedScrollable,
     BaseAppBarHeader,
     CompanyCard,
     ProductTicket,

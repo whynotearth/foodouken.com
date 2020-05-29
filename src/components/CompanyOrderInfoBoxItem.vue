@@ -4,7 +4,7 @@
       {{ props.orderInfo.total }}
     </div>
     <div class="">
-      <h3 class="tg-caption-mobile em-medium text-white text-center uppercase">
+      <h3 class="tg-caption-mobile opacity-54 text-white text-center uppercase">
         {{ props.orderInfo.name }}
       </h3>
     </div>
