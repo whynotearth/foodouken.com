@@ -48,7 +48,7 @@
               <DeliveryTicket v-for="n in 3" :key="n" />
             </div>
             <div class="pt-4 px-2">
-              <router-link :to="{ name: 'UpcomingOrders' }">
+              <router-link :to="{ name: 'InProgress' }">
                 <div
                   class="flex justify-between tg-body-mobile text-opacity-84"
                 >
