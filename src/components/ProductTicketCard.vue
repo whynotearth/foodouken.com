@@ -4,7 +4,7 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <img class="w-3 h-3" src="../assets/person.png" alt="" />
-          <h3 class="pl-4 tg-caption-mobile text-opacity-84">
+          <h3 class="pl-4 tg-caption-mobile text-white text-opacity-84">
             Paul Chris Luke
           </h3>
         </div>

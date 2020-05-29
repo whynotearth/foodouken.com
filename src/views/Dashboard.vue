@@ -31,7 +31,7 @@
             <div class="pt-4 px-2">
               <router-link :to="{ name: 'UpcomingOrders' }">
                 <div
-                  class="flex justify-between tg-body-mobile text-opacity-84"
+                  class="flex justify-between tg-body-mobile text-white text-opacity-84"
                 >
                   <span>View all upcoming orders</span>
                   <span>></span>
@@ -50,7 +50,7 @@
             <div class="pt-4 px-2">
               <router-link :to="{ name: 'InProgress' }">
                 <div
-                  class="flex justify-between tg-body-mobile text-opacity-84"
+                  class="flex justify-between tg-body-mobile text-white text-opacity-84"
                 >
                   <span>View all orders in progress</span>
                   <span>></span>
