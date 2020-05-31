@@ -35,6 +35,31 @@ const routes = [
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
+    path: '/tenant/menu',
+    name: 'Menu',
+    component: () => import('@/views/Menu.vue'),
+    children: [
+      {
+        path: 'categories',
+        name: 'MenuCategoryList',
+        component: () => import('@/views/MenuCategoryList.vue'),
+        meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+      },
+      {
+        path: 'items',
+        name: 'MenuItemList',
+        component: () => import('@/views/MenuItemList.vue'),
+        meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+      },
+      {
+        path: 'items/add',
+        name: 'MenuItemsAdd',
+        component: () => import('@/views/MenuItemsAddEdit.vue'),
+        meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+      }
+    ]
+  },
+  {
     path: '/*',
     redirect: '/'
   }

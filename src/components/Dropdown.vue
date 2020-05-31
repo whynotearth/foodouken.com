@@ -3,6 +3,7 @@
     <div
       @click="showDropdown = !showDropdown"
       class="w-full bg-secondary rounded-lg shadow p-5 mb-2 cursor-pointer"
+      :class="background"
     >
       <img
         :src="icon"
@@ -27,6 +28,7 @@
     <div
       v-if="showDropdown"
       class="dropdown narrow-scrollbar mt-2 w-48 bg-secondary w-full rounded-lg shadow-xl overflow-x-hidden overflow-y-auto"
+      :class="background"
     >
       <div
         class="p-5 first:rounded-t-lg last:rounded-b-lg hover:bg-footer cursor-pointer"
@@ -66,6 +68,9 @@ export default {
     placeholder: {
       type: String,
       default: 'Select an option'
+    },
+    background: {
+      type: String
     }
   },
   data() {
