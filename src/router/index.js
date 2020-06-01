@@ -35,7 +35,7 @@ const routes = [
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
-    path: '/dashboard',
+    path: '/dashboard/:slug',
     name: 'Dashboard',
     component: () => import('@/views/Dashboard.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
