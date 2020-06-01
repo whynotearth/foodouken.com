@@ -65,4 +65,5 @@ For more detailed assistance Visit **[New contributor guide](https://github.com/
 
 ### Special notes
 
-When using `text-opacity-{opacity}` utilities, make sure to provide a `text-{color}` class too, do not rely on base color.
+- Branches will get auto deleted upon merge.
+- When using `text-opacity-{opacity}` utilities, make sure to provide a `text-{color}` class too, do not rely on base color.
