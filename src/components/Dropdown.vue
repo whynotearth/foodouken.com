@@ -1,9 +1,9 @@
 <template>
-  <div class="text-white text-opacity-54">
+  <div class="mb-4 relative text-white text-opacity-54">
     <div
       @click="showDropdown = !showDropdown"
-      class="w-full bg-secondary rounded-lg shadow p-5 mb-2 cursor-pointer"
-      :class="background"
+      class="w-full mb-2 rounded shadow cursor-pointer"
+      :class="[background, tight ? 'py-3 px-4 rounded' : 'p-5 rounded-lg']"
     >
       <img
         :src="icon"
@@ -23,18 +23,24 @@
         :src="down"
         alt="down arrow"
         class="inline-block py-3 float-right pointer-events-none"
+        :class="{ 'transform rotate-180': showDropdown }"
       />
     </div>
     <div
       v-if="showDropdown"
-      class="dropdown narrow-scrollbar mt-2 w-48 bg-secondary w-full rounded-lg shadow-xl overflow-x-hidden overflow-y-auto"
-      :class="background"
+      class="dropdown absolute right-0 left-0 z-50 narrow-scrollbar w-48 w-full shadow-8dp overflow-x-hidden overflow-y-auto"
+      :class="[background, tight ? 'rounded' : 'rounded-lg']"
     >
       <div
-        class="p-5 first:rounded-t-lg last:rounded-b-lg hover:bg-footer cursor-pointer"
         v-for="(option, index) in options"
         :key="index"
-        @click="updateDay(option)"
+        @click="updateValue(option)"
+        class="hover:bg-footer cursor-pointer"
+        :class="
+          tight
+            ? 'p-4 first:rounded-t last:rounded-b'
+            : 'p-5 first:rounded-t-lg last:rounded-b-lg'
+        "
       >
         <slot name="option" :option="option">{{ option }}</slot>
       </div>
@@ -70,7 +76,12 @@ export default {
       default: 'Select an option'
     },
     background: {
-      type: String
+      type: String,
+      default: 'bg-secondary'
+    },
+    tight: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -80,7 +91,7 @@ export default {
     };
   },
   methods: {
-    updateDay(option) {
+    updateValue(option) {
       this.$emit('updateSelectedOption', option);
       this.showDropdown = false;
     }
