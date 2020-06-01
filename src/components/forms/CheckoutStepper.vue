@@ -21,8 +21,10 @@
       </div>
     </div>
     <div class="flex-grow text-right leading-tight p-4">
-      <h3 class="text-xl font-bold">{{ pageHeader(page) }}</h3>
-      <h4 class="text-base text-inactive">
+      <h3 class="text-xl text-white text-opacity-84 font-bold">
+        {{ pageHeader(page) }}
+      </h3>
+      <h4 class="text-base text-white text-opacity-54">
         {{ pageSubheader(page) | formatPageSubHeader }}
       </h4>
     </div>
