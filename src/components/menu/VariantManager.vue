@@ -42,10 +42,11 @@
 import MaterialInput from '@/components/inputs/MaterialInput';
 import Button from '@/components/Button';
 import down from '@/assets/down.png';
+import Delete from '@/assets/delete.svg';
 
 export default {
   name: 'VariantManager',
-  components: { MaterialInput, Button },
+  components: { MaterialInput, Button, Delete },
   model: {
     prop: 'variants',
     event: 'updateVariants'
@@ -85,6 +86,11 @@ export default {
         name: '',
         price: ''
       };
+    },
+    removeVariant(index) {
+      let newVariants = this.variants;
+      newVariants.splice(index, 1);
+      this.$emit('updateVariants', newVariants);
     }
   }
 };
