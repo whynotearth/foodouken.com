@@ -132,7 +132,7 @@ const getters = {
   getItemInventory: state => state.item.inventory,
   getItemVariants: state => state.item.variants,
   getItemCustomisations: state => state.item.customisations,
-  getCategories: state => state.item.categories
+  getCategories: state => state.categories
 };
 
 const actions = {};
