@@ -1,17 +1,24 @@
 <template>
-  <div class="max-w-sm m-auto">
-    <checkout-stepper :navigation="navigation" />
-    <transition name="fade" mode="out-in">
-      <keep-alive>
-        <component :is="component"></component>
-      </keep-alive>
-    </transition>
-    <checkout-nav-bar
-      :page="page"
-      :nextStepText="`${navigation[page] ? navigation[page].name : 'SUBMIT' } ►`"
-      @previousStep="previousStep"
-      @nextStep="nextStep"
-    />
+  <div class="h-screen flex justify-center items-center">
+    <div class="h-full w-full flex flex-col justify-between md:block md:h-auto max-w-sm md:m-auto">
+      <div>
+        <checkout-stepper class="clear-margin" :navigation="navigation" />
+        <div class="my-4">
+          <transition name="fade" mode="out-in">
+            <keep-alive>
+              <component :is="component"></component>
+            </keep-alive>
+          </transition>
+        </div>
+      </div>
+      <checkout-nav-bar
+        :page="page"
+        :nextStepText="`${navigation[page] && page < navigation.length ? 'NEXT STEP' : 'FINISH' } ►`"
+        @previousStep="previousStep"
+        @nextStep="nextStep"
+        class="clear-margin"
+      />
+    </div>
   </div>
 </template>
 
@@ -84,3 +91,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .clear-margin {
+    @apply m-0 !important;
+  }
+</style>
