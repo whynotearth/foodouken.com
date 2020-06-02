@@ -1,7 +1,7 @@
 <template>
   <component
     :is="type"
-    class="cursor-pointer text-white text-sm font-semibold uppercase"
+    class="cursor-pointer text-white text-sm font-semibold uppercase inline-block"
     :class="[isRipple ? 'ripple' : '', width, buttonBg, padding]"
     @click="$emit('clicked')"
     :href="href"
