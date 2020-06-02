@@ -11,30 +11,38 @@
         :class="{ 'transform rotate-180': expand }"
       />
     </div>
-    <div class="shadow-1dp bg-secondary rounded-lg">
-      <div v-if="showVariants" class="pt-4">
-        <div v-for="(variant, index) in variants" :key="index" class="flex">
-          <MaterialInput
-            v-model="variant.name"
-            :label="`Option ${index + 1}`"
-            class="w-2/3 mx-2"
-          />
-          <MaterialInput
-            v-model="variant.price"
-            label="Price"
-            class="w-1/3 mx-2"
-          />
+    <transition name="fade" mode="out-in">
+      <div v-if="expand" class="shadow-1dp bg-secondary rounded-lg">
+        <div v-if="variants.length > 0" class="pt-4">
+          <transition-group name="fade">
+            <div v-for="(variant, index) in variants" :key="index" class="flex">
+              <MaterialInput
+                v-model="variant.name"
+                :label="`Option ${index + 1}`"
+                class="w-2/3 mx-2"
+              />
+              <MaterialInput
+                v-model="variant.price"
+                label="Price"
+                class="w-1/3"
+              />
+              <Delete
+                @click="removeVariant(index)"
+                class="mr-2 my-2 text-white text-opacity-54 hover:text-opacity-100 cursor-pointer"
+              />
+            </div>
+          </transition-group>
+          <hr class="border-white border-opacity-12" />
         </div>
-        <hr class="border-white border-opacity-12" />
+        <Button
+          @clicked="addVariant"
+          :title="buttonTitle"
+          :isRipple="false"
+          buttonBg="bg-transparent"
+          class="text-button"
+        />
       </div>
-      <Button
-        @clicked="addVariant"
-        :title="buttonTitle"
-        :isRipple="false"
-        buttonBg="bg-transparent"
-        class="text-button"
-      />
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -74,11 +82,6 @@ export default {
         price: ''
       }
     };
-  },
-  computed: {
-    showVariants() {
-      return this.variants.length > 0 ? true : false;
-    }
   },
   methods: {
     addVariant() {
