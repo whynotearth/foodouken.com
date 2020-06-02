@@ -85,7 +85,6 @@ export default {
       }
     },
     register() {
-      console.log('Register');
       // register shop
     }
   }
