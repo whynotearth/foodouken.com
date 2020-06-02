@@ -1,6 +1,6 @@
 <template>
   <div class="mx-4">
-    <div class="w-full my-6">
+    <div class="w-full my-6 cursor-pointer" @click="expand = !expand">
       <span class="tg-h3-mobile text-white text-opacity-54 inline-block">
         {{ title }}
       </span>
@@ -8,7 +8,7 @@
         :src="down"
         alt="down arrow"
         class="inline-block py-3 float-right pointer-events-none"
-        :class="{ 'transform rotate-180': showVariants }"
+        :class="{ 'transform rotate-180': expand }"
       />
     </div>
     <div class="shadow-1dp bg-secondary rounded-lg">
@@ -68,6 +68,7 @@ export default {
   data() {
     return {
       down,
+      expand: true,
       newVariant: {
         name: '',
         price: ''
