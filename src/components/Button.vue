@@ -38,7 +38,7 @@ export default {
       type: String
     },
     to: {
-      type: String
+      type: [String, Object]
     },
     title: {
       type: String,

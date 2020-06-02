@@ -41,7 +41,7 @@ export default {
       required: true
     },
     toLink: {
-      type: String,
+      type: [String, Object],
       default: '/'
     },
     action: {
