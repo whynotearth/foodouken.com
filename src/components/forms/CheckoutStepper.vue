@@ -36,6 +36,11 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'CheckoutStepper',
+  props: {
+    navigation: {
+      type: Array
+    }
+  },
   data() {
     return {
       pageCount: 5,
@@ -46,32 +51,37 @@ export default {
   },
   methods: {
     pageHeader(pageNum) {
-      switch (pageNum) {
-        case 1: {
-          return 'Your Info';
-        }
-        case 2: {
-          return 'Your Address';
-        }
-        case 3: {
-          return 'Delivery Time';
-        }
-        case 4: {
-          return 'Payment Method';
-        }
-        case 5: {
-          return 'Review Your Order';
-        }
-        case 6: {
-          return '';
-        }
-        default: {
-          return '';
+      if (this.navigation) {
+        return this.navigation[pageNum - 1].name;
+      } else {
+        switch (pageNum) {
+          case 1: {
+            return 'Your Info';
+          }
+          case 2: {
+            return 'Your Address';
+          }
+          case 3: {
+            return 'Delivery Time';
+          }
+          case 4: {
+            return 'Payment Method';
+          }
+          case 5: {
+            return 'Review Your Order';
+          }
+          case 6: {
+            return '';
+          }
+          default: {
+            return '';
+          }
         }
       }
+      
     },
     pageSubheader(pageNum) {
-      return this.pageHeader(pageNum + 1);
+      return this.navigation[pageNum] ? this.pageHeader(pageNum + 1) : '';
     }
   },
   computed: {

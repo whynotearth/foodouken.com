@@ -43,6 +43,7 @@ const routes = [
   {
     path: '/auth/sign-up/:step',
     name: 'SignUp',
+    props: true,
     component: () => import('@/views/SignUp.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },

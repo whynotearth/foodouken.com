@@ -1,11 +1,14 @@
 <template>
   <div class="">
-    hello
+    <SignUpForm />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SignUp'
+  name: 'SignUp',
+  components: {
+    SignUpForm: () => import('@/components/forms/SignUpForm.vue')
+  }
 };
 </script>
