@@ -28,7 +28,7 @@
     </div>
     <div
       v-if="showDropdown"
-      class="dropdown absolute right-0 left-0 z-50 narrow-scrollbar w-48 w-full shadow-8dp overflow-x-hidden overflow-y-auto"
+      class="dropdown absolute right-0 left-0 z-20 narrow-scrollbar w-48 w-full shadow-8dp overflow-x-hidden overflow-y-auto"
       :class="[background, tight ? 'rounded' : 'rounded-lg']"
     >
       <div
