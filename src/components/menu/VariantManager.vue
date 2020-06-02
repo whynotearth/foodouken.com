@@ -81,6 +81,10 @@ export default {
   methods: {
     addVariant() {
       this.$emit('updateVariants', [...this.variants, this.newVariant]);
+      this.newVariant = {
+        name: '',
+        price: ''
+      };
     }
   }
 };
