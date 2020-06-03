@@ -15,7 +15,11 @@
       <div v-if="expand" class="shadow-1dp bg-secondary rounded-lg">
         <div v-if="variants.length > 0" class="pt-4">
           <transition-group name="fade">
-            <div v-for="(variant, index) in variants" :key="index" class="flex">
+            <div
+              v-for="(variant, index) in variants"
+              :key="variant"
+              class="flex"
+            >
               <MaterialInput
                 v-model="variant.name"
                 :label="`Option ${index + 1}`"
