@@ -17,7 +17,7 @@
           <transition-group name="fade">
             <div
               v-for="(variant, index) in variants"
-              :key="variant"
+              :key="`Variant_${index + 1}`"
               class="flex"
             >
               <MaterialInput
