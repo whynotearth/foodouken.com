@@ -64,17 +64,14 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      const stepFromUrl = this.$route.params.step;
-      const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl);
+    const stepFromUrl = this.$route.params.step;
+    const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl);
 
-      if (ind > 1) {
-        this.pageChange(ind + 1)
-      } else if (ind < 0) {
-        this.$router.push({name: 'Welcome'})
-      }
-    })
-    
+    if (ind > 1) {
+      this.pageChange(ind + 1)
+    } else if (ind < 0) {
+      this.$router.push({name: 'Welcome'})
+    }
   },
   computed: {
     ...mapGetters('auth', ['page']),
