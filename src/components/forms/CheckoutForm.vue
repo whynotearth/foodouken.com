@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-sm m-auto">
     <checkout-stepper v-if="page < 6" />
-    <transition name="fade">
+    <transition name="fade" mode="out-in">
       <customer-info @pageChange="onPageChange" v-if="page === 1" />
       <customer-address @pageChange="onPageChange" v-if="page === 2" />
       <delivery-time @pageChange="onPageChange" v-if="page === 3" />
