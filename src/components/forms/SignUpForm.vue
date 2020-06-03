@@ -67,7 +67,7 @@ export default {
     const stepFromUrl = this.$route.params.step;
     const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl);
 
-    if (ind > 1) {
+    if (ind > 0) {
       this.pageChange(ind + 1)
     } else if (ind < 0) {
       this.$router.push({name: 'Welcome'})
