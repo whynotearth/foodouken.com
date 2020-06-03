@@ -2,11 +2,11 @@
   <div class="h-screen flex justify-center items-center">
     <div class="h-full w-full flex flex-col justify-between md:block md:h-auto max-w-sm md:m-auto">
       <div>
-        <checkout-stepper class="clear-margin" :navigation="navigation" />
+        <checkout-stepper class="clear-margin" :navigation="navigation" :page="page" />
         <div class="my-4">
           <transition name="fade" mode="out-in">
             <keep-alive>
-              <component :is="component"></component>
+              <component :is="component" :ref="component"></component>
             </keep-alive>
           </transition>
         </div>
@@ -63,29 +63,50 @@ export default {
       ]
     }
   },
+  mounted() {
+    const stepFromUrl = this.$route.params.step;
+    const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl)
+    if (ind > 1) {
+      this.pageChange(ind + 1)
+    }
+  },
   computed: {
-    ...mapGetters('form', ['page']),
+    ...mapGetters('auth', ['page']),
     component() {
       return this.navigation[this.page - 1].step;
-    },
-    
+    }
   },
   methods: {
-    ...mapMutations('form', ['pageChange']),
+    ...mapMutations('auth', ['pageChange']),
     previousStep() {
       if (this.page > 1) {
         this.pageChange(this.page - 1)
       }
     },
     nextStep() {
-      if (this.page < this.navigation.length) {
-        this.pageChange(this.page + 1)
-      } else {
-        this.register();
+      let valid = true;
+      const isThereValidationAtComponent = !!this.$refs[this.component].$v;
+      if (isThereValidationAtComponent) {
+        this.$refs[this.component].$v.$touch();
+        valid = !this.$refs[this.component].$v.$invalid;
+      }
+
+      if (valid) {
+        if (this.page < this.navigation.length) {
+          this.pageChange(this.page + 1)
+        } else {
+          this.register();
+        }
       }
     },
     register() {
       // register shop
+    }
+  },
+  watch: {
+    component(step) {
+      this.$router.push({ name: 'SignUp', params: { step } })
+        .catch(() => {})
     }
   }
 };

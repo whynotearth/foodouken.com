@@ -5,6 +5,7 @@ import cart from './modules/cart';
 import home from './modules/home';
 import form from './modules/form';
 import shop from './modules/shop';
+import auth from './modules/auth';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     category,
     cart,
     form,
-    shop
+    shop,
+    auth
   }
 });

@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 
 export default {
@@ -57,10 +58,6 @@ export default {
   },
   data() {
     return {
-      name: '',
-      email: '',
-      phone: '',
-      description: ''
     };
   },
   validations: {
@@ -77,5 +74,43 @@ export default {
     },
     description: {}
   },
+  computed: {
+    ...mapGetters('auth', ['getName', 'getEmail', 'getPhone', 'getDescription']),
+    name: {
+      get() {
+        return this.getName;
+      },
+      set(value) {
+        this.updateName(value);
+      }
+    },
+    email: {
+      get() {
+        return this.getEmail;
+      },
+      set(value) {
+        this.updateEmail(value);
+      }
+    },
+    phone: {
+      get() {
+        return this.getPhone;
+      },
+      set(value) {
+        this.updatePhone(value);
+      }
+    },
+    description: {
+      get() {
+        return this.getDescription;
+      },
+      set(value) {
+        this.updateDescription(value);
+      }
+    },
+  },
+  methods: {
+    ...mapMutations('auth', ['updateName', 'updateEmail', 'updatePhone', 'updateDescription'])
+  }
 };
 </script>
