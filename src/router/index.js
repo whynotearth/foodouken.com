@@ -54,6 +54,12 @@ const routes = [
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
+    path: '/auth/sign-up/success/:slug',
+    name: 'SignUpSuccess',
+    component: () => import('@/components/forms/SignUpSuccess.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+  },
+  {
     path: '/*',
     redirect: '/'
   }

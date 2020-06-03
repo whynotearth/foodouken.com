@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex justify-center items-center">
-    <div class="h-full w-full flex flex-col justify-between md:block md:h-auto max-w-sm md:m-auto">
+    <div class="h-full w-full flex flex-col justify-between max-w-sm md:m-auto">
       <div>
         <checkout-stepper class="clear-margin" :navigation="navigation" :page="page" />
         <div class="my-4">
@@ -64,11 +64,17 @@ export default {
     }
   },
   mounted() {
-    const stepFromUrl = this.$route.params.step;
-    const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl)
-    if (ind > 1) {
-      this.pageChange(ind + 1)
-    }
+    this.$nextTick(() => {
+      const stepFromUrl = this.$route.params.step;
+      const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl);
+
+      if (ind > 1) {
+        this.pageChange(ind + 1)
+      } else if (ind < 0) {
+        this.$router.push({name: 'Welcome'})
+      }
+    })
+    
   },
   computed: {
     ...mapGetters('auth', ['page']),
@@ -100,7 +106,7 @@ export default {
       }
     },
     register() {
-      // register shop
+      this.$router.push({name: 'SignUpSuccess', params: { slug: 'bang-bang-bakery'}})
     }
   },
   watch: {

@@ -1,4 +1,28 @@
 // initial state
+const notificationTypes = [
+  {
+    name: 'Text',
+    key: 'phone',
+    id: 1
+  },
+  {
+    name: 'Email',
+    key: 'email',
+    id: 2
+  }
+];
+
+const paymentMethods = [
+  {
+    name: 'Cash',
+    id: 1
+  },
+  {
+    name: 'ABA Bank Transfer',
+    id: 2
+  }
+];
+
 const state = {
     businessInfo: {
       name: '',
@@ -6,8 +30,8 @@ const state = {
       phone: '',
       description: '',
     },
-    notificationType: [],
-    paymentMethodType: [],
+    selectedNotificationType: [],
+    selectedPaymentMethods: [],
     businessHouts: [
       {
         dayOfWeek: 0,
@@ -16,7 +40,9 @@ const state = {
         closingTime: {}
       }
     ],
-    page: 1
+    page: 1,
+    notificationTypes,
+    paymentMethods
 };
 
 const getters = {
@@ -34,6 +60,12 @@ const getters = {
   },
   page(state) {
     return state.page;
+  },
+  getSelectedNotificationTypes(state) {
+    return state.selectedNotificationType;
+  },
+  getSelectedPaymentMethods(state) {
+    return state.selectedPaymentMethods;
   }
 };
 
@@ -55,6 +87,12 @@ const mutations = {
   },
   pageChange(state, payload) {
     state.page = payload
+  },
+  updateSelectedNotificationTypes(state, payload) {
+    state.selectedNotificationType = [...payload]
+  },
+  updateSelectedPaymentMethods(state, payload) {
+    state.selectedPaymentMethods = [...payload]
   }
 };
 

@@ -19,7 +19,7 @@
     <div class="py-10 w-full md:w-auto px-5">
       <div class="py-3">
         <Button
-          @clicked="$router.push({ name: 'SignUp' })"
+          @clicked="$router.push({ name: 'SignUp', params: { step: 'business-info' } })"
           title="START SETTING UP YOUR BUSINESS"
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 px-10"
         />

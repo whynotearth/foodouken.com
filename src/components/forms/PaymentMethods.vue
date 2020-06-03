@@ -6,11 +6,8 @@
       </h6>
     </div>
     <div>
-      <div class="my-8">
-        <CheckBox v-model="paymentMethods" :value="1" label="Cash" />
-      </div>
-      <div class="my-8">
-        <CheckBox v-model="paymentMethods" :value="2" label="ABA Bank Transfer" />
+      <div class="my-8" v-for="(paymentMethod, key) in paymentMethods" :key="key">
+        <CheckBox v-model="selectedPaymentMethods" :value="paymentMethod.id" :label="paymentMethod.name" />
       </div>
     </div>
   </div>
@@ -18,14 +15,29 @@
 
 <script>
 import CheckBox from '@/components/inputs/CheckBox';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'PaymentMethods',
   components: { CheckBox },
   data() {
     return {
-      paymentMethods: []
     };
+  },
+  computed: {
+    ...mapState('auth', ['paymentMethods']),
+    ...mapGetters('auth', ['getSelectedPaymentMethods']),
+    selectedPaymentMethods: {
+      get() {
+        return this.getSelectedPaymentMethods;
+      },
+      set(value) {
+        this.updateSelectedPaymentMethods(value)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations('auth', ['updateSelectedPaymentMethods'])
   }
 };
 </script>
