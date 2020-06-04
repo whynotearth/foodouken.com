@@ -99,6 +99,18 @@ export default {
       ]
     };
   },
+  beforeDestroy() {
+    this.updateItem({
+      name: '',
+      category: '',
+      images: [],
+      price: '',
+      description: '',
+      inventory: '',
+      variants: [],
+      customisations: []
+    });
+  },
   computed: {
     ...mapGetters('menu', [
       'getItemName',
@@ -178,6 +190,7 @@ export default {
   },
   methods: {
     ...mapMutations('menu', [
+      'updateItem',
       'updateItemName',
       'updateItemCategory',
       'updateItemImages',
