@@ -1,7 +1,10 @@
 <template>
-  <div class="mb-4 relative text-white text-opacity-54">
+  <div
+    class="mb-4 relative text-white text-opacity-54"
+    v-click-outside="hideDropdown"
+  >
     <div
-      @click="showDropdown = !showDropdown"
+      @click="toggleDropdown"
       class="w-full mb-2 rounded shadow cursor-pointer"
       :class="[background, tight ? 'py-3 px-4 rounded' : 'p-5 rounded-lg']"
     >
@@ -23,11 +26,11 @@
         :src="down"
         alt="down arrow"
         class="inline-block py-3 float-right pointer-events-none"
-        :class="{ 'transform rotate-180': showDropdown }"
+        :class="{ 'transform rotate-180': dropdown }"
       />
     </div>
     <div
-      v-if="showDropdown"
+      v-if="dropdown"
       class="dropdown absolute right-0 left-0 z-20 narrow-scrollbar w-48 w-full shadow-8dp overflow-x-hidden overflow-y-auto"
       :class="[background, tight ? 'rounded' : 'rounded-lg']"
     >
@@ -86,14 +89,27 @@ export default {
   },
   data() {
     return {
-      showDropdown: false,
+      dropdown: false,
       down: down
     };
   },
   methods: {
+    hideDropdown() {
+      this.dropdown = false;
+    },
+    showDropdown() {
+      this.dropdown = true;
+    },
+    toggleDropdown() {
+      if (this.dropdown) {
+        this.hideDropdown();
+      } else {
+        this.showDropdown();
+      }
+    },
     updateValue(option) {
       this.$emit('updateSelectedOption', option);
-      this.showDropdown = false;
+      this.hideDropdown();
     }
   }
 };
