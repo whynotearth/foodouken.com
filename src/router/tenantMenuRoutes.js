@@ -1,4 +1,4 @@
-const tenantRoutes = [
+const tenantMenuRoutes = [
   {
     path: '/tenant/menu',
     name: 'Menu',
@@ -79,4 +79,4 @@ const tenantRoutes = [
   }
 ];
 
-module.exports = tenantRoutes;
+module.exports = tenantMenuRoutes;
