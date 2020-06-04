@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="-my-4">
     <div>
       <div
         v-for="(day, index) in days"
@@ -32,8 +32,8 @@ export default {
     return {};
   },
   methods: {
-    dayClicked(e) {
-      console.log(e);
+    dayClicked(day, index) {
+      alert(day, index);
     }
   },
   computed: {

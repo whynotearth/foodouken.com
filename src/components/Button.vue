@@ -20,7 +20,6 @@
       <div class="flex-grow text-center" v-if="title">
         {{ title }}
       </div>
-      <slot v-else></slot>
       <div
         class="text-right"
         :class="[titleRight || title ? 'flex-1' : 'hidden']"
