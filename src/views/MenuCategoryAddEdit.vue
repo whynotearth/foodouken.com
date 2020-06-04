@@ -58,6 +58,13 @@ export default {
       ]
     };
   },
+  beforeDestroy() {
+    this.updateCategory({
+      name: '',
+      image: '',
+      description: ''
+    });
+  },
   computed: {
     ...mapGetters('menu', [
       'getCategoryName',
@@ -91,6 +98,7 @@ export default {
   },
   methods: {
     ...mapMutations('menu', [
+      'updateCategory',
       'updateCategoryName',
       'updateCategoryImage',
       'updateCategoryDescription'
