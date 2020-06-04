@@ -1,10 +1,10 @@
 <template>
   <div class="mx-auto">
-    <BaseAppBarHeader title="Bagels & Bread" :toLink="{ name: 'MenuItemList' }">
-      <template #menu>
+    <BaseAppBarHeader :title="appBar.title" :toLink="appBar.backRoute">
+      <template #menu v-if="appBar.newItem">
         <div class="flex-grow inline-block text-right">
-          <router-link :to="{ name: 'MenuItemsAdd' }" class="relative">
-            <NewItemIcon class="float-right w-5 h-5 cursor-pointer" />
+          <router-link :to="appBar.newItem" class="relative">
+            <NewItemIcon class="float-right w-5 h-5 my-auto cursor-pointer" />
           </router-link>
         </div>
       </template>
@@ -23,6 +23,15 @@ export default {
   components: {
     BaseAppBarHeader,
     NewItemIcon
+  },
+  computed: {
+    appBar() {
+      if (this.$route.meta.appBar) return this.$route.meta.appBar;
+      return {
+        title: 'Navbar',
+        backRoute: { name: 'Home' }
+      };
+    }
   }
 };
 </script>
