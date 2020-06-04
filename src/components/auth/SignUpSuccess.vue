@@ -11,7 +11,8 @@
       </div>
       <div class="py-3">
         <h1 class="tg-h1-mobile text-center text-white text-opacity-84">
-          Congrats on your <br class="md:hidden" /> new site!
+          Congrats on your <br class="md:hidden" />
+          new site!
         </h1>
       </div>
     </div>

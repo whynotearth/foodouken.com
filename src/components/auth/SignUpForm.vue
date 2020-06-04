@@ -2,7 +2,11 @@
   <div class="h-screen flex justify-center items-center">
     <div class="h-full w-full flex flex-col justify-between max-w-sm md:m-auto">
       <div>
-        <checkout-stepper class="clear-margin" :navigation="navigation" :pageS="page" />
+        <checkout-stepper
+          class="clear-margin"
+          :navigation="navigation"
+          :pageS="page"
+        />
         <div class="my-4">
           <transition name="fade" mode="out-in">
             <keep-alive>
@@ -13,7 +17,13 @@
       </div>
       <checkout-nav-bar
         :pageS="page"
-        :nextStepText="`${navigation[page] && page < navigation.length ? 'NEXT STEP' : 'FINISH' } ►`"
+        :nextStepText="
+          `${
+            navigation[page] && page < navigation.length
+              ? 'NEXT STEP'
+              : 'FINISH'
+          } ►`
+        "
         @previousStep="previousStep"
         @nextStep="nextStep"
         class="clear-margin"
@@ -28,8 +38,8 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
   name: 'SignUpForm',
   components: {
-    CheckoutStepper: () => import('./CheckoutStepper'),
-    CheckoutNavBar: () => import('./CheckoutNavBar'),
+    CheckoutStepper: () => import('../forms/CheckoutStepper'),
+    CheckoutNavBar: () => import('../forms/CheckoutNavBar'),
     BusinessInfo: () => import('./BusinessInfo'),
     LinkAccount: () => import('./LinkAccount'),
     Notifications: () => import('./Notifications'),
@@ -61,16 +71,16 @@ export default {
           name: 'Payment Methods'
         }
       ]
-    }
+    };
   },
   mounted() {
     const stepFromUrl = this.$route.params.step;
     const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl);
 
     if (ind > 0) {
-      this.pageChange(ind + 1)
+      this.pageChange(ind + 1);
     } else if (ind < 0) {
-      this.$router.push({name: 'Welcome'})
+      this.$router.push({ name: 'Welcome' });
     }
   },
   computed: {
@@ -84,7 +94,7 @@ export default {
     ...mapActions('auth', ['signUp']),
     previousStep() {
       if (this.page > 1) {
-        this.pageChange(this.page - 1)
+        this.pageChange(this.page - 1);
       }
     },
     nextStep() {
@@ -97,32 +107,33 @@ export default {
 
       if (valid) {
         if (this.page < this.navigation.length) {
-          this.pageChange(this.page + 1)
+          this.pageChange(this.page + 1);
         } else {
           this.register();
         }
       }
     },
     register() {
-      this.signUp().then(data => {
-        console.log(data);
-        // this.$router.push({name: 'SignUpSuccess', params: { slug: 'bang-bang-bakery'}})
-      }).catch(err => {
-        console.log(err);
-      });
+      this.signUp()
+        .then(data => {
+          console.log(data);
+          // this.$router.push({name: 'SignUpSuccess', params: { slug: 'bang-bang-bakery'}})
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   watch: {
     component(step) {
-      this.$router.push({ name: 'SignUp', params: { step } })
-        .catch(() => {})
+      this.$router.push({ name: 'SignUp', params: { step } }).catch(() => {});
     }
   }
 };
 </script>
 
 <style scoped>
-  .clear-margin {
-    @apply m-0 !important;
-  }
+.clear-margin {
+  @apply m-0 !important;
+}
 </style>

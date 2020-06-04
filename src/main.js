@@ -6,9 +6,12 @@ import store from './store';
 import './styles/tailwind.css';
 import Vuelidate from 'vuelidate';
 import VueMeta from 'vue-meta';
+import SmoothPicker from 'vue-smooth-picker';
+import 'vue-smooth-picker/dist/css/style.css';
 
 require('typeface-open-sans');
 
+Vue.use(SmoothPicker);
 Vue.use(Vuelidate);
 Vue.use(VueMeta, {
   // optional pluginOptions

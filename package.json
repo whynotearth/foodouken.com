@@ -16,6 +16,7 @@
     "vue": "^2.6.11",
     "vue-meta": "^2.3.3",
     "vue-router": "^3.1.5",
+    "vue-smooth-picker": "^0.4.2",
     "vuelidate": "^0.7.5",
     "vuex": "^3.1.2"
   },

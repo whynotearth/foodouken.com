@@ -57,8 +57,7 @@ export default {
     TextArea: () => import('@/components/inputs/TextArea.vue')
   },
   data() {
-    return {
-    };
+    return {};
   },
   validations: {
     name: {
@@ -75,7 +74,12 @@ export default {
     description: {}
   },
   computed: {
-    ...mapGetters('auth', ['getName', 'getEmail', 'getPhone', 'getDescription']),
+    ...mapGetters('auth', [
+      'getName',
+      'getEmail',
+      'getPhone',
+      'getDescription'
+    ]),
     name: {
       get() {
         return this.getName;
@@ -107,10 +111,15 @@ export default {
       set(value) {
         this.updateDescription(value);
       }
-    },
+    }
   },
   methods: {
-    ...mapMutations('auth', ['updateName', 'updateEmail', 'updatePhone', 'updateDescription'])
+    ...mapMutations('auth', [
+      'updateName',
+      'updateEmail',
+      'updatePhone',
+      'updateDescription'
+    ])
   }
 };
 </script>

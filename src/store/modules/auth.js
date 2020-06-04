@@ -25,27 +25,31 @@ const paymentMethods = [
 ];
 
 const state = {
-    businessInfo: {
-      name: '',
-      email: '',
-      phone: '',
-      description: '',
+  businessInfo: {
+    name: '',
+    email: '',
+    phone: '',
+    description: ''
+  },
+  selectedNotificationType: [],
+  selectedPaymentMethods: [],
+  businessHours: [
+    {
+      dayOfWeek: 0,
+      isClosed: true,
+      openingTime: null,
+      closingTime: null
     },
-    selectedNotificationType: [],
-    selectedPaymentMethods: [],
-    businessHours: [
-      {
-        dayOfWeek: 0,
-        isClosed: true
-      },
-      {
-        dayOfWeek: 1,
-        isClosed: true
-      },
-    ],
-    page: 1,
-    notificationTypes,
-    paymentMethods
+    {
+      dayOfWeek: 1,
+      isClosed: true,
+      openingTime: null,
+      closingTime: null
+    }
+  ],
+  page: 1,
+  notificationTypes,
+  paymentMethods
 };
 
 const getters = {
@@ -83,17 +87,19 @@ const actions = {
       paymentMethodType: getters.getSelectedPaymentMethods[0],
       companySlug: 'foodouken',
       businessHours: state.businessHours
-    }
+    };
 
     return new Promise((resolve, reject) => {
-      httpClient.post(`/companies/${registerData.companySlug}/tenants`, registerData).then(
-        response => {
-          resolve(response.data);
-        },
-        error => {
-          reject(error);
-        }
-      );
+      httpClient
+        .post(`/companies/${registerData.companySlug}/tenants`, registerData)
+        .then(
+          response => {
+            resolve(response.data);
+          },
+          error => {
+            reject(error);
+          }
+        );
     });
   }
 };
@@ -112,13 +118,13 @@ const mutations = {
     state.businessInfo.description = payload;
   },
   pageChange(state, payload) {
-    state.page = payload
+    state.page = payload;
   },
   updateSelectedNotificationTypes(state, payload) {
-    state.selectedNotificationType = [...payload]
+    state.selectedNotificationType = [...payload];
   },
   updateSelectedPaymentMethods(state, payload) {
-    state.selectedPaymentMethods = [...payload]
+    state.selectedPaymentMethods = [...payload];
   }
 };
 

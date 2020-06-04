@@ -1,7 +1,9 @@
 <template>
   <div class="px-8">
     <div class="py-10">
-      <h4 class="tg-body-mobile text-white text-opacity-84">Link your Facebook or Google account to get started!</h4>
+      <h4 class="tg-body-mobile text-white text-opacity-84">
+        Link your Facebook or Google account to get started!
+      </h4>
     </div>
     <div>
       <div class="py-3">

@@ -14,7 +14,11 @@
       <div class="flex items-center">
         <div
           class="h-5 w-5 border border-white rounded"
-          :class="[showCheckMark ? 'bg-button border-button' : 'border-opacity-38 bg-white bg-opacity-38']"
+          :class="[
+            showCheckMark
+              ? 'bg-button border-button'
+              : 'border-opacity-38 bg-white bg-opacity-38'
+          ]"
         >
           <div
             :class="showCheckMark ? '' : 'invisible'"
@@ -26,7 +30,7 @@
         <div class="mx-4 tg-body-mobile">
           <slot name="label">
             <span class="mx-1 text-white text-opacity-84">
-              {{label}}
+              {{ label }}
             </span>
           </slot>
         </div>
@@ -49,8 +53,7 @@ export default {
     CheckMark
   },
   data() {
-    return {
-    }
+    return {};
   },
   props: {
     value: {},
@@ -62,17 +65,20 @@ export default {
   methods: {
     changeValue(event) {
       if (typeof this.inputModel === 'object') {
-        const newArray = [...this.inputModel]
+        const newArray = [...this.inputModel];
         if (event.target.checked) {
-          newArray.push(event.target.value)
+          newArray.push(event.target.value);
         } else {
-          newArray.splice(newArray.findIndex(val => val === event.target.value), 1)
+          newArray.splice(
+            newArray.findIndex(val => val === event.target.value),
+            1
+          );
         }
         this.$emit('update', [...newArray]);
       } else {
         this.$emit('update', event.target.checked);
       }
-    },
+    }
   },
   computed: {
     /*
@@ -80,8 +86,11 @@ export default {
       If value is not object means it has to be null or boolean return accordingly
     */
     showCheckMark() {
-      return (typeof this.inputModel === 'object' && this.inputModel.includes(String(this.value)))
-        || (typeof this.inputModel !== 'object' && this.inputModel);
+      return (
+        (typeof this.inputModel === 'object' &&
+          this.inputModel.includes(String(this.value))) ||
+        (typeof this.inputModel !== 'object' && this.inputModel)
+      );
     }
   }
 };

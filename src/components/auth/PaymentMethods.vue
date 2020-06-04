@@ -6,8 +6,16 @@
       </h6>
     </div>
     <div>
-      <div class="my-8" v-for="(paymentMethod, key) in paymentMethods" :key="key">
-        <CheckBox v-model="selectedPaymentMethods" :value="paymentMethod.id" :label="paymentMethod.name" />
+      <div
+        class="my-8"
+        v-for="(paymentMethod, key) in paymentMethods"
+        :key="key"
+      >
+        <CheckBox
+          v-model="selectedPaymentMethods"
+          :value="paymentMethod.id"
+          :label="paymentMethod.name"
+        />
       </div>
     </div>
   </div>
@@ -21,8 +29,7 @@ export default {
   name: 'PaymentMethods',
   components: { CheckBox },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapState('auth', ['paymentMethods']),
@@ -32,7 +39,7 @@ export default {
         return this.getSelectedPaymentMethods;
       },
       set(value) {
-        this.updateSelectedPaymentMethods(value)
+        this.updateSelectedPaymentMethods(value);
       }
     }
   },

@@ -8,7 +8,7 @@
 export default {
   name: 'SignUp',
   components: {
-    SignUpForm: () => import('@/components/forms/SignUpForm.vue')
+    SignUpForm: () => import('@/components/auth/SignUpForm.vue')
   }
 };
 </script>

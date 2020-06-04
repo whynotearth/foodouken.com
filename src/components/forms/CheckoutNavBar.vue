@@ -40,9 +40,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('form', [{
-      pageC: 'page'
-    }]),
+    ...mapGetters('form', [
+      {
+        pageC: 'page'
+      }
+    ]),
     page() {
       return this.pageS ? this.pageS : this.pageC;
     }

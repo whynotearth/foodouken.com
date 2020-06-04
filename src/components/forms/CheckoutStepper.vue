@@ -80,16 +80,17 @@ export default {
           }
         }
       }
-      
     },
     pageSubheader(pageNum) {
       return this.navigation[pageNum] ? this.pageHeader(pageNum + 1) : '';
     }
   },
   computed: {
-    ...mapGetters('form', [{
-      pageC: 'page'
-    }]),
+    ...mapGetters('form', [
+      {
+        pageC: 'page'
+      }
+    ]),
     page() {
       return this.pageS ? this.pageS : this.pageC;
     },

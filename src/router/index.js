@@ -56,7 +56,7 @@ const routes = [
   {
     path: '/auth/sign-up/success/:slug',
     name: 'SignUpSuccess',
-    component: () => import('@/components/forms/SignUpSuccess.vue'),
+    component: () => import('@/components/auth/SignUpSuccess.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
