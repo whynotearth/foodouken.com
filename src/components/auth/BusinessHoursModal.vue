@@ -3,7 +3,7 @@
     <div class="absolute w-screen h-screen top-0 left-0 bg-secondary z-50">
       <div>
         <div class="px-4 py-2" @click="$emit('closeModal')">
-          <span>X</span>
+          <span><CloseIcon class="text-white text-opacity-54"/></span>
         </div>
         <div>
           <div
@@ -91,7 +91,8 @@ export default {
   },
   components: {
     TimePicker: () => import('../TimePicker'),
-    Button: () => import('../Button')
+    Button: () => import('../Button'),
+    CloseIcon: () => import('@/assets/close.svg')
   },
   methods: {
     changeIsActive(key) {

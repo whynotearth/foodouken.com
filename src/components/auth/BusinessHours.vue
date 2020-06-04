@@ -26,7 +26,13 @@
             </div>
           </div>
           <div class="w-auto text-right">
-            <span class="text-lg text-white text-opacity-54">></span>
+            <span class="text-lg text-white text-opacity-54">
+              <img
+                class="h-6 w-6"
+                src="../../assets/arrow-forward.png"
+                alt=""
+              />
+            </span>
           </div>
         </div>
       </div>
