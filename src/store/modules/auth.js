@@ -24,6 +24,16 @@ const paymentMethods = [
   }
 ];
 
+const days = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday'
+];
+
 const state = {
   businessInfo: {
     name: '',
@@ -34,18 +44,15 @@ const state = {
   selectedNotificationType: [],
   selectedPaymentMethods: [],
   businessHours: [
-    {
-      dayOfWeek: 0,
-      isClosed: true,
-      openingTime: null,
-      closingTime: null
-    },
-    {
-      dayOfWeek: 1,
-      isClosed: true,
-      openingTime: null,
-      closingTime: null
-    }
+    ...days.map((day, index) => {
+      return {
+        dayOfWeek: index,
+        dayName: day,
+        isClosed: false,
+        openingTime: '08:00 AM',
+        closingTime: '06:00 PM'
+      };
+    })
   ],
   page: 1,
   notificationTypes,
@@ -73,6 +80,9 @@ const getters = {
   },
   getSelectedPaymentMethods(state) {
     return state.selectedPaymentMethods;
+  },
+  getBusinessHours(state) {
+    return state.businessHours;
   }
 };
 
@@ -125,6 +135,9 @@ const mutations = {
   },
   updateSelectedPaymentMethods(state, payload) {
     state.selectedPaymentMethods = [...payload];
+  },
+  updateBusinessHours(state, payload) {
+    state.businessHours = payload;
   }
 };
 

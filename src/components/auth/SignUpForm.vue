@@ -115,13 +115,13 @@ export default {
     },
     register() {
       this.signUp()
-        .then(data => {
-          console.log(data);
-          // this.$router.push({name: 'SignUpSuccess', params: { slug: 'bang-bang-bakery'}})
+        .then(() => {
+          this.$router.push({
+            name: 'SignUpSuccess',
+            params: { slug: 'bang-bang-bakery' }
+          });
         })
-        .catch(err => {
-          console.log(err);
-        });
+        .catch(() => {});
     }
   },
   watch: {

@@ -31,6 +31,12 @@ export default {
     prop: 'value',
     event: 'change'
   },
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     const hoursArr = [];
     for (let i = 1; i <= 12; i++) {
@@ -63,6 +69,19 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    const getTime = [...this.value.split(' ')];
+    const hourMin = [...getTime[0].split(':')];
+    this.hours[0].currentIndex = this.hours[0].list.findIndex(
+      hour => hour === hourMin[0]
+    );
+    this.mins[0].currentIndex = this.mins[0].list.findIndex(
+      min => min === hourMin[1]
+    );
+    this.time[0].currentIndex = this.time[0].list.findIndex(
+      t => t === getTime[1]
+    );
   },
   methods: {
     setTimeToModel() {
