@@ -4,19 +4,14 @@
     @click="$emit('clicked')"
   >
     <div class="flex-shrink-0 h-10 w-10">
-      <img
-        :src="item.images[0]"
-        class="object-cover"
-        draggable="false"
-        alt="item"
-      />
+      <img :src="image" class="object-cover" draggable="false" alt="item" />
     </div>
     <div class="mx-2 w-full flex flex-col truncate z-10">
       <span class="tg-body-mobile text-white text-opacity-95 truncate">
-        {{ item.name }}
+        {{ name }}
       </span>
       <span class="tg-caption-mobile text-gray-500 truncate">
-        ${{ item.price }} - {{ item.category }}
+        <slot name="subHeading" />
       </span>
     </div>
     <div class="my-auto text-right relative text-white text-opacity-54">
@@ -56,13 +51,16 @@ export default {
     };
   },
   props: {
-    item: {
-      type: Object,
-      required: true
-    },
     options: {
       type: Array,
       required: true
+    },
+    name: {
+      type: String,
+      default: 'Item name'
+    },
+    image: {
+      type: String
     }
   },
   methods: {
