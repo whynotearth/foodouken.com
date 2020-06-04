@@ -101,6 +101,65 @@ const state = {
       currency: 'USD'
     }
   ],
+  categoryList: [
+    {
+      id: 17,
+      slug: 'bagels-and-breads',
+      name: 'Bagels and Breads',
+      image:
+        'https://res.cloudinary.com/whynotearth/image/upload/v1585961859/foodouken/bangbangbakerycafe/Categories/bagels-and-breads_wqvwji.png',
+      description: 'Prices per piece.'
+    },
+    {
+      id: 18,
+      slug: 'brunch-and-lunch',
+      name: 'Brunch and Lunch',
+      image:
+        'https://res.cloudinary.com/whynotearth/image/upload/v1585961859/foodouken/bangbangbakerycafe/Categories/brunch-and-lunch_g1c8uj.png',
+      description: 'Prices per piece or of whole loaf.'
+    },
+    {
+      id: 19,
+      slug: 'sandwiches',
+      name: 'Sandwiches',
+      image:
+        'https://res.cloudinary.com/whynotearth/image/upload/v1586084577/foodouken/bangbangbakerycafe/Categories/sandwiches.png',
+      description: ''
+    },
+    {
+      id: 21,
+      slug: 'coffee-and-tea',
+      name: 'Coffee and Tea',
+      image:
+        'https://res.cloudinary.com/whynotearth/image/upload/v1585961859/foodouken/bangbangbakerycafe/Categories/coffee-and-tea_eocvj5.png',
+      description:
+        'Add 0.25 for iced.\r\nMilk options: Regular, Soy, or Almond.'
+    },
+    {
+      id: 16,
+      slug: 'cakes-and-cookies',
+      name: 'Cake and Cookies',
+      image:
+        'https://res.cloudinary.com/whynotearth/image/upload/v1585961859/foodouken/bangbangbakerycafe/Categories/cakes-and-cookies_otf9ir.png',
+      description: null
+    },
+    {
+      id: 20,
+      slug: 'cream-cheese-bagels',
+      name: 'Cream Cheese Bagels',
+      image:
+        'https://res.cloudinary.com/whynotearth/image/upload/v1585961859/foodouken/bangbangbakerycafe/Categories/cream-cheese-bagels_rhih7m.png',
+      description: null
+    },
+    {
+      id: 22,
+      slug: 'other-drinks',
+      name: 'Other Drinks',
+      image:
+        'https://res.cloudinary.com/whynotearth/image/upload/v1585961859/foodouken/bangbangbakerycafe/Categories/other-drinks_bvg8le.png',
+      description: null
+    }
+  ],
   categories: [
     'Bagels & Breads',
     'Cakes & Cookies',
@@ -118,6 +177,11 @@ const state = {
     inventory: '',
     variants: [],
     customisations: []
+  },
+  category: {
+    name: '',
+    description: '',
+    image: ''
   }
 };
 
@@ -132,7 +196,12 @@ const getters = {
   getItemInventory: state => state.item.inventory,
   getItemVariants: state => state.item.variants,
   getItemCustomisations: state => state.item.customisations,
-  getCategories: state => state.categories
+  getCategories: state => state.categories,
+  getCategoryList: state => state.categoryList,
+  getCategory: state => state.category,
+  getCategoryName: state => state.category.name,
+  getCategoryDescription: state => state.category.description,
+  getCategoryImage: state => state.category.image
 };
 
 const actions = {};
@@ -164,6 +233,18 @@ const mutations = {
   },
   updateItemCustomisations(state, payload) {
     state.item.customisations = payload;
+  },
+  updateCategory(state, payload) {
+    state.category = payload;
+  },
+  updateCategoryName(state, payload) {
+    state.category.name = payload;
+  },
+  updateCategoryDescription(state, payload) {
+    state.category.description = payload;
+  },
+  updateCategoryImage(state, payload) {
+    state.category.image = payload;
   }
 };
 
