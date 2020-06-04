@@ -1,8 +1,12 @@
 <template>
-  <div class="text-white text-opacity-54">
+  <div
+    class="mb-4 relative text-white text-opacity-54"
+    v-click-outside="hideDropdown"
+  >
     <div
-      @click="showDropdown = !showDropdown"
-      class="w-full bg-secondary rounded-lg shadow p-5 mb-2 cursor-pointer"
+      @click="toggleDropdown"
+      class="w-full mb-2 rounded shadow cursor-pointer"
+      :class="[background, tight ? 'py-3 px-4 rounded' : 'p-5 rounded-lg']"
     >
       <img
         :src="icon"
@@ -22,17 +26,24 @@
         :src="down"
         alt="down arrow"
         class="inline-block py-3 float-right pointer-events-none"
+        :class="{ 'transform rotate-180': dropdown }"
       />
     </div>
     <div
-      v-if="showDropdown"
-      class="dropdown narrow-scrollbar mt-2 w-48 bg-secondary w-full rounded-lg shadow-xl overflow-x-hidden overflow-y-auto"
+      v-if="dropdown"
+      class="dropdown absolute right-0 left-0 z-20 narrow-scrollbar w-48 w-full shadow-8dp overflow-x-hidden overflow-y-auto"
+      :class="[background, tight ? 'rounded' : 'rounded-lg']"
     >
       <div
-        class="p-5 first:rounded-t-lg last:rounded-b-lg hover:bg-footer cursor-pointer"
         v-for="(option, index) in options"
         :key="index"
-        @click="updateDay(option)"
+        @click="updateValue(option)"
+        class="hover:bg-footer cursor-pointer"
+        :class="
+          tight
+            ? 'p-4 first:rounded-t last:rounded-b'
+            : 'p-5 first:rounded-t-lg last:rounded-b-lg'
+        "
       >
         <slot name="option" :option="option">{{ option }}</slot>
       </div>
@@ -66,18 +77,39 @@ export default {
     placeholder: {
       type: String,
       default: 'Select an option'
+    },
+    background: {
+      type: String,
+      default: 'bg-secondary'
+    },
+    tight: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      showDropdown: false,
+      dropdown: false,
       down: down
     };
   },
   methods: {
-    updateDay(option) {
+    hideDropdown() {
+      this.dropdown = false;
+    },
+    showDropdown() {
+      this.dropdown = true;
+    },
+    toggleDropdown() {
+      if (this.dropdown) {
+        this.hideDropdown();
+      } else {
+        this.showDropdown();
+      }
+    },
+    updateValue(option) {
       this.$emit('updateSelectedOption', option);
-      this.showDropdown = false;
+      this.hideDropdown();
     }
   }
 };

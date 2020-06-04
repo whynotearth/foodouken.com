@@ -3,7 +3,7 @@
     <input
       class="input appearance-none outline-none relative bg-transparent rounded w-full px-4 py-3 border focus:border-2 active:border-2 focus:border-opacity-54 active:border-opacity-54"
       :class="[
-        { filled: value.length > 0 },
+        { filled: value && value.length > 0 },
         error
           ? 'border-red-600 placeholder-red-600'
           : 'border-white border-opacity-38'

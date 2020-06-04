@@ -1,9 +1,7 @@
 <template>
   <div>
     <transition name="fade">
-      <div>
-        <router-view class="max-w-screen-xxl mx-auto min-h-screen" />
-      </div>
+      <router-view class="container mx-auto min-h-screen" />
     </transition>
   </div>
 </template>
