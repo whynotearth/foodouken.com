@@ -29,6 +29,7 @@
       <div
         v-show="menu"
         class="absolute top-0 right-0 mr-6 z-20 tg-body-mobile bg-secondary shadow-8dp rounded-md outline-none"
+        v-click-outside="hideMenu"
       >
         <button
           v-for="(option, index) in options"
