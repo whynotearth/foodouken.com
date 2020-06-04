@@ -1,4 +1,5 @@
-// initial state
+import { httpClient } from '@/services/httpClient';
+
 const notificationTypes = [
   {
     name: 'Text',
@@ -32,13 +33,15 @@ const state = {
     },
     selectedNotificationType: [],
     selectedPaymentMethods: [],
-    businessHouts: [
+    businessHours: [
       {
         dayOfWeek: 0,
-        isClosed: true,
-        openingTime: {},
-        closingTime: {}
-      }
+        isClosed: true
+      },
+      {
+        dayOfWeek: 1,
+        isClosed: true
+      },
     ],
     page: 1,
     notificationTypes,
@@ -70,6 +73,29 @@ const getters = {
 };
 
 const actions = {
+  signUp({ getters, state }) {
+    const registerData = {
+      name: getters.getName,
+      email: getters.getEmail,
+      phone: getters.getPhone,
+      description: getters.getDescription,
+      notificationType: getters.getSelectedNotificationTypes[0],
+      paymentMethodType: getters.getSelectedPaymentMethods[0],
+      companySlug: 'foodouken',
+      businessHours: state.businessHours
+    }
+
+    return new Promise((resolve, reject) => {
+      httpClient.post(`/companies/${registerData.companySlug}/tenants`, registerData).then(
+        response => {
+          resolve(response.data);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+  }
 };
 
 const mutations = {

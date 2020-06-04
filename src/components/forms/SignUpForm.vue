@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   name: 'SignUpForm',
@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     ...mapMutations('auth', ['pageChange']),
+    ...mapActions('auth', ['signUp']),
     previousStep() {
       if (this.page > 1) {
         this.pageChange(this.page - 1)
@@ -103,7 +104,12 @@ export default {
       }
     },
     register() {
-      this.$router.push({name: 'SignUpSuccess', params: { slug: 'bang-bang-bakery'}})
+      this.signUp().then(data => {
+        console.log(data);
+        // this.$router.push({name: 'SignUpSuccess', params: { slug: 'bang-bang-bakery'}})
+      }).catch(err => {
+        console.log(err);
+      });
     }
   },
   watch: {
