@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import tenantRoutes from './tenantRoutes';
 
 Vue.use(VueRouter);
 
@@ -34,31 +35,7 @@ const routes = [
     component: () => import('@/views/Business.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
-  {
-    path: '/tenant/menu',
-    name: 'Menu',
-    component: () => import('@/views/Menu.vue'),
-    children: [
-      {
-        path: 'categories',
-        name: 'MenuCategoryList',
-        component: () => import('@/views/MenuCategoryList.vue'),
-        meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-      },
-      {
-        path: 'items',
-        name: 'MenuItemList',
-        component: () => import('@/views/MenuItemList.vue'),
-        meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-      },
-      {
-        path: 'items/add',
-        name: 'MenuItemsAdd',
-        component: () => import('@/views/MenuItemsAddEdit.vue'),
-        meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-      }
-    ]
-  },
+  ...tenantRoutes,
   {
     path: '/*',
     redirect: '/'
