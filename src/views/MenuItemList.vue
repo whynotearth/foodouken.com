@@ -4,8 +4,10 @@
       v-for="item in getMenuItems"
       :key="item.id"
       :item="item"
-      :options="menuItemOptions(item)"
+      :options="menuItemOptions"
       @clicked="editItem(item)"
+      @sellOutItem="sellOutItem(item)"
+      @deleteItem="deleteItem(item)"
     />
   </div>
 </template>
@@ -19,23 +21,25 @@ export default {
   components: {
     MenuItem
   },
+  data() {
+    return {
+      menuItemOptions: [
+        {
+          name: 'Sell out',
+          action: 'sellOutItem'
+        },
+        {
+          name: 'Delete',
+          action: 'deleteItem'
+        }
+      ]
+    };
+  },
   computed: {
     ...mapGetters('menu', ['getMenuItems'])
   },
   methods: {
     ...mapMutations('menu', ['updateItem']),
-    menuItemOptions(item) {
-      return [
-        {
-          name: 'Sell out',
-          action: () => this.sellOutItem(item)
-        },
-        {
-          name: 'Delete',
-          action: () => this.deleteItem(item)
-        }
-      ];
-    },
     sellOutItem(item) {
       alert(item.name + ' is sold out');
     },
@@ -44,7 +48,7 @@ export default {
     },
     editItem(item) {
       this.updateItem(item);
-      this.$router.push({ name: 'MenuItemsAdd' });
+      this.$router.push({ name: 'MenuItemEdit', params: { item: item.name } });
     }
   }
 };
