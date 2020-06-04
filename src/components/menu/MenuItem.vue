@@ -20,7 +20,9 @@
       </span>
     </div>
     <div class="my-auto text-right relative text-white text-opacity-54 z-20">
-      <More class="cursor-pointer m-4" @click.stop.prevent="toggleMenu" />
+      <div class="w-6 h-6 p-1" @click.stop.prevent="toggleMenu">
+        <More class="m-auto cursor-pointer object-contain" />
+      </div>
       <div
         v-show="menu"
         class="absolute top-0 right-0 mr-6 tg-body-mobile bg-secondary shadow-8dp rounded-md outline-none"
