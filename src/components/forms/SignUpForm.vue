@@ -2,7 +2,7 @@
   <div class="h-screen flex justify-center items-center">
     <div class="h-full w-full flex flex-col justify-between max-w-sm md:m-auto">
       <div>
-        <checkout-stepper class="clear-margin" :navigation="navigation" :page="page" />
+        <checkout-stepper class="clear-margin" :navigation="navigation" :pageS="page" />
         <div class="my-4">
           <transition name="fade" mode="out-in">
             <keep-alive>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <checkout-nav-bar
-        :page="page"
+        :pageS="page"
         :nextStepText="`${navigation[page] && page < navigation.length ? 'NEXT STEP' : 'FINISH' } ►`"
         @previousStep="previousStep"
         @nextStep="nextStep"

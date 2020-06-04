@@ -34,10 +34,18 @@ export default {
     hideNext: {
       type: Boolean,
       default: false
+    },
+    pageS: {
+      type: Number
     }
   },
   computed: {
-    ...mapGetters('form', ['page'])
+    ...mapGetters('form', [{
+      pageC: 'page'
+    }]),
+    page() {
+      return this.pageS ? this.pageS : this.pageC;
+    }
   }
 };
 </script>

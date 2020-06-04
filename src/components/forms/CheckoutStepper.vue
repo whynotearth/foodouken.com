@@ -33,12 +33,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
-
 export default {
   name: 'CheckoutStepper',
   props: {
     navigation: {
       type: Array
+    },
+    pageS: {
+      type: Number
     }
   },
   data() {
@@ -85,7 +87,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('form', ['page']),
+    ...mapGetters('form', [{
+      pageC: 'page'
+    }]),
+    page() {
+      return this.pageS ? this.pageS : this.pageC;
+    },
     circumference() {
       return 2 * Math.PI * this.radius;
     },
