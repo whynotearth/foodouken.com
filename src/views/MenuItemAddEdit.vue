@@ -78,7 +78,7 @@ import Button from '@/components/Button';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
-  name: 'MenuItemsAddEdit',
+  name: 'MenuItemAddEdit',
   components: {
     ImageUpload,
     VariantManager,
