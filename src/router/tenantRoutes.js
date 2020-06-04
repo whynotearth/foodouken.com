@@ -19,7 +19,7 @@ const tenantRoutes = [
       {
         path: 'categories/add',
         name: 'MenuCategoryAdd',
-        component: () => import('@/views/MenuItemAddEdit.vue'),
+        component: () => import('@/views/MenuCategoryAddEdit.vue'),
         meta: {
           appBar: {
             title: 'Add new category',
@@ -30,7 +30,7 @@ const tenantRoutes = [
       {
         path: 'categories/:category/edit',
         name: 'MenuCategoryEdit',
-        component: () => import('@/views/MenuItemAddEdit.vue'),
+        component: () => import('@/views/MenuCategoryAddEdit.vue'),
         meta: {
           appBar: {
             title: 'Edit category',
