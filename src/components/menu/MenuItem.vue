@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-row p-2 relative items-center w-full mx-auto max-w-xs">
+  <div
+    class="flex flex-row p-2 relative items-center w-full mx-auto max-w-xs cursor-pointer"
+    @click="$emit('clicked')"
+  >
     <div class="flex-shrink-0 h-10 w-10">
       <img
         :src="item.images[0]"
@@ -8,7 +11,7 @@
         alt="item"
       />
     </div>
-    <div class="mx-2 w-full flex flex-col truncate">
+    <div class="mx-2 w-full flex flex-col truncate z-10">
       <span class="tg-body-mobile text-white text-opacity-95 truncate">
         {{ item.name }}
       </span>
@@ -16,26 +19,20 @@
         ${{ item.price }} - {{ item.category }}
       </span>
     </div>
-    <div class="flex items-center text-gray-500">
-      <div class="my-auto text-right relative outline-none">
-        <More class="cursor-pointer m-4" @click.stop.prevent="toggleMenu" />
-        <div
-          v-show="menu"
-          class="absolute top-0 right-0 text-left tg-body-mobile text-white text-opacity-54 bg-secondary shadow-8dp rounded-md mr-5 py-2"
+    <div class="my-auto text-right relative text-white text-opacity-54 z-20">
+      <More class="cursor-pointer m-4" @click.stop.prevent="toggleMenu" />
+      <div
+        v-show="menu"
+        class="absolute top-0 right-0 mr-6 tg-body-mobile bg-secondary shadow-8dp rounded-md outline-none"
+      >
+        <button
+          v-for="(option, index) in options"
+          :key="index"
+          class="block w-full text-left p-4 leading-5 hover:text-white hover:bg-footer first:rounded-t-md last:rounded-b-md cursor-pointer"
+          @click.stop.prevent="option.action"
         >
-          <router-link
-            :to="{ name: 'MenuItemsAdd' }"
-            class="block py-2 px-4 leading-5 hover:text-white cursor-pointer"
-          >
-            Edit
-          </router-link>
-          <router-link
-            to="/delete"
-            class="block py-2 px-4 leading-5 hover:text-white cursor-pointer"
-          >
-            Delete
-          </router-link>
-        </div>
+          {{ option.name }}
+        </button>
       </div>
     </div>
   </div>
@@ -55,6 +52,10 @@ export default {
   props: {
     item: {
       type: Object,
+      required: true
+    },
+    options: {
+      type: Array,
       required: true
     }
   },
