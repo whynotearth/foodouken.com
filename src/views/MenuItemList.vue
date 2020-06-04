@@ -27,7 +27,7 @@ export default {
     menuItemOptions(item) {
       return [
         {
-          name: 'Sold out',
+          name: 'Sell out',
           action: () => this.sellOutItem(item)
         },
         {
