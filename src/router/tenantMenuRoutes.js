@@ -3,6 +3,7 @@ const tenantMenuRoutes = [
     path: '/tenant/menu',
     name: 'Menu',
     component: () => import('@/views/Menu.vue'),
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') },
     children: [
       {
         path: 'categories',
