@@ -33,7 +33,7 @@
         <button
           v-for="(option, index) in options"
           :key="index"
-          class="block text-left p-4 leading-5 hover:text-white hover:bg-footer first:rounded-t-md last:rounded-b-md cursor-pointer"
+          class="text-left whitespace-no-wrap w-full p-4 leading-5 hover:text-white hover:bg-footer first:rounded-t-md last:rounded-b-md cursor-pointer"
           @click.stop.prevent="option.action"
         >
           {{ option.name }}
