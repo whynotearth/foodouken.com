@@ -138,6 +138,9 @@ const getters = {
 const actions = {};
 
 const mutations = {
+  updateItem(state, payload) {
+    state.item = payload;
+  },
   updateItemName(state, payload) {
     state.item.name = payload;
   },
