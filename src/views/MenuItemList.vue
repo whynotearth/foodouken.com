@@ -3,12 +3,15 @@
     <MenuItem
       v-for="item in getMenuItems"
       :key="item.id"
-      :item="item"
+      :name="item.name"
+      :image="item.images[0]"
       :options="menuItemOptions"
       @clicked="editItem(item)"
       @sellOutItem="sellOutItem(item)"
       @deleteItem="deleteItem(item)"
-    />
+    >
+      <template #subHeading> ${{ item.price }} - {{ item.category }} </template>
+    </MenuItem>
   </div>
 </template>
 
