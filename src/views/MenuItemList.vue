@@ -37,10 +37,10 @@ export default {
       ];
     },
     sellOutItem(item) {
-      console.log(item.name, 'is sold out');
+      alert(item.name + ' is sold out');
     },
     deleteItem(item) {
-      console.log(item.name, 'is deleted');
+      alert(item.name + ' is deleted');
     },
     editItem(item) {
       this.updateItem(item);
