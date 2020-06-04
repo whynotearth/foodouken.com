@@ -19,18 +19,21 @@
         ${{ item.price }} - {{ item.category }}
       </span>
     </div>
-    <div class="my-auto text-right relative text-white text-opacity-54 z-20">
-      <div class="w-6 h-6 p-1" @click.stop.prevent="toggleMenu">
+    <div class="my-auto text-right relative text-white text-opacity-54">
+      <div
+        class="w-8 h-8 p-2 rounded-full cursor-pointer hover:bg-white hover:bg-opacity-04"
+        @click.stop.prevent="toggleMenu"
+      >
         <More class="m-auto cursor-pointer object-contain" />
       </div>
       <div
         v-show="menu"
-        class="absolute top-0 right-0 mr-6 tg-body-mobile bg-secondary shadow-8dp rounded-md outline-none"
+        class="absolute top-0 right-0 mr-6 z-20 tg-body-mobile bg-secondary shadow-8dp rounded-md outline-none"
       >
         <button
           v-for="(option, index) in options"
           :key="index"
-          class="block w-full text-left p-4 leading-5 hover:text-white hover:bg-footer first:rounded-t-md last:rounded-b-md cursor-pointer"
+          class="block text-left p-4 leading-5 hover:text-white hover:bg-footer first:rounded-t-md last:rounded-b-md cursor-pointer"
           @click.stop.prevent="option.action"
         >
           {{ option.name }}
