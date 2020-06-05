@@ -1,7 +1,6 @@
 <template>
   <label class="cursor-pointer">
     <input
-      :id="_uid"
       class="hidden"
       type="checkbox"
       v-bind="$attrs"
@@ -56,8 +55,12 @@ export default {
     return {};
   },
   props: {
-    value: {},
-    inputModel: {},
+    value: {
+      type: [String, Number]
+    },
+    inputModel: {
+      type: [Object, String, Number]
+    },
     label: {
       type: String
     }
