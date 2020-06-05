@@ -53,8 +53,8 @@ const state = {
       return {
         dayOfWeek: day.toLocaleLowerCase(),
         isClosed: false,
-        openingTime: '08:00 AM',
-        closingTime: '06:00 PM'
+        openingTime: '08:00:00',
+        closingTime: '18:00:00'
       };
     })
   ],

@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { timeFormat, extractTimeFrom24H } from '@/helpers.js';
+
 export default {
   name: 'TimePicker',
   model: {
@@ -62,16 +64,17 @@ export default {
   created() {
     this.hours[0].list = this.setHours();
     this.mins[0].list = this.setMins();
-    const getTime = [...this.value.split(' ')];
-    const hourMin = [...getTime[0].split(':')];
+
+    const { hour: getHour, min: getMin, postfix } = this.extractTimeFrom24H(this.value);
+
     this.hours[0].currentIndex = this.hours[0].list.findIndex(
-      hour => hour === hourMin[0]
+      hour => hour === getHour
     );
     this.mins[0].currentIndex = this.mins[0].list.findIndex(
-      min => min === hourMin[1]
+      min => min === getMin
     );
     this.time[0].currentIndex = this.time[0].list.findIndex(
-      t => t === getTime[1]
+      t => t === postfix
     );
   },
   methods: {
@@ -81,8 +84,11 @@ export default {
       const timePicker = this.$refs.timePickerTime.getCurrentIndexList();
       const hour = this.hours[0].list[hourPicker];
       const min = this.mins[0].list[minPicker];
-      const time = this.time[0].list[timePicker];
-      return `${hour}:${min} ${time}`;
+      const postfix = this.time[0].list[timePicker];
+
+      const time = `${hour}:${min} ${postfix}`;
+      
+      return this.timeFormat(time, '24h');
     },
     dataChange() {
       const time = this.setTimeToModel();
@@ -101,7 +107,9 @@ export default {
         minsArr.push(i < 10 ? `0${i}` : i);
       }
       return minsArr;
-    }
+    },
+    timeFormat,
+    extractTimeFrom24H
   }
 };
 </script>

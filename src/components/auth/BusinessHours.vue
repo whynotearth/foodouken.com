@@ -17,11 +17,8 @@
             </div>
             <div class="pl-6">
               <h6 class="tg-body-mobile text-white text-opacity-54">
-                {{
-                  day.isClosed
-                    ? 'Closed'
-                    : `${day.openingTime} - ${day.closingTime}`
-                }}
+                <span v-if="day.isClosed">Closed</span>
+                <span v-else>{{day.openingTime | timeFormat}} - {{day.closingTime | timeFormat}}</span>
               </h6>
             </div>
           </div>
@@ -43,6 +40,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
+import { timeFormat } from '@/helpers.js'
 import BusinessHoursModal from './BusinessHoursModal';
 import arrowForward from '@/assets/arrow-forward.png';
 
@@ -76,6 +74,9 @@ export default {
         this.updateBusinessHours(value);
       }
     }
+  },
+  filters: {
+    timeFormat
   }
 };
 </script>
