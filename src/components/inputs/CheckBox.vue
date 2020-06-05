@@ -53,10 +53,10 @@ export default {
   },
   props: {
     value: {
-      type: [String, Number]
+      type: [String, Number, Boolean]
     },
     inputModel: {
-      type: [Object, String, Number]
+      type: [Array, Object, Boolean]
     },
     label: {
       type: String
