@@ -1,71 +1,77 @@
 <template>
   <div class="time-picker-modal" v-if="selectedDay">
     <div class="absolute w-screen h-screen top-0 left-0 bg-secondary z-50">
-      <div>
-        <div class="px-4 py-2" @click="$emit('closeModal')">
-          <span><CloseIcon class="text-white text-opacity-54"/></span>
-        </div>
-        <div>
-          <div
-            class="flex justify-between items-center border-b border-white border-opacity-12 px-4 pb-4"
-          >
-            <div class="tg-body-mobile text-white text-opacity-84">
-              <h6>
-                We are {{ isOpen ? 'open' : 'closed' }} on
-                {{ selectedDay.dayName }}
-              </h6>
+      <div class="md:flex justify-center items-center h-full">
+        <div class="modal-size">
+          <div class="w-full">
+            <div class="px-4 py-2" @click="$emit('closeModal')">
+              <span><CloseIcon class="text-white text-opacity-54"/></span>
             </div>
-            <div @click="isOpen = !isOpen">
-              <div v-if="isOpen">Open</div>
-              <div v-else>Close</div>
-            </div>
-          </div>
-        </div>
-        <div v-if="isOpen">
-          <div>
-            <div class="grid grid-cols-2 shadow-lg text-white">
+            <div>
               <div
-                class="col-span-1 text-center py-4 text-white"
-                :class="
-                  isActive === 'open'
-                    ? 'border-b-3 border-button text-opacity-84'
-                    : ' text-opacity-54'
-                "
-                @click="changeIsActive('open')"
+                class="flex justify-between items-center border-b border-white border-opacity-12 px-4 pb-4"
               >
-                Open
-              </div>
-              <div
-                class="col-span-1 text-center py-4 text-white"
-                :class="
-                  isActive === 'close'
-                    ? 'border-b-3 border-button text-opacity-84'
-                    : ' text-opacity-54'
-                "
-                @click="changeIsActive('close')"
-              >
-                Close
+                <div class="tg-body-mobile text-white text-opacity-84">
+                  <h6>
+                    We are {{ isOpen ? 'open' : 'closed' }} on
+                    {{ selectedDay.dayName }}
+                  </h6>
+                </div>
+                <div>
+                  <ToggleSwitch
+                    :value="isOpen"
+                    @toggleSwitch="isOpen = !isOpen"
+                  />
+                </div>
               </div>
             </div>
-            <div class="px-12 py-20">
-              <TimePicker
-                key="open"
-                v-if="isActive === 'open'"
-                v-model="openingTime"
-              />
-              <TimePicker
-                key="close"
-                v-if="isActive === 'close'"
-                v-model="closingTime"
-              />
+            <div v-if="isOpen">
+              <div>
+                <div class="grid grid-cols-2 shadow-lg text-white">
+                  <div
+                    class="col-span-1 text-center py-4 text-white"
+                    :class="
+                      isActive === 'open'
+                        ? 'border-b-3 border-button text-opacity-84'
+                        : ' text-opacity-54'
+                    "
+                    @click="changeIsActive('open')"
+                  >
+                    Open
+                  </div>
+                  <div
+                    class="col-span-1 text-center py-4 text-white"
+                    :class="
+                      isActive === 'close'
+                        ? 'border-b-3 border-button text-opacity-84'
+                        : ' text-opacity-54'
+                    "
+                    @click="changeIsActive('close')"
+                  >
+                    Close
+                  </div>
+                </div>
+                <div class="px-12 py-20">
+                  <TimePicker
+                    key="open"
+                    v-if="isActive === 'open'"
+                    v-model="openingTime"
+                  />
+                  <TimePicker
+                    key="close"
+                    v-if="isActive === 'close'"
+                    v-model="closingTime"
+                  />
+                </div>
+              </div>
+              <div class="px-4 my-4">
+                <Button
+                  @clicked="saveHours"
+                  class="tg-color-label-mobile rounded-full"
+                  :title="`Save ${selectedDay.dayName} Hours`"
+                />
+              </div>
             </div>
-          </div>
-          <div class="px-4 my-4">
-            <Button
-              @clicked="saveHours"
-              class="tg-color-label-mobile rounded-full"
-              :title="`Save ${selectedDay.dayName} Hours`"
-            />
           </div>
         </div>
       </div>
@@ -92,7 +98,8 @@ export default {
   components: {
     TimePicker: () => import('../TimePicker'),
     Button: () => import('../Button'),
-    CloseIcon: () => import('@/assets/close.svg')
+    CloseIcon: () => import('@/assets/close.svg'),
+    ToggleSwitch: () => import('@/components/inputs/BaseToggleSwitch')
   },
   methods: {
     changeIsActive(key) {
@@ -134,5 +141,12 @@ export default {
 .border-b-3 {
   border-bottom-width: 3px;
   border-bottom-style: solid;
-}</style
->>
+}
+
+@media (min-width: 640px) {
+  .modal-size {
+    width: 32rem;
+    height: 600px;
+  }
+}
+</style>
