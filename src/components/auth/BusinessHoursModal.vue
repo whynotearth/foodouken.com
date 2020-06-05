@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import TimePicker from '../TimePicker';
+import TimePicker from '@/components/TimePicker,vue';
 import Button from '@/components/Button.vue';
 import CloseIcon from  '@/assets/close.svg';
 import ToggleSwitch from  '@/components/inputs/BaseToggleSwitch';
