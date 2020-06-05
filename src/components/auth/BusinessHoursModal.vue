@@ -1,7 +1,7 @@
 <template>
   <div class="time-picker-modal" v-if="selectedDay">
     <div class="absolute w-screen h-screen top-0 left-0 bg-secondary z-50">
-      <div class="md:flex justify-center items-center h-full">
+      <div class="sm:flex justify-center items-center h-full">
         <div class="modal-size">
           <div class="w-full">
             <div class="px-4 py-2" @click="$emit('closeModal')">
@@ -145,7 +145,7 @@ export default {
 
 @media (min-width: 640px) {
   .modal-size {
-    width: 32rem;
+    width: 560px;
     height: 600px;
   }
 }

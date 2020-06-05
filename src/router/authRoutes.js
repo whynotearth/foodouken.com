@@ -1,4 +1,4 @@
-const authRoutes = [
+export const authRoutes = [
   {
     path: '/welcome',
     name: 'Welcome',
@@ -23,7 +23,5 @@ const authRoutes = [
     name: 'SignUpSuccess',
     component: () => import('@/components/auth/SignUpSuccess.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
+  }
 ];
-
-module.exports = authRoutes;
