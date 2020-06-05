@@ -24,8 +24,6 @@ export function extractTimeFrom24H(time) {
 }
 
 export function extractTimeFrom12H(time) {
-  console.log(time);
-  
   const [formattedTime, postfix] = time.split(' ');
   let [hour, min] = formattedTime.split(':');
   hour = postfix === 'PM' ? `${Number(hour) + 12}` : `${hour}`;
