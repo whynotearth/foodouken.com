@@ -40,10 +40,12 @@
 </template>
 
 <script>
+import Button from '@/components/Button.vue';
+
 export default {
   name: 'Welcome',
   components: {
-    Button: () => import('@/components/Button.vue')
+    Button
   }
 };
 </script>

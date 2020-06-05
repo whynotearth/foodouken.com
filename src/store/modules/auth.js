@@ -4,23 +4,28 @@ const notificationTypes = [
   {
     name: 'Text',
     key: 'phone',
-    id: 1
+    id: 'text'
+  },
+  {
+    name: 'Whatsapp',
+    key: 'phone',
+    id: 'whatsapp'
   },
   {
     name: 'Email',
     key: 'email',
-    id: 2
+    id: 'email'
   }
 ];
 
 const paymentMethods = [
   {
     name: 'Cash',
-    id: 1
+    id: 'cash'
   },
   {
     name: 'ABA Bank Transfer',
-    id: 2
+    id: 'abaBankTransfer'
   }
 ];
 
@@ -44,10 +49,9 @@ const state = {
   selectedNotificationType: [],
   selectedPaymentMethods: [],
   businessHours: [
-    ...days.map((day, index) => {
+    ...days.map(day => {
       return {
-        dayOfWeek: index,
-        dayName: day,
+        dayOfWeek: day.toLocaleLowerCase(),
         isClosed: false,
         openingTime: '08:00 AM',
         closingTime: '06:00 PM'
@@ -93,8 +97,8 @@ const actions = {
       email: getters.getEmail,
       phone: getters.getPhone,
       description: getters.getDescription,
-      notificationType: getters.getSelectedNotificationTypes[0],
-      paymentMethodType: getters.getSelectedPaymentMethods[0],
+      notificationType: getters.getSelectedNotificationTypes,
+      paymentMethodType: getters.getSelectedPaymentMethods,
       companySlug: 'foodouken',
       businessHours: state.businessHours
     };

@@ -49,12 +49,14 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
+import MaterialInput from '@/components/inputs/MaterialInput';
+import TextArea from '@/components/inputs/TextArea.vue';
 
 export default {
   name: 'BusinessInfo',
   components: {
-    MaterialInput: () => import('@/components/inputs/MaterialInput'),
-    TextArea: () => import('@/components/inputs/TextArea.vue')
+    MaterialInput,
+    TextArea
   },
   data() {
     return {};

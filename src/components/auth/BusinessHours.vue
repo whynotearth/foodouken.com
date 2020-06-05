@@ -11,8 +11,8 @@
         >
           <div class="w-full flex">
             <div class="w-1/4">
-              <h6 class="tg-body-mobile text-white text-opacity-84">
-                {{ day.dayName }}
+              <h6 class="tg-body-mobile capitalize text-white text-opacity-84">
+                {{ day.dayOfWeek }}
               </h6>
             </div>
             <div class="pl-6">
@@ -47,10 +47,12 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
+import BusinessHoursModal from './BusinessHoursModal';
+
 export default {
   name: 'BusinessHours',
   components: {
-    BusinessHoursModal: () => import('./BusinessHoursModal')
+    BusinessHoursModal
   },
   data() {
     return {

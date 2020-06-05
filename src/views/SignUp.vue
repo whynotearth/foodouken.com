@@ -5,10 +5,12 @@
 </template>
 
 <script>
+import SignUpForm from '@/components/auth/SignUpForm.vue';
+
 export default {
   name: 'SignUp',
   components: {
-    SignUpForm: () => import('@/components/auth/SignUpForm.vue')
+    SignUpForm
   }
 };
 </script>

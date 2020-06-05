@@ -34,18 +34,24 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
+import CheckoutStepper from '../forms/CheckoutStepper';
+import CheckoutNavBar from '../forms/CheckoutNavBar';
+import BusinessInfo from './BusinessInfo';
+import LinkAccount from './LinkAccount';
+import Notifications from './Notifications';
+import BusinessHours from './BusinessHours';
+import PaymentMethods from './PaymentMethods'
 
 export default {
   name: 'SignUpForm',
   components: {
-    CheckoutStepper: () => import('../forms/CheckoutStepper'),
-    CheckoutNavBar: () => import('../forms/CheckoutNavBar'),
-    BusinessInfo: () => import('./BusinessInfo'),
-    LinkAccount: () => import('./LinkAccount'),
-    Notifications: () => import('./Notifications'),
-    BusinessHours: () => import('./BusinessHours'),
-    PaymentMethods: () => import('./PaymentMethods'),
-    SignUpSuccess: () => import('./SignUpSuccess')
+    CheckoutStepper,
+    CheckoutNavBar,
+    BusinessInfo,
+    LinkAccount,
+    Notifications,
+    BusinessHours,
+    PaymentMethods
   },
   data() {
     return {

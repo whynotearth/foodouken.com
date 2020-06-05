@@ -43,10 +43,12 @@
 </template>
 
 <script>
+import Button from '@/components/Button.vue';
+
 export default {
   name: 'SignUpSuccesss',
   components: {
-    Button: () => import('@/components/Button.vue')
+    Button
   },
   computed: {
     url() {

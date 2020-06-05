@@ -14,7 +14,7 @@
                 <div class="tg-body-mobile text-white text-opacity-84">
                   <h6>
                     We are {{ isOpen ? 'open' : 'closed' }} on
-                    {{ selectedDay.dayName }}
+                    <span class="capitalize">{{ selectedDay.dayOfWeek }}</span>
                   </h6>
                 </div>
                 <div>
@@ -68,7 +68,7 @@
                 <Button
                   @clicked="saveHours"
                   class="tg-color-label-mobile rounded-full"
-                  :title="`Save ${selectedDay.dayName} Hours`"
+                  :title="`Save ${selectedDay.dayOfWeek} Hours`"
                 />
               </div>
             </div>
@@ -80,6 +80,11 @@
 </template>
 
 <script>
+import TimePicker from '../TimePicker';
+import Button from '@/components/Button.vue';
+import CloseIcon from  '@/assets/close.svg';
+import ToggleSwitch from  '@/components/inputs/BaseToggleSwitch';
+
 export default {
   name: 'BusinessHoursModal',
   props: {
@@ -96,10 +101,10 @@ export default {
     };
   },
   components: {
-    TimePicker: () => import('../TimePicker'),
-    Button: () => import('../Button'),
-    CloseIcon: () => import('@/assets/close.svg'),
-    ToggleSwitch: () => import('@/components/inputs/BaseToggleSwitch')
+    TimePicker,
+    Button,
+    CloseIcon,
+    ToggleSwitch
   },
   methods: {
     changeIsActive(key) {
