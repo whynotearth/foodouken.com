@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import tenantMenuRoutes from './tenantMenuRoutes';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,7 @@ const routes = [
     component: () => import('@/views/Business.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
+  ...tenantMenuRoutes,
   {
     path: '/*',
     redirect: '/'
