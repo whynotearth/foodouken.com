@@ -1,6 +1,6 @@
 <template>
   <div class="example-page">
-    <div class="flex items-center">
+    <div class="flex items-center tg-h3-mobile">
       <smooth-picker
         class="w-full mx-4"
         ref="timePickerHour"
@@ -38,39 +38,30 @@ export default {
     }
   },
   data() {
-    const hoursArr = [];
-    for (let i = 1; i <= 12; i++) {
-      hoursArr.push(i < 10 ? `0${i}` : i);
-    }
-    const minsArr = [];
-    for (let i = 0; i < 60; i += 5) {
-      minsArr.push(i < 10 ? `0${i}` : i);
-    }
     return {
       hours: [
         {
           currentIndex: 7,
-          list: hoursArr,
-          className: 'tg-h3-mobile'
+          list: this.hoursArr
         }
       ],
       mins: [
         {
           currentIndex: 0,
-          list: minsArr,
-          className: 'tg-h3-mobile'
+          list: this.minsArr
         }
       ],
       time: [
         {
           currentIndex: 0,
-          list: ['AM', 'PM'],
-          className: 'tg-h3-mobile'
+          list: ['AM', 'PM']
         }
       ]
     };
   },
   created() {
+    this.hours[0].list = this.setHours();
+    this.mins[0].list = this.setMins();
     const getTime = [...this.value.split(' ')];
     const hourMin = [...getTime[0].split(':')];
     this.hours[0].currentIndex = this.hours[0].list.findIndex(
@@ -96,6 +87,20 @@ export default {
     dataChange() {
       const time = this.setTimeToModel();
       this.$emit('change', time);
+    },
+    setHours() {
+      const hoursArr = [];
+      for (let i = 1; i <= 12; i++) {
+        hoursArr.push(i < 10 ? `0${i}` : i);
+      }
+      return hoursArr;
+    },
+    setMins() {
+      const minsArr = [];
+      for (let i = 0; i < 60; i += 5) {
+        minsArr.push(i < 10 ? `0${i}` : i);
+      }
+      return minsArr;
     }
   }
 };
