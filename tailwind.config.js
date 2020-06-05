@@ -16,7 +16,9 @@ module.exports = {
       },
       spacing: {
         '0.5': '0.125rem',
-        '1.5': '0.375rem'
+        '1.5': '0.375rem',
+        '128': '32rem',
+        '160': '40rem'
       },
       fontFamily: {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans]
