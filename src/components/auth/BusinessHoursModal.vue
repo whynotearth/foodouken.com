@@ -1,5 +1,5 @@
 <template>
-  <div class="time-picker-modal" v-if="selectedDay">
+  <div class="time-picker-modal" v-if="selectedDayOption">
     <div class="absolute w-screen h-screen top-0 left-0 bg-secondary z-50">
       <div class="sm:flex justify-center items-center h-full">
         <div class="modal-size">
@@ -13,19 +13,19 @@
               >
                 <div class="tg-body-mobile text-white text-opacity-84">
                   <h6>
-                    We are {{ isOpen ? 'open' : 'closed' }} on
-                    <span class="capitalize">{{ selectedDay.dayOfWeek }}</span>
+                    We are {{ !selectedDayOption.isClosed ? 'open' : 'closed' }} on
+                    <span class="capitalize">{{ selectedDayOption.dayOfWeek }}</span>
                   </h6>
                 </div>
                 <div>
                   <ToggleSwitch
-                    :value="isOpen"
-                    @toggleSwitch="isOpen = !isOpen"
+                    :value="!isClosed"
+                    @toggleSwitch="isClosed = !isClosed"
                   />
                 </div>
               </div>
             </div>
-            <div v-if="isOpen">
+            <div v-if="!selectedDayOption.isClosed">
               <div>
                 <div class="grid grid-cols-2 shadow-lg text-white">
                   <div
@@ -55,12 +55,12 @@
                   <TimePicker
                     key="open"
                     v-if="isActive === 'open'"
-                    v-model="openingTime"
+                    v-model="selectedDayOption.openingTime"
                   />
                   <TimePicker
                     key="close"
                     v-if="isActive === 'close'"
-                    v-model="closingTime"
+                    v-model="selectedDayOption.closingTime"
                   />
                 </div>
               </div>
@@ -68,7 +68,7 @@
                 <Button
                   @clicked="saveHours"
                   class="tg-color-label-mobile rounded-full"
-                  :title="`Save ${selectedDay.dayOfWeek} Hours`"
+                  :title="`Save ${selectedDayOption.dayOfWeek} Hours`"
                 />
               </div>
             </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import TimePicker from '@/components/TimePicker,vue';
+import TimePicker from '@/components/TimePicker.vue';
 import Button from '@/components/Button.vue';
 import CloseIcon from  '@/assets/close.svg';
 import ToggleSwitch from  '@/components/inputs/BaseToggleSwitch';
@@ -94,9 +94,6 @@ export default {
   },
   data() {
     return {
-      isOpen: true,
-      openingTime: null,
-      closingTime: null,
       isActive: 'open'
     };
   },
@@ -113,30 +110,28 @@ export default {
     async saveHours() {
       await this.$emit('update:selectedDay', {
         ...this.selectedDay,
-        openingTime: this.openingTime,
-        closingTime: this.closingTime
+        openingTime: this.selectedDayOption.openingTime,
+        closingTime: this.selectedDayOption.closingTime
       });
       this.$emit('closeModal');
     }
   },
-  watch: {
-    selectedDay: {
-      immediate: true,
-      handler(val) {
-        if (val) {
-          this.isOpen = !val.isClosed;
-          if (this.isOpen) {
-            this.openingTime = val.openingTime;
-            this.closingTime = val.closingTime;
-          }
-        }
+  computed: {
+    selectedDayOption: {
+      get() {
+        return this.selectedDay ? { ...this.selectedDay } : null;
       }
     },
-    isOpen(value) {
-      this.$emit('update:selectedDay', {
-        ...this.selectedDay,
-        isClosed: !value
-      });
+    isClosed: {
+      get() {
+        return this.selectedDay ? this.selectedDay.isClosed : null;
+      },
+      set(value) {
+        this.$emit('update:selectedDay', {
+          ...this.selectedDay,
+          isClosed: value
+        });
+      }
     }
   }
 };
