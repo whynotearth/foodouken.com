@@ -27,11 +27,7 @@
           </div>
           <div class="w-auto text-right">
             <span class="text-lg text-white text-opacity-54">
-              <img
-                class="h-6 w-6"
-                src="../../assets/arrow-forward.png"
-                alt=""
-              />
+              <img class="h-6 w-6" alt="arrow-forward" :src="arrowForward" />
             </span>
           </div>
         </div>
@@ -48,6 +44,7 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex';
 import BusinessHoursModal from './BusinessHoursModal';
+import arrowForward from '@/assets/arrow-forward.png';
 
 export default {
   name: 'BusinessHours',
@@ -56,7 +53,8 @@ export default {
   },
   data() {
     return {
-      selectedIndex: null
+      selectedIndex: null,
+      arrowForward
     };
   },
   methods: {
