@@ -5,8 +5,7 @@
         id="toggle"
         type="checkbox"
         class="hidden"
-        v-model="value"
-        @click="toggleCheckbox"
+        v-model="inputValue"
       />
       <div
         class="toggle-line w-10 h-4 bg-gray-400 rounded-full shadow-inner"
@@ -21,14 +20,23 @@
 <script>
 export default {
   name: 'BaseToggleSwitch',
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     value: {
       type: Boolean
     }
   },
-  methods: {
-    toggleCheckbox() {
-      this.$emit('toggleSwitch');
+  computed: {
+    inputValue: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit('change', value);
+      }
     }
   }
 };
