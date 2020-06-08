@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     updateValue(event) {
-      if (this.inputModel instanceof Array) {
+      if (Array.isArray(this.inputModel)) {
         const newArray = [...this.inputModel]
         
         if (event.target.checked) {
@@ -82,7 +82,7 @@ export default {
   },
   computed: {
     isChecked() {
-      if (this.inputModel instanceof Array) {
+      if (Array.isArray(this.inputModel)) {
         return this.inputModel.includes(String(this.value));
       }
       return this.inputModel;
