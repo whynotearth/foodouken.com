@@ -13,8 +13,11 @@
               >
                 <div class="tg-body-mobile text-white text-opacity-84">
                   <h6>
-                    We are {{ !selectedDayOption.isClosed ? 'open' : 'closed' }} on
-                    <span class="capitalize">{{ selectedDayOption.dayOfWeek }}</span>
+                    We are
+                    {{ !selectedDayOption.isClosed ? 'open' : 'closed' }} on
+                    <span class="capitalize">{{
+                      selectedDayOption.dayOfWeek
+                    }}</span>
                   </h6>
                 </div>
                 <div>
@@ -82,8 +85,8 @@
 <script>
 import TimePicker from '@/components/TimePicker.vue';
 import Button from '@/components/Button.vue';
-import CloseIcon from  '@/assets/close.svg';
-import ToggleSwitch from  '@/components/inputs/BaseToggleSwitch';
+import CloseIcon from '@/assets/close.svg';
+import ToggleSwitch from '@/components/inputs/BaseToggleSwitch';
 
 export default {
   name: 'BusinessHoursModal',

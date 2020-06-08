@@ -5,8 +5,8 @@
         <img
           height="150"
           width="75"
-          src="../assets/foodouken.png"
-          alt="foodokuen"
+          :src="foodoukenLogo"
+          alt="foodokuen-logo"
         />
       </div>
       <div class="py-3">
@@ -23,11 +23,7 @@
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 md:px-5"
         >
           <template #icon>
-            <img
-              class="md:mr-5"
-              src="https://user-images.githubusercontent.com/5694308/81395429-d1683c00-914d-11ea-914e-da163fce66d8.png"
-              alt="facebook-icon"
-            />
+            <img class="md:mr-5" :src="facebookLogo" alt="facebook-icon" />
           </template>
         </Button>
       </div>
@@ -37,11 +33,7 @@
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 md:px-5"
         >
           <template #icon>
-            <img
-              class="md:mr-5"
-              src="https://user-images.githubusercontent.com/5694308/81395448-d9c07700-914d-11ea-8abf-c19185bb47ca.png"
-              alt="google-icon"
-            />
+            <img class="md:mr-5" :src="googleLogo" alt="google-icon" />
           </template>
         </Button>
       </div>
@@ -51,11 +43,21 @@
 
 <script>
 import Button from '@/components/Button.vue';
+import foodoukenLogo from '@/assets/foodouken.png';
+import facebookLogo from '@/assets/facebook2.png';
+import googleLogo from '@/assets/google.png';
 
 export default {
   name: 'LogIn',
   components: {
     Button
+  },
+  data() {
+    return {
+      foodoukenLogo,
+      facebookLogo,
+      googleLogo
+    };
   }
 };
 </script>

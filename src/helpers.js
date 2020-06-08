@@ -4,13 +4,13 @@ export function randomId() {
     .substr(2);
 }
 
-export function timeFormat(time, format='12h') {
+export function timeFormat(time, format = '12h') {
   if (format === '12h') {
     const { hour, min, postfix } = extractTimeFrom24H(time);
     return `${hour}:${min} ${postfix}`;
   } else if (format === '24h') {
     const { hour, min, sec } = extractTimeFrom12H(time);
-    return `${hour}:${min}:${sec}`
+    return `${hour}:${min}:${sec}`;
   }
 }
 

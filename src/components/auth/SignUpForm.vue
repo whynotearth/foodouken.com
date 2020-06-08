@@ -40,7 +40,7 @@ import BusinessInfo from './BusinessInfo';
 import LinkAccount from './LinkAccount';
 import Notifications from './Notifications';
 import BusinessHours from './BusinessHours';
-import PaymentMethods from './PaymentMethods'
+import PaymentMethods from './PaymentMethods';
 
 export default {
   name: 'SignUpForm',

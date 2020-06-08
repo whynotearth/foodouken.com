@@ -65,7 +65,9 @@ export default {
     this.hours[0].list = this.setHours();
     this.mins[0].list = this.setMins();
 
-    const { hour: getHour, min: getMin, postfix } = this.extractTimeFrom24H(this.value);
+    const { hour: getHour, min: getMin, postfix } = this.extractTimeFrom24H(
+      this.value
+    );
 
     this.hours[0].currentIndex = this.hours[0].list.findIndex(
       hour => hour === getHour
@@ -73,9 +75,7 @@ export default {
     this.mins[0].currentIndex = this.mins[0].list.findIndex(
       min => min === getMin
     );
-    this.time[0].currentIndex = this.time[0].list.findIndex(
-      t => t === postfix
-    );
+    this.time[0].currentIndex = this.time[0].list.findIndex(t => t === postfix);
   },
   methods: {
     setTimeToModel() {
@@ -87,7 +87,7 @@ export default {
       const postfix = this.time[0].list[timePicker];
 
       const time = `${hour}:${min} ${postfix}`;
-      
+
       return this.timeFormat(time, '24h');
     },
     dataChange() {

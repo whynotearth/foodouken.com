@@ -2,12 +2,7 @@
   <div class="flex flex-col justify-center items-center">
     <div class="flex flex-col items-center">
       <div class="py-3">
-        <img
-          height="300"
-          width="150"
-          src="../../assets/foodouken.png"
-          alt="foodokuen"
-        />
+        <img height="300" width="150" :src="foodoukenLogo" alt="foodokuen" />
       </div>
       <div class="py-3">
         <h1 class="tg-h1-mobile text-center text-white text-opacity-84">
@@ -44,15 +39,21 @@
 
 <script>
 import Button from '@/components/Button.vue';
+import foodoukenLogo from '@/assets/foodouken.png';
 
 export default {
   name: 'SignUpSuccesss',
   components: {
     Button
   },
+  data() {
+    return {
+      foodoukenLogo
+    };
+  },
   computed: {
     url() {
-      return `https://foodouken.com/${this.$route.params.slug}`;
+      return `${process.env.VUE_APP_BASE_URL}/${this.$route.params.slug}`;
     }
   }
 };

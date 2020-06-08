@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col justify-evenly items-center py-20">
+  <div class="flex flex-col items-center py-20">
     <div class="py-16 flex flex-col items-center">
       <div class="py-3">
         <img
           height="150"
           width="75"
-          src="../assets/foodouken.png"
-          alt="foodokuen"
+          :src="foodoukenLogo"
+          alt="foodouken-logo"
         />
       </div>
       <div class="py-3">
@@ -41,17 +41,17 @@
 
 <script>
 import Button from '@/components/Button.vue';
+import foodoukenLogo from '@/assets/foodouken.png';
 
 export default {
   name: 'Welcome',
   components: {
     Button
+  },
+  data() {
+    return {
+      foodoukenLogo
+    };
   }
 };
 </script>
-
-<style scoped>
-.justify-evenly {
-  justify-content: space-evenly;
-}
-</style>
