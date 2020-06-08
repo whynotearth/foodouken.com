@@ -6,21 +6,17 @@
       v-bind="$attrs"
       :value="value"
       v-on="$listeners"
-      @input="changeValue"
+      @input="updateValue"
       v-model="inputModel"
     />
     <div class="w-auto inline-block">
       <div class="flex items-center">
         <div
           class="h-5 w-5 border border-white rounded"
-          :class="[
-            showCheckMark
-              ? 'bg-button border-button'
-              : 'border-opacity-38 bg-white bg-opacity-38'
-          ]"
+          :class="[isChecked ? 'bg-button border-button' : 'border-opacity-38 bg-white bg-opacity-38']"
         >
           <div
-            :class="showCheckMark ? '' : 'invisible'"
+            :class="isChecked ? '' : 'invisible'"
             class="flex h-full w-full justify-center items-center text-black"
           >
             <CheckMark />
@@ -59,16 +55,17 @@ export default {
       type: [String, Number, Boolean]
     },
     inputModel: {
-      type: [Array, Object, Boolean]
+      type: [Array, Boolean]
     },
     label: {
       type: String
     }
   },
   methods: {
-    changeValue(event) {
-      if (typeof this.inputModel === 'object') {
-        const newArray = [...this.inputModel];
+    updateValue(event) {
+      if (this.inputModel instanceof Array) {
+        const newArray = [...this.inputModel]
+        
         if (event.target.checked) {
           newArray.push(event.target.value);
         } else {
@@ -77,6 +74,7 @@ export default {
             1
           );
         }
+
         this.$emit('update', [...newArray]);
       } else {
         this.$emit('update', event.target.checked);
@@ -84,16 +82,11 @@ export default {
     }
   },
   computed: {
-    /*
-      If value is object and includes in array return true otherwise false
-      If value is not object means it has to be null or boolean return accordingly
-    */
-    showCheckMark() {
-      return (
-        (typeof this.inputModel === 'object' &&
-          this.inputModel.includes(String(this.value))) ||
-        (typeof this.inputModel !== 'object' && this.inputModel)
-      );
+    isChecked() {
+      if (this.inputModel instanceof Array) {
+        return this.inputModel.includes(String(this.value));
+      }
+      return this.inputModel;
     }
   }
 };
