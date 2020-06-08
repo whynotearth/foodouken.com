@@ -22,8 +22,7 @@
                 </div>
                 <div>
                   <ToggleSwitch
-                    :value="!isClosed"
-                    @toggleSwitch="isClosed = !isClosed"
+                    v-model="isOpen"
                   />
                 </div>
               </div>
@@ -125,14 +124,14 @@ export default {
         return this.selectedDay ? { ...this.selectedDay } : null;
       }
     },
-    isClosed: {
+    isOpen: {
       get() {
-        return this.selectedDay ? this.selectedDay.isClosed : null;
+        return this.selectedDay ? !this.selectedDay.isClosed : null;
       },
       set(value) {
         this.$emit('update:selectedDay', {
           ...this.selectedDay,
-          isClosed: value
+          isClosed: !value
         });
       }
     }
