@@ -7,7 +7,6 @@
       :value="value"
       v-on="$listeners"
       @input="updateValue"
-      v-model="inputModel"
     />
     <div class="w-auto inline-block">
       <div class="flex items-center">
