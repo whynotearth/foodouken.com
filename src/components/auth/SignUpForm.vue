@@ -2,10 +2,10 @@
   <div class="h-screen flex justify-center items-center">
     <div class="h-full w-full flex flex-col justify-between max-w-sm md:m-auto">
       <div>
-        <checkout-stepper
+        <StepperTop
           class="clear-margin"
           :navigation="navigation"
-          :pageS="page"
+          :page="page"
         />
         <div class="my-4">
           <transition name="fade" mode="out-in">
@@ -15,8 +15,8 @@
           </transition>
         </div>
       </div>
-      <checkout-nav-bar
-        :pageS="page"
+      <StepperBottom
+        :page="page"
         :nextStepText="
           `${
             navigation[page] && page < navigation.length
@@ -34,8 +34,8 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
-import CheckoutStepper from '@/components/forms/CheckoutStepper';
-import CheckoutNavBar from '@/components/forms/CheckoutNavBar';
+import StepperTop from '@/components/BaseStepperTopBar';
+import StepperBottom from '@/components/BaseStepperBottomBar';
 import BusinessInfo from './BusinessInfo';
 import LinkAccount from './LinkAccount';
 import Notifications from './Notifications';
@@ -45,8 +45,8 @@ import PaymentMethods from './PaymentMethods';
 export default {
   name: 'SignUpForm',
   components: {
-    CheckoutStepper,
-    CheckoutNavBar,
+    StepperTop,
+    StepperBottom,
     BusinessInfo,
     LinkAccount,
     Notifications,

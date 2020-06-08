@@ -20,7 +20,6 @@
 
 <script>
 import Button from '@/components/Button.vue';
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'CheckoutNavBar',
@@ -34,10 +33,10 @@ export default {
     hideNext: {
       type: Boolean,
       default: false
+    },
+    page: {
+      type: Number
     }
-  },
-  computed: {
-    ...mapGetters('form', ['page'])
   }
 };
 </script>
