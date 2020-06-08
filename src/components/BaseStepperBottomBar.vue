@@ -7,7 +7,7 @@
       class="bg-footer"
       :width="hideNext ? 'flex-grow' : 'w-1/3'"
       @clicked="$emit('previousStep')"
-      v-if="page != 1"
+      v-if="firstPageStepBack || page != 1"
     />
     <Button
       :titleRight="nextStepText"
@@ -36,6 +36,10 @@ export default {
     },
     page: {
       type: Number
+    },
+    firstPageStepBack: {
+      type: Boolean,
+      default: false
     }
   }
 };

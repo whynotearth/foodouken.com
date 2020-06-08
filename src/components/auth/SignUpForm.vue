@@ -27,6 +27,7 @@
         @previousStep="previousStep"
         @nextStep="nextStep"
         class="clear-margin"
+        :firstPageStepBack="true"
       />
     </div>
   </div>
@@ -79,16 +80,6 @@ export default {
       ]
     };
   },
-  mounted() {
-    const stepFromUrl = this.$route.params.step;
-    const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl);
-
-    if (ind > 0) {
-      this.pageChange(ind + 1);
-    } else if (ind < 0) {
-      this.$router.push({ name: 'Welcome' });
-    }
-  },
   computed: {
     ...mapGetters('auth', ['page']),
     component() {
@@ -101,6 +92,8 @@ export default {
     previousStep() {
       if (this.page > 1) {
         this.pageChange(this.page - 1);
+      } else if (this.page === 1) {
+        this.$router.push({name: 'Welcome'})
       }
     },
     nextStep() {
@@ -133,6 +126,19 @@ export default {
   watch: {
     component(step) {
       this.$router.push({ name: 'SignUp', params: { step } }).catch(() => {});
+    },
+    '$route.params.step': {
+      immediate: true,
+      handler() {
+        const stepFromUrl = this.$route.params.step;
+        const ind = this.navigation.findIndex(nav => nav.step === stepFromUrl);
+
+        if (ind >= 0) {
+          this.pageChange(ind + 1);
+        } else if (ind < 0) {
+          this.$router.push({ name: 'Welcome' });
+        }
+      }
     }
   }
 };
