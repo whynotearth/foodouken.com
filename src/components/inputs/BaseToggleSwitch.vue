@@ -46,8 +46,8 @@ export default {
 .toggle-dot {
   top: -0.25rem;
   left: -0.25rem;
+  transition: all 0.3s ease-in-out;
 
-  @apply transition-all delay-300 ease-in-out;
   @apply bg-white;
 }
 
@@ -56,7 +56,9 @@ export default {
 }
 
 input:checked ~ .toggle-dot {
-  @apply bg-button translate-x-full;
+  @apply bg-button;
+
+  transform: translateX(100%);
 }
 
 input:checked ~ .toggle-line {
