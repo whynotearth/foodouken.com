@@ -51,18 +51,12 @@
     <span class="text-red-600" v-if="registerError">
       {{ registerError }}
     </span>
-    <CheckoutNavBar
-      nextStepText="Link Account ►"
-      @previousStep="decrementPage"
-      @nextStep="submit"
-    />
   </div>
 </template>
 
 <script>
 import MaterialInput from '@/components/inputs/MaterialInput.vue';
 import TextArea from '@/components/inputs/TextArea.vue';
-import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 
@@ -70,8 +64,7 @@ export default {
   name: 'BusinessInfoForm',
   components: {
     MaterialInput,
-    TextArea,
-    CheckoutNavBar
+    TextArea
   },
   data() {
     return {

@@ -1,7 +1,14 @@
 <template>
   <div>
-    <BaseAppBarHeader title="Settings" />
-    <div class="container">
+    <BaseAppBarHeader
+      class="flex items-center bg-gray-200 h-24"
+      :title="appBar.title"
+      :toLink="appBar.backRoute"
+    /><br />
+    <transition name="fade" mode="out-in">
+      <router-view class="container mx-auto"></router-view>
+    </transition>
+    <div class="container" v-if="$router.currentRoute.path === '/settings'">
       <settings-button title="My Account" to-link="Account"></settings-button>
       <settings-button title="My Business" to-link="Business"></settings-button>
       <settings-button v-slot="{ linkStyling }">
@@ -36,6 +43,20 @@ export default {
         return error;
       }
     }
+  },
+  computed: {
+    appBar() {
+      if (this.$route.meta.appBar) return this.$route.meta.appBar;
+      return {
+        title: 'Navbar',
+        backRoute: { name: 'Home' }
+      };
+    }
   }
 };
 </script>
+<style scoped>
+.container {
+  max-width: 768px;
+}
+</style>

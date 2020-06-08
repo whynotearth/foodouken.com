@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import tenantMenuRoutes from './tenantMenuRoutes';
 
 Vue.use(VueRouter);
 
@@ -20,38 +21,77 @@ const routes = [
     path: '/settings',
     name: 'Settings',
     component: () => import('@/views/Settings.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+    meta: {
+      layout: () => import('@/layouts/TenantLayout.vue'),
+      appBar: {
+        title: 'Settings',
+        backRoute: { name: 'Home' }
+      }
+    },
+    children: [
+      {
+        path: 'account',
+        name: 'Account',
+        component: () => import('@/views/SettingsAccount.vue'),
+        meta: {
+          layout: () => import('@/layouts/TenantLayout.vue'),
+          appBar: {
+            title: 'Account',
+            backRoute: { name: 'Settings' }
+          }
+        }
+      },
+      {
+        path: 'business',
+        name: 'Business',
+        component: () => import('@/views/SettingsBusiness.vue'),
+        meta: {
+          layout: () => import('@/layouts/TenantLayout.vue'),
+          appBar: {
+            title: 'Business',
+            backRoute: { name: 'Settings' }
+          }
+        }
+      },
+      {
+        path: 'business/info',
+        name: 'BusinessInfo',
+        component: () => import('@/views/SettingsMyBusinessInfo.vue'),
+        meta: {
+          layout: () => import('@/layouts/TenantLayout.vue'),
+          appBar: {
+            title: 'Business Info',
+            backRoute: { name: 'Business' }
+          }
+        }
+      },
+      {
+        path: 'hours',
+        name: 'BusinessHours',
+        component: () => import('@/views/SettingsMyBusinessHours.vue'),
+        meta: {
+          layout: () => import('@/layouts/TenantLayout.vue'),
+          appBar: {
+            title: 'Business Hours',
+            backRoute: { name: 'Business' }
+          }
+        }
+      },
+      {
+        path: 'location',
+        name: 'BusinessLocation',
+        component: () => import('@/views/SettingsMyBusinessLocation.vue'),
+        meta: {
+          layout: () => import('@/layouts/TenantLayout.vue'),
+          appBar: {
+            title: 'Business Location',
+            backRoute: { name: 'Business' }
+          }
+        }
+      }
+    ]
   },
-  {
-    path: '/settings/account',
-    name: 'Account',
-    component: () => import('@/views/settings/Account.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
-  {
-    path: '/settings/business',
-    name: 'Business',
-    component: () => import('@/views/settings/Business.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
-  {
-    path: '/settings/business/info',
-    name: 'BusinessInfo',
-    component: () => import('@/views/settings/myBusiness/BusinessInfo.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
-  {
-    path: '/settings/business/hours',
-    name: 'BusinessHours',
-    component: () => import('@/views/settings/myBusiness/BusinessHours.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
-  {
-    path: '/settings/business/location',
-    name: 'BusinessLocation',
-    component: () => import('@/views/settings/myBusiness/Location.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
+  ...tenantMenuRoutes,
   {
     path: '/*',
     redirect: '/'

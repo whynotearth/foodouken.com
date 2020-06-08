@@ -1,6 +1,5 @@
 <template>
   <div>
-    <BaseAppBarHeader title="My Business" toLink="/settings/" />
     <div class="container">
       <settings-button
         title="Business Info"
@@ -18,17 +17,25 @@
   </div>
 </template>
 <script>
-import BaseAppBarHeader from '@/components/BaseAppBarHeader.vue';
 import SettingsButton from '@/components/settings/SettingsButton.vue';
 import arrowForward from '@/assets/arrow-forward.png';
 
 export default {
   name: 'BusinessPage',
-  components: { BaseAppBarHeader, SettingsButton },
+  components: { SettingsButton },
   data() {
     return {
       arrowForward
     };
+  },
+  computed: {
+    appBar() {
+      if (this.$route.meta.appBar) return this.$route.meta.appBar;
+      return {
+        title: 'Navbar',
+        backRoute: { name: 'Home' }
+      };
+    }
   },
   methods: {
     async logout() {

@@ -119,7 +119,7 @@ export default {
     }
   },
   created() {
-    if (this.option === 'Use my location') {
+    if (this.option === 'Share location') {
       this.getCoordinates();
     }
   },
@@ -214,7 +214,7 @@ export default {
       'pageChange'
     ]),
     submit() {
-      if (this.option !== 'Use my location') {
+      if (this.option !== 'Share location') {
         this.$v.$touch();
         if (this.$v.$invalid) {
           this.submitError = true;
@@ -252,7 +252,7 @@ export default {
   },
   watch: {
     option: function(val) {
-      if (val === 'Use my location') {
+      if (val === 'Share location') {
         this.getCoordinates();
       }
     }

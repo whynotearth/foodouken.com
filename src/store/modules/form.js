@@ -10,7 +10,7 @@ const state = {
       specialRequest: ''
     },
     customerAddress: {
-      addressOption: 'Use my location',
+      addressOption: 'Share location',
       googleLocation: '',
       buildingName: '',
       street: '',
