@@ -12,7 +12,11 @@
       <div class="flex items-center">
         <div
           class="h-5 w-5 border border-white rounded"
-          :class="[isChecked ? 'bg-button border-button' : 'border-opacity-38 bg-white bg-opacity-38']"
+          :class="[
+            isChecked
+              ? 'bg-button border-button'
+              : 'border-opacity-38 bg-white bg-opacity-38'
+          ]"
         >
           <div
             :class="isChecked ? '' : 'invisible'"
@@ -63,8 +67,8 @@ export default {
   methods: {
     updateValue(event) {
       if (Array.isArray(this.inputModel)) {
-        const newArray = [...this.inputModel]
-        
+        const newArray = [...this.inputModel];
+
         if (event.target.checked) {
           newArray.push(event.target.value);
         } else {

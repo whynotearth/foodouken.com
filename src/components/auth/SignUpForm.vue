@@ -81,19 +81,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('auth', ['page']),
+    ...mapGetters('tenant', ['page']),
     component() {
       return this.navigation[this.page - 1].step;
     }
   },
   methods: {
-    ...mapMutations('auth', ['pageChange']),
-    ...mapActions('auth', ['signUp']),
+    ...mapMutations('tenant', ['pageChange']),
+    ...mapActions('tenant', ['createTenant']),
     previousStep() {
       if (this.page > 1) {
         this.pageChange(this.page - 1);
       } else if (this.page === 1) {
-        this.$router.push({name: 'Welcome'})
+        this.$router.push({ name: 'Welcome' });
       }
     },
     nextStep() {
@@ -113,11 +113,13 @@ export default {
       }
     },
     register() {
-      this.signUp()
-        .then(() => {
+      this.createTenant()
+        .then((res) => {
+          console.log(res);
+          
           this.$router.push({
             name: 'SignUpSuccess',
-            params: { slug: 'bang-bang-bakery' }
+            params: { slug: res }
           });
         })
         .catch(() => {});

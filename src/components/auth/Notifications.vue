@@ -42,8 +42,8 @@ export default {
     return {};
   },
   computed: {
-    ...mapState('auth', ['notificationTypes']),
-    ...mapGetters('auth', [
+    ...mapState('tenant', ['notificationTypes']),
+    ...mapGetters('tenant', [
       'getSelectedNotificationTypes',
       'getEmail',
       'getPhone'
@@ -64,7 +64,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('auth', ['updateSelectedNotificationTypes'])
+    ...mapMutations('tenant', ['updateSelectedNotificationTypes'])
   }
 };
 </script>

@@ -76,7 +76,7 @@ export default {
     description: {}
   },
   computed: {
-    ...mapGetters('auth', [
+    ...mapGetters('tenant', [
       'getName',
       'getEmail',
       'getPhone',
@@ -116,7 +116,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('auth', [
+    ...mapMutations('tenant', [
       'updateName',
       'updateEmail',
       'updatePhone',

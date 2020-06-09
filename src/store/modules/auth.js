@@ -1,147 +1,94 @@
-import { httpClient } from '@/services/httpClient';
+import { AuthenticationService } from '@/connection/resources.js';
 
-const notificationTypes = [
-  {
-    name: 'Text',
-    key: 'phone',
-    id: 'text'
-  },
-  {
-    name: 'Whatsapp',
-    key: 'phone',
-    id: 'whatsapp'
-  },
-  {
-    name: 'Email',
-    key: 'email',
-    id: 'email'
-  }
-];
-
-const paymentMethods = [
-  {
-    name: 'Cash',
-    id: 'cash'
-  },
-  {
-    name: 'ABA Bank Transfer',
-    id: 'abaBankTransfer'
-  }
-];
-
-const days = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday'
-];
+const defaultUser = {
+  id: 0,
+  isAuthenticated: false,
+  userName: ''
+};
 
 const state = {
-  businessInfo: {
-    name: '',
-    email: '',
-    phone: '',
-    description: ''
-  },
-  selectedNotificationType: [],
-  selectedPaymentMethods: [],
-  businessHours: [
-    ...days.map(day => {
-      return {
-        dayOfWeek: day.toLocaleLowerCase(),
-        isClosed: false,
-        openingTime: '08:00:00',
-        closingTime: '18:00:00'
-      };
-    })
-  ],
-  page: 1,
-  notificationTypes,
-  paymentMethods
+  user: defaultUser,
+  provider: '',
+  returnURL: '',
+  loading: false,
+  loginError: '',
+  registerError: '',
+  token: ''
 };
 
 const getters = {
-  getName(state) {
-    return state.businessInfo.name;
+  getToken(state) {
+    return state.token;
   },
-  getEmail(state) {
-    return state.businessInfo.email;
+  getUser(state) {
+    return state.user;
   },
-  getPhone(state) {
-    return state.businessInfo.phone;
+  isAuthenticated(state) {
+    return state.user.isAuthenticated;
   },
-  getDescription(state) {
-    return state.businessInfo.description;
+  loginError(state) {
+    return state.loginError;
   },
-  page(state) {
-    return state.page;
+  registerError(state) {
+    return state.registerError;
   },
-  getSelectedNotificationTypes(state) {
-    return state.selectedNotificationType;
-  },
-  getSelectedPaymentMethods(state) {
-    return state.selectedPaymentMethods;
-  },
-  getBusinessHours(state) {
-    return state.businessHours;
+  oauth(state) {
+    return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}`;
   }
 };
 
 const actions = {
-  signUp({ getters, state }) {
-    const registerData = {
-      name: getters.getName,
-      email: getters.getEmail,
-      phone: getters.getPhone,
-      description: getters.getDescription,
-      notificationType: getters.getSelectedNotificationTypes,
-      paymentMethodType: getters.getSelectedPaymentMethods,
-      companySlug: 'foodouken',
-      businessHours: state.businessHours
-    };
+  updateLoginError(context, payload) {
+    context.commit('updateLoginError', payload);
+  },
+  updateReturnUrl(context, payload) {
+    context.commit('updateReturnUrl', payload);
+  },
+  updateToken(context, payload) {
+    context.commit('updateToken', payload);
+  },
+  updateUser(context, payload) {
+    context.commit('updateUser', payload);
+  },
+  async ping(context) {
+    // const token = context.getters.getToken;
 
-    return new Promise((resolve, reject) => {
-      httpClient
-        .post(`/companies/${registerData.companySlug}/tenants`, registerData)
-        .then(
-          response => {
-            resolve(response.data);
-          },
-          error => {
-            reject(error);
-          }
-        );
-    });
+    try {
+      const params = {};
+      const options = {
+        // headers: { Authorization: `Bearer ${token}` }
+      };
+      const user = await AuthenticationService.ping(params, options);
+      await context.dispatch('updateUser', user);
+    } catch (error) {
+      console.log('ping 401');
+      throw new Error('Getting user data failed');
+    }
+    return true;
   }
 };
 
 const mutations = {
-  updateName(state, payload) {
-    state.businessInfo.name = payload;
+  updateLoginError(state, payload) {
+    state.loginError = payload;
   },
-  updateEmail(state, payload) {
-    state.businessInfo.email = payload;
+  updateRegisterError(state, payload) {
+    state.registerError = payload;
   },
-  updatePhone(state, payload) {
-    state.businessInfo.phone = payload;
+  updateProvider(state, payload) {
+    state.provider = payload;
   },
-  updateDescription(state, payload) {
-    state.businessInfo.description = payload;
+  updateLoading(state, payload) {
+    state.loading = payload;
   },
-  pageChange(state, payload) {
-    state.page = payload;
+  updateUser(state, payload) {
+    state.user = payload;
   },
-  updateSelectedNotificationTypes(state, payload) {
-    state.selectedNotificationType = [...payload];
+  updateToken(state, payload) {
+    state.token = payload;
   },
-  updateSelectedPaymentMethods(state, payload) {
-    state.selectedPaymentMethods = [...payload];
-  },
-  updateBusinessHours(state, payload) {
-    state.businessHours = payload;
+  updateReturnUrl(state, payload) {
+    state.returnURL = payload;
   }
 };
 

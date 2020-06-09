@@ -32,8 +32,8 @@ export default {
     return {};
   },
   computed: {
-    ...mapState('auth', ['paymentMethods']),
-    ...mapGetters('auth', ['getSelectedPaymentMethods']),
+    ...mapState('tenant', ['paymentMethods']),
+    ...mapGetters('tenant', ['getSelectedPaymentMethods']),
     selectedPaymentMethods: {
       get() {
         return this.getSelectedPaymentMethods;
@@ -44,7 +44,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('auth', ['updateSelectedPaymentMethods'])
+    ...mapMutations('tenant', ['updateSelectedPaymentMethods'])
   }
 };
 </script>

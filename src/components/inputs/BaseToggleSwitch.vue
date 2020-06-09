@@ -1,12 +1,7 @@
 <template>
   <label for="toggle" class="flex items-center cursor-pointer">
     <div class="relative">
-      <input
-        id="toggle"
-        type="checkbox"
-        class="hidden"
-        v-model="inputValue"
-      />
+      <input id="toggle" type="checkbox" class="hidden" v-model="inputValue" />
       <div
         class="toggle-line w-10 h-4 bg-gray-400 rounded-full shadow-inner"
       ></div>

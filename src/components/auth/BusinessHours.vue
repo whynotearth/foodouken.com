@@ -59,7 +59,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('auth', ['updateBusinessHours']),
+    ...mapMutations('tenant', ['updateBusinessHours']),
     dayClicked(index) {
       this.selectedIndex = index;
     },
@@ -68,7 +68,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('auth', ['getBusinessHours']),
+    ...mapGetters('tenant', ['getBusinessHours']),
     businessHours: {
       get() {
         return this.getBusinessHours;

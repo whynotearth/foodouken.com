@@ -21,9 +21,7 @@
                   </h6>
                 </div>
                 <div>
-                  <ToggleSwitch
-                    v-model="isOpen"
-                  />
+                  <ToggleSwitch v-model="isOpen" />
                 </div>
               </div>
             </div>

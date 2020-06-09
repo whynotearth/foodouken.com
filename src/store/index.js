@@ -7,10 +7,19 @@ import form from './modules/form';
 import shop from './modules/shop';
 import auth from './modules/auth';
 import menu from './modules/menu';
+import tenant from './modules/tenant';
+import VuexPersistence from 'vuex-persist';
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+  modules: ['auth', 'tenant'],
+  key: 'store'
+});
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [vuexLocal.plugin],
   modules: {
     home,
     category,
@@ -18,6 +27,7 @@ export default new Vuex.Store({
     form,
     shop,
     auth,
-    menu
+    menu,
+    tenant
   }
 });
