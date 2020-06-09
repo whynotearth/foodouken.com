@@ -61,7 +61,6 @@ const actions = {
       const user = await AuthenticationService.ping(params, options);
       await context.dispatch('updateUser', user);
     } catch (error) {
-      console.log('ping 401');
       throw new Error('Getting user data failed');
     }
     return true;
