@@ -115,8 +115,6 @@ export default {
     register() {
       this.createTenant()
         .then(res => {
-          console.log(res);
-
           this.$router.push({
             name: 'SignUpSuccess',
             params: { slug: res }
