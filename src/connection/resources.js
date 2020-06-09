@@ -17,7 +17,7 @@ export class AuthenticationService {
         'Content-Type': 'application/json'
       });
 
-      let url = '/api/v0/authentication/ping';
+      let url = '/authentication/ping';
       configs.url = url;
       configs.params = params;
       let data = null;

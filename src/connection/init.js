@@ -1,3 +1,3 @@
-import { ajax } from './ajax';
+import { httpClient } from '@/services/httpClient';
 import { serviceOptions } from './resources.js';
-serviceOptions.axios = ajax;
+serviceOptions.axios = httpClient;
