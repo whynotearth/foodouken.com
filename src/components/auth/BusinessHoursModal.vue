@@ -1,6 +1,9 @@
 <template>
   <div class="time-picker-modal" v-if="selectedDayOption">
-    <div class="absolute w-screen h-screen top-0 left-0 bg-background z-50" @click="$emit('closeModal')">
+    <div
+      class="absolute w-screen h-screen top-0 left-0 bg-background z-50"
+      @click="$emit('closeModal')"
+    >
       <div class="sm:flex justify-center items-center h-full">
         <div
           @click.stop
@@ -92,7 +95,7 @@
 </template>
 
 <script>
-import TimePicker from '@/components/TimePicker.vue';
+import TimePicker from '@/components/inputs/TimePicker.vue';
 import Button from '@/components/Button.vue';
 import CloseIcon from '@/assets/close.svg';
 import ToggleSwitch from '@/components/inputs/BaseToggleSwitch';
