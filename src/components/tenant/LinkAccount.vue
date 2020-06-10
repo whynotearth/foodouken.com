@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import AuthButtons from './AuthButtons';
+import AuthButtons from '@/components/auth/AuthButtons';
 
 export default {
   name: 'LinkAccount',

@@ -37,11 +37,11 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 import StepperTop from '@/components/BaseStepperTopBar';
 import StepperBottom from '@/components/BaseStepperBottomBar';
-import BusinessInfo from './BusinessInfo';
-import LinkAccount from './LinkAccount';
-import Notifications from './Notifications';
-import BusinessHours from './BusinessHours';
-import PaymentMethods from './PaymentMethods';
+import BusinessInfo from '@/components/tenant/BusinessInfo';
+import LinkAccount from '@/components/tenant/LinkAccount';
+import Notifications from '@/components/tenant/Notifications';
+import BusinessHours from '@/components/tenant/BusinessHours';
+import PaymentMethods from '@/components/tenant/PaymentMethods';
 
 export default {
   name: 'SignUpForm',
