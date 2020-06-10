@@ -2,6 +2,7 @@
   <div>
     <div class="-my-4">
       <div
+        class="cursor-pointer"
         v-for="(day, index) in businessHours"
         :key="index"
         @click="dayClicked(index)"

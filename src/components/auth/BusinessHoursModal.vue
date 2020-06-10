@@ -1,11 +1,13 @@
 <template>
   <div class="time-picker-modal" v-if="selectedDayOption">
-    <div class="absolute w-screen h-screen top-0 left-0 bg-secondary z-50">
+    <div class="absolute w-screen h-screen top-0 left-0 bg-background z-50">
       <div class="sm:flex justify-center items-center h-full">
-        <div class="sm:w-128 sm:h-160">
+        <div class="sm:w-128 sm:h-160 shadow-2xl sm:border border-secondary border-opacity-34">
           <div class="w-full">
-            <div class="px-4 py-2" @click="$emit('closeModal')">
-              <span><CloseIcon class="text-white text-opacity-54"/></span>
+            <div class="px-4 py-2">
+              <span class="flex" >
+                <CloseIcon @click="$emit('closeModal')" class="cursor-pointer text-white text-opacity-54"/>
+              </span>
             </div>
             <div>
               <div
@@ -25,53 +27,57 @@
                 </div>
               </div>
             </div>
-            <div v-if="!selectedDayOption.isClosed">
-              <div>
-                <div class="grid grid-cols-2 shadow-lg text-white">
-                  <div
-                    class="col-span-1 text-center py-4 text-white"
-                    :class="
-                      isActive === 'open'
-                        ? 'border-b-3 border-button text-opacity-84'
-                        : ' text-opacity-54'
-                    "
-                    @click="changeIsActive('open')"
-                  >
-                    Open
+            <transition name="fade">
+              <div v-if="!selectedDayOption.isClosed">
+                <div>
+                  <div class="grid grid-cols-2 shadow-lg text-white">
+                    <div
+                      class="cursor-pointer col-span-1 text-center py-4 text-white"
+                      :class="
+                        isActive === 'open'
+                          ? 'border-b-3 border-button text-opacity-84'
+                          : ' text-opacity-54'
+                      "
+                      @click="changeIsActive('open')"
+                    >
+                      Open
+                    </div>
+                    <div
+                      class="cursor-pointer col-span-1 text-center py-4 text-white"
+                      :class="
+                        isActive === 'close'
+                          ? 'border-b-3 border-button text-opacity-84'
+                          : ' text-opacity-54'
+                      "
+                      @click="changeIsActive('close')"
+                    >
+                      Close
+                    </div>
                   </div>
-                  <div
-                    class="col-span-1 text-center py-4 text-white"
-                    :class="
-                      isActive === 'close'
-                        ? 'border-b-3 border-button text-opacity-84'
-                        : ' text-opacity-54'
-                    "
-                    @click="changeIsActive('close')"
-                  >
-                    Close
+                  <div class="px-12 py-20">
+                    <transition name="fade" mode="out-in">
+                      <TimePicker
+                        key="open"
+                        v-if="isActive === 'open'"
+                        v-model="selectedDayOption.openingTime"
+                      />
+                      <TimePicker
+                        key="close"
+                        v-if="isActive === 'close'"
+                        v-model="selectedDayOption.closingTime"
+                      />
+                    </transition>
                   </div>
                 </div>
-                <div class="px-12 py-20">
-                  <TimePicker
-                    key="open"
-                    v-if="isActive === 'open'"
-                    v-model="selectedDayOption.openingTime"
-                  />
-                  <TimePicker
-                    key="close"
-                    v-if="isActive === 'close'"
-                    v-model="selectedDayOption.closingTime"
+                <div class="px-4 my-4">
+                  <Button
+                    @clicked="saveHours"
+                    class="tg-color-label-mobile rounded-full"
+                    :title="`Save ${selectedDayOption.dayOfWeek} Hours`"
                   />
                 </div>
               </div>
-              <div class="px-4 my-4">
-                <Button
-                  @clicked="saveHours"
-                  class="tg-color-label-mobile rounded-full"
-                  :title="`Save ${selectedDayOption.dayOfWeek} Hours`"
-                />
-              </div>
-            </div>
+            </transition>
           </div>
         </div>
       </div>

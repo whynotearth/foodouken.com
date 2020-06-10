@@ -120,6 +120,12 @@ export default {
   font-size: inherit;
 }
 
+/deep/ .smooth-picker .smooth-middle,
+/deep/ .smooth-picker .smooth-top,
+/deep/ .smooth-picker .smooth-bottom {
+  @apply cursor-pointer;
+}
+
 /deep/ .smooth-picker .smooth-handle-layer .smooth-bottom,
 /deep/ .smooth-picker .smooth-handle-layer .smooth-top {
   background: transparent;

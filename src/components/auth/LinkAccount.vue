@@ -6,25 +6,15 @@
       </h4>
     </div>
     <div>
-      <div class="py-3">
+      <div class="py-3" v-for="({ name, logo }, ind) in socialMediaProviders" :key="ind">
         <Button
-          title="Log In With Facebook"
+          :title="isLoggedInViaPovider(name) ? `Logged In With ${name}` : `Log In With ${name}`"
+          :disabled="isLoggedInViaPovider(name)"
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 md:px-5"
-          @clicked="oauth('Facebook')"
+          @clicked="oauth(name)"
         >
           <template #icon>
-            <img class="md:mr-5" :src="facebookLogo" alt="facebook-icon" />
-          </template>
-        </Button>
-      </div>
-      <div class="py-3">
-        <Button
-          title="Log In With Google"
-          class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 md:px-5"
-          @clicked="oauth('Google')"
-        >
-          <template #icon>
-            <img class="md:mr-5" :src="googleLogo" alt="google-icon" />
+            <img class="md:mr-5" :src="logo" :alt="`${name}-icon`" />
           </template>
         </Button>
       </div>
@@ -45,14 +35,23 @@ export default {
   },
   data() {
     return {
-      facebookLogo,
-      googleLogo
+      socialMediaProviders: [
+        {
+          name: 'Facebook',
+          logo: facebookLogo
+        },
+        {
+          name: 'Google',
+          logo: googleLogo
+        },
+      ]
     };
   },
   computed: {
     ...mapGetters('auth', {
       oauthLink: 'oauth'
-    })
+    }),
+    ...mapGetters('auth', ['getUser'])
   },
   methods: {
     ...mapMutations('auth', ['updateProvider']),
@@ -63,6 +62,9 @@ export default {
       const redirectUrl = await this.oauthLink;
       window.location.assign(redirectUrl);
       this.ping();
+    },
+    isLoggedInViaPovider(provider) {
+      return this.getUser && this.getUser.loginProviders && this.getUser.loginProviders.includes(provider);
     }
   }
 };

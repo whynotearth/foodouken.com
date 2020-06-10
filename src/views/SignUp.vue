@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="clear">
     <SignUpForm />
   </div>
 </template>
@@ -14,3 +14,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.clear {
+  @apply max-w-none mx-0 !important;
+}
+</style>

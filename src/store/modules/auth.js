@@ -1,4 +1,4 @@
-import { AuthenticationService } from '@/connection/resources.js';
+import { httpClient } from '@/services/httpClient'
 
 const defaultUser = {
   id: 0,
@@ -50,20 +50,18 @@ const actions = {
   updateUser(context, payload) {
     context.commit('updateUser', payload);
   },
-  async ping(context) {
-    // const token = context.getters.getToken;
-
-    try {
-      const params = {};
-      const options = {
-        // headers: { Authorization: `Bearer ${token}` }
-      };
-      const user = await AuthenticationService.ping(params, options);
-      await context.dispatch('updateUser', user);
-    } catch (error) {
-      throw new Error('Getting user data failed');
-    }
-    return true;
+  ping(context) {
+    return new Promise((resolve, reject) => {
+      httpClient.get('authentication/ping').then(
+        response => {
+          context.dispatch('updateUser', response.data);
+          resolve(response.data);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
   }
 };
 

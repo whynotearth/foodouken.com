@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen flex justify-center items-center">
-    <div class="h-full w-full flex flex-col justify-between max-w-sm md:m-auto">
+  <div class="h-screen flex items-stretch justify-center items-center">
+    <div class="h-full w-full flex flex-col justify-between">
       <div>
         <StepperTop
           class="clear-margin"

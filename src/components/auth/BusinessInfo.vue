@@ -4,6 +4,7 @@
       v-model="$v.name.$model"
       label="Name"
       :error="$v.name.$dirty && !$v.name.required"
+      labelBg="bg-background"
     >
       <span
         v-if="$v.name.$dirty && !$v.name.required"
@@ -16,6 +17,7 @@
       v-model="$v.email.$model"
       label="Email"
       :error="$v.email.$dirty && (!$v.email.required || !$v.email.email)"
+      labelBg="bg-background"
     >
       <span
         v-if="$v.email.$dirty && !$v.email.required"
@@ -31,6 +33,7 @@
       v-model="$v.phone.$model"
       label="Phone number"
       :error="$v.phone.$dirty && (!$v.phone.required || !$v.phone.minLength)"
+      labelBg="bg-background"
     >
       <span
         v-if="$v.phone.$dirty && !$v.phone.required"
@@ -42,7 +45,11 @@
         Please enter a valid phone number
       </span>
     </material-input>
-    <text-area v-model="$v.description.$model" label="Description" />
+    <text-area
+      v-model="$v.description.$model"
+      label="Description"
+      labelBg="bg-background"
+    />
   </div>
 </template>
 
