@@ -1,12 +1,18 @@
 <template>
   <div class="time-picker-modal" v-if="selectedDayOption">
-    <div class="absolute w-screen h-screen top-0 left-0 bg-background z-50">
+    <div class="absolute w-screen h-screen top-0 left-0 bg-background z-50" @click="$emit('closeModal')">
       <div class="sm:flex justify-center items-center h-full">
-        <div class="sm:w-128 sm:h-160 shadow-2xl sm:border border-secondary border-opacity-34">
+        <div
+          @click.stop
+          class="sm:w-128 sm:h-160 shadow-2xl sm:border border-secondary border-opacity-34"
+        >
           <div class="w-full">
             <div class="px-4 py-2">
-              <span class="flex" >
-                <CloseIcon @click="$emit('closeModal')" class="cursor-pointer text-white text-opacity-54"/>
+              <span class="flex">
+                <CloseIcon
+                  @click="$emit('closeModal')"
+                  class="cursor-pointer text-white text-opacity-54"
+                />
               </span>
             </div>
             <div>

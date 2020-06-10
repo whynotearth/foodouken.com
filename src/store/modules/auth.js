@@ -1,4 +1,4 @@
-import { httpClient } from '@/services/httpClient'
+import { httpClient } from '@/services/httpClient';
 
 const defaultUser = {
   id: 0,

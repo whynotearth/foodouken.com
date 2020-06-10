@@ -70,13 +70,16 @@ export default {
         const newArray = [...this.inputModel];
 
         const isValueInArray = newArray.includes(event.target.value);
-        
+
         if (!isValueInArray) {
           newArray.push(event.target.value);
         } else {
-          newArray.splice(newArray.findIndex(val => val === event.target.value), 1);
+          newArray.splice(
+            newArray.findIndex(val => val === event.target.value),
+            1
+          );
         }
-        
+
         this.$emit('update', [...newArray]);
       } else {
         this.$emit('update', event.target.checked);
