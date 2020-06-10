@@ -2,8 +2,8 @@
   <div>
     <div
       class="py-3"
-      v-for="({ name, logo }, ind) in socialMediaProviders"
-      :key="ind"
+      v-for="({ name, logo }, index) in socialMediaProviders"
+      :key="index"
     >
       <Button
         :title="
