@@ -46,8 +46,8 @@ const state = {
     phone: '',
     description: ''
   },
-  selectedNotificationType: [],
-  selectedPaymentMethods: [],
+  selectedNotificationType: ['whatsapp'],
+  selectedPaymentMethods: ['cash'],
   businessHours: days.map(day => {
     return {
       dayOfWeek: day.toLocaleLowerCase(),

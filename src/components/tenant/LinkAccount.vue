@@ -5,7 +5,7 @@
         Link your Facebook or Google account to get started!
       </h4>
     </div>
-    <AuthButtons />
+    <AuthButtons @loginSuccess="loginSuccess"/>
   </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
   name: 'LinkAccount',
   components: {
     AuthButtons
+  },
+  methods: {
+    loginSuccess() {
+      this.$emit('nextStep');
+    }
   }
 };
 </script>

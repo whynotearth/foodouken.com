@@ -10,7 +10,7 @@
         <div class="my-4">
           <transition name="fade" mode="out-in">
             <keep-alive>
-              <component :is="component" :ref="component"></component>
+              <component :is="component" :ref="component" @nextStep="nextStep"></component>
             </keep-alive>
           </transition>
         </div>
@@ -80,14 +80,23 @@ export default {
       ]
     };
   },
+  created() {
+    if (this.getUser && this.getUser.isAuthenticated && !this.isSignUpStarted) {
+      this.$router.push({ name: 'Business' });
+    } else {
+      this.updateIsSignUpStarted(true);
+    }
+  },
   computed: {
     ...mapGetters('tenant', ['page']),
+    ...mapGetters('auth', ['getUser', 'isSignUpStarted']),
     component() {
       return this.navigation[this.page - 1].step;
     }
   },
   methods: {
     ...mapMutations('tenant', ['pageChange']),
+    ...mapMutations('auth', ['updateIsSignUpStarted']),
     ...mapActions('tenant', ['createTenant']),
     previousStep() {
       if (this.page > 1) {
@@ -119,6 +128,7 @@ export default {
             name: 'SignUpSuccess',
             params: { slug: res }
           });
+          this.updateIsSignUpStarted(false);
         })
         .catch(() => {});
     }

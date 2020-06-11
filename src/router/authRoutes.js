@@ -24,7 +24,7 @@ export const authRoutes = [
         store.getters['auth/getUser'] &&
         store.getters['auth/getUser'].isAuthenticated;
       if (userAuthenticated) {
-        return next({ name: 'Home' });
+        return next({ name: 'MenuCategoryList' });
       }
       next();
     }

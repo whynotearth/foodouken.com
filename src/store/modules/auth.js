@@ -13,7 +13,8 @@ const state = {
   loading: false,
   loginError: '',
   registerError: '',
-  token: ''
+  token: '',
+  isSignUpStarted: false,
 };
 
 const getters = {
@@ -34,7 +35,10 @@ const getters = {
   },
   oauth(state) {
     return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}`;
-  }
+  },
+  isSignUpStarted(state) {
+    return state.isSignUpStarted;
+  },
 };
 
 const actions = {
@@ -56,6 +60,19 @@ const actions = {
         response => {
           context.dispatch('updateUser', response.data);
           resolve(response.data);
+        },
+        error => {
+          context.dispatch('updateUser', defaultUser);
+          reject(error);
+        }
+      );
+    });
+  },
+  logout(context, payload) {
+    return new Promise((resolve, reject) => {
+      httpClient.get(`authentication/provider/logout?provider=${payload.provider}`).then(
+        () => {
+          context.dispatch('updateUser', defaultUser);
         },
         error => {
           reject(error);
@@ -86,6 +103,9 @@ const mutations = {
   },
   updateReturnUrl(state, payload) {
     state.returnURL = payload;
+  },
+  updateIsSignUpStarted(state, payload) {
+    state.isSignUpStarted = payload;
   }
 };
 
