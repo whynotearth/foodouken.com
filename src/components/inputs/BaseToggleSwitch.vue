@@ -1,12 +1,7 @@
 <template>
   <label for="toggle" class="flex items-center cursor-pointer">
     <div class="relative">
-      <input
-        id="toggle"
-        type="checkbox"
-        class="hidden"
-        v-model="inputValue"
-      />
+      <input id="toggle" type="checkbox" class="hidden" v-model="inputValue" />
       <div
         class="toggle-line w-10 h-4 bg-gray-400 rounded-full shadow-inner"
       ></div>
@@ -46,8 +41,8 @@ export default {
 .toggle-dot {
   top: -0.25rem;
   left: -0.25rem;
+  transition: all 0.3s ease-in-out;
 
-  @apply transition-all delay-300 ease-in-out;
   @apply bg-white;
 }
 
@@ -56,7 +51,9 @@ export default {
 }
 
 input:checked ~ .toggle-dot {
-  @apply bg-button translate-x-full;
+  @apply bg-button;
+
+  transform: translateX(100%);
 }
 
 input:checked ~ .toggle-line {
