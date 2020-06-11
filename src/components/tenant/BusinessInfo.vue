@@ -50,6 +50,21 @@
       label="Description"
       labelBg="bg-background"
     />
+    <hr class="border-white border-opacity-12 my-8" />
+    <ImageUpload class="clear-margin" v-model="logo" :defaultImages="logo">
+      <template #title>
+        <div class="tg-body-mobile ">
+          <span class="text-white text-opacity-65"> Logo </span>
+          <span class="text-white text-opacity-38"> ( 500 x 599 pixels JPEG / PNG ) </span>
+        </div>
+      </template>
+    </ImageUpload>
+    <span
+        v-if="$v.logo.$dirty && !$v.logo.required"
+        class="text-red-600 text-xs"
+      >
+        Logo is required
+      </span>
   </div>
 </template>
 
@@ -58,12 +73,14 @@ import { mapMutations, mapGetters } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea.vue';
+import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 
 export default {
   name: 'BusinessInfo',
   components: {
     MaterialInput,
-    TextArea
+    TextArea,
+    ImageUpload
   },
   data() {
     return {};
@@ -80,14 +97,18 @@ export default {
       required,
       minLength: minLength(7)
     },
-    description: {}
+    description: {},
+    logo: {
+      required
+    }
   },
   computed: {
     ...mapGetters('tenant', [
       'getName',
       'getEmail',
       'getPhone',
-      'getDescription'
+      'getDescription',
+      'getLogo'
     ]),
     name: {
       get() {
@@ -120,14 +141,23 @@ export default {
       set(value) {
         this.updateDescription(value);
       }
-    }
+    },
+    logo: {
+      get() {
+        return this.getLogo;
+      },
+      set(value) {
+        this.updateLogo(value);
+      }
+    },
   },
   methods: {
     ...mapMutations('tenant', [
       'updateName',
       'updateEmail',
       'updatePhone',
-      'updateDescription'
+      'updateDescription',
+      'updateLogo'
     ])
   }
 };

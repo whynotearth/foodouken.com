@@ -44,7 +44,8 @@ const state = {
     name: '',
     email: '',
     phone: '',
-    description: ''
+    description: '',
+    logo: []
   },
   selectedNotificationType: ['whatsapp'],
   selectedPaymentMethods: ['cash'],
@@ -74,6 +75,9 @@ const getters = {
   getDescription(state) {
     return state.businessInfo.description;
   },
+  getLogo(state) {
+    return state.businessInfo.logo;
+  },
   page(state) {
     return state.page;
   },
@@ -98,7 +102,8 @@ const actions = {
       notificationTypes: getters.getSelectedNotificationTypes,
       paymentMethodTypes: getters.getSelectedPaymentMethods,
       companySlug: process.env.VUE_APP_COMPANY_SLUG,
-      businessHours: state.businessHours
+      businessHours: state.businessHours,
+      logo: getters.getLogo && getters.getLogo[0] ? getters.getLogo[0].url : ''
     };
 
     return new Promise((resolve, reject) => {
@@ -128,6 +133,9 @@ const mutations = {
   },
   updateDescription(state, payload) {
     state.businessInfo.description = payload;
+  },
+  updateLogo(state, payload) {
+    state.businessInfo.logo = payload;
   },
   pageChange(state, payload) {
     state.page = payload;

@@ -19,7 +19,7 @@
       </div>
       <div class="text-center">
         <Button
-          :to="url"
+          :to="{ name: 'Shop', params: { slug: $route.params.slug } }"
           class="hyperlink-text text-button normal-case"
           :title="url"
           buttonBg="bg-transparent"
@@ -28,7 +28,7 @@
       </div>
       <div class="">
         <Button
-          @clicked="$router.push({ name: 'SignUp' })"
+          @clicked="$router.push({ name: 'MenuCategoryAdd' })"
           title="START ADDING MENU ITEMS"
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 px-10"
         />

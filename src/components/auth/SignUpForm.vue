@@ -133,6 +133,9 @@ export default {
         .catch(() => {});
     }
   },
+  destroyed() {
+    this.updateIsSignUpStarted(false);
+  },
   watch: {
     component(step) {
       this.$router.push({ name: 'SignUp', params: { step } }).catch(() => {});
@@ -157,7 +160,7 @@ export default {
 </script>
 
 <style scoped>
-.clear-margin {
+/deep/ .clear-margin {
   @apply m-0 !important;
 }
 </style>
