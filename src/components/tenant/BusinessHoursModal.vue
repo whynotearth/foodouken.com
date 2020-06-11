@@ -148,6 +148,11 @@ export default {
         });
       }
     }
+  },
+  watch: {
+    selectedDay() {
+      this.isActive = 'open';
+    }
   }
 };
 </script>
