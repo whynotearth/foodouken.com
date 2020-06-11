@@ -14,8 +14,7 @@ const state = {
   loginError: '',
   registerError: '',
   token: '',
-  isSignUpStarted: false,
-  isSignUpSuccessed: false
+  isSignUpStarted: false
 };
 
 const getters = {
@@ -39,10 +38,7 @@ const getters = {
   },
   isSignUpStarted(state) {
     return state.isSignUpStarted;
-  },
-  isSignUpSuccessed(state) {
-    return state.isSignUpSuccessed;
-  },
+  }
 };
 
 const actions = {
@@ -110,9 +106,6 @@ const mutations = {
   },
   updateIsSignUpStarted(state, payload) {
     state.isSignUpStarted = payload;
-  },
-  updateIsSignUpSuccessed(state, payload) {
-    state.isSignUpSuccessed = payload;
   }
 };
 

@@ -5,11 +5,12 @@
         Link your Facebook or Google account to get started!
       </h4>
     </div>
-    <AuthButtons @loginSuccess="loginSuccess"/>
+    <AuthButtons />
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import AuthButtons from '@/components/auth/AuthButtons';
 
 export default {
@@ -17,19 +18,14 @@ export default {
   components: {
     AuthButtons
   },
-  created() {
-    if (this.isSignUpSuccessed) {
+  async created() {
+    const user = await this.ping();
+    if (user && user.isAuthenticated) {
       this.$emit('nextStep');
     }
   },
   methods: {
-    ...mapMutations('auth', ['updateIsSignUpSuccessed']),
-    loginSuccess() {
-      this.updateIsSignUpSuccessed(true);
-    }
-  },
-  computed: {
-    ...mapGetters('auth', ['isSignUpSuccessed']),
+    ...mapActions('auth', ['ping'])
   }
 };
 </script>

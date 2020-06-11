@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     ...mapGetters('tenant', ['page']),
-    ...mapGetters('auth', ['isAuthenticated', 'isSignUpStarted', 'updateIsSignUpSuccessed']),
+    ...mapGetters('auth', ['isAuthenticated', 'isSignUpStarted']),
     component() {
       return this.navigation[this.page - 1].step;
     }
@@ -129,7 +129,6 @@ export default {
             params: { slug: res }
           });
           this.updateIsSignUpStarted(false);
-          this.updateIsSignUpSuccessed(false);
         })
         .catch(() => {});
     }
