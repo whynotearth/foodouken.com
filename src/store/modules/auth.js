@@ -70,14 +70,16 @@ const actions = {
   },
   logout(context, payload) {
     return new Promise((resolve, reject) => {
-      httpClient.get(`authentication/provider/logout?provider=${payload.provider}`).then(
-        () => {
-          context.dispatch('updateUser', defaultUser);
-        },
-        error => {
-          reject(error);
-        }
-      );
+      httpClient
+        .get(`authentication/provider/logout?provider=${payload.provider}`)
+        .then(
+          () => {
+            context.dispatch('updateUser', defaultUser);
+          },
+          error => {
+            reject(error);
+          }
+        );
     });
   }
 };

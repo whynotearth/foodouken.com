@@ -10,7 +10,11 @@
         <div class="my-4">
           <transition name="fade" mode="out-in">
             <keep-alive>
-              <component :is="component" :ref="component" @nextStep="nextStep"></component>
+              <component
+                :is="component"
+                :ref="component"
+                @nextStep="nextStep"
+              ></component>
             </keep-alive>
           </transition>
         </div>

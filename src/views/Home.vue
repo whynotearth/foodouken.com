@@ -34,7 +34,7 @@
           >
             <div
               class="relative overflow-hidden w-full"
-              style="padding-bottom: 45%"
+              style="padding-bottom: 45%;"
             >
               <img
                 :src="tenant.logo"

@@ -1,6 +1,6 @@
-const tenantMenuRoutes = [
+export const tenantCMSRoutes = [
   {
-    path: '/tenant/menu',
+    path: '/tenant/:tenantSlug/menu',
     name: 'Menu',
     component: () => import('@/views/Menu.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') },
@@ -79,5 +79,3 @@ const tenantMenuRoutes = [
     ]
   }
 ];
-
-module.exports = tenantMenuRoutes;
