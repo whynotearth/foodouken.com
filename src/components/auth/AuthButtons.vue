@@ -31,12 +31,6 @@ import googleLogo from '@/assets/google.png';
 
 export default {
   name: 'LinkAccount',
-  props: {
-    redirectToHome: {
-      type: Boolean,
-      default: false
-    }
-  },
   components: {
     Button
   },
@@ -69,11 +63,6 @@ export default {
       const redirectUrl = await this.oauthLink;
       window.location.assign(redirectUrl);
       await this.ping();
-
-      // If login is success and redirectToHome is true redirect to home
-      if (this.redirectToHome && this.getUser && this.getUser.isAuthenticated) {
-        this.$router.push({ name: 'Home' });
-      }
     },
     isLoggedInViaPovider(provider) {
       return (

@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="py-10 w-full md:w-auto px-5">
-      <AuthButtons :redirectToHome="true" />
+      <AuthButtons />
     </div>
   </div>
 </template>

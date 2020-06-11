@@ -131,7 +131,9 @@ export default {
       immediate: true,
       handler() {
         const stepFromUrl = this.$route.params.step;
-        const index = this.navigation.findIndex(nav => nav.step === stepFromUrl);
+        const index = this.navigation.findIndex(
+          nav => nav.step === stepFromUrl
+        );
 
         if (index >= 0) {
           this.pageChange(index + 1);
