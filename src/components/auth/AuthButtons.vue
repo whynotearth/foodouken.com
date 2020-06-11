@@ -52,7 +52,12 @@ export default {
     ...mapGetters('auth', {
       oauthLink: 'oauth'
     }),
-    ...mapGetters('auth', ['getUser'])
+    ...mapGetters('auth', ['getUser', 'isAuthenticated'])
+  },
+  created() {
+    if (this.isAuthenticated) {
+      this.$emit('loginSuccess')
+    }
   },
   methods: {
     ...mapMutations('auth', ['updateProvider']),

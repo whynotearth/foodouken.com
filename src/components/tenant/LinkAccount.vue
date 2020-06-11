@@ -17,10 +17,19 @@ export default {
   components: {
     AuthButtons
   },
-  methods: {
-    loginSuccess() {
+  created() {
+    if (this.isSignUpSuccessed) {
       this.$emit('nextStep');
     }
+  },
+  methods: {
+    ...mapMutations('auth', ['updateIsSignUpSuccessed']),
+    loginSuccess() {
+      this.updateIsSignUpSuccessed(true);
+    }
+  },
+  computed: {
+    ...mapGetters('auth', ['isSignUpSuccessed']),
   }
 };
 </script>

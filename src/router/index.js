@@ -58,8 +58,8 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta.requiresAuth) {
     const pingResult = await store.dispatch('auth/ping');
 
-    if (pingResult === 'IS_LOGGED_OUT') {
-      await router.push({ name: 'Welcome' });
+    if (!pingResult) {
+      next({ name: 'Welcome' });
     }
 
     if (pingResult.isAuthenticated) {

@@ -81,7 +81,7 @@ export default {
     };
   },
   created() {
-    if (this.getUser && this.getUser.isAuthenticated && !this.isSignUpStarted) {
+    if (this.isAuthenticated && !this.isSignUpStarted) {
       this.$router.push({ name: 'Business' });
     } else {
       this.updateIsSignUpStarted(true);
@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     ...mapGetters('tenant', ['page']),
-    ...mapGetters('auth', ['getUser', 'isSignUpStarted']),
+    ...mapGetters('auth', ['isAuthenticated', 'isSignUpStarted', 'updateIsSignUpSuccessed']),
     component() {
       return this.navigation[this.page - 1].step;
     }
@@ -129,6 +129,7 @@ export default {
             params: { slug: res }
           });
           this.updateIsSignUpStarted(false);
+          this.updateIsSignUpSuccessed(false);
         })
         .catch(() => {});
     }
