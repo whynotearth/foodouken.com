@@ -50,7 +50,7 @@
         Inventory
       </span>
       <MaterialInput
-        v-model="itemInventory"
+        v-model.number="itemInventory"
         label="Available"
         labelBg="bg-background"
       />
