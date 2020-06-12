@@ -4,20 +4,20 @@ export const authRoutes = [
   {
     path: '/welcome',
     name: 'Welcome',
-    component: () => import('@/views/Welcome.vue'),
+    component: () => import('@/views/AuthWelcome.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
     path: '/auth/sign-up/:step',
     name: 'SignUp',
     props: true,
-    component: () => import('@/views/SignUp.vue'),
+    component: () => import('@/views/AuthSignUp.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
     path: '/auth/login',
     name: 'LogIn',
-    component: () => import('@/views/LogIn.vue'),
+    component: () => import('@/views/AuthLogIn.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') },
     beforeEnter: (to, from, next) => {
       const userAuthenticated =
