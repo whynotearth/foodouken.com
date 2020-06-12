@@ -26,17 +26,20 @@ const router = new VueRouter({
   routes
 });
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    const pingResult = await store.dispatch('auth/ping');
-
-    if (!pingResult) {
-      next({ name: 'Welcome' });
-    }
-
-    if (pingResult.isAuthenticated) {
-      next();
-    }
+    store
+      .dispatch('auth/ping')
+      .then(user => {
+        if (user && user.isAuthenticated) {
+          next();
+        } else {
+          throw new Error('User is not logged in');
+        }
+      })
+      .catch(() => {
+        next({ name: 'Welcome' });
+      });
   } else {
     next();
   }
