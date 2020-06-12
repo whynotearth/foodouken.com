@@ -20,7 +20,7 @@
         background="border bg-background border-white border-opacity-38"
       />
       <MaterialInput
-        v-model="itemPrice"
+        v-model.number="itemPrice"
         label="Price"
         labelBg="bg-background"
       />
