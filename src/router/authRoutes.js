@@ -19,7 +19,7 @@ export const authRoutes = [
     name: 'LogIn',
     component: () => import('@/views/AuthLogIn.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') },
-    beforeEnter: async (to, from, next) => {
+    beforeEnter: (to, from, next) => {
       const userAuthenticated = store.getters['auth/isAuthenticated'];
       if (userAuthenticated) {
         next({ name: 'MenuCategoryList' });
