@@ -136,8 +136,6 @@ export default {
   },
   methods: {
     toggleMenu() {
-      console.log('hell');
-
       this.isOpen = !this.isOpen;
     }
   }
