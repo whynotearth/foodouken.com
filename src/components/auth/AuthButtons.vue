@@ -56,13 +56,12 @@ export default {
   },
   methods: {
     ...mapMutations('auth', ['updateProvider']),
-    ...mapActions('auth', ['updateReturnUrl', 'ping']),
+    ...mapActions('auth', ['updateReturnUrl']),
     async oauth(provider) {
       await this.updateProvider(provider);
       await this.updateReturnUrl(window.location.href);
       const redirectUrl = await this.oauthLink;
       window.location.assign(redirectUrl);
-      await this.ping();
     },
     isLoggedInViaPovider(provider) {
       return (

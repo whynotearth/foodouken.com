@@ -26,7 +26,10 @@ Vue.use(VueMeta, {
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
   store,
+  beforeCreate() {
+    store.dispatch('auth/ping');
+  },
+  router,
   render: h => h(App)
 }).$mount('#app');

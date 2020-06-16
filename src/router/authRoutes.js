@@ -19,14 +19,20 @@ export const authRoutes = [
     name: 'LogIn',
     component: () => import('@/views/AuthLogIn.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') },
-    beforeEnter: (to, from, next) => {
-      const userAuthenticated =
-        store.getters['auth/getUser'] &&
-        store.getters['auth/getUser'].isAuthenticated;
+    beforeEnter: async (to, from, next) => {
+      const userAuthenticated = store.getters['auth/isAuthenticated'];
       if (userAuthenticated) {
-        return next({ name: 'MenuCategoryList' });
+        next({ name: 'MenuCategoryList' });
+      } else {
+        store
+          .dispatch('auth/ping')
+          .then(() => {
+            next({ name: 'MenuCategoryList' });
+          })
+          .catch(() => {
+            next();
+          });
       }
-      next();
     }
   },
   {

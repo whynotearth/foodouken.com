@@ -56,25 +56,31 @@ const actions = {
   },
   ping(context) {
     return new Promise((resolve, reject) => {
-      httpClient.get('authentication/ping').then(
-        response => {
+      httpClient
+        .get('authentication/ping')
+        .then(response => {
           context.dispatch('updateUser', response.data);
           resolve(response.data);
-        },
-        error => {
+        })
+        .catch(error => {
+          const isStatus401 = error.response && error.response.status;
           context.dispatch('updateUser', defaultUser);
-          reject(error);
-        }
-      );
+          if (isStatus401) {
+            reject('IS_LOGGED_OUT');
+          } else {
+            reject(error);
+          }
+        });
     });
   },
   logout(context, payload) {
     return new Promise((resolve, reject) => {
       httpClient
-        .get(`authentication/provider/logout?provider=${payload.provider}`)
+        .post(`authentication/provider/logout?provider=${payload.provider}`)
         .then(
           () => {
             context.dispatch('updateUser', defaultUser);
+            resolve('Log Out Successful');
           },
           error => {
             reject(error);
