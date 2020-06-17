@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex w-full relative bottom-0 bg-transparent z-100 shadow-inner-8dp"
+    class="flex w-full fixed bottom-0 bg-transparent z-100 shadow-inner-8dp"
     id="bottom-nav"
   >
     <div class="flex flex-auto">
@@ -8,7 +8,7 @@
       <div class="container container--border px-0">
         <div class="flex relative">
           <ul
-            class="flex-auto flex justify-around text-left menu list-none bg-primary px-2 md:px-0"
+            class="flex-auto flex text-left menu list-none bg-primary px-2 md:px-0"
           >
             <li class="text-white inline-block m-2 mb-1 tg-caption-mobile">
               <router-link
@@ -203,7 +203,7 @@ ul.toggle-menu.opened > li:nth-child(2) {
 .router-active-link svg path {
   @apply opacity-100;
 
-  fill: #0e9ec2;
+  fill: #fff;
   fill-opacity: 1;
 }
 
