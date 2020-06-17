@@ -6,11 +6,6 @@
 
     <template #content class="container">
       <div>
-        <settings-button title="My Account" to-link="Account"></settings-button>
-        <settings-button
-          title="My Business"
-          to-link="Business"
-        ></settings-button>
         <settings-button v-slot="{ linkStyling }">
           <button @click.prevent="signOut()" :class="linkStyling">
             <span class="mr-2 text-error">Log Out</span>

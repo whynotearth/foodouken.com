@@ -105,10 +105,10 @@
 <script>
 import AddIcon from '@/assets/actions.svg';
 import HomeIcon from '@/assets/home.svg';
-import BookingIcon from '@/assets/booking.svg';
+// import BookingIcon from '@/assets/booking.svg';
 import ShoppingCartIcon from '@/assets/shopping-cart.svg';
 import CreateIcon from '@/assets/create.svg';
-import TimeIcon from '@/assets/time.svg';
+// import TimeIcon from '@/assets/time.svg';
 
 import BottomNavFrame from '@/assets/bottom-nav-frame.png';
 export default {
@@ -116,10 +116,10 @@ export default {
   components: {
     AddIcon,
     HomeIcon,
-    BookingIcon,
+    // BookingIcon,
     ShoppingCartIcon,
     CreateIcon,
-    TimeIcon
+    // TimeIcon
   },
   data() {
     return {
