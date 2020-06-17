@@ -3,7 +3,7 @@
     <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
       <div v-show="!getLoading">
-        <BaseSiteBanner title="Maintenance Mode" />
+        <BaseSiteBanner v-if="maintenanceMode" title="Maintenance Mode" />
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
         />
@@ -20,6 +20,11 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'DefaultLayout',
   components: { Spinner, BaseSiteBanner },
+  data() {
+    return {
+      maintenanceMode: false
+    };
+  },
   computed: {
     ...mapGetters('home', ['getLoading'])
   }
