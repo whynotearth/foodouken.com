@@ -159,9 +159,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.clear-margin {
-  @apply m-0 !important;
-}
-</style>

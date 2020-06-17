@@ -1,5 +1,5 @@
 <template>
-  <div class="clear">
+  <div class="clear-margin clear-max-width">
     <SignUpForm />
   </div>
 </template>
@@ -14,9 +14,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.clear {
-  @apply max-w-none mx-0 !important;
-}
-</style>
