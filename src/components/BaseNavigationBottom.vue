@@ -197,7 +197,7 @@ ul.toggle-menu.opened > li:nth-child(2) {
 }
 
 .router-active-link {
-  @apply text-button opacity-100;
+  @apply text-white opacity-100;
 }
 
 .router-active-link svg path {
