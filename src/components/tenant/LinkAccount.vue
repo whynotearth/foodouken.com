@@ -18,11 +18,14 @@ export default {
   components: {
     AuthButtons
   },
-  async created() {
-    const user = await this.ping().catch(() => {});
-    if (user && user.isAuthenticated) {
-      this.$emit('nextStep');
-    }
+  created() {
+    this.ping()
+      .then(result => {
+        if (result && result.isAuthenticated) {
+          this.$emit('nextStep');
+        }
+      })
+      .catch(() => {});
   },
   methods: {
     ...mapActions('auth', ['ping'])
