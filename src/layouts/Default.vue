@@ -17,8 +17,16 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'DefaultLayout',
+<<<<<<< HEAD
   components: {
     Spinner
+=======
+  components: { Spinner, BaseSiteBanner },
+  data() {
+    return {
+      maintenanceMode: false
+    };
+>>>>>>> f7e1e8c... chore: disable maintenance mode
   },
   computed: {
     ...mapGetters('home', ['getLoading'])

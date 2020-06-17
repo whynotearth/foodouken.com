@@ -26,6 +26,11 @@ export default {
     Spinner,
     CreditFooter
   },
+  data() {
+    return {
+      maintenanceMode: false
+    };
+  },
   computed: {
     ...mapGetters('shop', ['getLoading'])
   }
