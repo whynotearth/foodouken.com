@@ -151,12 +151,14 @@ export default {
 }
 
 .toggle-button:hover {
-  background: #03b3f9;
+  @apply bg-button;
+
   transition: background ease-in 0.6s;
 }
 
 .toggle-button:active {
-  background: #fff;
+  @apply bg-white;
+
   transition: background ease-in 0.6s;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -171,19 +173,21 @@ export default {
 }
 
 ul.toggle-menu > li {
+  @apply bg-transparent;
+
   transition: all 0.2s ease;
-  color: transparent;
+}
+
+ul.toggle-menu.opened > li:nth-child(1),
+ul.toggle-menu.opened > li:nth-child(2) {
+  @apply text-white;
 }
 
 ul.toggle-menu.opened > li:nth-child(1) {
-  transition-duration: 450ms;
-  color: #fff;
   top: -70px;
 }
 
 ul.toggle-menu.opened > li:nth-child(2) {
-  color: #fff;
-  transition-duration: 450ms;
   top: -130px;
 }
 
@@ -209,10 +213,7 @@ ul.toggle-menu.opened > li:nth-child(2) {
 
 .container--border {
   @screen md {
-    border-left: 24px solid;
-    border-right: 24px solid;
-
-    @apply border-primary;
+    @apply border-primary border-solid border-l-24 border-r-24;
   }
 }
 </style>
