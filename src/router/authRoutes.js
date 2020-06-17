@@ -20,19 +20,18 @@ export const authRoutes = [
     component: () => import('@/views/AuthLogIn.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') },
     beforeEnter: (to, from, next) => {
-      const userAuthenticated = store.getters['auth/isAuthenticated'];
-      if (userAuthenticated) {
-        next({ name: 'MenuCategoryList' });
-      } else {
-        store
-          .dispatch('auth/ping')
-          .then(() => {
+      store
+        .dispatch('auth/ping')
+        .then(response => {
+          if (response.isAuthenticated) {
             next({ name: 'MenuCategoryList' });
-          })
-          .catch(() => {
-            next();
-          });
-      }
+          } else {
+            throw new Error('USER_NOT_LOGGED_IN');
+          }
+        })
+        .catch(() => {
+          next();
+        });
     }
   },
   {

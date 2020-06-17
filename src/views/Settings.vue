@@ -24,7 +24,7 @@ import BaseAppBarHeader from '@/components/BaseAppBarHeader.vue';
 import SettingsButton from '@/components/settings/SettingsButton.vue';
 import arrowForward from '@/assets/arrow-forward.png';
 import BaseNavigationBottom from '@/components/BaseNavigationBottom.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'SettingsPage',
@@ -38,20 +38,12 @@ export default {
       arrowForward
     };
   },
-  computed: {
-    ...mapGetters('auth', ['getUser'])
-  },
   methods: {
     ...mapActions('auth', ['logout']),
     signOut() {
-      const payload = {
-        provider: this.getUser.loginProviders && this.getUser.loginProviders[0]
-      };
-      if (payload.provider) {
-        this.logout(payload).then(() => {
-          this.$router.push({ name: 'Welcome' });
-        });
-      }
+      this.logout().then(() => {
+        this.$router.push({ name: 'Welcome' });
+      });
     }
   }
 };

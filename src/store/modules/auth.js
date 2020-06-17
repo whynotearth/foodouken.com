@@ -1,37 +1,15 @@
 import { httpClient } from '@/services/httpClient';
 
-const defaultUser = {
-  id: 0,
-  isAuthenticated: false,
-  userName: ''
-};
-
 const state = {
-  user: defaultUser,
+  isAuthenticated: false,
   provider: '',
   returnURL: '',
-  loading: false,
-  loginError: '',
-  registerError: '',
-  token: '',
   isSignUpStarted: false
 };
 
 const getters = {
-  getToken(state) {
-    return state.token;
-  },
-  getUser(state) {
-    return state.user;
-  },
   isAuthenticated(state) {
-    return state.user.isAuthenticated;
-  },
-  loginError(state) {
-    return state.loginError;
-  },
-  registerError(state) {
-    return state.registerError;
+    return state.isAuthenticated;
   },
   oauth(state) {
     return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}`;
@@ -42,44 +20,31 @@ const getters = {
 };
 
 const actions = {
-  updateLoginError(context, payload) {
-    context.commit('updateLoginError', payload);
-  },
-  updateReturnUrl(context, payload) {
-    context.commit('updateReturnUrl', payload);
-  },
-  updateToken(context, payload) {
-    context.commit('updateToken', payload);
-  },
-  updateUser(context, payload) {
-    context.commit('updateUser', payload);
-  },
-  ping(context) {
+  ping({ commit }) {
     return new Promise((resolve, reject) => {
       httpClient
         .get('authentication/ping')
         .then(response => {
-          context.dispatch('updateUser', response.data);
+          const isAuthenticated = !!response.data.isAuthenticated;
+          commit('updateIsAuthenticated', isAuthenticated);
+          commit('updateProvider', response.data.loginProviders[0]);
           resolve(response.data);
         })
         .catch(error => {
-          const isStatus401 = error.response && error.response.status;
-          context.dispatch('updateUser', defaultUser);
-          if (isStatus401) {
-            reject('IS_LOGGED_OUT');
-          } else {
-            reject(error);
-          }
+          commit('updateIsAuthenticated', false);
+          commit('updateProvider', '');
+          reject(error);
         });
     });
   },
-  logout(context, payload) {
+  logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       httpClient
-        .post(`authentication/provider/logout?provider=${payload.provider}`)
+        .post(`authentication/provider/logout?provider=${state.provider}`)
         .then(
           () => {
-            context.dispatch('updateUser', defaultUser);
+            commit('updateIsAuthenticated', false);
+            commit('updateProvider', '');
             resolve('Log Out Successful');
           },
           error => {
@@ -91,29 +56,17 @@ const actions = {
 };
 
 const mutations = {
-  updateLoginError(state, payload) {
-    state.loginError = payload;
-  },
-  updateRegisterError(state, payload) {
-    state.registerError = payload;
-  },
   updateProvider(state, payload) {
     state.provider = payload;
-  },
-  updateLoading(state, payload) {
-    state.loading = payload;
-  },
-  updateUser(state, payload) {
-    state.user = payload;
-  },
-  updateToken(state, payload) {
-    state.token = payload;
   },
   updateReturnUrl(state, payload) {
     state.returnURL = payload;
   },
   updateIsSignUpStarted(state, payload) {
     state.isSignUpStarted = payload;
+  },
+  updateIsAuthenticated(state, payload) {
+    state.isAuthenticated = payload;
   }
 };
 
