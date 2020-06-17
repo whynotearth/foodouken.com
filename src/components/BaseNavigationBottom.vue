@@ -21,6 +21,7 @@
                 Home
               </router-link>
             </li>
+            <!--
             <li class="text-white inline-block m-2 mb-1 tg-caption-mobile">
               <router-link
                 :active-class="'router-active-link'"
@@ -41,6 +42,7 @@
                 In progress
               </router-link>
             </li>
+            -->
           </ul>
           <img class="h-14 m-auto" :src="BottomNavFrame" />
           <ul
