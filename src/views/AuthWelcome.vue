@@ -19,20 +19,14 @@
     <div class="py-10 w-full md:w-auto px-5">
       <div class="py-3">
         <Button
-          @clicked="
-            $router.push(
-              isAuthenticated
-                ? { name: 'Business' }
-                : { name: 'SignUp', params: { step: 'business-info' } }
-            )
-          "
+          :to="{ name: 'SignUp', params: { step: 'business-info' } }"
           title="START SETTING UP YOUR BUSINESS"
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 px-10"
         />
       </div>
       <div class="py-3 text-center">
         <Button
-          :to="{ name: isAuthenticated ? 'MenuCategoryList' : 'LogIn' }"
+          :to="{ name: 'LogIn' }"
           class="hyperlink-text text-white text-opacity-54 normal-case"
           title="Already have an account? Log in!"
           buttonBg="bg-transparent"
@@ -44,7 +38,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import Button from '@/components/Button.vue';
 import foodoukenLogo from '@/assets/foodouken.png';
 
@@ -57,9 +50,6 @@ export default {
     return {
       foodoukenLogo
     };
-  },
-  computed: {
-    ...mapGetters('auth', ['isAuthenticated'])
   }
 };
 </script>

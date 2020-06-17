@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="clear-margin clear-max-width">
     <BaseAppBarHeader title="Settings" />
     <div>
       <!--

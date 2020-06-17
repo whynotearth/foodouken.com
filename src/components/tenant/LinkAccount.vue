@@ -19,7 +19,7 @@ export default {
     AuthButtons
   },
   async created() {
-    const user = await this.ping();
+    const user = await this.ping().catch(() => {});
     if (user && user.isAuthenticated) {
       this.$emit('nextStep');
     }

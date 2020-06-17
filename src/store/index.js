@@ -16,7 +16,7 @@ const vuexLocal = new VuexPersistence({
   key: 'localstore'
 });
 
-const vuexionSession = new VuexPersistence({
+const vuexSession = new VuexPersistence({
   storage: window.sessionStorage,
   modules: ['auth'],
   key: 'sessionstore'
@@ -25,7 +25,7 @@ const vuexionSession = new VuexPersistence({
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  plugins: [vuexLocal.plugin, vuexionSession.plugin],
+  plugins: [vuexLocal.plugin, vuexSession.plugin],
   modules: {
     home,
     category,
