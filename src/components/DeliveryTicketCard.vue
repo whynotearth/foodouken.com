@@ -6,9 +6,7 @@
           <div class="flex justify-center items-center w-4 h-4">
             <img src="../assets/person.png" alt="" />
           </div>
-          <h3 class="pl-4 tg-body-mobile text-white text-opacity-84">
-            Paul Chris Luke
-          </h3>
+          <h3 class="pl-4 tg-body-mobile text-white text-opacity-84">Paul Chris Luke</h3>
         </div>
         <div>
           <img class="w-5 h-5" src="../assets/phone.png" alt="" />
@@ -41,9 +39,7 @@
     </div>
     <hr class="opacity-84" />
     <div>
-      <div
-        class="py-2 flex justify-between tg-body-mobile text-white text-opacity-84"
-      >
+      <div class="py-2 flex justify-between tg-body-mobile text-white text-opacity-84">
         <span>Total</span>
         <span>$26</span>
       </div>
