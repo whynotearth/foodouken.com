@@ -52,16 +52,6 @@ export default {
 </script>
 
 <style scoped>
-.disable-scrollbars::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* Chrome/Safari/Webkit */
-}
-
-.disable-scrollbars {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-}
-
 .deleteMargins {
   margin-left: -1.2rem;
   margin-right: -1.2rem;

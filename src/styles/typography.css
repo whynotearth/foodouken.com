@@ -1,0 +1,153 @@
+@responsive {
+  /* Desktop */
+  .tg-h1-desktop {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4rem;
+    line-height: 5.438rem;
+  }
+
+  .tg-h2-desktop {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 4.063rem;
+  }
+
+  .tg-h3-desktop {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.25rem;
+    line-height: 3.063rem;
+  }
+
+  .tg-desktop-body {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2rem;
+    line-height: 2.75rem;
+  }
+
+  .tg-desktop-body-bold {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 2.75rem;
+  }
+
+  .tg-desktop-caption {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.5rem;
+    line-height: 2.063rem;
+  }
+
+  .tg-desktop-bolded-caption {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 2.063rem;
+  }
+
+  .tg-desktop-color-label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 2.375rem;
+    text-transform: uppercase;
+  }
+
+  .tg-desktop-story-titles {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.125rem;
+    line-height: 0.688rem;
+  }
+
+  .tg-desktop-bolded-story-titles {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.125rem;
+    line-height: 0.688rem;
+  }
+
+  /* Mobile */
+  .tg-h1-mobile {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 2.75rem;
+  }
+
+  .tg-h2-mobile {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 2.063rem;
+  }
+
+  .tg-h3-mobile {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.125rem;
+    line-height: 1.563rem;
+  }
+
+  .tg-body-mobile {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.375rem;
+  }
+
+  .tg-body-mobile-bold {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.375rem;
+  }
+
+  .tg-caption-mobile {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .tg-caption-bold-mobile {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .tg-mobile-story-titles {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.563rem;
+    line-height: 0.688rem;
+  }
+
+  .tg-mobile-bolded-story-titles {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.563rem;
+    line-height: 0.688rem;
+  }
+
+  .tg-color-label-mobile {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.188rem;
+    text-transform: uppercase;
+  }
+
+  .hyperlink-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-decoration: underline;
+  }
+}

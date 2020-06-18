@@ -1,39 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '../store';
+
+import { customerViewRoutes } from './customerViewRoutes';
+import { tenantCMSRoutes } from './tenantCMSRoutes';
+import { authRoutes } from './authRoutes';
+import { settingRoutes } from './settingRoutes';
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/views/Home.vue'),
-    meta: { layout: () => import('@/layouts/Default.vue') }
-  },
-  {
-    path: '/shop/:slug/:orderingStepSlug?',
-    name: 'Shop',
-    component: () => import('@/views/Shop.vue'),
-    meta: { layout: () => import('@/layouts/ShopLayout.vue') }
-  },
-  {
-    path: '/settings',
-    name: 'Settings',
-    component: () => import('@/views/Settings.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
-  {
-    path: '/settings/account',
-    name: 'Account',
-    component: () => import('@/views/Account.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
-  {
-    path: '/settings/business',
-    name: 'Business',
-    component: () => import('@/views/Business.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
-  },
+  ...customerViewRoutes,
+  ...settingRoutes,
+  ...tenantCMSRoutes,
+  ...authRoutes,
   {
     path: '/dashboard',
     name: 'Dashboard',
@@ -50,6 +30,25 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  store
+    .dispatch('auth/ping')
+    .then(response => {
+      if (response && response.isAuthenticated) {
+        next();
+      } else {
+        throw new Error();
+      }
+    })
+    .catch(() => {
+      if (!to.meta.requiresAuth) {
+        return next();
+      } else {
+        next({ name: 'Welcome' });
+      }
+    });
 });
 
 export default router;

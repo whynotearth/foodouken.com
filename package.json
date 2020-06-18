@@ -11,17 +11,20 @@
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "register-service-worker": "^1.6.2",
-    "tailwindcss": "^1.2.0",
+    "tailwindcss": "^1.4.6",
     "typeface-open-sans": "0.0.75",
+    "v-click-outside": "^3.0.1",
     "vue": "^2.6.11",
     "vue-carousel": "^0.18.0",
     "vue-meta": "^2.3.3",
     "vue-router": "^3.1.5",
+    "vue-smooth-picker": "^0.4.2",
     "vuelidate": "^0.7.5",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "vuex-persist": "^2.2.0"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.2.0",
+    "@fullhuman/postcss-purgecss": "^2.1.0",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-plugin-pwa": "~4.2.0",
@@ -33,11 +36,10 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.1.2",
-    "postcss-nested": "^4.2.1",
-    "postcss-pxtorem": "^5.1.1",
     "prettier": "^1.19.1",
-    "stylelint": "^13.4.0",
+    "stylelint": "^13.5.0",
     "stylelint-config-standard": "^20.0.0",
+    "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

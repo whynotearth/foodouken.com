@@ -34,25 +34,25 @@ Your job is to create manipulate the API to be better suited for food delivery. 
 ## Project setup
 
 ```
-npm install
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```
-npm run serve
+yarn run serve
 ```
 
 ### Compiles and minifies for production
 
 ```
-npm run build
+yarn run build
 ```
 
 ### Lints and fixes files
 
 ```
-npm run lint
+yarn run lint
 ```
 
 ### Customize configuration
@@ -62,3 +62,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Detailed new contributor guide
 
 For more detailed assistance Visit **[New contributor guide](https://github.com/whynotearth/whynot.earth/wiki/New-Contributor-Guide)**
+
+### Special notes
+
+- Branches will get auto deleted upon merge.
+- When using `text-opacity-{opacity}` utilities, make sure to provide a `text-{color}` class too, do not rely on base color.

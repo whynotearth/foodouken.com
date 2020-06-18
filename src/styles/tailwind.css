@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './typography.css';
+@import './scrollbars.css';
+@import './animations.css';
+
+.clear-margin {
+  @apply mx-0 !important;
+}
+
+.clear-max-width {
+  @apply max-w-none !important;
+}
