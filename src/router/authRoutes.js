@@ -12,7 +12,24 @@ export const authRoutes = [
     name: 'SignUp',
     props: true,
     component: () => import('@/views/AuthSignUp.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') },
+    beforeEnter: (to, from, next) => {
+      store
+        .dispatch('auth/ping')
+        .then(response => {
+          if (
+            response.isAuthenticated &&
+            !store.getters['auth/isSignUpStarted']
+          ) {
+            next({ name: 'Settings' });
+          } else {
+            throw new Error('USER_NOT_LOGGED_IN');
+          }
+        })
+        .catch(() => {
+          next();
+        });
+    }
   },
   {
     path: '/auth/login',
@@ -20,13 +37,18 @@ export const authRoutes = [
     component: () => import('@/views/AuthLogIn.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') },
     beforeEnter: (to, from, next) => {
-      const userAuthenticated =
-        store.getters['auth/getUser'] &&
-        store.getters['auth/getUser'].isAuthenticated;
-      if (userAuthenticated) {
-        return next({ name: 'MenuCategoryList' });
-      }
-      next();
+      store
+        .dispatch('auth/ping')
+        .then(response => {
+          if (response.isAuthenticated) {
+            next({ name: 'MenuCategoryList' });
+          } else {
+            throw new Error('USER_NOT_LOGGED_IN');
+          }
+        })
+        .catch(() => {
+          next();
+        });
     }
   },
   {

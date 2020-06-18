@@ -27,22 +27,22 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    store
-      .dispatch('auth/ping')
-      .then(user => {
-        if (user && user.isAuthenticated) {
-          next();
-        } else {
-          throw new Error('User is not logged in');
-        }
-      })
-      .catch(() => {
+  store
+    .dispatch('auth/ping')
+    .then(response => {
+      if (response && response.isAuthenticated) {
+        next();
+      } else {
+        throw new Error();
+      }
+    })
+    .catch(() => {
+      if (!to.meta.requiresAuth) {
+        return next();
+      } else {
         next({ name: 'Welcome' });
-      });
-  } else {
-    next();
-  }
+      }
+    });
 });
 
 export default router;

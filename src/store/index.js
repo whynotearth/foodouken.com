@@ -12,14 +12,20 @@ import VuexPersistence from 'vuex-persist';
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
-  modules: ['auth', 'tenant'],
-  key: 'store'
+  modules: ['tenant'],
+  key: 'localstore'
+});
+
+const vuexSession = new VuexPersistence({
+  storage: window.sessionStorage,
+  modules: ['auth'],
+  key: 'sessionstore'
 });
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  plugins: [vuexLocal.plugin],
+  plugins: [vuexLocal.plugin, vuexSession.plugin],
   modules: {
     home,
     category,

@@ -118,7 +118,7 @@ export default {
     HomeIcon,
     // BookingIcon,
     ShoppingCartIcon,
-    CreateIcon,
+    CreateIcon
     // TimeIcon
   },
   data() {
