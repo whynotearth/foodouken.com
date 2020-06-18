@@ -4,7 +4,7 @@ const colors = require('./src/styles/colors');
 const opacity = require('./src/styles/opacity');
 
 module.exports = {
-  purge: ['./src/**/*.html', './src/**/*.vue'],
+  purge: ['./public/**/*.html', './src/**/*.vue'],
   theme: {
     extend: {
       boxShadow,
@@ -16,7 +16,10 @@ module.exports = {
       },
       spacing: {
         '0.5': '0.125rem',
-        '1.5': '0.375rem'
+        '1.5': '0.375rem',
+        '14': '3.5rem',
+        '128': '32rem',
+        '160': '40rem'
       },
       fontFamily: {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans]

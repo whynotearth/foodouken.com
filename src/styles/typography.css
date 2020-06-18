@@ -142,4 +142,12 @@
     line-height: 1.188rem;
     text-transform: uppercase;
   }
+
+  .hyperlink-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-decoration: underline;
+  }
 }
