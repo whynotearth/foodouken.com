@@ -46,7 +46,7 @@
       class="mb-2"
     >
       <template #title="{ selectedOption }">
-        <span v-if="timeSlots.length === 0" class="text-gray-500">
+        <span v-if="timeSlots.length === 0">
           Store closed on this day
         </span>
         <span v-else-if="selectedOption">

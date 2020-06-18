@@ -80,14 +80,6 @@ export default {
     remove() {
       this.$store.dispatch('cart/removeCartProduct', this.cartItem.product);
     }
-  },
-  computed: {
-    cartItemTitle() {
-      let cartItemTitle = this.cartItem.product.name;
-      return cartItemTitle.length > 15
-        ? cartItemTitle.slice(0, 15) + '...'
-        : cartItemTitle;
-    }
   }
 };
 </script>
