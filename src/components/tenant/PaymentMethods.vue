@@ -18,18 +18,32 @@
         />
       </div>
     </div>
+    <div
+      v-if="
+        $v.selectedPaymentMethods.$dirty && $v.selectedPaymentMethods.$invalid
+      "
+      class="text-red-600 text-xs"
+    >
+      You should provide at least one payment method.
+    </div>
   </div>
 </template>
 
 <script>
 import CheckBox from '@/components/inputs/CheckBox';
 import { mapState, mapGetters, mapMutations } from 'vuex';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
   name: 'PaymentMethods',
   components: { CheckBox },
   data() {
     return {};
+  },
+  validations: {
+    selectedPaymentMethods: {
+      required
+    }
   },
   computed: {
     ...mapState('tenant', ['paymentMethods']),

@@ -27,6 +27,15 @@
           </template>
         </CheckBox>
       </div>
+      <div
+        v-if="
+          $v.selectedNotificationTypes.$dirty &&
+            $v.selectedNotificationTypes.$invalid
+        "
+        class="text-red-600 text-xs"
+      >
+        You should provide at least one notification method.
+      </div>
     </div>
   </div>
 </template>
@@ -34,12 +43,18 @@
 <script>
 import CheckBox from '@/components/inputs/CheckBox';
 import { mapState, mapGetters, mapMutations } from 'vuex';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
   name: 'Notifications',
   components: { CheckBox },
   data() {
     return {};
+  },
+  validations: {
+    selectedNotificationTypes: {
+      required
+    }
   },
   computed: {
     ...mapState('tenant', ['notificationTypes']),
