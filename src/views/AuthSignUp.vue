@@ -13,14 +13,11 @@ export default {
   components: {
     SignUpForm
   },
-  created() {
-    this.updateIsSignUpStarted(true);
+  methods: {
+    ...mapMutations('tenant', ['resetCreateTenantForm'])
   },
   destroyed() {
-    this.updateIsSignUpStarted(false);
-  },
-  methods: {
-    ...mapMutations('auth', ['updateIsSignUpStarted'])
+    this.resetCreateTenantForm();
   }
 };
 </script>

@@ -39,6 +39,17 @@ const days = [
   'Sunday'
 ];
 
+const defaultNotificationTypes = ['whatsapp'];
+const defaultPaymentMethods = ['cash'];
+const defaultBusinessHours = days.map(day => {
+  return {
+    dayOfWeek: day.toLocaleLowerCase(),
+    isClosed: false,
+    openingTime: '08:00:00',
+    closingTime: '18:00:00'
+  };
+});
+
 const state = {
   businessInfo: {
     name: '',
@@ -46,16 +57,9 @@ const state = {
     phone: '',
     description: ''
   },
-  selectedNotificationType: ['whatsapp'],
-  selectedPaymentMethods: ['cash'],
-  businessHours: days.map(day => {
-    return {
-      dayOfWeek: day.toLocaleLowerCase(),
-      isClosed: false,
-      openingTime: '08:00:00',
-      closingTime: '18:00:00'
-    };
-  }),
+  selectedNotificationType: [...defaultNotificationTypes],
+  selectedPaymentMethods: [...defaultPaymentMethods],
+  businessHours: [...defaultBusinessHours],
   page: 1,
   notificationTypes,
   paymentMethods
@@ -140,6 +144,15 @@ const mutations = {
   },
   updateBusinessHours(state, payload) {
     state.businessHours = payload;
+  },
+  resetCreateTenantForm(state) {
+    state.businessInfo.name = '';
+    state.businessInfo.email = '';
+    state.businessInfo.phone = '';
+    state.businessInfo.description = '';
+    state.selectedNotificationType = defaultNotificationTypes;
+    state.paymentMethodTypes = defaultPaymentMethods;
+    state.businessHours = defaultBusinessHours;
   }
 };
 

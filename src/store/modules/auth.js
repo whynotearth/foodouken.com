@@ -2,16 +2,12 @@ import { httpClient } from '@/services/httpClient';
 
 const state = {
   provider: '',
-  returnURL: '',
-  isSignUpStarted: false
+  returnURL: ''
 };
 
 const getters = {
   oauth(state) {
     return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}`;
-  },
-  isSignUpStarted(state) {
-    return state.isSignUpStarted;
   }
 };
 
@@ -53,9 +49,6 @@ const mutations = {
   },
   updateReturnUrl(state, payload) {
     state.returnURL = payload;
-  },
-  updateIsSignUpStarted(state, payload) {
-    state.isSignUpStarted = payload;
   }
 };
 
