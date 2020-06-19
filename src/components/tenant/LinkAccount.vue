@@ -41,7 +41,10 @@ export default {
       .then(result => {
         if (result && result.isAuthenticated) {
           this.isAuthenticated = true;
-          this.$emit('nextStep');
+        }
+
+        if (this.$router.history._startLocation.includes(this.$route.params.step) && this.$route.hash) {
+            this.$emit('nextStep');
         }
       })
       .catch(() => {

@@ -12,24 +12,7 @@ export const authRoutes = [
     name: 'SignUp',
     props: true,
     component: () => import('@/views/AuthSignUp.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') },
-    beforeEnter: (to, from, next) => {
-      store
-        .dispatch('auth/ping')
-        .then(response => {
-          if (
-            response.isAuthenticated &&
-            !store.getters['auth/isSignUpStarted']
-          ) {
-            next({ name: 'Settings' });
-          } else {
-            throw new Error('USER_NOT_LOGGED_IN');
-          }
-        })
-        .catch(() => {
-          next();
-        });
-    }
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
     path: '/auth/login',

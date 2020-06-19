@@ -16,11 +16,11 @@
           :value="notificationType.id"
         >
           <template #label>
-            <div class="tg-body-mobile">
+            <div class="tg-body-mobile flex flex-wrap">
               <span class="mx-1 text-white text-opacity-84">{{
                 notificationType.name
               }}</span>
-              <span class="mx-1 text-white text-opacity-54"
+              <span class="mx-1 text-white text-opacity-54 break-all"
                 >({{ authDetail[notificationType.key] }})</span
               >
             </div>
