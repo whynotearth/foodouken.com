@@ -46,6 +46,55 @@ const actions = {
         );
     });
   },
+  createTenantCategory({ commit }, { tenantSlug, category }) {
+    commit('changeMenuLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient.post(`/shop/tenant/${tenantSlug}/categories`, category).then(
+        response => {
+          commit('changeMenuLoading', false);
+          resolve(response);
+        },
+        error => {
+          commit('changeMenuLoading', false);
+          reject(error);
+        }
+      );
+    });
+  },
+  updateTenantCategory({ commit }, { tenantSlug, categoryId, category }) {
+    commit('changeMenuLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient
+        .put(`/shop/tenant/${tenantSlug}/categories/${categoryId}`, category)
+        .then(
+          response => {
+            commit('changeMenuLoading', false);
+            resolve(response);
+          },
+          error => {
+            commit('changeMenuLoading', false);
+            reject(error);
+          }
+        );
+    });
+  },
+  deleteTenantCategory({ commit }, { tenantSlug, categoryId }) {
+    commit('changeMenuLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient
+        .delete(`/shop/tenant/${tenantSlug}/categories/${categoryId}`)
+        .then(
+          response => {
+            commit('changeMenuLoading', false);
+            resolve(response);
+          },
+          error => {
+            commit('changeMenuLoading', false);
+            reject(error);
+          }
+        );
+    });
+  },
   fetchTenantCategoryItems({ commit }, categoryId) {
     commit('changeMenuLoading', true);
     return new Promise((resolve, reject) => {
@@ -62,32 +111,77 @@ const actions = {
       );
     });
   },
-  updateItem(state, payload) {
-    state.item = payload;
+  fetchTenantCategoryItemById({ commit }, { categoryId, productId }) {
+    commit('changeMenuLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient
+        .get(`/shop/categories/${categoryId}/products/${productId}`)
+        .then(
+          response => {
+            commit('changeMenuLoading', false);
+            resolve(response.data);
+          },
+          error => {
+            commit('changeMenuLoading', false);
+            reject(error);
+          }
+        );
+    });
   },
-  updateItemName(state, payload) {
-    state.item.name = payload;
+  createTenantCategoryItem({ commit }, { categoryId, product }) {
+    commit('changeMenuLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient.post(`/shop/categories/${categoryId}/products`, product).then(
+        response => {
+          commit('changeMenuLoading', false);
+          resolve(response);
+        },
+        error => {
+          commit('changeMenuLoading', false);
+          reject(error);
+        }
+      );
+    });
   },
-  updateItemCategory(state, payload) {
-    state.item.category = payload;
+  updateTenantCategoryItem({ commit }, { categoryId, productId, product }) {
+    commit('changeMenuLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient
+        .put(`/shop/categories/${categoryId}/products/${productId}`, product)
+        .then(
+          response => {
+            commit('changeMenuLoading', false);
+            resolve(response);
+          },
+          error => {
+            commit('changeMenuLoading', false);
+            reject(error);
+          }
+        );
+    });
   },
-  updateItemPrice(state, payload) {
-    state.item.price = payload;
-  },
-  updateItemDescription(state, payload) {
-    state.item.description = payload;
-  },
-  updateItemInventory(state, payload) {
-    state.item.inventory = payload;
-  },
-  updateItemImages(state, payload) {
-    state.item.images = payload;
-  },
-  updateItemVariants(state, payload) {
-    state.item.variants = payload;
-  },
-  updateItemCustomisations(state, payload) {
-    state.item.customisations = payload;
+  deleteTenantCategoryItem({ commit }, { categoryId, productId }) {
+    commit('changeMenuLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient
+        .delete(`/shop/categories/${categoryId}/products/${productId}`)
+        .then(
+          response => {
+            commit('changeMenuLoading', false);
+            resolve(response);
+          },
+          error => {
+            commit('changeMenuLoading', false);
+            reject(error);
+          }
+        );
+    });
+  }
+};
+
+const mutations = {
+  updateItems(state, payload) {
+    state.items = payload;
   },
   updateCategories(state, payload) {
     state.categories = payload;
