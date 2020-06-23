@@ -1,43 +1,14 @@
 import { httpClient } from '@/services/httpClient';
 
 const state = {
-  items: [],
+  menuItems: [],
   categories: [],
-  loading: false,
-  item: {
-    name: '',
-    category: '',
-    images: [],
-    price: '',
-    description: '',
-    inventory: '',
-    variants: [],
-    customisations: []
-  },
-  category: {
-    name: '',
-    description: '',
-    image: ''
-  }
+  loading: false
 };
 
 const getters = {
   getMenuItems: state => state.items,
-  getItem: state => state.item,
-  getItemName: state => state.item.name,
-  getItemCategory: state => state.item.category,
-  getItemImages: state => state.item.images,
-  getItemPrice: state => state.item.price,
-  getItemDescription: state => state.item.description,
-  getItemInventory: state => state.item.inventory,
-  getItemVariants: state => state.item.variants,
-  getItemCustomisations: state => state.item.customisations,
   getCategories: state => state.categories,
-  getCategoryList: state => state.categoryList,
-  getCategory: state => state.category,
-  getCategoryName: state => state.category.name,
-  getCategoryDescription: state => state.category.description,
-  getCategoryImage: state => state.category.image,
   getMenuLoading: state => state.loading
 };
 
@@ -65,7 +36,6 @@ const actions = {
         .get(`/shop/tenant/${tenantSlug}/categories/${categoryId}`)
         .then(
           response => {
-            commit('updateCategory', response.data);
             commit('changeMenuLoading', false);
             resolve(response.data);
           },
@@ -91,12 +61,6 @@ const actions = {
         }
       );
     });
-  }
-};
-
-const mutations = {
-  updateItems(state, payload) {
-    state.items = payload;
   },
   updateItem(state, payload) {
     state.item = payload;
@@ -127,18 +91,6 @@ const mutations = {
   },
   updateCategories(state, payload) {
     state.categories = payload;
-  },
-  updateCategory(state, payload) {
-    state.category = payload;
-  },
-  updateCategoryName(state, payload) {
-    state.category.name = payload;
-  },
-  updateCategoryDescription(state, payload) {
-    state.category.description = payload;
-  },
-  updateCategoryImage(state, payload) {
-    state.category.image = payload;
   },
   changeMenuLoading(state, payload) {
     state.loading = payload;
