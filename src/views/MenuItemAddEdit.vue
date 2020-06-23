@@ -191,18 +191,32 @@ export default {
       'deleteTenantCategoryItem'
     ]),
     init() {
-      let params = {
+      // TODO: Add loader till all requests are finished loading
+      this.edit = this.itemId !== undefined ? true : false;
+      this.fetchTenantCategories(this.tenantSlug);
+      this.fetchTenantCategoryById({
         tenantSlug: this.tenantSlug,
         categoryId: this.categoryId
-      };
-      this.fetchTenantCategories(params.tenantSlug);
-      this.fetchTenantCategoryById(params)
+      })
         .then(category => {
           this.category = category;
         })
         .catch(error => {
           throw error;
         });
+      if (this.edit) {
+        this.fetchTenantCategoryItemById({
+          categoryId: this.categoryId,
+          productId: this.itemId
+        })
+          .then(item => {
+            this.item = item;
+          })
+          .catch(error => {
+            this.apiError = error.response.data;
+            throw error;
+          });
+      }
     },
     async onSuccessSubmit() {
       this.$store.commit('overlay/updateModel', {
@@ -234,9 +248,7 @@ export default {
         product: this.item
       };
       delete payload.product.images;
-      this.itemId !== undefined
-        ? this.editItem(payload)
-        : this.newItem(payload);
+      this.edit ? this.editItem(payload) : this.newItem(payload);
     },
     newItem(payload) {
       this.createTenantCategoryItem(payload)
