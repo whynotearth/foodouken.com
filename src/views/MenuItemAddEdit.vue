@@ -181,6 +181,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['ping']),
     ...mapActions('menu', [
       'fetchTenantCategories',
       'fetchTenantCategoryById',
@@ -241,13 +242,22 @@ export default {
         this.submitError = true;
         return false;
       }
-      // this.cleanFormData();
-      let payload = {
-        categoryId: this.categoryId,
-        product: this.item
-      };
-      delete payload.product.images;
-      this.edit ? this.editItem(payload) : this.newItem(payload);
+      this.ping()
+        .then(user => {
+          if (user.isAuthenticated) {
+            // this.cleanFormData();
+            let payload = {
+              categoryId: this.categoryId,
+              product: this.item
+            };
+            delete payload.product.images;
+            this.edit ? this.editItem(payload) : this.newItem(payload);
+          }
+        })
+        .catch(error => {
+          this.$router.push({ name: 'Welcome' });
+          throw error;
+        });
     },
     newItem(payload) {
       this.createTenantCategoryItem(payload)
