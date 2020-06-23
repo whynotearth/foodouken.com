@@ -2,7 +2,7 @@
   <div class="grid xs:grid-cols-1 sm:grid-cols-2 gap-6">
     <product-detail
       v-if="selectedProduct"
-      :product="selectedProduct"
+      :productInfo="{ productId: selectedProduct.id, categoryId: getCategory.id }"
       @clearSelectedProduct="selectedProduct = null"
     />
     <product-card
@@ -31,7 +31,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('category', ['getProducts'])
+    ...mapGetters('category', ['getCategory', 'getProducts'])
   },
   methods: {
     changeSelectedProduct(product) {

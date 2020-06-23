@@ -128,8 +128,7 @@
                 <Button
                   :title="`Add ${productAtCart.count} To Cart`"
                   :titleRight="totalPrice"
-                  buttonBg="bg-primary"
-                  class="tg-color-label-mobile text-white text-opacity-84 rounded-lg py-3 md:px-5"
+                  class="tg-color-label-mobile text-white text-opacity-84 py-3 md:px-5"
                   @clicked="updateProduct"
                 >
                 </Button>
@@ -149,12 +148,12 @@ import Button from '@/components/Button.vue';
 import QuantityInput from '@/components/inputs/QuantityInput.vue';
 import { required } from 'vuelidate/lib/validators';
 
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'ProductDetail',
   props: {
-    product: {
+    productInfo: {
       type: Object,
       required: true
     }
@@ -173,28 +172,31 @@ export default {
     return {
       arrowBack,
       productAtCart: null,
-      additions: this.product.productAttributes.map(item => {
-        return {
-          count: 0,
-          ...item
-        };
-      }),
+      additions: [],
       selectedOption: null
     };
   },
   async created() {
+    await this.getProductById({
+      ...this.productInfo
+    });
+
+    // This is for when modal opens no scrool to body element
+    /*
     const body = document.getElementsByTagName('body')[0];
     body.classList.add('overflow-hidden');
     this.$once('hook:destroyed', () => {
       body.classList.remove('overflow-hidden');
     });
-    const productAtCart = await this.getCartProductById(this.product.id);
+    */
+    const productAtCart = await this.getCartProductById(this.productInfo.productId);
     this.productAtCart = productAtCart
       ? productAtCart
       : { count: 1, product: this.product };
   },
   methods: {
     ...mapActions('cart', ['getCartProductById', 'updateCartProductById']),
+    ...mapActions('menu', ['fetchTenantCategoryItemById']),
     async updateProduct() {
       this.$v.$touch();
 
@@ -205,6 +207,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('menu', ['item']),
     totalPrice() {
       const exactPrice =
         this.productAtCart &&
