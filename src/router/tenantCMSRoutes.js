@@ -46,15 +46,20 @@ export const tenantCMSRoutes = [
         name: 'MenuItemList',
         component: () => import('@/views/MenuItemList.vue'),
         beforeEnter: (to, from, next) => {
+          let params = {
+            tenantSlug: to.params.tenantSlug,
+            categoryId: to.params.categoryId
+          };
           store
-            .dispatch('menu/fetchTenantCategoryById', to.params)
-            .then(() => {
-              to.meta.appBar.title = store.getters['menu/getCategoryName'];
+            .dispatch('menu/fetchTenantCategoryById', params)
+            .then(category => {
+              to.meta.appBar.title = category.name;
               next();
             })
-            .catch(() => {
+            .catch(error => {
               to.meta.appBar.title = 'Category';
               next();
+              throw new Error(error.message);
             });
         },
         meta: {
