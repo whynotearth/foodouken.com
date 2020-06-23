@@ -1,13 +1,13 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
     <MenuItem
-      v-for="category in getCategoryList"
+      v-for="category in getCategories"
       :key="category.id"
       :name="category.name"
       :image="category.image"
       :options="menuItemOptions"
-      @clicked="showItems"
-      @edit="editCategory(category)"
+      @clicked="showItems(category.id)"
+      @edit="editCategory(category.id)"
       @delete="deleteCategory(category)"
     />
   </div>
@@ -15,7 +15,7 @@
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'MenuCategoryList',
@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      tenantSlug: this.$route.params.tenantSlug,
       menuItemOptions: [
         {
           name: 'Edit',
@@ -36,25 +37,27 @@ export default {
       ]
     };
   },
+  created() {
+    this.fetchTenantCategories(this.tenantSlug);
+  },
   computed: {
-    ...mapGetters('menu', ['getCategoryList'])
+    ...mapGetters('menu', ['getCategories'])
   },
   methods: {
-    ...mapMutations('menu', ['updateCategory']),
-    showItems() {
+    ...mapActions('menu', ['fetchTenantCategories']),
+    showItems(categoryId) {
       this.$router.push({
         name: 'MenuItemList',
-        params: { category: 'BagelsAndBread' }
+        params: { categoryId: categoryId }
       });
     },
     deleteCategory(category) {
       alert(category.name + ' is deleted');
     },
-    editCategory(category) {
-      this.updateCategory(category);
+    editCategory(categoryId) {
       this.$router.push({
         name: 'MenuCategoryEdit',
-        params: { category: 'BagelsAndBread' }
+        params: { categoryId: categoryId }
       });
     }
   }

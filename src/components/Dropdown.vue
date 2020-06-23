@@ -66,7 +66,7 @@ export default {
       default: null
     },
     selectedOption: {
-      type: [String, Date, Number]
+      type: [String, Date, Number, Object]
     },
     options: {
       type: Array,

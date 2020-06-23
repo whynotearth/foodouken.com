@@ -1,9 +1,14 @@
+import store from '@/store';
+
 export const tenantCMSRoutes = [
   {
     path: '/tenant/:tenantSlug/menu',
     name: 'Menu',
     component: () => import('@/views/Menu.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') },
+    meta: {
+      layout: () => import('@/layouts/TenantLayout.vue'),
+      requiresAuth: true
+    },
     children: [
       {
         path: 'categories',
@@ -29,7 +34,7 @@ export const tenantCMSRoutes = [
         }
       },
       {
-        path: 'categories/:category/edit',
+        path: 'categories/:categoryId/edit',
         name: 'MenuCategoryEdit',
         component: () => import('@/views/MenuCategoryAddEdit.vue'),
         meta: {
@@ -40,19 +45,35 @@ export const tenantCMSRoutes = [
         }
       },
       {
-        path: 'categories/:category/items',
+        path: 'categories/:categoryId/items',
         name: 'MenuItemList',
         component: () => import('@/views/MenuItemList.vue'),
+        beforeEnter: (to, from, next) => {
+          let params = {
+            tenantSlug: to.params.tenantSlug,
+            categoryId: to.params.categoryId
+          };
+          store
+            .dispatch('menu/fetchTenantCategoryById', params)
+            .then(category => {
+              to.meta.appBar.title = category.name;
+              next();
+            })
+            .catch(error => {
+              to.meta.appBar.title = 'Category';
+              next();
+              throw new Error(error.message);
+            });
+        },
         meta: {
           appBar: {
-            title: 'Bagels & Bread',
             backRoute: { name: 'MenuCategoryList' },
             newItem: { name: 'MenuItemAdd' }
           }
         }
       },
       {
-        path: 'categories/:category/items/add',
+        path: 'categories/:categoryId/items/add',
         name: 'MenuItemAdd',
         component: () => import('@/views/MenuItemAddEdit.vue'),
         meta: {
@@ -63,7 +84,7 @@ export const tenantCMSRoutes = [
         }
       },
       {
-        path: 'categories/:category/items/:item/edit',
+        path: 'categories/:categoryId/items/:item/edit',
         name: 'MenuItemEdit',
         component: () => import('@/views/MenuItemAddEdit.vue'),
         meta: {
@@ -71,7 +92,7 @@ export const tenantCMSRoutes = [
             title: 'Edit item',
             backRoute: {
               name: 'MenuItemList',
-              params: { category: 'BagelsAndBread' }
+              params: { categoryId: 'BagelsAndBread' }
             }
           }
         }
