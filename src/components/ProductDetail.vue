@@ -176,23 +176,25 @@ export default {
       selectedOption: null
     };
   },
-  async created() {
-    await this.fetchTenantCategoryItemById({
+  created() {
+    this.fetchTenantCategoryItemById({
       ...this.productInfo
-    });
+    }).then(async () => {
+      // This is for when modal opens no scrool to body element
+      const body = document.getElementsByTagName('body')[0];
+      body.classList.add('overflow-hidden');
+      this.$once('hook:destroyed', () => {
+        body.classList.remove('overflow-hidden');
+      });
 
-    // This is for when modal opens no scrool to body element
-    /*
-    const body = document.getElementsByTagName('body')[0];
-    body.classList.add('overflow-hidden');
-    this.$once('hook:destroyed', () => {
-      body.classList.remove('overflow-hidden');
+      const productAtCart = await this.getCartProductById(this.productInfo.productId);
+      this.productAtCart = productAtCart
+        ? productAtCart
+        : { count: 1, product: this.product };
+    }).catch(() => {
+      // this.$emit('clearSelectedProduct');
+      alert('Could not fetch product from backend');
     });
-    */
-    const productAtCart = await this.getCartProductById(this.productInfo.productId);
-    this.productAtCart = productAtCart
-      ? productAtCart
-      : { count: 1, product: this.product };
   },
   methods: {
     ...mapActions('cart', ['getCartProductById', 'updateCartProductById']),
@@ -207,7 +209,9 @@ export default {
     }
   },
   computed: {
-    ...mapState('menu', ['item']),
+    ...mapState('menu', {
+      product: 'menuItem'
+    }),
     totalPrice() {
       const exactPrice =
         this.productAtCart &&
