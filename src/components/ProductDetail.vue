@@ -62,7 +62,7 @@
                           <span
                             class="text-white text-opacity-54"
                             v-if="variant.price > 0"
-                            >+${{ variant.price }}</span
+                            >+ ${{ variant.price }}</span
                           >
                         </div>
                       </template>
@@ -103,7 +103,7 @@
                         </div>
                       </div>
                       <div class="text-white text-opacity-54">
-                        +${{ attribute.price }}
+                        + ${{ attribute.price }}
                       </div>
                     </div>
                   </div>
