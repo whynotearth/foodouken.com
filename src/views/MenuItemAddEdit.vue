@@ -142,7 +142,6 @@ export default {
         name: ''
       },
       item: {
-        pageId: null,
         name: '',
         price: '',
         // description: '',
@@ -256,7 +255,7 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data;
+          this.apiError = error.response.data.title;
           throw error;
         });
     },
