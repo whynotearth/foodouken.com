@@ -29,3 +29,11 @@ export function extractTimeFrom12H(time) {
   hour = postfix === 'PM' ? `${Number(hour) + 12}` : `${hour}`;
   return { hour, min, sec: '00' };
 }
+
+export async function sleep(time) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+}
