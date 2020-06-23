@@ -142,7 +142,6 @@ export default {
         name: ''
       },
       item: {
-        pageId: null,
         name: '',
         price: '',
         // description: '',
@@ -182,6 +181,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['ping']),
     ...mapActions('menu', [
       'fetchTenantCategories',
       'fetchTenantCategoryById',
@@ -191,18 +191,32 @@ export default {
       'deleteTenantCategoryItem'
     ]),
     init() {
-      let params = {
+      // TODO: Add loader till all requests are finished loading
+      this.edit = this.itemId !== undefined ? true : false;
+      this.fetchTenantCategories(this.tenantSlug);
+      this.fetchTenantCategoryById({
         tenantSlug: this.tenantSlug,
         categoryId: this.categoryId
-      };
-      this.fetchTenantCategories(params.tenantSlug);
-      this.fetchTenantCategoryById(params)
+      })
         .then(category => {
           this.category = category;
         })
         .catch(error => {
           throw error;
         });
+      if (this.edit) {
+        this.fetchTenantCategoryItemById({
+          categoryId: this.categoryId,
+          productId: this.itemId
+        })
+          .then(item => {
+            this.item = item;
+          })
+          .catch(error => {
+            this.apiError = error.response.data;
+            throw error;
+          });
+      }
     },
     async onSuccessSubmit() {
       this.$store.commit('overlay/updateModel', {
@@ -228,15 +242,22 @@ export default {
         this.submitError = true;
         return false;
       }
-      // this.cleanFormData();
-      let payload = {
-        categoryId: this.categoryId,
-        product: this.item
-      };
-      delete payload.product.images;
-      this.itemId !== undefined
-        ? this.editItem(payload)
-        : this.newItem(payload);
+      this.ping()
+        .then(user => {
+          if (user.isAuthenticated) {
+            // this.cleanFormData();
+            let payload = {
+              categoryId: this.categoryId,
+              product: this.item
+            };
+            delete payload.product.images;
+            this.edit ? this.editItem(payload) : this.newItem(payload);
+          }
+        })
+        .catch(error => {
+          this.$router.push({ name: 'Welcome' });
+          throw error;
+        });
     },
     newItem(payload) {
       this.createTenantCategoryItem(payload)
@@ -244,7 +265,7 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data;
+          this.apiError = error.response.data.title;
           throw error;
         });
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <ImageUpload v-model="categoryImage" :defaultImages="defaultImages" />
+    <ImageUpload v-model="images" :defaultImages="images" />
     <hr class="border-white border-opacity-12 my-8" />
 
     <div class="mx-4">
@@ -8,12 +8,17 @@
         Category info
       </span>
       <MaterialInput
-        v-model="categoryName"
+        v-model="$v.category.name.$model"
         label="Category name"
         labelBg="bg-background"
-      />
+        :error="$v.category.name.$error"
+      >
+        <span v-if="$v.category.name.$error" class="text-red-600 text-xs">
+          Name is required
+        </span>
+      </MaterialInput>
       <TextArea
-        v-model="categoryDescription"
+        v-model="category.description"
         label="Description"
         labelBg="bg-background"
       />
@@ -25,7 +30,7 @@
         title="Save category"
         class="rounded-full"
         padding="p-2"
-        :to="{ name: 'MenuCategoryList' }"
+        @clicked="submit"
       />
     </div>
   </div>
@@ -36,7 +41,9 @@ import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Button from '@/components/Button';
-import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
+import { required } from 'vuelidate/lib/validators';
+import { sleep } from '@/helpers.js';
 
 export default {
   name: 'MenuCategoryAddEdit',
@@ -46,72 +53,131 @@ export default {
     TextArea,
     Button
   },
+  validations: {
+    category: {
+      name: {
+        required
+      }
+    }
+  },
   data() {
     return {
+      edit: false,
       params: {
         tenantSlug: this.$route.params.tenantSlug,
         categoryId: this.$route.params.categoryId
       },
       submitError: false,
-      registerError: '',
-      defaultImages: [
-        {
-          url:
-            'https://res.cloudinary.com/whynotearth/image/upload/v1586682068/foodouken/bangbangbakerycafe/Bagels%20and%20Breads/light_rye_sourdough_bang_bang_ixlett.jpg'
-        }
-      ]
+      apiError: '',
+      category: {
+        name: '',
+        description: '',
+        image:
+          'https://res.cloudinary.com/whynotearth/image/upload/v1586682068/foodouken/bangbangbakerycafe/Bagels%20and%20Breads/light_rye_sourdough_bang_bang_ixlett.jpg'
+      }
     };
   },
   created() {
-    this.fetchTenantCategoryById(this.params);
+    this.init();
   },
   beforeDestroy() {
-    this.updateCategory({
-      name: '',
-      image: '',
-      description: ''
-    });
+    this.category = {};
+    this.submitError = false;
+    this.apiError = '';
   },
   computed: {
-    ...mapGetters('menu', [
-      'getCategoryName',
-      'getCategoryDescription',
-      'getCategoryImage'
-    ]),
-    categoryName: {
-      get() {
-        return this.getCategoryName;
-      },
-      set(value) {
-        this.updateCategoryName(value);
-      }
-    },
-    categoryImage: {
+    images: {
       //FIXME: ImageUpload component should handle strings, the solution below is a temporary fix.
       get() {
-        return [{ url: this.getCategoryImage }];
+        return [{ url: this.category.image }];
       },
       set(value) {
-        this.updateCategoryImage(value[0].url);
-      }
-    },
-    categoryDescription: {
-      get() {
-        return this.getCategoryDescription;
-      },
-      set(value) {
-        this.updateCategoryDescription(value);
+        this.item.image = value[0].url;
       }
     }
   },
   methods: {
-    ...mapActions('menu', ['fetchTenantCategoryById']),
-    ...mapMutations('menu', [
-      'updateCategory',
-      'updateCategoryName',
-      'updateCategoryImage',
-      'updateCategoryDescription'
-    ])
+    ...mapActions('auth', ['ping']),
+    ...mapActions('menu', [
+      'fetchTenantCategoryById',
+      'createTenantCategory',
+      'updateTenantCategory'
+    ]),
+    init() {
+      this.edit = this.params.categoryId !== undefined ? true : false;
+      if (this.edit) {
+        this.fetchTenantCategoryById(this.params)
+          .then(category => {
+            this.category = category;
+          })
+          .catch(error => {
+            throw error;
+          });
+      }
+    },
+    async onSuccessSubmit() {
+      this.$store.commit('overlay/updateModel', {
+        title: 'Success!',
+        message: 'Your category has been saved!'
+      });
+
+      await sleep(1000);
+
+      await this.$router.push({
+        name: 'MenuCategoryList'
+      });
+
+      this.$store.commit('overlay/updateModel', {
+        title: '',
+        message: ''
+      });
+    },
+    submit() {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitError = true;
+        return false;
+      }
+      this.ping()
+        .then(user => {
+          if (user.isAuthenticated) {
+            let payload = {
+              tenantSlug: this.params.tenantSlug,
+              category: {
+                tenantSlug: this.params.tenantSlug,
+                ...this.category
+              }
+            };
+            delete payload.category.image;
+            this.edit ? this.editItem(payload) : this.newItem(payload);
+          }
+        })
+        .catch(error => {
+          this.$router.push({ name: 'Welcome' });
+          throw error;
+        });
+    },
+    newItem(payload) {
+      this.createTenantCategory(payload)
+        .then(() => {
+          this.onSuccessSubmit();
+        })
+        .catch(error => {
+          this.apiError = error.response.data;
+          throw error;
+        });
+    },
+    editItem(payload) {
+      payload.categoryId = this.params.categoryId;
+      this.updateTenantCategory(payload)
+        .then(() => {
+          this.onSuccessSubmit();
+        })
+        .catch(error => {
+          this.apiError = error.response.data;
+          throw error;
+        });
+    }
   }
 };
 </script>
