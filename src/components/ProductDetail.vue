@@ -177,7 +177,7 @@ export default {
     };
   },
   async created() {
-    await this.getProductById({
+    await this.fetchTenantCategoryItemById({
       ...this.productInfo
     });
 

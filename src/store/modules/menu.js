@@ -3,13 +3,15 @@ import { httpClient } from '@/services/httpClient';
 const state = {
   menuItems: [],
   categories: [],
-  loading: false
+  loading: false,
+  menuItem: null
 };
 
 const getters = {
   getMenuItems: state => state.items,
   getCategories: state => state.categories,
-  getMenuLoading: state => state.loading
+  getMenuLoading: state => state.loading,
+  getMenuItem: state => state.menuItem
 };
 
 const actions = {
@@ -119,6 +121,7 @@ const actions = {
         .then(
           response => {
             commit('changeMenuLoading', false);
+            commit('updateMenuItem', response.data);
             resolve(response.data);
           },
           error => {
@@ -188,6 +191,9 @@ const mutations = {
   },
   changeMenuLoading(state, payload) {
     state.loading = payload;
+  },
+  updateMenuItem(state, payload) {
+    state.menuItem = payload;
   }
 };
 
