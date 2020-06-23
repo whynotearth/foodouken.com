@@ -5,7 +5,10 @@ export const tenantCMSRoutes = [
     path: '/tenant/:tenantSlug/menu',
     name: 'Menu',
     component: () => import('@/views/Menu.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') },
+    meta: {
+      layout: () => import('@/layouts/TenantLayout.vue'),
+      requiresAuth: true
+    },
     children: [
       {
         path: 'categories',
