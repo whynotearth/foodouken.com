@@ -26,9 +26,10 @@
                 class="w-2/3 mx-2"
               />
               <MaterialInput
-                v-model="variant.price"
+                v-model.number="variant.price"
                 label="Price"
                 class="w-1/3"
+                type="number"
               />
               <Delete
                 @click="removeVariant(index)"

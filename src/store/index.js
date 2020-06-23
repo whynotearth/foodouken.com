@@ -8,6 +8,7 @@ import shop from './modules/shop';
 import auth from './modules/auth';
 import menu from './modules/menu';
 import tenant from './modules/tenant';
+import overlay from './modules/overlay';
 import VuexPersistence from 'vuex-persist';
 
 const vuexLocal = new VuexPersistence({
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     shop,
     auth,
     menu,
-    tenant
+    tenant,
+    overlay
   }
 });

@@ -36,7 +36,7 @@ import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Button from '@/components/Button';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   name: 'MenuCategoryAddEdit',
@@ -48,6 +48,10 @@ export default {
   },
   data() {
     return {
+      params: {
+        tenantSlug: this.$route.params.tenantSlug,
+        categoryId: this.$route.params.categoryId
+      },
       submitError: false,
       registerError: '',
       defaultImages: [
@@ -57,6 +61,9 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    this.fetchTenantCategoryById(this.params);
   },
   beforeDestroy() {
     this.updateCategory({
@@ -80,11 +87,12 @@ export default {
       }
     },
     categoryImage: {
+      //FIXME: ImageUpload component should handle strings, the solution below is a temporary fix.
       get() {
-        return this.getCategoryImage;
+        return [{ url: this.getCategoryImage }];
       },
       set(value) {
-        this.updateCategoryImage(value);
+        this.updateCategoryImage(value[0].url);
       }
     },
     categoryDescription: {
@@ -97,6 +105,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('menu', ['fetchTenantCategoryById']),
     ...mapMutations('menu', [
       'updateCategory',
       'updateCategoryName',

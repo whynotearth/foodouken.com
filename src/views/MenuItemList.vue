@@ -17,7 +17,7 @@
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   name: 'MenuItemList',
@@ -26,6 +26,7 @@ export default {
   },
   data() {
     return {
+      categoryId: this.$route.params.categoryId,
       menuItemOptions: [
         {
           name: 'Sell out',
@@ -38,10 +39,14 @@ export default {
       ]
     };
   },
+  created() {
+    this.fetchTenantCategoryItems(this.categoryId);
+  },
   computed: {
     ...mapGetters('menu', ['getMenuItems'])
   },
   methods: {
+    ...mapActions('menu', ['fetchTenantCategoryItems']),
     ...mapMutations('menu', ['updateItem']),
     sellOutItem(item) {
       alert(item.name + ' is sold out');

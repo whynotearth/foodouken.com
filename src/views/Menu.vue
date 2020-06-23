@@ -18,6 +18,7 @@
 <script>
 import BaseAppBarHeader from '@/components/BaseAppBarHeader';
 import NewItemIcon from '@/assets/new_item.svg';
+
 export default {
   name: 'Menu',
   components: {
@@ -26,11 +27,13 @@ export default {
   },
   computed: {
     appBar() {
-      if (this.$route.meta.appBar) return this.$route.meta.appBar;
-      return {
-        title: 'Navbar',
-        backRoute: { name: 'Home' }
-      };
+      let route = this.$route,
+        appBarData = {
+          title: 'Navbar',
+          backRoute: { name: 'Home' }
+        };
+      if (route.meta.appBar) appBarData = route.meta.appBar;
+      return appBarData;
     }
   }
 };
