@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="addCartProduct(product)"
+    @click="$emit('productClicked')"
     class="product-card bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer transition duration-300 transform hover:opacity-75"
   >
     <img
@@ -19,6 +19,7 @@
     </p>
     <div class="relative flex-grow">
       <div
+        @click.stop.self="addCartProduct(product)"
         class="ripple absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
       >
         <img

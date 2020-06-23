@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full cursor-pointer text-lg"
+    class="w-full flex items-center cursor-pointer text-lg"
     :class="{ 'opacity-50 cursor-not-allowed': disabled }"
     @click="selectOption"
   >
@@ -13,11 +13,11 @@
         :class="{ 'bg-button': selectedOption === value }"
       ></div>
     </div>
-    <span class="inline-block">
-      <slot name="title">
+    <slot name="title">
+      <span class="inline-block">
         {{ value }}
-      </slot>
-    </span>
+      </span>
+    </slot>
   </div>
 </template>
 
@@ -30,10 +30,10 @@ export default {
   },
   props: {
     selectedOption: {
-      type: [String, Number]
+      type: [String, Number, Object]
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Object],
       default: 'Option'
     },
     disabled: {

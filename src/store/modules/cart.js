@@ -63,6 +63,26 @@ const actions = {
   },
   clearAllCartItems({ commit }) {
     commit('resetCartItems');
+  },
+  getCartProductById({ state }, id) {
+    const product = state.cartItems.find(item => item.product.id === id);
+    return product ? product : null;
+  },
+  updateCartProductById({ state, commit }, product) {
+    const productIndexAtCart = state.cartItems.findIndex(
+      item => item.product.id === product.product.id
+    );
+    if (productIndexAtCart > -1) {
+      commit('updateCartProduct', {
+        index: productIndexAtCart,
+        product
+      });
+    } else {
+      commit('updateCartProduct', {
+        index: state.cartItems.length,
+        product
+      });
+    }
   }
 };
 
@@ -71,10 +91,10 @@ const mutations = {
   resetCartItems(state) {
     state.cartItems = [];
   },
-  addCartProduct(state, product) {
+  addCartProduct(state, product, count = 1) {
     state.cartItems.push({
       product: product,
-      count: 1
+      count
     });
   },
   incrementCartProduct(state, product) {
@@ -89,6 +109,9 @@ const mutations = {
   },
   removeCartProduct(state, product) {
     state.cartItems = state.cartItems.filter(ci => ci.product != product);
+  },
+  updateCartProduct(state, { index, product }) {
+    state.cartItems.splice(index, 1, product);
   }
 };
 

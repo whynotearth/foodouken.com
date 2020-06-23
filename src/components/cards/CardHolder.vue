@@ -1,9 +1,15 @@
 <template>
   <div class="grid xs:grid-cols-1 sm:grid-cols-2 gap-6">
+    <product-detail
+      v-if="selectedProduct"
+      :product="selectedProduct"
+      @clearSelectedProduct="selectedProduct = null"
+    />
     <product-card
       :product="product"
       v-for="product in getProducts"
       :key="product.id"
+      @productClicked="changeSelectedProduct(product)"
     />
   </div>
 </template>
@@ -11,14 +17,26 @@
 <script>
 import ProductCard from '@/components/cards/ProductCard.vue';
 import { mapGetters } from 'vuex';
+import ProductDetail from '@/components/ProductDetail.vue';
 
 export default {
   name: 'CardHolder',
   components: {
-    ProductCard
+    ProductCard,
+    ProductDetail
+  },
+  data() {
+    return {
+      selectedProduct: null
+    };
   },
   computed: {
     ...mapGetters('category', ['getProducts'])
+  },
+  methods: {
+    changeSelectedProduct(product) {
+      this.selectedProduct = product;
+    }
   }
 };
 </script>

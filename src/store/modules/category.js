@@ -39,7 +39,34 @@ const actions = {
     return new Promise((resolve, reject) => {
       httpClient.get(`/tenants/${shopSlug}/categories/${slug}/products`).then(
         response => {
-          commit('updateProducts', response.data);
+          commit(
+            'updateProducts',
+            response.data.map(prod => {
+              return {
+                ...prod,
+                variations: [
+                  {
+                    name: 'Hot',
+                    price: 0
+                  },
+                  {
+                    name: 'Cold',
+                    price: 0.25
+                  }
+                ],
+                productAttributes: [
+                  {
+                    name: 'Sugar',
+                    price: 0.25
+                  },
+                  {
+                    name: 'Lemon',
+                    price: 0.25
+                  }
+                ]
+              };
+            })
+          );
           commit('changeCategoryLoading', false);
           resolve(response.data);
         },
