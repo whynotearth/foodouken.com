@@ -2,12 +2,12 @@
   <div class="select-none">
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
       <RadioInput v-model="paymentMethod" value="Cash" class="p-5" />
-      <hr class="border-gray-700" />
+      <!-- <hr class="border-gray-700" />
       <RadioInput
         v-model="paymentMethod"
         value="ABA Bank Transfer"
         class="p-5"
-      />
+      /> -->
     </div>
     <CheckoutNavBar
       nextStepText="Review your order ►"
