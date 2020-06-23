@@ -6,10 +6,7 @@
       class="fixed w-screen h-screen top-0 left-0 bg-background z-50 overflow-y-scroll"
     >
       <div class="sm:flex justify-center items-center sm:items-start h-full">
-        <div
-          @click.stop
-          class="sm:w-128 sm:h-160 relative"
-        >
+        <div @click.stop class="sm:w-128 sm:h-160 relative">
           <div>
             <div class="absolute top-0 left-0 px-4 py-2">
               <span class="flex">
@@ -84,7 +81,10 @@
               <div>
                 <h5>Additions</h5>
 
-                <div class="w-full bg-secondary rounded-lg shadow mb-2 my-4" v-if="additions">
+                <div
+                  class="w-full bg-secondary rounded-lg shadow mb-2 my-4"
+                  v-if="additions"
+                >
                   <div
                     class="px-5 py-4"
                     v-for="(attribute, index) in additions"
@@ -121,7 +121,10 @@
                   />
                 </div>
               </div>
-              <div class="sticky bottom-0 left-0 w-full py-4 mt-8" v-if="productAtCart">
+              <div
+                class="sticky bottom-0 left-0 w-full py-4 mt-8"
+                v-if="productAtCart"
+              >
                 <Button
                   :title="`Add ${productAtCart.count} To Cart`"
                   :titleRight="totalPrice"
