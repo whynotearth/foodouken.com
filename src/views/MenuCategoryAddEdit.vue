@@ -97,6 +97,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['ping']),
     ...mapActions('menu', [
       'fetchTenantCategoryById',
       'createTenantCategory',
@@ -137,15 +138,24 @@ export default {
         this.submitError = true;
         return false;
       }
-      let payload = {
-        tenantSlug: this.params.tenantSlug,
-        category: {
-          tenantSlug: this.params.tenantSlug,
-          ...this.category
-        }
-      };
-      delete payload.category.image;
-      this.edit ? this.editItem(payload) : this.newItem(payload);
+      this.ping()
+        .then(user => {
+          if (user.isAuthenticated) {
+            let payload = {
+              tenantSlug: this.params.tenantSlug,
+              category: {
+                tenantSlug: this.params.tenantSlug,
+                ...this.category
+              }
+            };
+            delete payload.category.image;
+            this.edit ? this.editItem(payload) : this.newItem(payload);
+          }
+        })
+        .catch(error => {
+          this.$router.push({ name: 'Welcome' });
+          throw error;
+        });
     },
     newItem(payload) {
       this.createTenantCategory(payload)
