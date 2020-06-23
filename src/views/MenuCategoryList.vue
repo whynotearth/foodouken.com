@@ -15,7 +15,7 @@
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'MenuCategoryList',
@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     ...mapActions('menu', ['fetchTenantCategories']),
-    ...mapMutations('menu', ['updateCategory']),
     showItems(categoryId) {
       this.$router.push({
         name: 'MenuItemList',
