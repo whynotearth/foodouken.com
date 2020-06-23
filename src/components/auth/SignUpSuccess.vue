@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     url() {
-      return `${window.location.host}/${this.$route.params.slug}`;
+      return `${window.location.host}/shop/${this.$route.params.slug}`;
     }
   }
 };
