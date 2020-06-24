@@ -196,7 +196,7 @@ export default {
           : { count: 1, product: this.product };
       })
       .catch(() => {
-        // this.$emit('clearSelectedProduct');
+        this.$emit('clearSelectedProduct');
         alert('Could not fetch product from backend');
       });
   },
