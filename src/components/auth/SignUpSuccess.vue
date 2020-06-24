@@ -28,7 +28,10 @@
       </div>
       <div class="">
         <Button
-          @clicked="$router.push({ name: 'SignUp' })"
+          :to="{
+            name: 'MenuCategoryList',
+            params: { tenantSlug: $route.params.slug }
+          }"
           title="START ADDING MENU ITEMS"
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 px-10"
         />
@@ -53,7 +56,7 @@ export default {
   },
   computed: {
     url() {
-      return `${window.location.host}/${this.$route.params.slug}`;
+      return `${window.location.host}/shop/${this.$route.params.slug}`;
     }
   }
 };

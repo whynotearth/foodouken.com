@@ -1,5 +1,8 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
+    <span v-if="apiError" class="my-8 mx-4 text-sm text-red-600">
+      {{ apiError }}
+    </span>
     <MenuItem
       v-for="category in getCategories"
       :key="category.id"
@@ -16,6 +19,7 @@
 <script>
 import MenuItem from '@/components/menu/MenuItem';
 import { mapActions, mapGetters } from 'vuex';
+import { sleep } from '@/helpers.js';
 
 export default {
   name: 'MenuCategoryList',
@@ -25,6 +29,7 @@ export default {
   data() {
     return {
       tenantSlug: this.$route.params.tenantSlug,
+      apiError: '',
       menuItemOptions: [
         {
           name: 'Edit',
@@ -44,15 +49,44 @@ export default {
     ...mapGetters('menu', ['getCategories'])
   },
   methods: {
-    ...mapActions('menu', ['fetchTenantCategories']),
+    ...mapActions('menu', ['fetchTenantCategories', 'deleteTenantCategory']),
     showItems(categoryId) {
       this.$router.push({
         name: 'MenuItemList',
         params: { categoryId: categoryId }
       });
     },
+    async onSuccessSubmit() {
+      this.$store.commit('overlay/updateModel', {
+        title: 'Success!',
+        message: 'Your category has been deleted!'
+      });
+
+      await this.fetchTenantCategories(this.tenantSlug);
+
+      await sleep(1000);
+
+      this.$store.commit('overlay/updateModel', {
+        title: '',
+        message: ''
+      });
+    },
     deleteCategory(category) {
-      alert(category.name + ' is deleted');
+      if (confirm('Are you sure?')) {
+        this.deleteTenantCategory({
+          tenantSlug: this.tenantSlug,
+          categoryId: category.id
+        })
+          .then(() => {
+            this.onSuccessSubmit();
+          })
+          .catch(error => {
+            this.apiError = error.response.data.title
+              ? error.response.data.title
+              : 'Something went wrong, try again.';
+            throw error;
+          });
+      } else return false;
     },
     editCategory(categoryId) {
       this.$router.push({

@@ -1,23 +1,29 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
+    <span v-if="apiError" class="my-8 mx-4 text-sm text-red-600">
+      {{ apiError }}
+    </span>
     <MenuItem
       v-for="item in getMenuItems"
       :key="item.id"
       :name="item.name"
-      :image="item.images[0]"
+      :image="item.images ? item.images[0] : ''"
       :options="menuItemOptions"
-      @clicked="editItem(item)"
-      @sellOutItem="sellOutItem(item)"
-      @deleteItem="deleteItem(item)"
+      @clicked="editItem(item.id)"
+      @sellOutItem="sellOutItem(item.id)"
+      @deleteItem="deleteItem(item.id)"
     >
-      <template #subHeading> ${{ item.price }} - {{ item.category }} </template>
+      <template #subHeading>
+        ${{ item.price }} - Category {{ item.categoryId }}
+      </template>
     </MenuItem>
   </div>
 </template>
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import { sleep } from '@/helpers.js';
 
 export default {
   name: 'MenuItemList',
@@ -27,6 +33,7 @@ export default {
   data() {
     return {
       categoryId: this.$route.params.categoryId,
+      apiError: '',
       menuItemOptions: [
         {
           name: 'Sell out',
@@ -46,17 +53,47 @@ export default {
     ...mapGetters('menu', ['getMenuItems'])
   },
   methods: {
-    ...mapActions('menu', ['fetchTenantCategoryItems']),
-    ...mapMutations('menu', ['updateItem']),
-    sellOutItem(item) {
-      alert(item.name + ' is sold out');
+    ...mapActions('menu', [
+      'fetchTenantCategoryItems',
+      'deleteTenantCategoryItem'
+    ]),
+    async onSuccessSubmit() {
+      this.$store.commit('overlay/updateModel', {
+        title: 'Success!',
+        message: 'Your product has been deleted!'
+      });
+
+      await this.fetchTenantCategoryItems(this.categoryId);
+
+      await sleep(1000);
+
+      this.$store.commit('overlay/updateModel', {
+        title: '',
+        message: ''
+      });
     },
-    deleteItem(item) {
-      alert(item.name + ' is deleted');
+    deleteItem(itemId) {
+      if (confirm('Are you sure?')) {
+        this.deleteTenantCategoryItem({
+          categoryId: this.categoryId,
+          productId: itemId
+        })
+          .then(() => {
+            this.onSuccessSubmit();
+          })
+          .catch(error => {
+            this.apiError = error.response.data.title
+              ? error.response.data.title
+              : 'Something went wrong, try again.';
+            throw error;
+          });
+      } else return false;
     },
-    editItem(item) {
-      this.updateItem(item);
-      this.$router.push({ name: 'MenuItemEdit', params: { item: item.name } });
+    sellOutItem(itemId) {
+      this.$router.push({ name: 'MenuItemEdit', params: { item: itemId } });
+    },
+    editItem(itemId) {
+      this.$router.push({ name: 'MenuItemEdit', params: { item: itemId } });
     }
   }
 };
