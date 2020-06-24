@@ -1,19 +1,22 @@
 <template>
-<div>
-  <product-detail
+  <div>
+    <product-detail
       v-if="selectedProduct"
-      :productInfo="{ productId: selectedProduct.id, categoryId: getCategory.id }"
+      :productInfo="{
+        productId: selectedProduct.id,
+        categoryId: getSelectedCategory.id
+      }"
       @clearSelectedProduct="selectedProduct = null"
     />
-  <div class="grid xs:grid-cols-1 sm:grid-cols-2 gap-6">
-    <product-card
-      :product="product"
-      v-for="product in getProducts"
-      :key="product.id"
-      @productClicked="changeSelectedProduct(product)"
-    />
+    <div class="grid xs:grid-cols-1 sm:grid-cols-2 gap-6">
+      <product-card
+        :product="product"
+        v-for="product in getProducts"
+        :key="product.id"
+        @productClicked="changeSelectedProduct(product)"
+      />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -33,7 +36,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('category', ['getCategory', 'getProducts'])
+    ...mapGetters('menu', {
+      getSelectedCategory: 'getSelectedCategory',
+      getProducts: 'getMenuItems'
+    })
   },
   methods: {
     changeSelectedProduct(product) {
