@@ -24,7 +24,7 @@ export const authRoutes = [
         .dispatch('auth/ping')
         .then(response => {
           if (response.isAuthenticated) {
-            next({ name: 'MenuCategoryList' });
+            next({ name: 'Home' });
           } else {
             throw new Error('USER_NOT_LOGGED_IN');
           }
