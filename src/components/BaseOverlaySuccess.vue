@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-secondary flex items-center justify-center h-full">
+  <div class="bg-background flex items-center justify-center h-full">
     <div class="text-center">
       <div class="progress-wrapper mb-4 md:mb-12 mx-auto">
         <!-- desktop -->
