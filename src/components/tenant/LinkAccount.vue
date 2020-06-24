@@ -43,8 +43,13 @@ export default {
           this.isAuthenticated = true;
         }
 
-        if (this.$router.history._startLocation.includes(this.$route.params.step) && this.$route.hash) {
-            this.$emit('nextStep');
+        if (
+          this.$router.history._startLocation.includes(
+            this.$route.params.step
+          ) &&
+          this.$route.hash
+        ) {
+          this.$emit('nextStep');
         }
       })
       .catch(() => {
