@@ -28,7 +28,7 @@
       </div>
       <div class="">
         <Button
-          @clicked="$router.push({ name: 'SignUp' })"
+          :to="{ name: 'MenuCategoryList', params: { tenantSlug: $route.params.slug } }"
           title="START ADDING MENU ITEMS"
           class="tg-color-label-mobile text-white text-opacity-84 rounded-full py-3 px-10"
         />
