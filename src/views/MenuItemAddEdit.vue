@@ -250,7 +250,7 @@ export default {
               categoryId: this.categoryId,
               product: this.item
             };
-            delete payload.product.images;
+            delete payload.product.image;
             this.edit ? this.editItem(payload) : this.newItem(payload);
           }
         })
