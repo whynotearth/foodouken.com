@@ -49,11 +49,11 @@
           </span>
         </template>
       </MaterialInput>
-      <!-- <TextArea
+      <TextArea
         v-model="item.description"
         label="Description"
         labelBg="bg-background"
-      /> -->
+      />
     </div>
     <hr class="border-white border-opacity-12 my-8" />
 
@@ -144,7 +144,7 @@ export default {
       item: {
         name: '',
         price: '',
-        // description: '',
+        description: '',
         variations: [],
         attributes: [],
         image: {
