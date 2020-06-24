@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <ImageUpload v-model="images" :defaultImages="images" />
+    <ImageUpload v-model="images" />
     <hr class="border-white border-opacity-12 my-8" />
 
     <div class="mx-4">
@@ -72,8 +72,7 @@ export default {
       category: {
         name: '',
         description: '',
-        image:
-          'https://res.cloudinary.com/whynotearth/image/upload/v1586682068/foodouken/bangbangbakerycafe/Bagels%20and%20Breads/light_rye_sourdough_bang_bang_ixlett.jpg'
+        imageUrl: ''
       }
     };
   },
@@ -89,10 +88,10 @@ export default {
     images: {
       //FIXME: ImageUpload component should handle strings, the solution below is a temporary fix.
       get() {
-        return [{ url: this.category.image }];
+        return [{ url: this.category.imageUrl }];
       },
       set(value) {
-        this.item.image = value[0].url;
+        this.category.imageUrl = value[0].url;
       }
     }
   },
@@ -148,7 +147,6 @@ export default {
                 ...this.category
               }
             };
-            delete payload.category.image;
             this.edit ? this.editItem(payload) : this.newItem(payload);
           }
         })
