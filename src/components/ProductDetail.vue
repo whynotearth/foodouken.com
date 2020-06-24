@@ -20,12 +20,13 @@
             </div>
             <div>
               <img
+                v-if="product.images"
                 class="w-screen sm:w-full h-64"
                 :src="product.images[0]"
                 alt="product"
               />
             </div>
-            <div class="p-4">
+            <div class="p-4 my-4">
               <div class="mb-4">
                 <h2 class="tg-h2-mobile">{{ product.name }}</h2>
               </div>
@@ -128,7 +129,6 @@
                 <Button
                   :title="`Add ${productAtCart.count} To Cart`"
                   :titleRight="totalPrice"
-                  class="tg-color-label-mobile text-white text-opacity-84 py-3 md:px-5"
                   @clicked="updateProduct"
                 >
                 </Button>
@@ -172,29 +172,33 @@ export default {
     return {
       arrowBack,
       productAtCart: null,
-      additions: [],
+      additions: null,
       selectedOption: null
     };
   },
   created() {
     this.fetchTenantCategoryItemById({
       ...this.productInfo
-    }).then(async () => {
-      // This is for when modal opens no scrool to body element
-      const body = document.getElementsByTagName('body')[0];
-      body.classList.add('overflow-hidden');
-      this.$once('hook:destroyed', () => {
-        body.classList.remove('overflow-hidden');
-      });
+    })
+      .then(async () => {
+        // This is for when modal opens no scrool to body element
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.add('overflow-hidden');
+        this.$once('hook:destroyed', () => {
+          body.classList.remove('overflow-hidden');
+        });
 
-      const productAtCart = await this.getCartProductById(this.productInfo.productId);
-      this.productAtCart = productAtCart
-        ? productAtCart
-        : { count: 1, product: this.product };
-    }).catch(() => {
-      // this.$emit('clearSelectedProduct');
-      alert('Could not fetch product from backend');
-    });
+        const productAtCart = await this.getCartProductById(
+          this.productInfo.productId
+        );
+        this.productAtCart = productAtCart
+          ? productAtCart
+          : { count: 1, product: this.product };
+      })
+      .catch(() => {
+        // this.$emit('clearSelectedProduct');
+        alert('Could not fetch product from backend');
+      });
   },
   methods: {
     ...mapActions('cart', ['getCartProductById', 'updateCartProductById']),
@@ -230,6 +234,21 @@ export default {
       }
 
       return `$${exactPrice + extras}`;
+    }
+  },
+  watch: {
+    product: {
+      immediate: true,
+      handler(value) {
+        if (value) {
+          this.additions = value.productAttributes.map(attribute => {
+            return {
+              count: 0,
+              ...attribute
+            };
+          });
+        }
+      }
     }
   }
 };
