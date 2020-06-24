@@ -49,11 +49,11 @@
           </span>
         </template>
       </MaterialInput>
-      <!-- <TextArea
+      <TextArea
         v-model="item.description"
         label="Description"
         labelBg="bg-background"
-      /> -->
+      />
     </div>
     <hr class="border-white border-opacity-12 my-8" />
 
@@ -104,7 +104,7 @@
 import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import VariantManager from '@/components/menu/VariantManager.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
-// import TextArea from '@/components/inputs/TextArea';
+import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import { mapGetters, mapActions } from 'vuex';
@@ -117,7 +117,7 @@ export default {
     ImageUpload,
     VariantManager,
     MaterialInput,
-    // TextArea,
+    TextArea,
     Dropdown,
     Button
   },
@@ -144,7 +144,7 @@ export default {
       item: {
         name: '',
         price: '',
-        // description: '',
+        description: '',
         variations: [],
         attributes: [],
         image: {
