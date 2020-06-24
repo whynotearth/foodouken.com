@@ -1,26 +1,28 @@
 <template>
-  <section>
+  <section v-if="getSelectedCategory">
     <div
       class="deleteMargins disable-scrollbars overflow-x-auto flex flex-no-wrap mt-6"
     >
       <category
         v-for="(category, index) in getCategories"
         :key="category.id"
-        @clicked="fetchCategoryProducts(category)"
+        @clicked="fetchTenantCategoryItems(category)"
         :category="category"
-        :selected="getSelectedCategorySlug === category.slug"
+        :selected="getSelectedCategory.slug === category.slug"
         :class="{
           'ml-4': index === 0,
           'mr-4': index === getCategories.length - 1
         }"
       />
     </div>
-    <h3 class="text-5xl text-white font-bold text-center mb-4">
-      {{ getCategory.name }}
-    </h3>
-    <p class="text-gray-500 text-center mb-8 text-lg">
-      {{ getCategory.description || '' }}
-    </p>
+    <div>
+      <h3 class="text-5xl text-white font-bold text-center mb-4">
+        {{ getSelectedCategory.name }}
+      </h3>
+      <p class="text-gray-500 text-center mb-8 text-lg">
+        {{ getSelectedCategory.description || '' }}
+      </p>
+    </div>
   </section>
 </template>
 
@@ -34,19 +36,15 @@ export default {
     Category
   },
   created() {
-    this.fetchCategories().then(() => {
-      this.fetchCategoryProducts(this.getCategories[0]);
+    this.fetchTenantCategories(this.$route.params.slug).then(categories => {
+      this.fetchTenantCategoryItems(categories[0].id);
     });
   },
   methods: {
-    ...mapActions('category', ['fetchCategories', 'fetchCategoryProducts'])
+    ...mapActions('menu', ['fetchTenantCategories', 'fetchTenantCategoryItems'])
   },
   computed: {
-    ...mapGetters('category', [
-      'getCategories',
-      'getCategory',
-      'getSelectedCategorySlug'
-    ])
+    ...mapGetters('menu', ['getCategories', 'getSelectedCategory'])
   }
 };
 </script>
