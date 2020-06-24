@@ -4,20 +4,22 @@
       v-for="item in getMenuItems"
       :key="item.id"
       :name="item.name"
-      :image="item.images[0]"
+      :image="item.images ? item.images[0] : ''"
       :options="menuItemOptions"
       @clicked="editItem(item)"
       @sellOutItem="sellOutItem(item)"
       @deleteItem="deleteItem(item)"
     >
-      <template #subHeading> ${{ item.price }} - {{ item.category }} </template>
+      <template #subHeading>
+        ${{ item.price }} - Category {{ item.categoryId }}
+      </template>
     </MenuItem>
   </div>
 </template>
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'MenuItemList',
@@ -47,7 +49,6 @@ export default {
   },
   methods: {
     ...mapActions('menu', ['fetchTenantCategoryItems']),
-    ...mapMutations('menu', ['updateItem']),
     sellOutItem(item) {
       alert(item.name + ' is sold out');
     },
@@ -55,8 +56,7 @@ export default {
       alert(item.name + ' is deleted');
     },
     editItem(item) {
-      this.updateItem(item);
-      this.$router.push({ name: 'MenuItemEdit', params: { item: item.name } });
+      this.$router.push({ name: 'MenuItemEdit', params: { item: item.id } });
     }
   }
 };
