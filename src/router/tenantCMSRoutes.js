@@ -91,8 +91,7 @@ export const tenantCMSRoutes = [
           appBar: {
             title: 'Edit item',
             backRoute: {
-              name: 'MenuItemList',
-              params: { categoryId: 'BagelsAndBread' }
+              name: 'MenuItemList'
             }
           }
         }
