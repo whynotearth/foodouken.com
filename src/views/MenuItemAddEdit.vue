@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <ImageUpload v-model="images" :defaultImages="images" />
+    <ImageUpload v-model="images" />
     <hr class="border-white border-opacity-12 my-8" />
 
     <div class="mx-4">
@@ -147,10 +147,7 @@ export default {
         description: '',
         variations: [],
         attributes: [],
-        image: {
-          url:
-            'https://res.cloudinary.com/whynotearth/image/upload/v1586682068/foodouken/bangbangbakerycafe/Bagels%20and%20Breads/light_rye_sourdough_bang_bang_ixlett.jpg'
-        }
+        imageUrl: ''
         // inventory: ''
       },
       submitError: false,
@@ -167,16 +164,10 @@ export default {
     ...mapGetters('menu', ['getCategories']),
     images: {
       get() {
-        return [this.item.image];
+        return [{ url: this.item.imageUrl }];
       },
       set(value) {
-        let image = {};
-        try {
-          image = value[0];
-        } catch (error) {
-          image = null;
-        }
-        this.item.image = image;
+        this.item.imageUrl = value[0].url;
       }
     }
   },
