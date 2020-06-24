@@ -104,7 +104,7 @@
 import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import VariantManager from '@/components/menu/VariantManager.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
-// import TextArea from '@/components/inputs/TextArea';
+import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import { mapGetters, mapActions } from 'vuex';
@@ -117,7 +117,7 @@ export default {
     ImageUpload,
     VariantManager,
     MaterialInput,
-    // TextArea,
+    TextArea,
     Dropdown,
     Button
   },
