@@ -163,7 +163,9 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data;
+          this.apiError = error.response.data.title
+            ? error.response.data.title
+            : 'Something went wrong, try again.';
           throw error;
         });
     },
@@ -174,7 +176,9 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data;
+          this.apiError = error.response.data.title
+            ? error.response.data.title
+            : 'Something went wrong, try again.';
           throw error;
         });
     }
