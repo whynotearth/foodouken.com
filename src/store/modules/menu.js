@@ -7,7 +7,7 @@ const state = {
 };
 
 const getters = {
-  getMenuItems: state => state.items,
+  getMenuItems: state => state.menuItems,
   getCategories: state => state.categories,
   getMenuLoading: state => state.loading
 };
@@ -100,7 +100,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       httpClient.get(`/shop/categories/${categoryId}/products`).then(
         response => {
-          commit('updateItems', response.data);
+          commit('updateMenuItems', response.data);
           commit('changeMenuLoading', false);
           resolve(response.data);
         },
@@ -180,8 +180,8 @@ const actions = {
 };
 
 const mutations = {
-  updateItems(state, payload) {
-    state.items = payload;
+  updateMenuItems(state, payload) {
+    state.menuItems = payload;
   },
   updateCategories(state, payload) {
     state.categories = payload;
