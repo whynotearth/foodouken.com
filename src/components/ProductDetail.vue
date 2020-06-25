@@ -219,7 +219,7 @@ export default {
         this.productAtCart.count * this.productAtCart.product.price;
       let extras = 0;
       if (this.selectedOption && this.selectedOption.price) {
-        extras += this.selectedOption.price;
+        extras += this.selectedOption.price * this.productAtCart.count ;
       }
 
       if (this.additions.length > 0) {
