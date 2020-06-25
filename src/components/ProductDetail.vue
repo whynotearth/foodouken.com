@@ -101,7 +101,11 @@
                         </div>
                       </div>
                       <div class="text-white text-opacity-54">
-                        + ${{ attribute.count > 0 ? attribute.price * attribute.count : attribute.price}}
+                        + ${{
+                          attribute.count > 0
+                            ? attribute.price * attribute.count
+                            : attribute.price
+                        }}
                       </div>
                     </div>
                   </div>
