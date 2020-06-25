@@ -29,7 +29,7 @@
               </div>
               <div>
                 <h6 class="tg-body-mobile text-white text-opacity-54">
-                  ${{ product.price }}
+                  ${{ product.price * productAtCart.count }}
                 </h6>
               </div>
               <hr class="border-gray-700 my-8" />
@@ -57,7 +57,7 @@
                           <span
                             class="text-white text-opacity-54"
                             v-if="variant.price > 0"
-                            >+ ${{ variant.price }}</span
+                            >+ ${{ variant.price * productAtCart.count }}</span
                           >
                         </div>
                       </template>
@@ -101,7 +101,7 @@
                         </div>
                       </div>
                       <div class="text-white text-opacity-54">
-                        + ${{ attribute.price }}
+                        + ${{ attribute.count > 0 ? attribute.price * attribute.count : attribute.price}}
                       </div>
                     </div>
                   </div>
@@ -219,7 +219,7 @@ export default {
         this.productAtCart.count * this.productAtCart.product.price;
       let extras = 0;
       if (this.selectedOption && this.selectedOption.price) {
-        extras += this.selectedOption.price * this.productAtCart.count ;
+        extras += this.selectedOption.price * this.productAtCart.count;
       }
 
       if (this.additions.length > 0) {

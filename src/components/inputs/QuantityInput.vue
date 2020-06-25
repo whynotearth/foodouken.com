@@ -35,11 +35,15 @@
           @click="increment"
           :class="buttonClasses"
         >
-          <img :src="plus" alt="+" class="pointer-events-none" draggable="false" />
+          <img
+            :src="plus"
+            alt="+"
+            class="pointer-events-none"
+            draggable="false"
+          />
         </div>
       </div>
     </transition>
-    
   </div>
 </template>
 
