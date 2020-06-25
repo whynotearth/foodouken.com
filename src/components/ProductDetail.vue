@@ -3,7 +3,7 @@
     <div
       v-if="product"
       @click="$emit('clearSelectedProduct')"
-      class="fixed w-screen h-screen top-0 left-0 bg-background z-50 overflow-y-scroll"
+      class="fixed w-screen min-h-screen h-full top-0 left-0 bg-background z-50 overflow-y-scroll"
     >
       <div class="sm:flex justify-center items-center sm:items-start h-full">
         <div @click.stop class="sm:w-128 sm:h-160 relative">
@@ -18,15 +18,14 @@
                 />
               </span>
             </div>
-            <div>
+            <div v-if="product.images">
               <img
-                v-if="product.images"
                 class="w-screen sm:w-full h-64"
                 :src="product.images[0]"
                 alt="product"
               />
             </div>
-            <div class="p-4 my-4">
+            <div class="p-4 my-8 sm:my-4">
               <div class="mb-4">
                 <h2 class="tg-h2-mobile">{{ product.name }}</h2>
               </div>
