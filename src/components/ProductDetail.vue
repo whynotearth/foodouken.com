@@ -6,17 +6,15 @@
       class="fixed w-screen min-h-screen h-full top-0 left-0 bg-background z-50 overflow-y-scroll"
     >
       <div class="sm:flex justify-center items-center sm:items-start h-full">
-        <div @click.stop class="sm:w-128 sm:h-160 relative">
+        <div @click.stop class="sm:w-128 sm:h-160">
           <div>
             <div class="absolute top-0 left-0 px-4 py-2">
-              <span class="flex">
-                <img
-                  :src="arrowBack"
-                  alt="arrow-back"
-                  @click="$emit('clearSelectedProduct')"
-                  class="cursor-pointer text-white text-opacity-54"
-                />
-              </span>
+              <img
+                :src="arrowBack"
+                alt="arrow-back"
+                @click="$emit('clearSelectedProduct')"
+                class="cursor-pointer text-white text-opacity-54"
+              />
             </div>
             <div v-if="product.images">
               <img
@@ -25,7 +23,7 @@
                 alt="product"
               />
             </div>
-            <div class="p-4 my-8 sm:my-4">
+            <div class="p-4 my-4">
               <div class="mb-4">
                 <h2 class="tg-h2-mobile">{{ product.name }}</h2>
               </div>
