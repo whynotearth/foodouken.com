@@ -182,13 +182,6 @@ export default {
       ...this.productInfo
     })
       .then(async () => {
-        // This is for when modal opens no scrool to body element
-        const body = document.getElementsByTagName('body')[0];
-        body.classList.add('overflow-hidden');
-        this.$once('hook:destroyed', () => {
-          body.classList.remove('overflow-hidden');
-        });
-
         const productAtCart = await this.getCartProductById(
           this.productInfo.productId
         );
