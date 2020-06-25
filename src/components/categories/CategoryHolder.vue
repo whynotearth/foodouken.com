@@ -6,7 +6,7 @@
       <category
         v-for="(category, index) in getCategories"
         :key="category.id"
-        @clicked="fetchTenantCategoryItems(category)"
+        @clicked="fetchTenantCategoryItems(category.id)"
         :category="category"
         :selected="getSelectedCategory.slug === category.slug"
         :class="{
