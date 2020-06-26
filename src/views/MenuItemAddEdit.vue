@@ -167,7 +167,7 @@ export default {
         return [{ url: this.item.imageUrl }];
       },
       set(value) {
-        this.item.imageUrl = value[0].url;
+        this.item.imageUrl = value[0] ? value[0].url : '';
       }
     }
   },
