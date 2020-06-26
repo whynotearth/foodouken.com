@@ -14,10 +14,10 @@
               class="cursor-pointer text-white text-opacity-54"
             />
           </div>
-          <div v-if="product.images">
+          <div>
             <img
               class="w-screen sm:w-full h-64"
-              :src="product.images[0]"
+              :src="product.imageUrl"
               alt="product"
             />
           </div>
