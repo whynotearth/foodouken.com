@@ -1,13 +1,5 @@
 <template>
   <div>
-    <product-detail
-      v-if="selectedProduct"
-      :productInfo="{
-        productId: selectedProduct.id,
-        categoryId: getSelectedCategory.id
-      }"
-      @clearSelectedProduct="selectedProduct = null"
-    />
     <div class="grid xs:grid-cols-1 sm:grid-cols-2 gap-6">
       <product-card
         :product="product"
@@ -22,13 +14,11 @@
 <script>
 import ProductCard from '@/components/cards/ProductCard.vue';
 import { mapGetters } from 'vuex';
-import ProductDetail from '@/components/ProductDetail.vue';
 
 export default {
   name: 'CardHolder',
   components: {
-    ProductCard,
-    ProductDetail
+    ProductCard
   },
   data() {
     return {
@@ -41,6 +31,7 @@ export default {
   methods: {
     changeSelectedProduct(product) {
       this.selectedProduct = product;
+      this.$router.push({ name: 'ShopProductDetail', params: { slug: this.$route.params.slug, categoryId: this.getSelectedCategory.id, productId: product.id } });
     }
   }
 };
