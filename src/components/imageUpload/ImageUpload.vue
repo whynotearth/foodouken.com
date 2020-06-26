@@ -28,13 +28,15 @@
         </label>
       </CloudinaryWidget>
       <div class="upload-previews-wrapper flex flex-wrap">
-        <BaseImagePreview
-          :selectImage="selectImage"
-          v-for="(image, index) in imagesToPreview"
-          :key="index"
-          :image="image.url"
-          :index="index"
-        />
+        <template v-for="(image, index) in imagesToPreview">
+          <BaseImagePreview
+            v-if="image.url"
+            :selectImage="selectImage"
+            :key="index"
+            :image="image.url"
+            :index="index"
+          />
+        </template>
       </div>
       <ImagePreviewModal
         v-if="
@@ -85,8 +87,10 @@ export default {
     CloudinaryWidget: () => import('./CloudinaryWidget')
   },
   mounted() {
-    this.images = [...this.defaultImages];
-    this.imagesToPreview = [...this.defaultImages];
+    if (this.defaultImages && this.defaultImages.length > 0) {
+      this.images = [...this.defaultImages];
+      this.imagesToPreview = [...this.defaultImages];
+    }
   },
   methods: {
     deleteImage(index) {
