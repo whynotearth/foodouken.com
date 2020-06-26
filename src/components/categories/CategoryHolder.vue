@@ -6,9 +6,9 @@
       <category
         v-for="(category, index) in getCategories"
         :key="category.id"
-        @clicked="fetchCategoryProducts(category)"
+        @clicked="fetchCategoryProducts(category.id)"
         :category="category"
-        :selected="getSelectedCategorySlug === category.slug"
+        :selected="getCategory.id === category.id"
         :class="{
           'ml-4': index === 0,
           'mr-4': index === getCategories.length - 1
@@ -34,8 +34,8 @@ export default {
     Category
   },
   created() {
-    this.fetchCategories().then(() => {
-      this.fetchCategoryProducts(this.getCategories[0]);
+    this.fetchCategories(this.$route.params.slug).then(() => {
+      this.fetchCategoryProducts(this.getCategories[0].id);
     });
   },
   methods: {
@@ -44,8 +44,7 @@ export default {
   computed: {
     ...mapGetters('category', [
       'getCategories',
-      'getCategory',
-      'getSelectedCategorySlug'
+      'getCategory'
     ])
   }
 };
