@@ -8,7 +8,7 @@
         :key="category.id"
         @clicked="fetchCategoryProducts(category.id)"
         :category="category"
-        :selected="getCategory.id === category.id"
+        :selected="getSelectedCategory.id === category.id"
         :class="{
           'ml-4': index === 0,
           'mr-4': index === getCategories.length - 1
@@ -16,10 +16,10 @@
       />
     </div>
     <h3 class="text-5xl text-white font-bold text-center mb-4">
-      {{ getCategory.name }}
+      {{ getSelectedCategory.name }}
     </h3>
     <p class="text-gray-500 text-center mb-8 text-lg">
-      {{ getCategory.description || '' }}
+      {{ getSelectedCategory.description || '' }}
     </p>
   </section>
 </template>
@@ -44,7 +44,7 @@ export default {
   computed: {
     ...mapGetters('category', [
       'getCategories',
-      'getCategory'
+      'getSelectedCategory'
     ])
   }
 };
