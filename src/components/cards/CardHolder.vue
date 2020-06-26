@@ -36,10 +36,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('menu', {
-      getSelectedCategory: 'getSelectedCategory',
-      getProducts: 'getMenuItems'
-    })
+    ...mapGetters('category', ['getSelectedCategory', 'getProducts'])
   },
   methods: {
     changeSelectedProduct(product) {

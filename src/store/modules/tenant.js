@@ -6,11 +6,11 @@ const notificationTypes = [
     key: 'phone',
     id: 'text'
   },
-  {
-    name: 'Whatsapp',
-    key: 'phone',
-    id: 'whatsapp'
-  },
+  // {
+  //   name: 'Whatsapp',
+  //   key: 'phone',
+  //   id: 'whatsapp'
+  // },
   {
     name: 'Email',
     key: 'email',
@@ -22,11 +22,11 @@ const paymentMethods = [
   {
     name: 'Cash',
     id: 'cash'
-  },
-  {
-    name: 'ABA Bank Transfer',
-    id: 'abaBankTransfer'
   }
+  // {
+  //   name: 'ABA Bank Transfer',
+  //   id: 'abaBankTransfer'
+  // }
 ];
 
 const days = [
@@ -39,7 +39,7 @@ const days = [
   'Sunday'
 ];
 
-const defaultNotificationTypes = ['whatsapp'];
+const defaultNotificationTypes = ['email'];
 const defaultPaymentMethods = ['cash'];
 const defaultBusinessHours = days.map(day => {
   return {

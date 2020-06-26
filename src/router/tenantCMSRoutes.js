@@ -15,6 +15,7 @@ export const tenantCMSRoutes = [
         name: 'MenuCategoryList',
         component: () => import('@/views/MenuCategoryList.vue'),
         meta: {
+          requiresAuth: true,
           appBar: {
             title: 'Categories',
             backRoute: { name: 'Home' },
@@ -27,6 +28,7 @@ export const tenantCMSRoutes = [
         name: 'MenuCategoryAdd',
         component: () => import('@/views/MenuCategoryAddEdit.vue'),
         meta: {
+          requiresAuth: true,
           appBar: {
             title: 'Add new category',
             backRoute: { name: 'MenuCategoryList' }
@@ -38,6 +40,7 @@ export const tenantCMSRoutes = [
         name: 'MenuCategoryEdit',
         component: () => import('@/views/MenuCategoryAddEdit.vue'),
         meta: {
+          requiresAuth: true,
           appBar: {
             title: 'Edit category',
             backRoute: { name: 'MenuCategoryList' }
@@ -66,6 +69,7 @@ export const tenantCMSRoutes = [
             });
         },
         meta: {
+          requiresAuth: true,
           appBar: {
             backRoute: { name: 'MenuCategoryList' },
             newItem: { name: 'MenuItemAdd' }
@@ -77,6 +81,7 @@ export const tenantCMSRoutes = [
         name: 'MenuItemAdd',
         component: () => import('@/views/MenuItemAddEdit.vue'),
         meta: {
+          requiresAuth: true,
           appBar: {
             title: 'Add new item',
             backRoute: { name: 'MenuItemList' }
@@ -88,6 +93,7 @@ export const tenantCMSRoutes = [
         name: 'MenuItemEdit',
         component: () => import('@/views/MenuItemAddEdit.vue'),
         meta: {
+          requiresAuth: true,
           appBar: {
             title: 'Edit item',
             backRoute: {

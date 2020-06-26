@@ -33,10 +33,11 @@ const getters = {
 
 // actions
 const actions = {
-  fetchShopData({ commit }, slug) {
-    commit('setshopSlug', slug);
+  fetchShopData({ commit }, tenantSlug) {
+    commit('setshopSlug', tenantSlug);
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
-      httpClient.get(`/pages/slug/foodouken/${slug}/shop`).then(
+      httpClient.get(`/companies/${companySlug}/tenants/${tenantSlug}`).then(
         response => {
           commit('loadOrgData', response.data);
           commit('changeshopLoading', false);
