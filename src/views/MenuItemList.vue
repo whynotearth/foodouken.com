@@ -7,7 +7,7 @@
       v-for="item in getMenuItems"
       :key="item.id"
       :name="item.name"
-      :image="item.images ? item.images[0] : ''"
+      :image="item.imageUrl"
       :options="menuItemOptions"
       @clicked="editItem(item.id)"
       @sellOutItem="sellOutItem(item.id)"

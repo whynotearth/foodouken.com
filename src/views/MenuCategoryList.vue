@@ -7,7 +7,7 @@
       v-for="category in getCategories"
       :key="category.id"
       :name="category.name"
-      :image="category.image"
+      :image="category.imageUrl"
       :options="menuItemOptions"
       @clicked="showItems(category.id)"
       @edit="editCategory(category.id)"
