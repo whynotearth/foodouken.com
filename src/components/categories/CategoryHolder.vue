@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="getSelectedCategory">
     <div
       class="deleteMargins disable-scrollbars overflow-x-auto flex flex-no-wrap mt-6"
     >
