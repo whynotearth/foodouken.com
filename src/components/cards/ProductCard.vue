@@ -4,7 +4,7 @@
     class="product-card bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer transition duration-300 transform hover:opacity-75"
   >
     <img
-      :src="product.images[0]"
+      :src="product.imagesUrl"
       alt="Product image"
       class="p-1/2 h-full object-cover rounded-l-lg"
     />
