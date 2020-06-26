@@ -7,7 +7,11 @@
           selected ? 'selected border-white border-2 p-1' : 'unselected p-1.5'
         "
       >
-        <img :src="category.image" alt="category" class="rounded-full" />
+        <img
+          :src="category.image"
+          alt="category"
+          class="rounded-full h-full w-full object-cover"
+        />
       </div>
     </div>
     <p
