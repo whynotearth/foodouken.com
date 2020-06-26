@@ -8,7 +8,7 @@
         "
       >
         <img
-          :src="category.image"
+          :src="category.imageUrl"
           alt="category"
           class="rounded-full h-full w-full object-cover"
         />
