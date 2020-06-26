@@ -55,24 +55,29 @@ export default {
     width: 5rem;
     height: 5rem;
   }
+
   50% {
     width: 4.7rem;
     height: 4.7rem;
   }
+
   100% {
     width: 5rem;
     height: 5rem;
   }
 }
+
 @keyframes shrink-mobile {
   0% {
     width: 4rem;
     height: 4rem;
   }
+
   50% {
     width: 3.6rem;
     height: 3.6rem;
   }
+
   100% {
     width: 4rem;
     height: 4rem;
