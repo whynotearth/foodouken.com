@@ -55,16 +55,18 @@
       <template #title>
         <div class="tg-body-mobile ">
           <span class="text-white text-opacity-65"> Logo </span>
-          <span class="text-white text-opacity-38"> ( 500 x 599 pixels JPEG / PNG ) </span>
+          <span class="text-white text-opacity-38">
+            ( 500 x 599 pixels JPEG / PNG )
+          </span>
         </div>
       </template>
     </ImageUpload>
     <span
-        v-if="$v.logo.$dirty && !$v.logo.required"
-        class="text-red-600 text-xs"
-      >
-        Logo is required
-      </span>
+      v-if="$v.logo.$dirty && !$v.logo.required"
+      class="text-red-600 text-xs"
+    >
+      Logo is required
+    </span>
   </div>
 </template>
 
@@ -149,7 +151,7 @@ export default {
       set(value) {
         this.updateLogo(value);
       }
-    },
+    }
   },
   methods: {
     ...mapMutations('tenant', [

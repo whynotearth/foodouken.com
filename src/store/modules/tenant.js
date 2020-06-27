@@ -107,7 +107,8 @@ const actions = {
       paymentMethodTypes: getters.getSelectedPaymentMethods,
       companySlug: process.env.VUE_APP_COMPANY_SLUG,
       businessHours: state.businessHours,
-      logoUrl: getters.getLogo && getters.getLogo[0] ? getters.getLogo[0].url : ''
+      logoUrl:
+        getters.getLogo && getters.getLogo[0] ? getters.getLogo[0].url : ''
     };
 
     return new Promise((resolve, reject) => {
