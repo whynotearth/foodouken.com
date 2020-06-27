@@ -17,7 +17,7 @@ const getters = {
   getOrgData(state) {
     return state.orgData;
   },
-  getOpeningHours(state) {
+  getBusinessHours(state) {
     return state.orgData.businessHours;
   },
   getLoading(state) {
@@ -28,6 +28,9 @@ const getters = {
   },
   getTaxRate() {
     return 0;
+  },
+  getPaymentMethodTypes(state) {
+    return state.orgData.paymentMethodTypes;
   }
 };
 
