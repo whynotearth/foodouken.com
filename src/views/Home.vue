@@ -37,7 +37,7 @@
               style="padding-bottom: 45%;"
             >
               <img
-                :src="tenant.logo"
+                :src="tenant.logoUrl"
                 class="absolute w-full object-cover"
                 :alt="tenant.name"
               />
