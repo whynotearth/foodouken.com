@@ -25,7 +25,7 @@ const state = {
       time: '',
       totalTime: ''
     },
-    paymentMethod: 'Cash'
+    paymentMethod: ''
   },
   page: 1,
   form: false,
