@@ -38,14 +38,15 @@
         label="Price"
         labelBg="bg-background"
         type="number"
+        step="0.01"
         :error="$v.item.price.$error"
       >
         <template v-if="$v.item.price.$error">
           <span v-if="!$v.item.price.required" class="text-red-600 text-xs">
             Price is required.
           </span>
-          <span v-if="!$v.item.price.numeric" class="text-red-600 text-xs">
-            Price should be a number.
+          <span v-if="!$v.item.price.decimal" class="text-red-600 text-xs">
+            Price should be a valid number.
           </span>
         </template>
       </MaterialInput>
@@ -109,7 +110,7 @@ import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
-import { required, numeric } from 'vuelidate/lib/validators';
+import { required, decimal } from 'vuelidate/lib/validators';
 
 export default {
   name: 'MenuItemAddEdit',
@@ -128,7 +129,7 @@ export default {
       },
       price: {
         required,
-        numeric
+        decimal
       }
     }
   },
