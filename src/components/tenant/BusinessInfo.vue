@@ -61,10 +61,7 @@
         </div>
       </template>
     </ImageUpload>
-    <span
-      v-if="$v.logo.$dirty && !$v.logo.required"
-      class="text-red-600 text-xs"
-    >
+    <span v-if="$v.logo.$dirty && $v.logo.$error" class="text-red-600 text-xs">
       Logo is required
     </span>
   </div>
@@ -101,7 +98,11 @@ export default {
     },
     description: {},
     logo: {
-      required
+      $each: {
+        url: {
+          required
+        }
+      }
     }
   },
   computed: {
@@ -146,10 +147,10 @@ export default {
     },
     logo: {
       get() {
-        return this.getLogo;
+        return [{ url: this.getLogo }];
       },
       set(value) {
-        this.updateLogo(value);
+        this.updateLogo(value[0] ? value[0].url : '');
       }
     }
   },

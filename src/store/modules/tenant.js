@@ -56,7 +56,7 @@ const state = {
     email: '',
     phone: '',
     description: '',
-    logo: []
+    logoUrl: ''
   },
   selectedNotificationType: [...defaultNotificationTypes],
   selectedPaymentMethods: [...defaultPaymentMethods],
@@ -80,7 +80,7 @@ const getters = {
     return state.businessInfo.description;
   },
   getLogo(state) {
-    return state.businessInfo.logo;
+    return state.businessInfo.logoUrl;
   },
   page(state) {
     return state.page;
@@ -97,7 +97,7 @@ const getters = {
 };
 
 const actions = {
-  createTenant({ getters, state }) {
+  createTenant({ getters }) {
     const registerData = {
       name: getters.getName,
       email: getters.getEmail,
@@ -106,9 +106,8 @@ const actions = {
       notificationTypes: getters.getSelectedNotificationTypes,
       paymentMethodTypes: getters.getSelectedPaymentMethods,
       companySlug: process.env.VUE_APP_COMPANY_SLUG,
-      businessHours: state.businessHours,
-      logoUrl:
-        getters.getLogo && getters.getLogo[0] ? getters.getLogo[0].url : ''
+      businessHours: getters.getBusinessHours,
+      logoUrl: getters.getLogo
     };
 
     return new Promise((resolve, reject) => {
@@ -140,7 +139,7 @@ const mutations = {
     state.businessInfo.description = payload;
   },
   updateLogo(state, payload) {
-    state.businessInfo.logo = payload;
+    state.businessInfo.logoUrl = payload;
   },
   pageChange(state, payload) {
     state.page = payload;
@@ -159,7 +158,7 @@ const mutations = {
     state.businessInfo.email = '';
     state.businessInfo.phone = '';
     state.businessInfo.description = '';
-    state.logo = [];
+    state.businessInfo.logoUrl = '';
     state.selectedNotificationType = defaultNotificationTypes;
     state.paymentMethodTypes = defaultPaymentMethods;
     state.businessHours = defaultBusinessHours;
