@@ -73,6 +73,7 @@ export default {
   },
   created() {
     this.fetchShopData(this.$route.params.slug);
+    this.resetCartItems();
   },
   methods: {
     triggerFormWrapper(value) {
@@ -97,7 +98,8 @@ export default {
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
     ...mapActions('shop', ['fetchShopData']),
-    ...mapMutations('form', ['triggerForm'])
+    ...mapMutations('form', ['triggerForm']),
+    ...mapMutations('cart', ['resetCartItems'])
   },
   computed: {
     ...mapGetters({
