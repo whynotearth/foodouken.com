@@ -36,10 +36,6 @@ export default {
       apiError: '',
       menuItemOptions: [
         {
-          name: 'Sell out',
-          action: 'sellOutItem'
-        },
-        {
           name: 'Delete',
           action: 'deleteItem'
         }
