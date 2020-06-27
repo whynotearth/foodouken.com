@@ -147,7 +147,8 @@ export default {
         description: '',
         variations: [],
         attributes: [],
-        imageUrl: ''
+        imageUrl:
+          'https://res.cloudinary.com/whynotearth/image/upload/v1587687189/foodouken/foodouken_logo_uq4iev_abk1wn.png'
         // inventory: ''
       },
       submitError: false,

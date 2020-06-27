@@ -72,7 +72,8 @@ export default {
       category: {
         name: '',
         description: '',
-        imageUrl: ''
+        imageUrl:
+          'https://res.cloudinary.com/whynotearth/image/upload/v1587687189/foodouken/foodouken_logo_uq4iev_abk1wn.png'
       }
     };
   },
