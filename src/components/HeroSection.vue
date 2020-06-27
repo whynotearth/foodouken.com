@@ -2,7 +2,7 @@
   <div class="text-center">
     <div class="mt-8">
       <img
-        :src="heroData.logo"
+        :src="heroData.logoUrl"
         alt="Logo image"
         class="h-48 w-48 m-auto rounded-full"
       />
