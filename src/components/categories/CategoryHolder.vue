@@ -35,7 +35,7 @@ export default {
   },
   created() {
     this.fetchCategories(this.$route.params.slug).then(() => {
-      this.fetchCategoryProducts(this.getCategories[0].id);
+      this.fetchCategoryProducts(this.getSelectedCategory.id ? this.getSelectedCategory.id : this.getCategories[0].id);
     });
   },
   methods: {

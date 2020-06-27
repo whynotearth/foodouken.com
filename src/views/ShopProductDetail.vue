@@ -1,11 +1,11 @@
 <template>
   <div
-    v-if="product"
-    class="fixed w-screen min-h-screen h-full top-0 left-0 bg-background z-50 overflow-y-scroll"
+    v-if="product && productAtCart"
+    class=""
   >
-    <div class="sm:flex justify-center items-center sm:items-start h-full">
-      <div class="sm:w-128 sm:h-160">
-        <div>
+    <div class="sm:flex justify-center items-center sm:items-start">
+      <div class="sm:w-128">
+        <div class="relative">
           <div class="absolute top-0 left-0 px-4 py-2">
             <img
               :src="arrowBack"
@@ -152,11 +152,11 @@ export default {
   name: 'ProductDetail',
   props: {
     categoryId: {
-      type: String,
+      type: Number,
       required: true
     },
     productId: {
-      type: String,
+      type: Number,
       required: true
     }
   },
