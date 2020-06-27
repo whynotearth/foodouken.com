@@ -129,8 +129,11 @@ export default {
     }
   },
   watch: {
-    value(val) {
-      this.imagesToPreview = [...val];
+    value: {
+      immediate: true,
+      handler(val) {
+        this.imagesToPreview = [...val];
+      }
     }
   }
 };
