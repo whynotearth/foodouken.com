@@ -74,12 +74,11 @@
               </div>
             </div>
             <hr class="border-gray-700 my-8" />
-            <div>
+            <div v-if="additions">
               <h5>Additions</h5>
 
               <div
                 class="w-full bg-secondary rounded-lg shadow mb-2 my-4"
-                v-if="additions"
               >
                 <div
                   class="px-5 py-4"
@@ -108,8 +107,8 @@
                   </div>
                 </div>
               </div>
-            </div>
             <hr class="border-gray-700 my-12" />
+            </div>
             <div class="flex justify-center">
               <div v-if="productAtCart">
                 <QuantityInput
@@ -222,7 +221,7 @@ export default {
         extras += this.selectedOption.price * this.productAtCart.count;
       }
 
-      if (this.additions.length > 0) {
+      if (this.additions && this.additions.length > 0) {
         const totalAdditionPrice = this.additions.reduce((total, current) => {
           total += current.price * current.count;
           return total;
@@ -238,7 +237,7 @@ export default {
       immediate: true,
       handler(value) {
         if (value) {
-          this.additions = value.productAttributes.map(attribute => {
+          this.additions = value.attributes.map(attribute => {
             return {
               count: 0,
               ...attribute
