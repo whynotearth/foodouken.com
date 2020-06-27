@@ -1,9 +1,11 @@
 <template>
   <div class="mx-4">
     <div class="mb-2">
-      <span class="tg-h3-mobile text-white text-opacity-54 mt-8 inline-block">
-        Image
-      </span>
+      <slot name="title">
+        <span class="tg-h3-mobile text-white text-opacity-54 mt-8 inline-block">
+          Image
+        </span>
+      </slot>
     </div>
     <div class="flex flex-wrap -mx-1">
       <CloudinaryWidget

@@ -128,6 +128,9 @@ export default {
         .catch(() => {});
     }
   },
+  destroyed() {
+    this.updateIsSignUpStarted(false);
+  },
   watch: {
     component(step) {
       this.$router.push({ name: 'SignUp', params: { step } }).catch(() => {});
