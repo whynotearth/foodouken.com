@@ -159,6 +159,7 @@ const mutations = {
     state.businessInfo.email = '';
     state.businessInfo.phone = '';
     state.businessInfo.description = '';
+    state.logo = [];
     state.selectedNotificationType = defaultNotificationTypes;
     state.paymentMethodTypes = defaultPaymentMethods;
     state.businessHours = defaultBusinessHours;
