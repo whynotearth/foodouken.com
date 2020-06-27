@@ -11,6 +11,7 @@
       :id="idName"
       :type="type"
       min="0"
+      :step="step"
       :value="value"
       @blur="$emit('input', $event.target.value)"
       :placeholder="placeholder || label"
@@ -46,6 +47,10 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    step: {
+      type: String,
+      default: '1'
     },
     error: {
       default: Boolean
