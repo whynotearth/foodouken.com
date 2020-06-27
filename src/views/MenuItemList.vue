@@ -14,7 +14,7 @@
       @deleteItem="deleteItem(item.id)"
     >
       <template #subHeading>
-        ${{ item.price }} - Category {{ item.categoryId }}
+        ${{ item.price }} - {{ item.category.name }}
       </template>
     </MenuItem>
   </div>
