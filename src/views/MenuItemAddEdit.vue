@@ -185,16 +185,6 @@ export default {
       // TODO: Add loader till all requests are finished loading
       this.edit = this.itemId !== undefined ? true : false;
       this.fetchTenantCategories(this.tenantSlug);
-      this.fetchTenantCategoryById({
-        tenantSlug: this.tenantSlug,
-        categoryId: this.categoryId
-      })
-        .then(category => {
-          this.category = category;
-        })
-        .catch(error => {
-          throw error;
-        });
       if (this.edit) {
         this.fetchTenantCategoryItemById({
           categoryId: this.categoryId,
@@ -202,9 +192,21 @@ export default {
         })
           .then(item => {
             this.item = item;
+            this.category = item.category;
           })
           .catch(error => {
             this.apiError = error.response.data;
+            throw error;
+          });
+      } else {
+        this.fetchTenantCategoryById({
+          tenantSlug: this.tenantSlug,
+          categoryId: this.categoryId
+        })
+          .then(category => {
+            this.category = category;
+          })
+          .catch(error => {
             throw error;
           });
       }
