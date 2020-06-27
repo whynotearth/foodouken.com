@@ -19,9 +19,9 @@
       </div>
       <div class="text-center">
         <Button
-          :to="url"
+          :to="url.to"
           class="hyperlink-text text-button normal-case"
-          :title="url"
+          :title="url.title"
           buttonBg="bg-transparent"
           :isRipple="false"
         />
@@ -56,7 +56,11 @@ export default {
   },
   computed: {
     url() {
-      return `${window.location.host}/shop/${this.$route.params.slug}`;
+      let tenantSlug = this.$route.params.slug;
+      return {
+        title: `https://foodouken.com/shop/${tenantSlug}`,
+        to: { name: 'Shop', params: { slug: tenantSlug } }
+      };
     }
   }
 };
