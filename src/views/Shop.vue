@@ -130,7 +130,7 @@ export default {
           property: 'og:url',
           content: window.location.host + this.$route.fullPath
         },
-        { property: 'og:image', content: this.orgData.logo },
+        { property: 'og:image', content: this.orgData.logoUrl },
         {
           property: 'og:description',
           content: this.orgData.description
@@ -142,11 +142,11 @@ export default {
           name: 'twitter:description',
           content: this.orgData.description
         },
-        { name: 'twitter:image', content: this.orgData.logo },
+        { name: 'twitter:image', content: this.orgData.logoUrl },
         // Google / Schema.org markup:
         { itemprop: 'name', content: this.orgData.name },
         { itemprop: 'description', content: this.orgData.description },
-        { itemprop: 'image', content: this.orgData.logo }
+        { itemprop: 'image', content: this.orgData.logoUrl }
       ],
       script: [
         {
