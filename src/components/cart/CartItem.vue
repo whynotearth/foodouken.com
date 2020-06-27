@@ -14,11 +14,11 @@
       />
     </div>
     <img
-      :src="cartItem.product.images[0]"
+      :src="cartItem.product.imageUrl"
       class="h-12 w-12 my-auto"
       alt="Product image"
     />
-    <div class="w-auto mx-2 w-full flex flex-col truncate">
+    <div class="mx-2 w-full flex flex-col truncate">
       <span class="text-gray-400 truncate">{{ cartItem.product.name }} </span>
       <span class="text-gray-500">${{ cartItem.product.price }}</span>
     </div>

@@ -16,16 +16,25 @@
           :value="notificationType.id"
         >
           <template #label>
-            <div class="tg-body-mobile">
+            <div class="tg-body-mobile flex flex-wrap">
               <span class="mx-1 text-white text-opacity-84">{{
                 notificationType.name
               }}</span>
-              <span class="mx-1 text-white text-opacity-54"
+              <span class="mx-1 text-white text-opacity-54 break-all"
                 >({{ authDetail[notificationType.key] }})</span
               >
             </div>
           </template>
         </CheckBox>
+      </div>
+      <div
+        v-if="
+          $v.selectedNotificationTypes.$dirty &&
+            $v.selectedNotificationTypes.$invalid
+        "
+        class="text-red-600 text-xs"
+      >
+        You should provide at least one notification method.
       </div>
     </div>
   </div>
@@ -34,12 +43,18 @@
 <script>
 import CheckBox from '@/components/inputs/CheckBox';
 import { mapState, mapGetters, mapMutations } from 'vuex';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
   name: 'Notifications',
   components: { CheckBox },
   data() {
     return {};
+  },
+  validations: {
+    selectedNotificationTypes: {
+      required
+    }
   },
   computed: {
     ...mapState('tenant', ['notificationTypes']),

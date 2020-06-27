@@ -4,7 +4,12 @@
     @click="$emit('clicked')"
   >
     <div class="flex-shrink-0 h-10 w-10">
-      <img :src="image" class="object-cover" draggable="false" alt="item" />
+      <img
+        :src="image"
+        class="object-cover h-full w-full"
+        draggable="false"
+        alt="item"
+      />
     </div>
     <div class="mx-2 w-full flex flex-col truncate z-10">
       <span class="tg-body-mobile text-white text-opacity-95 truncate">

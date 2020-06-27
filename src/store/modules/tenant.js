@@ -6,11 +6,11 @@ const notificationTypes = [
     key: 'phone',
     id: 'text'
   },
-  {
-    name: 'Whatsapp',
-    key: 'phone',
-    id: 'whatsapp'
-  },
+  // {
+  //   name: 'Whatsapp',
+  //   key: 'phone',
+  //   id: 'whatsapp'
+  // },
   {
     name: 'Email',
     key: 'email',
@@ -22,22 +22,33 @@ const paymentMethods = [
   {
     name: 'Cash',
     id: 'cash'
-  },
-  {
-    name: 'ABA Bank Transfer',
-    id: 'abaBankTransfer'
   }
+  // {
+  //   name: 'ABA Bank Transfer',
+  //   id: 'abaBankTransfer'
+  // }
 ];
 
 const days = [
+  'Sunday',
   'Monday',
   'Tuesday',
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday',
-  'Sunday'
+  'Saturday'
 ];
+
+const defaultNotificationTypes = ['email'];
+const defaultPaymentMethods = ['cash'];
+const defaultBusinessHours = days.map(day => {
+  return {
+    dayOfWeek: day.toLocaleLowerCase(),
+    isClosed: false,
+    openingTime: '08:00:00',
+    closingTime: '18:00:00'
+  };
+});
 
 const state = {
   businessInfo: {
@@ -47,16 +58,9 @@ const state = {
     description: '',
     logo: []
   },
-  selectedNotificationType: ['whatsapp'],
-  selectedPaymentMethods: ['cash'],
-  businessHours: days.map(day => {
-    return {
-      dayOfWeek: day.toLocaleLowerCase(),
-      isClosed: false,
-      openingTime: '08:00:00',
-      closingTime: '18:00:00'
-    };
-  }),
+  selectedNotificationType: [...defaultNotificationTypes],
+  selectedPaymentMethods: [...defaultPaymentMethods],
+  businessHours: [...defaultBusinessHours],
   page: 1,
   notificationTypes,
   paymentMethods
@@ -148,6 +152,15 @@ const mutations = {
   },
   updateBusinessHours(state, payload) {
     state.businessHours = payload;
+  },
+  resetCreateTenantForm(state) {
+    state.businessInfo.name = '';
+    state.businessInfo.email = '';
+    state.businessInfo.phone = '';
+    state.businessInfo.description = '';
+    state.selectedNotificationType = defaultNotificationTypes;
+    state.paymentMethodTypes = defaultPaymentMethods;
+    state.businessHours = defaultBusinessHours;
   }
 };
 

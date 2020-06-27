@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full text-center my-4 flex sticky lg:relative inset-x-0 bottom-0 z-10"
+    class="w-full text-center mt-4 flex sticky lg:relative inset-x-0 bottom-0 z-10"
   >
     <Button
       titleLeft="◄ Back"

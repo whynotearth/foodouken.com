@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex items-stretch justify-center items-center">
+  <div class="h-screen w-screen flex items-stretch justify-center items-center">
     <div class="h-full w-full flex flex-col justify-between">
       <div>
         <StepperTop
@@ -10,7 +10,11 @@
         <div class="my-4">
           <transition name="fade" mode="out-in">
             <keep-alive>
-              <component :is="component" :ref="component" @nextStep="nextStep"></component>
+              <component
+                :is="component"
+                :ref="component"
+                @nextStep="nextStep"
+              ></component>
             </keep-alive>
           </transition>
         </div>
@@ -80,24 +84,16 @@ export default {
       ]
     };
   },
-  created() {
-    if (this.isAuthenticated && !this.isSignUpStarted) {
-      this.$router.push({ name: 'Business' });
-    } else {
-      this.updateIsSignUpStarted(true);
-    }
-  },
   computed: {
     ...mapGetters('tenant', ['page']),
-    ...mapGetters('auth', ['isAuthenticated', 'isSignUpStarted']),
     component() {
       return this.navigation[this.page - 1].step;
     }
   },
   methods: {
     ...mapMutations('tenant', ['pageChange']),
-    ...mapMutations('auth', ['updateIsSignUpStarted']),
     ...mapActions('tenant', ['createTenant']),
+    ...mapActions('auth', ['ping']),
     previousStep() {
       if (this.page > 1) {
         this.pageChange(this.page - 1);
@@ -128,7 +124,6 @@ export default {
             name: 'SignUpSuccess',
             params: { slug: res }
           });
-          this.updateIsSignUpStarted(false);
         })
         .catch(() => {});
     }
@@ -158,9 +153,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/deep/ .clear-margin {
-  @apply m-0 !important;
-}
-</style>

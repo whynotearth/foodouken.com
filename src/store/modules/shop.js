@@ -17,26 +17,30 @@ const getters = {
   getOrgData(state) {
     return state.orgData;
   },
-  getOpeningHours(state) {
-    return state.orgData.custom.openingHours;
+  getBusinessHours(state) {
+    return state.orgData.businessHours;
   },
   getLoading(state) {
     return state.loading;
   },
   getDeliveryFee(state) {
-    return state.orgData.custom.deliveryFee;
+    return state.orgData.deliveryFee;
   },
-  getTaxRate(state) {
-    return state.orgData.custom.taxRate;
+  getTaxRate() {
+    return 0;
+  },
+  getPaymentMethodTypes(state) {
+    return state.orgData.paymentMethodTypes;
   }
 };
 
 // actions
 const actions = {
-  fetchShopData({ commit }, slug) {
-    commit('setshopSlug', slug);
+  fetchShopData({ commit }, tenantSlug) {
+    commit('setshopSlug', tenantSlug);
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
-      httpClient.get(`/pages/slug/foodouken/${slug}/shop`).then(
+      httpClient.get(`/companies/${companySlug}/tenants/${tenantSlug}`).then(
         response => {
           commit('loadOrgData', response.data);
           commit('changeshopLoading', false);
