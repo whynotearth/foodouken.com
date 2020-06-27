@@ -31,7 +31,14 @@ export default {
   methods: {
     changeSelectedProduct(product) {
       this.selectedProduct = product;
-      this.$router.push({ name: 'ShopProductDetail', params: { slug: this.$route.params.slug, categoryId: this.getSelectedCategory.id, productId: product.id } });
+      this.$router.push({
+        name: 'ShopProductDetail',
+        params: {
+          slug: this.$route.params.slug,
+          categoryId: this.getSelectedCategory.id,
+          productId: product.id
+        }
+      });
     }
   }
 };

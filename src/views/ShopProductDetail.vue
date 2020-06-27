@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="product && productAtCart"
-    class=""
-  >
+  <div v-if="product && productAtCart" class="">
     <div class="sm:flex justify-center items-center sm:items-start">
       <div class="sm:w-128">
         <div class="relative">
@@ -77,9 +74,7 @@
             <div v-if="additions">
               <h5>Additions</h5>
 
-              <div
-                class="w-full bg-secondary rounded-lg shadow mb-2 my-4"
-              >
+              <div class="w-full bg-secondary rounded-lg shadow mb-2 my-4">
                 <div
                   class="px-5 py-4"
                   v-for="(attribute, index) in additions"
@@ -107,7 +102,7 @@
                   </div>
                 </div>
               </div>
-            <hr class="border-gray-700 my-12" />
+              <hr class="border-gray-700 my-12" />
             </div>
             <div class="flex justify-center">
               <div v-if="productAtCart">
@@ -205,7 +200,10 @@ export default {
       }
     },
     goBack() {
-      this.$router.push({ name: 'Shop', params: { slug: this.$route.params.slug } });
+      this.$router.push({
+        name: 'Shop',
+        params: { slug: this.$route.params.slug }
+      });
     }
   },
   computed: {

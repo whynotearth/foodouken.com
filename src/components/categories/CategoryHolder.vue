@@ -35,17 +35,18 @@ export default {
   },
   created() {
     this.fetchCategories(this.$route.params.slug).then(() => {
-      this.fetchCategoryProducts(this.getSelectedCategory && this.getSelectedCategory.id ? this.getSelectedCategory.id : this.getCategories[0].id);
+      this.fetchCategoryProducts(
+        this.getSelectedCategory && this.getSelectedCategory.id
+          ? this.getSelectedCategory.id
+          : this.getCategories[0].id
+      );
     });
   },
   methods: {
     ...mapActions('category', ['fetchCategories', 'fetchCategoryProducts'])
   },
   computed: {
-    ...mapGetters('category', [
-      'getCategories',
-      'getSelectedCategory'
-    ])
+    ...mapGetters('category', ['getCategories', 'getSelectedCategory'])
   }
 };
 </script>
