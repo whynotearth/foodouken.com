@@ -149,7 +149,7 @@ export default {
         variations: [],
         attributes: [],
         imageUrl:
-          'https://res.cloudinary.com/whynotearth/image/upload/v1587687189/foodouken/foodouken_logo_uq4iev_abk1wn.png'
+          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png'
         // inventory: ''
       },
       submitError: false,
