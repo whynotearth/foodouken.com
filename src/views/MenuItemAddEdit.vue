@@ -166,7 +166,7 @@ export default {
     ...mapGetters('menu', ['getCategories']),
     images: {
       get() {
-        return [{ url: this.item.imageUrl }];
+        return [{ secure_url: this.item.imageUrl }];
       },
       set(value) {
         this.item.imageUrl = value[0] ? value[0].secure_url : '';

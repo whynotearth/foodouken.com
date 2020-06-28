@@ -99,7 +99,7 @@ export default {
     description: {},
     logo: {
       $each: {
-        url: {
+        secure_url: {
           required
         }
       }
@@ -147,7 +147,7 @@ export default {
     },
     logo: {
       get() {
-        return [{ url: this.getLogo }];
+        return [{ secure_url: this.getLogo }];
       },
       set(value) {
         this.updateLogo(value[0] ? value[0].secure_url : '');

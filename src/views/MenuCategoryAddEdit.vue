@@ -89,7 +89,7 @@ export default {
     images: {
       //FIXME: ImageUpload component should handle strings, the solution below is a temporary fix.
       get() {
-        return [{ url: this.category.imageUrl }];
+        return [{ secure_url: this.category.imageUrl }];
       },
       set(value) {
         this.category.imageUrl = value[0] ? value[0].secure_url : '';
