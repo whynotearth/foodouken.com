@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { timeFormat, extractTimeFrom24H } from '@/helpers.js';
+import { timeFormat, extractTimeFrom24H, randomId } from '@/helpers.js';
 
 export default {
   name: 'TimePicker',
@@ -134,11 +134,6 @@ export default {
       }
       return minsArr;
     },
-    randomId() {
-      return Math.random()
-        .toString(36)
-        .substr(2, 9);
-    },
     wheelEvent(id, arr) {
       document.getElementById(id).addEventListener('wheel', e => {
         let index = this[arr][0].currentIndex;
@@ -156,6 +151,7 @@ export default {
     },
     timeFormat,
     extractTimeFrom24H,
+    randomId,
     removeWheelEvent(id) {
       if (document.getElementById(id)) {
         document
