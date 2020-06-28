@@ -197,7 +197,9 @@ export default {
             this.category = item.category;
           })
           .catch(error => {
-            this.apiError = error.response.data;
+            this.apiError = error.response.data.title
+              ? error.response.data.title
+              : 'Failed to fetch item details, please refresh.';
             throw error;
           });
       } else {
