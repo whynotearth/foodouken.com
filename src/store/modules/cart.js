@@ -79,7 +79,6 @@ const mutations = {
   },
   incrementCartProduct(state, product) {
     let cartItem = state.cartItems.filter(ci => ci.product == product)[0];
-    console.log(cartItem);
     if (cartItem.count < 999) {
       cartItem.count = cartItem.count + 1;
     }
