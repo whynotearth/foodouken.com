@@ -17,6 +17,10 @@
               ></component>
             </keep-alive>
           </transition>
+          <div v-if="error" class="px-4 text-error text-xs">
+            <p>Something went wrong!</p>
+            <p>Please make sure you filled form correctly.</p>
+          </div>
         </div>
       </div>
       <StepperBottom
@@ -81,7 +85,8 @@ export default {
           step: 'payment-methods',
           name: 'Payment Methods'
         }
-      ]
+      ],
+      error: false
     };
   },
   computed: {
@@ -90,8 +95,14 @@ export default {
       return this.navigation[this.page - 1].step;
     }
   },
+  created() {
+    if (!this.$route.hash && this.$route.params.step !== 'business-info') {
+      this.resetCreateTenantForm();
+      this.$router.replace({ params: { step: 'business-info' } });
+    }
+  },
   methods: {
-    ...mapMutations('tenant', ['pageChange']),
+    ...mapMutations('tenant', ['pageChange', 'resetCreateTenantForm']),
     ...mapActions('tenant', ['createTenant']),
     ...mapActions('auth', ['ping']),
     previousStep() {
@@ -125,7 +136,9 @@ export default {
             params: { slug: res }
           });
         })
-        .catch(() => {});
+        .catch(() => {
+          this.error = true;
+        });
     }
   },
   watch: {
