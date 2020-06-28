@@ -17,9 +17,10 @@
               ></component>
             </keep-alive>
           </transition>
-          <div v-if="error" class="px-4 text-error text-xs">
-            <p>Something went wrong!</p>
-            <p>Please make sure you filled form correctly.</p>
+          <div v-if="errors" class="px-4 text-error text-xs">
+            <div v-for="(error, key) in errors" :key="key">
+              <p v-for="(detail, key) in error" :key="key">{{ detail }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -86,7 +87,7 @@ export default {
           name: 'Payment Methods'
         }
       ],
-      error: false
+      errors: null
     };
   },
   computed: {
@@ -136,8 +137,8 @@ export default {
             params: { slug: res }
           });
         })
-        .catch(() => {
-          this.error = true;
+        .catch(error => {
+          this.errors = error.response.data.errors;
         });
     }
   },
