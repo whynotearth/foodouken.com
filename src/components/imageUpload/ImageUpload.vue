@@ -120,9 +120,9 @@ export default {
       }
     },
     getCloudinaryImageAdaptedObject(cloudinaryImageInfo) {
-      const { url, height, width } = cloudinaryImageInfo;
+      const { secure_url, height, width } = cloudinaryImageInfo;
       return {
-        url,
+        secure_url,
         height,
         width
       };
