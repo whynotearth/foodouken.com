@@ -32,10 +32,10 @@
       <div class="upload-previews-wrapper flex flex-wrap">
         <template v-for="(image, index) in imagesToPreview">
           <BaseImagePreview
-            v-if="image.url"
+            v-if="image.secure_url"
             :selectImage="selectImage"
             :key="index"
-            :image="image.url"
+            :image="image.secure_url"
             :index="index"
           />
         </template>
@@ -43,7 +43,7 @@
       <ImagePreviewModal
         v-if="
           selectedImageInfo &&
-            selectedImageInfo.url &&
+            selectedImageInfo.secure_url &&
             selectedImageInfo.index >= 0
         "
         @deleteImage="deleteImage"
@@ -77,7 +77,7 @@ export default {
       images: [],
       imagesToPreview: [],
       selectedImageInfo: {
-        url: '',
+        secure_url: '',
         index: null
       }
     };
@@ -99,13 +99,13 @@ export default {
       this.images.splice(index, 1);
       this.$emit('change', [...this.images]);
     },
-    selectImage([url, index]) {
-      this.selectedImageInfo.url = url;
+    selectImage([secure_url, index]) {
+      this.selectedImageInfo.secure_url = secure_url;
       this.selectedImageInfo.index = index;
     },
     resetSelectedImage() {
       this.selectedImageInfo = {
-        url: '',
+        secure_url: '',
         index: null
       };
     },
