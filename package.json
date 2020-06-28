@@ -15,6 +15,7 @@
     "typeface-open-sans": "0.0.75",
     "v-click-outside": "^3.0.1",
     "vue": "^2.6.11",
+    "vue-carousel": "^0.18.0",
     "vue-meta": "^2.3.3",
     "vue-router": "^3.1.5",
     "vue-smooth-picker": "^0.4.2",
