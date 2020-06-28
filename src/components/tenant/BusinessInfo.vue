@@ -150,7 +150,7 @@ export default {
         return [{ url: this.getLogo }];
       },
       set(value) {
-        this.updateLogo(value[0] ? value[0].url : '');
+        this.updateLogo(value[0] ? value[0].secure_url : '');
       }
     }
   },

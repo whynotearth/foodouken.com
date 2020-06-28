@@ -92,7 +92,7 @@ export default {
         return [{ url: this.category.imageUrl }];
       },
       set(value) {
-        this.category.imageUrl = value[0] ? value[0].url : '';
+        this.category.imageUrl = value[0] ? value[0].secure_url : '';
       }
     }
   },
