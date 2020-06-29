@@ -7,7 +7,7 @@ const state = {
 
 const getters = {
   oauth(state) {
-    return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}#hash`;
+    return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}?signUpStarted=true`;
   }
 };
 

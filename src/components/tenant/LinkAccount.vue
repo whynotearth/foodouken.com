@@ -47,7 +47,7 @@ export default {
           this.$router.history._startLocation.includes(
             this.$route.params.step
           ) &&
-          this.$route.hash
+          this.$route.query.signUpStarted
         ) {
           this.$emit('nextStep');
         }

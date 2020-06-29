@@ -97,8 +97,10 @@ export default {
     }
   },
   created() {
-    if (!this.$route.hash && this.$route.params.step !== 'business-info') {
-      this.resetCreateTenantForm();
+    if (
+      !this.$route.query.signUpStarted &&
+      this.$route.params.step !== 'business-info'
+    ) {
       this.$router.replace({ params: { step: 'business-info' } });
     }
   },
