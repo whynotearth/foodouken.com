@@ -29,6 +29,24 @@ export const tenantCMSRoutes = [
         path: 'categories',
         name: 'MenuCategoryList',
         component: () => import('@/views/MenuCategoryList.vue'),
+        beforeEnter: (to, from, next) => {
+          if (to.params.tenant) {
+            to.meta.appBar.title = to.params.tenant.name;
+            next();
+          } else {
+            store
+              .dispatch('shop/fetchShopData', to.params.tenantSlug)
+              .then(tenant => {
+                to.meta.appBar.title = tenant.name;
+                next();
+              })
+              .catch(error => {
+                to.meta.appBar.title = 'Categories';
+                next();
+                throw new Error(error);
+              });
+          }
+        },
         meta: {
           layout: () => import('@/layouts/TenantLayout.vue'),
           requiresAuth: true,
