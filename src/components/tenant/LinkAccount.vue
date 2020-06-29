@@ -53,7 +53,7 @@ export default {
           ) &&
           this.$route.query.signUpStarted
         ) {
-          // this.$emit('nextStep');
+          this.$emit('nextStep');
         }
       })
       .catch(() => {
