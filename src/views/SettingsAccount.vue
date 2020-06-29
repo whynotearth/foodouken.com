@@ -4,7 +4,11 @@
     <span v-if="apiError" class="my-8 mx-4 text-sm text-red-600">
       {{ apiError }}
     </span>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+    <transition-group
+      name="fade"
+      mode="out-in"
+      class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4"
+    >
       <div
         v-for="(tenant, index) in tenants"
         :key="index"
@@ -20,7 +24,7 @@
           </template>
         </MenuItem>
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
