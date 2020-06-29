@@ -122,6 +122,19 @@ const actions = {
           }
         );
     });
+  },
+  fetchUserTenants() {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient.get(`/companies/${companySlug}/tenants/mytenants`).then(
+        response => {
+          resolve(response.data);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
   }
 };
 
