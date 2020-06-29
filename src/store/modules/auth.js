@@ -7,7 +7,7 @@ const state = {
 
 const getters = {
   oauth(state) {
-    return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}?signUpStarted=true`;
+    return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}`;
   }
 };
 
@@ -48,7 +48,7 @@ const mutations = {
     state.provider = payload;
   },
   updateReturnUrl(state, payload) {
-    state.returnURL = payload;
+    state.returnURL = `${payload}?signUpStarted=true`;
   }
 };
 
