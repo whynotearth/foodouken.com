@@ -9,7 +9,7 @@
       :name="category.name"
       :image="category.imageUrl"
       :options="menuItemOptions"
-      @clicked="showItems(category.id)"
+      @clicked="showItems(category)"
       @edit="editCategory(category.id)"
       @delete="deleteCategory(category)"
     />
@@ -18,7 +18,7 @@
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { sleep } from '@/helpers.js';
 
 export default {
@@ -45,15 +45,19 @@ export default {
   created() {
     this.fetchTenantCategories(this.tenantSlug);
   },
+  beforeDestroy() {
+    this.updateCategories([]);
+  },
   computed: {
     ...mapGetters('menu', ['getCategories'])
   },
   methods: {
+    ...mapMutations('menu', ['updateCategories']),
     ...mapActions('menu', ['fetchTenantCategories', 'deleteTenantCategory']),
-    showItems(categoryId) {
+    showItems(category) {
       this.$router.push({
         name: 'MenuItemList',
-        params: { categoryId: categoryId }
+        params: { categoryId: category.id, category: category }
       });
     },
     async onSuccessSubmit() {

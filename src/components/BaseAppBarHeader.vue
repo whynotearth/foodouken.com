@@ -6,7 +6,11 @@
           <img :src="arrowBack" />
         </router-link>
       </div>
-      <div class="text-white font-bold text-xl truncate">{{ title }}</div>
+      <transition name="fade" mode="out-in">
+        <div :key="title" class="text-white font-bold text-xl truncate">
+          {{ title }}
+        </div>
+      </transition>
       <!-- The action only has routing -->
       <router-link
         v-if="action && !action.method"
