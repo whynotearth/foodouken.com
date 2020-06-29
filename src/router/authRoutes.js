@@ -19,7 +19,11 @@ export const authRoutes = [
     name: 'LogIn',
     component: () => import('@/views/AuthLogIn.vue'),
     meta: { layout: () => import('@/layouts/TenantLayout.vue') },
-    beforeEnter: (to, from, next) => {
+    beforeEnter: async (to, from, next) => {
+      if (to.query.token) {
+        await store.commit('auth/updateToken', to.query.token);
+      }
+
       store
         .dispatch('auth/ping')
         .then(response => {
