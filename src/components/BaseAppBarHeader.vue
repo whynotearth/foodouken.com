@@ -1,8 +1,6 @@
 <template>
-  <nav
-    class="flex items-stretch fixed w-full top-0 px-4 py-4 flex-wrap shadow-md z-100 bg-primary"
-  >
-    <div class="container mx-auto flex">
+  <nav class="sticky top-0 w-full p-4 shadow-md z-100 bg-primary">
+    <div class="container mx-auto flex flex-wrap">
       <div class="flex-start mr-3 flex-shrink-0">
         <router-link class="inline-block align-middle" :to="toLink">
           <img :src="arrowBack" />
