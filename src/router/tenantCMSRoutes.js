@@ -5,6 +5,25 @@ export const tenantCMSRoutes = [
     path: '/tenant/:tenantSlug/menu',
     name: 'Menu',
     component: () => import('@/views/Menu.vue'),
+    beforeEnter: (to, from, next) => {
+      if (from.name === 'Account') next();
+      else {
+        store
+          .dispatch('tenant/userOwnsTenant', to.params.tenantSlug)
+          .then(result => {
+            if (result) {
+              next();
+            } else {
+              next({ name: 'Account' });
+              alert('You do not have permission to access this tenant!');
+            }
+          })
+          .catch(error => {
+            next({ name: 'Account' });
+            throw new Error(error);
+          });
+      }
+    },
     children: [
       {
         path: 'categories',
