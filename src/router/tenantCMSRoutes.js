@@ -88,21 +88,26 @@ export const tenantCMSRoutes = [
         name: 'MenuItemList',
         component: () => import('@/views/MenuItemList.vue'),
         beforeEnter: (to, from, next) => {
-          let params = {
-            tenantSlug: to.params.tenantSlug,
-            categoryId: to.params.categoryId
-          };
-          store
-            .dispatch('menu/fetchTenantCategoryById', params)
-            .then(category => {
-              to.meta.appBar.title = category.name;
-              next();
-            })
-            .catch(error => {
-              to.meta.appBar.title = 'Category';
-              next();
-              throw new Error(error.message);
-            });
+          if (to.params.category) {
+            to.meta.appBar.title = to.params.category.name;
+            next();
+          } else {
+            let params = {
+              tenantSlug: to.params.tenantSlug,
+              categoryId: to.params.categoryId
+            };
+            store
+              .dispatch('menu/fetchTenantCategoryById', params)
+              .then(category => {
+                to.meta.appBar.title = category.name;
+                next();
+              })
+              .catch(error => {
+                to.meta.appBar.title = 'Category';
+                next();
+                throw new Error(error.message);
+              });
+          }
         },
         meta: {
           layout: () => import('@/layouts/TenantLayout.vue'),
@@ -142,5 +147,9 @@ export const tenantCMSRoutes = [
         }
       }
     ]
+  },
+  {
+    path: '/tenant/:tenantSlug/menu',
+    redirect: '/tenant/:tenantSlug/menu/categories'
   }
 ];
