@@ -10,8 +10,8 @@
       class="grid grid-cols-1 md:grid-cols-3 gap-4 my-4"
     >
       <div
-        v-for="(tenant, index) in tenants"
-        :key="index"
+        v-for="tenant in tenants"
+        :key="tenant.slug"
         class="shadow-1dp bg-secondary rounded-lg p-2 max-w-sm"
       >
         <MenuItem
