@@ -10,7 +10,7 @@ export const tenantCMSRoutes = [
       requiresAuth: true,
       appBar: {
         title: 'Categories',
-        backRoute: { name: 'Home' },
+        backRoute: { name: 'Account' },
         newItem: { name: 'MenuCategoryAdd' }
       }
     }
