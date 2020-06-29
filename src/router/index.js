@@ -9,18 +9,10 @@ import { settingRoutes } from './settingRoutes';
 
 Vue.use(VueRouter);
 
-// If you use prefixRoutes function, make sure that your child routes start with a '/'
-function prefixRoutes(prefix, routes) {
-  return routes.map(route => {
-    route.path = prefix + '' + route.path;
-    return route;
-  });
-}
-
 const routes = [
   ...customerViewRoutes,
   ...settingRoutes,
-  ...prefixRoutes('/tenant/:tenantSlug/menu', [...tenantCMSRoutes]),
+  ...tenantCMSRoutes,
   ...authRoutes,
   {
     path: '/*',
