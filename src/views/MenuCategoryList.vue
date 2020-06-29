@@ -9,7 +9,7 @@
       :name="category.name"
       :image="category.imageUrl"
       :options="menuItemOptions"
-      @clicked="showItems(category.id)"
+      @clicked="showItems(category)"
       @edit="editCategory(category.id)"
       @delete="deleteCategory(category)"
     />
@@ -54,10 +54,10 @@ export default {
   methods: {
     ...mapMutations('menu', ['updateCategories']),
     ...mapActions('menu', ['fetchTenantCategories', 'deleteTenantCategory']),
-    showItems(categoryId) {
+    showItems(category) {
       this.$router.push({
         name: 'MenuItemList',
-        params: { categoryId: categoryId }
+        params: { categoryId: category.id, category: category }
       });
     },
     async onSuccessSubmit() {
