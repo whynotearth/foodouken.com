@@ -101,6 +101,21 @@ const actions = {
       );
     });
   },
+  logout({ commit }) {
+    commit('changeFormsLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient.post(`/authentication/logout`).then(
+        response => {
+          commit('changeFormsLoading', false);
+          resolve(response.data);
+        },
+        error => {
+          commit('changeFormsLoading', false);
+          reject(error);
+        }
+      );
+    });
+  },
   submit({ commit, rootState }, payload) {
     commit('changeFormsLoading', true);
     const shopSlug = rootState.shop.shopSlug;

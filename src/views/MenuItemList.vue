@@ -14,7 +14,7 @@
       @deleteItem="deleteItem(item.id)"
     >
       <template #subHeading>
-        ${{ item.price }} - Category {{ item.categoryId }}
+        ${{ item.price }} - {{ item.category.name }}
       </template>
     </MenuItem>
   </div>
@@ -35,10 +35,6 @@ export default {
       categoryId: this.$route.params.categoryId,
       apiError: '',
       menuItemOptions: [
-        {
-          name: 'Sell out',
-          action: 'sellOutItem'
-        },
         {
           name: 'Delete',
           action: 'deleteItem'

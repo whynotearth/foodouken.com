@@ -72,7 +72,8 @@ export default {
       category: {
         name: '',
         description: '',
-        imageUrl: ''
+        imageUrl:
+          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png'
       }
     };
   },
@@ -88,10 +89,10 @@ export default {
     images: {
       //FIXME: ImageUpload component should handle strings, the solution below is a temporary fix.
       get() {
-        return [{ url: this.category.imageUrl }];
+        return [{ secure_url: this.category.imageUrl }];
       },
       set(value) {
-        this.category.imageUrl = value[0] ? value[0].url : '';
+        this.category.imageUrl = value[0] ? value[0].secure_url : '';
       }
     }
   },

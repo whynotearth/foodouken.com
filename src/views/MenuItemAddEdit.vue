@@ -38,14 +38,15 @@
         label="Price"
         labelBg="bg-background"
         type="number"
+        step="0.01"
         :error="$v.item.price.$error"
       >
         <template v-if="$v.item.price.$error">
           <span v-if="!$v.item.price.required" class="text-red-600 text-xs">
             Price is required.
           </span>
-          <span v-if="!$v.item.price.numeric" class="text-red-600 text-xs">
-            Price should be a number.
+          <span v-if="!$v.item.price.decimal" class="text-red-600 text-xs">
+            Price should be a valid number.
           </span>
         </template>
       </MaterialInput>
@@ -109,7 +110,7 @@ import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
-import { required, numeric } from 'vuelidate/lib/validators';
+import { required, decimal } from 'vuelidate/lib/validators';
 
 export default {
   name: 'MenuItemAddEdit',
@@ -128,7 +129,7 @@ export default {
       },
       price: {
         required,
-        numeric
+        decimal
       }
     }
   },
@@ -147,7 +148,8 @@ export default {
         description: '',
         variations: [],
         attributes: [],
-        imageUrl: ''
+        imageUrl:
+          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png'
         // inventory: ''
       },
       submitError: false,
@@ -164,10 +166,10 @@ export default {
     ...mapGetters('menu', ['getCategories']),
     images: {
       get() {
-        return [{ url: this.item.imageUrl }];
+        return [{ secure_url: this.item.imageUrl }];
       },
       set(value) {
-        this.item.imageUrl = value[0] ? value[0].url : '';
+        this.item.imageUrl = value[0] ? value[0].secure_url : '';
       }
     }
   },
@@ -185,16 +187,6 @@ export default {
       // TODO: Add loader till all requests are finished loading
       this.edit = this.itemId !== undefined ? true : false;
       this.fetchTenantCategories(this.tenantSlug);
-      this.fetchTenantCategoryById({
-        tenantSlug: this.tenantSlug,
-        categoryId: this.categoryId
-      })
-        .then(category => {
-          this.category = category;
-        })
-        .catch(error => {
-          throw error;
-        });
       if (this.edit) {
         this.fetchTenantCategoryItemById({
           categoryId: this.categoryId,
@@ -202,9 +194,23 @@ export default {
         })
           .then(item => {
             this.item = item;
+            this.category = item.category;
           })
           .catch(error => {
-            this.apiError = error.response.data;
+            this.apiError = error.response.data.title
+              ? error.response.data.title
+              : 'Failed to fetch item details, please refresh.';
+            throw error;
+          });
+      } else {
+        this.fetchTenantCategoryById({
+          tenantSlug: this.tenantSlug,
+          categoryId: this.categoryId
+        })
+          .then(category => {
+            this.category = category;
+          })
+          .catch(error => {
             throw error;
           });
       }
