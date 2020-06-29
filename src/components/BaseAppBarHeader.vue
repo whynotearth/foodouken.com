@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex items-stretch items-center px-4 py-4 flex-wrap shadow-md z-10 bg-primary"
+    class="flex items-stretch fixed w-full top-0 px-4 py-4 flex-wrap shadow-md z-100 bg-primary"
   >
     <div class="container mx-auto flex">
       <div class="flex-start mr-3 flex-shrink-0">
