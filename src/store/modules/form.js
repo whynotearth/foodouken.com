@@ -60,6 +60,7 @@ const getters = {
 const actions = {
   register({ commit, getters }) {
     commit('changeFormsLoading', true);
+    commit('removeToken', false);
     let address;
     if (getters.getAddressOption === 'Use my location') {
       address = getters.getGoogleLocation;
@@ -107,6 +108,7 @@ const actions = {
       httpClient.post(`/authentication/logout`).then(
         response => {
           commit('changeFormsLoading', false);
+          commit('removeToken', false);
           resolve(response.data);
         },
         error => {
@@ -198,6 +200,9 @@ const mutations = {
   },
   setToken(state, payload) {
     httpClient.defaults.headers.common['authorization'] = 'Bearer ' + payload;
+  },
+  removeToken() {
+    delete httpClient.defaults.headers.common['authorization'];
   }
 };
 
