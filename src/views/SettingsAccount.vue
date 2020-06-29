@@ -17,7 +17,7 @@
         <MenuItem
           :name="tenant.name"
           :image="tenant.logoUrl"
-          @clicked="manageTenant(tenant.slug)"
+          @clicked="manageTenant(tenant)"
         >
           <template #subHeading>
             Foodouken
@@ -62,10 +62,10 @@ export default {
           throw error;
         });
     },
-    manageTenant(tenantSlug) {
+    manageTenant(tenant) {
       this.$router.push({
         name: 'MenuCategoryList',
-        params: { tenantSlug: tenantSlug }
+        params: { tenantSlug: tenant.slug, tenant: tenant }
       });
     }
   }
