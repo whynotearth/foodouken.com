@@ -18,7 +18,7 @@
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { sleep } from '@/helpers.js';
 
 export default {
@@ -45,10 +45,14 @@ export default {
   created() {
     this.fetchTenantCategories(this.tenantSlug);
   },
+  beforeDestroy() {
+    this.updateCategories([]);
+  },
   computed: {
     ...mapGetters('menu', ['getCategories'])
   },
   methods: {
+    ...mapMutations('menu', ['updateCategories']),
     ...mapActions('menu', ['fetchTenantCategories', 'deleteTenantCategory']),
     showItems(categoryId) {
       this.$router.push({
