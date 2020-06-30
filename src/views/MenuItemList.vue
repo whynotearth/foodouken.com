@@ -64,7 +64,7 @@ export default {
     async onSuccessSubmit() {
       this.$store.commit('overlay/updateModel', {
         title: 'Success!',
-        message: 'Your product has been deleted!'
+        message: 'Congratulations on selling out your product!'
       });
 
       await this.fetchTenantCategoryItems(this.categoryId);
