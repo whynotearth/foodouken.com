@@ -247,7 +247,8 @@ export default {
       this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.VUE_APP_MAPS_API_KEY}&q=${latitude},${longitude}`;
     },
     error() {
-      this.locationError = 'Unable to retrieve your location';
+      this.locationError =
+        'Location failed please check your settings or enter your address manually below';
     }
   },
   watch: {
