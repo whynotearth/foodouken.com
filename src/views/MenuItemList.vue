@@ -93,7 +93,7 @@ export default {
           productId: itemId
         })
           .then(() => {
-            this.onSuccessSubmit();
+            this.onSuccessSubmit('Your product has been deleted.');
           })
           .catch(error => {
             this.apiError = error.response.data.title
