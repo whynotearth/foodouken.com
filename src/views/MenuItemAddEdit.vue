@@ -256,7 +256,7 @@ export default {
           if (user.isAuthenticated) {
             // this.cleanFormData();
             let payload = {
-              categoryId: this.categoryId,
+              categoryId: this.category.id,
               product: this.item
             };
             this.edit ? this.editItem(payload) : this.newItem(payload);
