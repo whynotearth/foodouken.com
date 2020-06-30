@@ -58,6 +58,11 @@ const mutations = {
   },
   updateToken(state, payload) {
     state.token = payload;
+    if (payload) {
+      httpClient.defaults.headers.common['Authorization'] = `Bearer ${payload}`;
+    } else {
+      delete httpClient.defaults.headers.common['Authorization'];
+    }
   }
 };
 
