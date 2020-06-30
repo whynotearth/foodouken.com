@@ -1,5 +1,5 @@
 [context.master.environment]
-  VUE_APP_API_URL=https://api.whynot.earth/api/v0
+  VUE_APP_API_URL="https://api.whynot.earth/api/v0"
 
 [[redirects]]
   from = "/.well-known/assetlinks.json"
