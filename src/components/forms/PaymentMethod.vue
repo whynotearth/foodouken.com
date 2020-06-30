@@ -1,13 +1,13 @@
 <template>
   <div class="select-none">
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
-      <RadioInput v-model="paymentMethod" value="Cash" class="p-5" />
-      <!-- <hr class="border-gray-700" />
       <RadioInput
+        v-for="(type, index) in getPaymentMethodTypes"
+        :key="index"
         v-model="paymentMethod"
-        value="ABA Bank Transfer"
-        class="p-5"
-      /> -->
+        :value="type"
+        class="p-5 border-b border-gray-700 last:border-none"
+      />
     </div>
     <CheckoutNavBar
       nextStepText="Review your order ►"
@@ -34,6 +34,9 @@ export default {
       down: down
     };
   },
+  created() {
+    this.paymentMethod = this.getPaymentMethodTypes[0];
+  },
   methods: {
     ...mapMutations('form', ['pageChange', 'updatePaymentMethod']),
     decrementPage() {
@@ -46,6 +49,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('shop', ['getPaymentMethodTypes']),
     ...mapGetters('form', ['getPaymentMethod', 'page']),
     paymentMethod: {
       get() {
@@ -58,5 +62,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

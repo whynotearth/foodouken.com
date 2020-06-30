@@ -1,15 +1,17 @@
 <template>
   <div class="mb-4 relative">
     <input
-      class="input appearance-none outline-none relative bg-transparent border rounded w-full px-4 py-3 focus:border-2 active:border-2"
+      class="input appearance-none outline-none relative bg-transparent rounded w-full px-4 py-3 border focus:border-2 active:border-2 focus:border-opacity-54 active:border-opacity-54"
       :class="[
-        { filled: value.length > 0 },
+        { filled: value && value.length > 0 },
         error
-          ? 'border-red-600 focus:border-red-600 active:border-red-600'
-          : 'border-gray-600 focus:border-gray-500 active:border-gray-500'
+          ? 'border-red-600 placeholder-red-600'
+          : 'border-white border-opacity-38'
       ]"
       :id="idName"
       :type="type"
+      min="0"
+      :step="step"
       :value="value"
       @blur="$emit('input', $event.target.value)"
       :placeholder="placeholder || label"
@@ -17,7 +19,7 @@
     <label
       :for="idName"
       class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
-      :class="error ? 'text-red-600' : 'text-gray-500'"
+      :class="[error ? 'text-red-600' : 'text-white text-opacity-50', labelBg]"
     >
       {{ label }}
     </label>
@@ -32,8 +34,8 @@ export default {
   name: 'TextInput',
   props: {
     value: {
-      type: String,
-      default: ''
+      type: [String, Number],
+      default: null
     },
     label: {
       type: String,
@@ -46,12 +48,19 @@ export default {
       type: String,
       default: 'text'
     },
+    step: {
+      type: String,
+      default: '1'
+    },
     error: {
       default: Boolean
     },
     idName: {
       type: String,
       default: randomId
+    },
+    labelBg: {
+      type: String
     }
   }
 };
@@ -61,6 +70,14 @@ export default {
 .input {
   transition: border 0.2s ease-in-out;
   z-index: 2;
+}
+
+.label {
+  transition: all 0.2s ease-out;
+  transition: all 200ms;
+  opacity: 0;
+  padding: 0 5px;
+  z-index: 1;
 }
 
 .input:focus + .label,
@@ -76,13 +93,5 @@ export default {
 
 .input:focus::placeholder {
   color: transparent;
-}
-
-.label {
-  transition: all 0.2s ease-out;
-  transition: all 200ms;
-  opacity: 0;
-  padding: 0 5px;
-  z-index: 1;
 }
 </style>

@@ -14,11 +14,11 @@
       />
     </div>
     <img
-      :src="cartItem.product.images[0]"
+      :src="cartItem.product.imageUrl"
       class="h-12 w-12 my-auto"
       alt="Product image"
     />
-    <div class="w-auto mx-2 w-full flex flex-col truncate">
+    <div class="mx-2 w-full flex flex-col truncate">
       <span class="text-gray-400 truncate">{{ cartItem.product.name }} </span>
       <span class="text-gray-500">${{ cartItem.product.price }}</span>
     </div>
@@ -35,7 +35,7 @@
         type="number"
         name="quantity"
         min="1"
-        v-model="cartItem.count"
+        v-model.number="cartItem.count"
         class="bg-transparent w-8 py-3 text-center font-bold text-white"
       />
       <div class="cursor-pointer w-6 select-none" @click="increment">
@@ -79,14 +79,6 @@ export default {
     },
     remove() {
       this.$store.dispatch('cart/removeCartProduct', this.cartItem.product);
-    }
-  },
-  computed: {
-    cartItemTitle() {
-      let cartItemTitle = this.cartItem.product.name;
-      return cartItemTitle.length > 15
-        ? cartItemTitle.slice(0, 15) + '...'
-        : cartItemTitle;
     }
   }
 };

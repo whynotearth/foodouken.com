@@ -46,7 +46,7 @@
       class="mb-2"
     >
       <template #title="{ selectedOption }">
-        <span v-if="timeSlots.length === 0" class="text-gray-500">
+        <span v-if="timeSlots.length === 0">
           Store closed on this day
         </span>
         <span v-else-if="selectedOption">
@@ -127,19 +127,37 @@ export default {
       this.$emit('pageChange', page);
       this.pageChange(page);
     },
+    getStartAndEndTime(d, bh) {
+      let [startHours, startMinutes, startSeconds] = bh[
+        d.getDay()
+      ].openingTime.split(':');
+
+      startHours = startHours * 3600000;
+      startMinutes = startMinutes * 60000;
+      startSeconds = startSeconds * 1000;
+      let startTime = startHours + startMinutes + startSeconds;
+
+      let [endHours, endMinutes, endSeconds] = bh[d.getDay()].closingTime.split(
+        ':'
+      );
+
+      endHours = (endHours - 1) * 3600000;
+      endMinutes = endMinutes * 60000;
+      endSeconds = endSeconds * 1000;
+      let endTime = endHours + endMinutes + endSeconds;
+
+      return { startTime, endTime };
+    },
     nowAvailable() {
-      let d = new Date();
-      let start = this.oh.days[d.getDay()].start_time;
-      let startHours = Math.floor(start / 100) * 3600000;
-      let startMinutes = (start % 100) * 60000;
-      let startTime = startHours + startMinutes;
-      let end = this.oh.days[d.getDay()].end_time;
-      let endHours = (Math.floor(end / 100) - 1) * 3600000;
-      let endMinutes = (end % 100) * 60000;
-      let endTime = endHours + endMinutes;
+      let d = new Date(),
+        bh = this.getBusinessHours;
+
+      let { startTime, endTime } = this.getStartAndEndTime(d, bh);
+
       d.setHours(0, 0, 0, 0);
+
       if (
-        this.oh.days[d.getDay()].is_closed ||
+        bh[d.getDay()].isClosed ||
         startTime > Date.now() - d.getTime() ||
         endTime < Date.now() - d.getTime()
       ) {
@@ -154,7 +172,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ oh: 'shop/getOpeningHours' }),
+    ...mapGetters('shop', ['getBusinessHours']),
     ...mapGetters('form', [
       'getDeliveryDateOption',
       'getDeliveryDateDay',
@@ -189,22 +207,23 @@ export default {
     timeSlots() {
       let time = [];
       if (this.day) {
-        let d = new Date(this.day);
-        let start = this.oh.days[d.getDay()].start_time;
-        let end = this.oh.days[d.getDay()].end_time;
-        let startHours = Math.floor(start / 100) * 3600000;
-        let endHours = (Math.floor(end / 100) - 1) * 3600000;
-        let startMinutes = (start % 100) * 60000;
-        let endMinutes = (end % 100) * 60000;
-        let startTime = startHours + startMinutes + 2700000; // Store will deliver after 45 mins of store opening
-        let endTime = endHours + endMinutes;
+        let d = new Date(this.day),
+          bh = this.getBusinessHours;
+
+        let { startTime, endTime } = this.getStartAndEndTime(d, bh);
+
+        startTime = startTime + 2700000; // Store will deliver after 45 mins of store opening
+
         d.setHours(0, 0, 0, 0);
-        if (this.oh.days[d.getDay()].is_closed) {
+
+        if (bh[d.getDay()].isClosed) {
           return time;
         }
+
         if (Date.now() >= d.getTime() + startTime) {
           startTime = Date.now() - d + 2700000;
         }
+
         for (let i = startTime; i <= endTime; i += 900000) {
           time.push(i);
         }

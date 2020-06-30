@@ -16,7 +16,7 @@
           <checkout-form v-if="form && cart.length" />
         </div>
         <h3
-          class="text-5xl text-white font-bold text-center mb-8"
+          class="text-5xl font-bold text-center mb-8"
           :class="cart.length ? 'block' : 'hidden lg:block'"
           v-if="page < 5"
         >
@@ -73,6 +73,7 @@ export default {
   },
   created() {
     this.fetchShopData(this.$route.params.slug);
+    this.resetCartItems();
   },
   methods: {
     triggerFormWrapper(value) {
@@ -97,7 +98,8 @@ export default {
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
     ...mapActions('shop', ['fetchShopData']),
-    ...mapMutations('form', ['triggerForm'])
+    ...mapMutations('form', ['triggerForm']),
+    ...mapMutations('cart', ['resetCartItems'])
   },
   computed: {
     ...mapGetters({
@@ -116,32 +118,35 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.orgData.custom.name,
+      title: this.orgData.name,
       meta: [
-        { name: 'keywords', content: this.orgData.custom.keyword },
-        { name: 'description', content: this.orgData.custom.description },
+        { name: 'keywords', content: this.orgData.tags },
+        { name: 'description', content: this.orgData.description },
         // OpenGraph data
-        { property: 'og:title', content: this.orgData.custom.name },
+        { property: 'og:title', content: this.orgData.name },
         { property: 'og:site_name', content: 'Foodouken' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: this.orgData.custom.url },
-        { property: 'og:image', content: this.orgData.custom.image },
+        {
+          property: 'og:url',
+          content: window.location.host + this.$route.fullPath
+        },
+        { property: 'og:image', content: this.orgData.logoUrl },
         {
           property: 'og:description',
-          content: this.orgData.custom.description
+          content: this.orgData.description
         },
         // Twitter card
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: this.orgData.custom.name },
+        { name: 'twitter:title', content: this.orgData.name },
         {
           name: 'twitter:description',
-          content: this.orgData.custom.description
+          content: this.orgData.description
         },
-        { name: 'twitter:image', content: this.orgData.custom.image },
+        { name: 'twitter:image', content: this.orgData.logoUrl },
         // Google / Schema.org markup:
-        { itemprop: 'name', content: this.orgData.custom.name },
-        { itemprop: 'description', content: this.orgData.custom.description },
-        { itemprop: 'image', content: this.orgData.custom.image }
+        { itemprop: 'name', content: this.orgData.name },
+        { itemprop: 'description', content: this.orgData.description },
+        { itemprop: 'image', content: this.orgData.logoUrl }
       ],
       script: [
         {

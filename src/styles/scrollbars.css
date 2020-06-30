@@ -1,0 +1,25 @@
+@responsive {
+  .disable-scrollbars {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+
+  .disable-scrollbars::-webkit-scrollbar {
+    width: 0;
+    background: transparent; /* Chrome/Safari/Webkit */
+  }
+
+  .narrow-scrollbar::-webkit-scrollbar {
+    width: 3px;
+    padding: 2px 0;
+  }
+
+  .narrow-scrollbar::-webkit-scrollbar-track {
+    box-shadow: none;
+  }
+
+  .narrow-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.54);
+    outline: transparent;
+  }
+}

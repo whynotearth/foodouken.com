@@ -6,7 +6,7 @@ const state = {
   categories: [],
   category: {},
   products: [],
-  selectedCategorySlug: ''
+  selectedCategoryId: null
 };
 
 // getters
@@ -25,43 +25,35 @@ const getters = {
   },
   getCategoryLoading(state) {
     return state.loading;
-  }
+  },
+  getSelectedCategory: state =>
+    state.categories.find(category => category.id === state.selectedCategoryId)
 };
 
 // actions
 const actions = {
-  fetchCategoryProducts({ commit, rootState }, category) {
-    const shopSlug = rootState.shop.shopSlug;
-    const slug = category.slug;
-    commit('updateCategory', category);
-    commit('updateSelectedCategorySlug', slug);
-    commit('changeCategoryLoading', true);
+  fetchCategoryProducts({ commit }, categoryId) {
     return new Promise((resolve, reject) => {
-      httpClient.get(`/tenants/${shopSlug}/categories/${slug}/products`).then(
+      httpClient.get(`/shop/categories/${categoryId}/products`).then(
         response => {
           commit('updateProducts', response.data);
-          commit('changeCategoryLoading', false);
+          commit('updateSelectedCategoryId', categoryId);
           resolve(response.data);
         },
         error => {
-          commit('changeCategoryLoading', false);
           reject(error);
         }
       );
     });
   },
-  fetchCategories({ commit, rootState }) {
-    const shopSlug = rootState.shop.shopSlug;
-    commit('changeCategoryLoading', true);
+  fetchCategories({ commit }, tenantSlug) {
     return new Promise((resolve, reject) => {
-      httpClient.get(`/tenants/${shopSlug}/categories`).then(
+      httpClient.get(`/shop/tenant/${tenantSlug}/categories`).then(
         response => {
-          commit('loadCategories', response.data);
-          commit('changeCategoryLoading', false);
+          commit('updateCategories', response.data);
           resolve(response.data);
         },
         error => {
-          commit('changeCategoryLoading', false);
           reject(error);
         }
       );
@@ -83,8 +75,11 @@ const mutations = {
   updateProducts(state, payload) {
     state.products = payload;
   },
-  loadCategories(state, payload) {
+  updateCategories(state, payload) {
     state.categories = payload;
+  },
+  updateSelectedCategoryId(state, payload) {
+    state.selectedCategoryId = payload;
   }
 };
 

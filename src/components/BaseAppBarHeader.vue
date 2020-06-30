@@ -1,14 +1,16 @@
 <template>
-  <nav
-    class="flex items-stretch items-center px-4 py-4 flex-wrap shadow-md z-10 bg-primary"
-  >
-    <div class="container flex px-0 md:px-6">
+  <nav class="sticky top-0 w-full p-4 shadow-md z-100 bg-primary">
+    <div class="container mx-auto flex flex-wrap">
       <div class="flex-start mr-3 flex-shrink-0">
         <router-link class="inline-block align-middle" :to="toLink">
           <img :src="arrowBack" />
         </router-link>
       </div>
-      <div class="text-white font-bold text-xl truncate">{{ title }}</div>
+      <transition name="fade" mode="out-in">
+        <div :key="title" class="text-white font-bold text-xl truncate">
+          {{ title }}
+        </div>
+      </transition>
       <!-- The action only has routing -->
       <router-link
         v-if="action && !action.method"
@@ -41,7 +43,7 @@ export default {
       required: true
     },
     toLink: {
-      type: String,
+      type: [String, Object],
       default: '/'
     },
     action: {

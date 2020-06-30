@@ -1,40 +1,46 @@
 <template>
-  <div id="app" class="font-sans bg-background h-full text-gray-300 text-lg">
+  <div
+    id="app"
+    class="font-sans bg-background h-full text-white text-lg antialiased"
+  >
     <component :is="this.$route.meta.layout || 'div'">
       <router-view />
     </component>
+    <transition name="fade">
+      <div
+        v-if="overlayModel.title || overlayModel.message"
+        class="w-full h-full fixed block top-0
+        left-0 z-110"
+      >
+        <BaseOverlaySuccess
+          :title="overlayModel.title"
+          :message="overlayModel.message"
+        />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
+import BaseOverlaySuccess from '@/components/BaseOverlaySuccess.vue';
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { BaseOverlaySuccess },
+  computed: {
+    overlayModel() {
+      return this.$store.getters['overlay/model'];
+    }
+  }
 };
 </script>
 
 <style>
 html,
 body {
+  @apply bg-background;
+
   scroll-behavior: smooth;
-  background-color: #003037;
   touch-action: manipulation;
-}
-
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>

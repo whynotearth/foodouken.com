@@ -1,8 +1,13 @@
 <template>
   <div class="mb-4 relative">
     <textarea
-      class="input disable-scrollbars appearance-none relative bg-transparent border border-gray-600 rounded h-32 w-full px-4 py-3 focus:outline-none focus:border-gray-500 focus:border-2 active:border-gray-500 active:border-2"
-      :class="value.length > 0 ? 'filled' : ''"
+      class="input disable-scrollbars appearance-none resize-none outline-none relative bg-transparent rounded h-32 w-full px-4 py-3 border focus:border-2 active:border-2 focus:border-opacity-54 active:border-opacity-54"
+      :class="[
+        { filled: value && value.length > 0 },
+        error
+          ? 'border-red-600 placeholder-red-600'
+          : 'border-white border-opacity-38'
+      ]"
       :id="idName"
       :value="value"
       @blur="$emit('input', $event.target.value)"
@@ -10,7 +15,8 @@
     ></textarea>
     <label
       :for="idName"
-      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text text-gray-500"
+      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
+      :class="[error ? 'text-red-600' : 'text-white text-opacity-50', labelBg]"
     >
       {{ label }}
     </label>
@@ -34,9 +40,15 @@ export default {
     placeholder: {
       type: String
     },
+    error: {
+      default: Boolean
+    },
     idName: {
       type: String,
       default: randomId
+    },
+    labelBg: {
+      type: String
     }
   }
 };
@@ -46,6 +58,14 @@ export default {
 .input {
   transition: border 0.2s ease-in-out;
   z-index: 2;
+}
+
+.label {
+  transition: all 0.2s ease-out;
+  transition: all 200ms;
+  opacity: 0;
+  padding: 0 5px;
+  z-index: 1;
 }
 
 .input:focus + .label,
@@ -61,23 +81,5 @@ export default {
 
 .input:focus::placeholder {
   color: transparent;
-}
-
-.label {
-  transition: all 0.2s ease-out;
-  transition: all 200ms;
-  opacity: 0;
-  padding: 0 5px;
-  z-index: 1;
-}
-
-.disable-scrollbars::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* Chrome/Safari/Webkit */
-}
-
-.disable-scrollbars {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
 }
 </style>

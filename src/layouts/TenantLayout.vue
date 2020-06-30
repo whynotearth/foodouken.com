@@ -1,59 +1,38 @@
 <template>
-  <div>
-    <transition name="fade">
-      <div>
-        <router-view class="max-w-screen-xxl mx-auto min-h-screen" />
-      </div>
+  <div class="mx-auto">
+    <BaseAppBarHeader
+      v-if="appBar"
+      :title="appBar.title"
+      :toLink="appBar.backRoute"
+    >
+      <template #menu v-if="appBar.newItem">
+        <div class="flex-grow inline-block text-right">
+          <router-link :to="appBar.newItem" class="relative">
+            <NewItemIcon class="float-right w-5 h-5 my-auto cursor-pointer" />
+          </router-link>
+        </div>
+      </template>
+    </BaseAppBarHeader>
+    <transition name="fade" mode="out-in">
+      <router-view class="container mx-auto"></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import BaseAppBarHeader from '@/components/BaseAppBarHeader';
+import NewItemIcon from '@/assets/new_item.svg';
 
 export default {
   name: 'TenantLayout',
-  computed: {
-    ...mapGetters({
-      orgData: 'shop/getOrgData'
-    })
+  components: {
+    BaseAppBarHeader,
+    NewItemIcon
   },
-  metaInfo() {
-    return {
-      title: this.orgData.custom.name,
-      meta: [
-        { name: 'keywords', content: this.orgData.custom.keyword },
-        { name: 'description', content: this.orgData.custom.description },
-        // OpenGraph data
-        { property: 'og:title', content: this.orgData.custom.name },
-        { property: 'og:site_name', content: 'Foodouken' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: this.orgData.custom.url },
-        { property: 'og:image', content: this.orgData.custom.image },
-        {
-          property: 'og:description',
-          content: this.orgData.custom.description
-        },
-        // Twitter card
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: this.orgData.custom.name },
-        {
-          name: 'twitter:description',
-          content: this.orgData.custom.description
-        },
-        { name: 'twitter:image', content: this.orgData.custom.image },
-        // Google / Schema.org markup:
-        { itemprop: 'name', content: this.orgData.custom.name },
-        { itemprop: 'description', content: this.orgData.custom.description },
-        { itemprop: 'image', content: this.orgData.custom.image }
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: this.orgData.custom
-        }
-      ]
-    };
+  computed: {
+    appBar() {
+      return this.$route.meta.appBar;
+    }
   }
 };
 </script>
