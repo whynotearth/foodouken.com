@@ -108,6 +108,8 @@ import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
+import BaseToggleSwitch from '@/components/inputs/BaseToggleSwitch';
+
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
 import { required, decimal } from 'vuelidate/lib/validators';
@@ -120,7 +122,8 @@ export default {
     MaterialInput,
     TextArea,
     Dropdown,
-    Button
+    Button,
+    BaseToggleSwitch
   },
   validations: {
     item: {
@@ -149,7 +152,8 @@ export default {
         variations: [],
         attributes: [],
         imageUrl:
-          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png'
+          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png',
+        isAvailable: true
         // inventory: ''
       },
       submitError: false,
