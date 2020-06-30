@@ -8,7 +8,7 @@
         :src="image"
         class="object-cover h-full w-full"
         draggable="false"
-        alt="item"
+        alt="img"
       />
     </div>
     <div class="mx-2 w-full flex flex-col truncate z-10">
