@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
-    <span v-if="apiError" class="my-8 mx-4 text-sm text-red-600">
+    <span v-if="apiError" class="m-4 text-sm text-red-600">
       {{ apiError }}
     </span>
     <MenuItem
