@@ -3,9 +3,10 @@
     <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
       <div v-show="!getLoading">
-        <BaseSiteBanner
-          title="Foodouken is now in Open Beta #DeleteFoodPanda ✊"
-        />
+        <BaseSiteBanner>
+          Foodouken is now in Open Beta
+          <a href="" class="underline">#DeleteFoodPanda</a> ✊
+        </BaseSiteBanner>
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
         />
