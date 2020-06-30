@@ -2,8 +2,7 @@ import { httpClient } from '@/services/httpClient';
 
 const state = {
   provider: '',
-  returnURL: '',
-  token: null
+  returnURL: ''
 };
 
 const getters = {
@@ -13,14 +12,10 @@ const getters = {
 };
 
 const actions = {
-  ping({ commit, state }) {
+  ping({ commit }) {
     return new Promise((resolve, reject) => {
       httpClient
-        .get('authentication/ping', {
-          headers: {
-            Authorization: `Bearer ${state.token}`
-          }
-        })
+        .get('authentication/ping')
         .then(response => {
           commit('updateProvider', response.data.loginProviders[0]);
           resolve(response.data);
@@ -57,7 +52,6 @@ const mutations = {
     state.returnURL = `${payload}?signUpStarted=true`;
   },
   updateToken(state, payload) {
-    state.token = payload;
     if (payload) {
       httpClient.defaults.headers.common['Authorization'] = `Bearer ${payload}`;
     } else {
