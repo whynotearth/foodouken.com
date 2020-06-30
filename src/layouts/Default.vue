@@ -5,7 +5,13 @@
       <div v-show="!getLoading">
         <BaseSiteBanner>
           Foodouken is now in Open Beta
-          <a href="" class="underline">#DeleteFoodPanda</a> ✊
+          <a
+            href="https://www.reddit.com/r/opensource/comments/herzsw/we_are_foodukencom_an_opensource_food_delivery/?utm_medium=android_app&utm_source=share"
+            class="underline"
+          >
+            #DeleteFoodPanda
+          </a>
+          ✊
         </BaseSiteBanner>
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
