@@ -5,7 +5,10 @@
       backdrop ? 'fixed h-screen w-screen bg-black bg-opacity-54' : 'sticky'
     "
   >
-    <div class="p-2 text-center font-bold text-2xl" :class="background">
+    <div
+      class="p-2 text-center tg-body-mobile-bold md:tg-desktop-bolded-caption"
+      :class="background"
+    >
       <slot>Site Banner</slot>
     </div>
   </div>
