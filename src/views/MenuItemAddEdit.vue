@@ -116,6 +116,7 @@ import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import BaseToggleSwitch from '@/components/inputs/BaseToggleSwitch';
+import BaseAPIErrorDisplay from '@/components/BaseAPIErrorDisplay';
 
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
@@ -130,7 +131,8 @@ export default {
     TextArea,
     Dropdown,
     Button,
-    BaseToggleSwitch
+    BaseToggleSwitch,
+    BaseAPIErrorDisplay
   },
   validations: {
     item: {
