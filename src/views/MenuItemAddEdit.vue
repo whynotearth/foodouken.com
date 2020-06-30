@@ -71,6 +71,14 @@
     />
     <hr class="border-white border-opacity-12 my-8" />
 
+    <div class="mx-4 flex space-x-4">
+      <BaseToggleSwitch v-model="item.isAvailable" />
+      <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
+        Product available
+      </span>
+    </div>
+    <hr class="border-white border-opacity-12 my-8" />
+
     <!-- <div class="mx-4">
       <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
         Inventory
