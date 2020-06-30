@@ -14,7 +14,9 @@
       @deleteItem="deleteItem(item.id)"
     >
       <template #subHeading>
-        ${{ item.price }} - {{ item.category.name }}
+        {{ !item.isAvailable ? 'Unavailable -' : '' }}
+        ${{ item.price }} -
+        {{ item.category.name }}
       </template>
     </MenuItem>
   </div>
