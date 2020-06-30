@@ -10,7 +10,7 @@
       :image="item.imageUrl"
       :options="menuItemOptions"
       @clicked="editItem(item.id)"
-      @sellOutItem="sellOutItem(item.id)"
+      @sellOutItem="sellOutItem(item)"
       @deleteItem="deleteItem(item.id)"
     >
       <template #subHeading>
@@ -36,6 +36,10 @@ export default {
       apiError: '',
       menuItemOptions: [
         {
+          name: 'Sell out',
+          action: 'sellOutItem'
+        },
+        {
           name: 'Delete',
           action: 'deleteItem'
         }
@@ -49,9 +53,11 @@ export default {
     ...mapGetters('menu', ['getMenuItems'])
   },
   methods: {
+    ...mapActions('auth', ['ping']),
     ...mapActions('menu', [
       'fetchTenantCategoryItems',
-      'deleteTenantCategoryItem'
+      'deleteTenantCategoryItem',
+      'updateTenantCategoryItem'
     ]),
     async onSuccessSubmit() {
       this.$store.commit('overlay/updateModel', {
@@ -85,8 +91,32 @@ export default {
           });
       } else return false;
     },
-    sellOutItem(itemId) {
-      this.$router.push({ name: 'MenuItemEdit', params: { item: itemId } });
+    sellOutItem(item) {
+      this.ping()
+        .then(user => {
+          if (user.isAuthenticated) {
+            let payload = {
+              categoryId: this.categoryId,
+              product: item,
+              productId: item.id
+            };
+            payload.product.isAvailable = false;
+            this.updateTenantCategoryItem(payload)
+              .then(() => {
+                this.onSuccessSubmit();
+              })
+              .catch(error => {
+                this.apiError = error.response.data.title
+                  ? error.response.data.title
+                  : 'Something went wrong, try again.';
+                throw error;
+              });
+          }
+        })
+        .catch(error => {
+          this.$router.push({ name: 'Welcome' });
+          throw error;
+        });
     },
     editItem(itemId) {
       this.$router.push({ name: 'MenuItemEdit', params: { item: itemId } });
