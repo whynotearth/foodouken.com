@@ -25,6 +25,15 @@
     </div>
     <hr class="border-white border-opacity-12 my-8" />
 
+    <div class="my-8 mx-4 text-sm text-red-600">
+      <span v-if="$v.$invalid && submitError">
+        Please fill out the form properly.
+      </span>
+      <span v-if="apiError">
+        {{ apiError }}
+      </span>
+    </div>
+
     <div class="px-4 mb-8 max-w-sm mx-auto">
       <Button
         title="Save category"

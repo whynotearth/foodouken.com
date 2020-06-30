@@ -8,7 +8,7 @@
         :src="image"
         class="object-cover h-full w-full"
         draggable="false"
-        alt="item"
+        alt="img"
       />
     </div>
     <div class="mx-2 w-full flex flex-col truncate z-10">
@@ -19,7 +19,10 @@
         <slot name="subHeading" />
       </span>
     </div>
-    <div class="my-auto text-right relative text-white text-opacity-54">
+    <div
+      v-if="options"
+      class="my-auto text-right relative text-white text-opacity-54"
+    >
       <div
         class="w-8 h-8 p-2 rounded-full cursor-pointer hover:bg-white hover:bg-opacity-04"
         @click.stop.prevent="toggleMenu"
@@ -57,8 +60,7 @@ export default {
   },
   props: {
     options: {
-      type: Array,
-      required: true
+      type: Array
     },
     name: {
       type: String,
