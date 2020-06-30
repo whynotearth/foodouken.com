@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen w-screen flex items-stretch justify-center items-center">
-    <div class="h-full w-full flex flex-col justify-between">
+  <div class="">
+    <div class="min-h-screen w-full flex flex-col justify-between">
       <div>
         <StepperTop
           class="clear-margin"
@@ -97,8 +97,10 @@ export default {
     }
   },
   created() {
-    if (!this.$route.hash && this.$route.params.step !== 'business-info') {
-      this.resetCreateTenantForm();
+    if (
+      !this.$route.query.signUpStarted &&
+      this.$route.params.step !== 'business-info'
+    ) {
       this.$router.replace({ params: { step: 'business-info' } });
     }
   },
@@ -141,9 +143,6 @@ export default {
           this.errors = error.response.data.errors;
         });
     }
-  },
-  destroyed() {
-    this.updateIsSignUpStarted(false);
   },
   watch: {
     component(step) {

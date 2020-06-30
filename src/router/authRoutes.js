@@ -1,5 +1,3 @@
-import store from '@/store';
-
 export const authRoutes = [
   {
     path: '/welcome',
@@ -18,21 +16,7 @@ export const authRoutes = [
     path: '/auth/login',
     name: 'LogIn',
     component: () => import('@/views/AuthLogIn.vue'),
-    meta: { layout: () => import('@/layouts/TenantLayout.vue') },
-    beforeEnter: (to, from, next) => {
-      store
-        .dispatch('auth/ping')
-        .then(response => {
-          if (response.isAuthenticated) {
-            next({ name: 'Account' });
-          } else {
-            throw new Error('USER_NOT_LOGGED_IN');
-          }
-        })
-        .catch(() => {
-          next();
-        });
-    }
+    meta: { layout: () => import('@/layouts/TenantLayout.vue') }
   },
   {
     path: '/auth/sign-up/success/:slug',

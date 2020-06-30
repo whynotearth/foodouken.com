@@ -7,7 +7,7 @@ const state = {
 
 const getters = {
   oauth(state) {
-    return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}#hash`;
+    return `${process.env.VUE_APP_API_URL}/authentication/provider/login?provider=${state.provider}&returnUrl=${state.returnURL}`;
   }
 };
 
@@ -33,6 +33,7 @@ const actions = {
         .then(
           () => {
             commit('updateProvider', '');
+            commit('updateToken', null);
             resolve('Log Out Successful');
           },
           error => {
@@ -48,7 +49,14 @@ const mutations = {
     state.provider = payload;
   },
   updateReturnUrl(state, payload) {
-    state.returnURL = payload;
+    state.returnURL = `${payload}?signUpStarted=true`;
+  },
+  updateToken(state, payload) {
+    if (payload) {
+      httpClient.defaults.headers.common['Authorization'] = `Bearer ${payload}`;
+    } else {
+      delete httpClient.defaults.headers.common['Authorization'];
+    }
   }
 };
 
