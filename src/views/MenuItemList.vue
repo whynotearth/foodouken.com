@@ -8,9 +8,10 @@
       :key="item.id"
       :name="item.name"
       :image="item.imageUrl"
-      :options="menuItemOptions"
+      :options="menuItemOptions(item)"
       @clicked="editItem(item.id)"
-      @sellOutItem="sellOutItem(item)"
+      @sellOutItem="changeAvailability(item, false)"
+      @restock="changeAvailability(item, true)"
       @deleteItem="deleteItem(item.id)"
     >
       <template #subHeading>
@@ -35,17 +36,7 @@ export default {
   data() {
     return {
       categoryId: this.$route.params.categoryId,
-      apiError: '',
-      menuItemOptions: [
-        {
-          name: 'Sell out',
-          action: 'sellOutItem'
-        },
-        {
-          name: 'Delete',
-          action: 'deleteItem'
-        }
-      ]
+      apiError: ''
     };
   },
   created() {
@@ -61,6 +52,25 @@ export default {
       'deleteTenantCategoryItem',
       'updateTenantCategoryItem'
     ]),
+    menuItemOptions(item) {
+      let options = [];
+      if (item.isAvailable) {
+        options.push({
+          name: 'Sell out',
+          action: 'sellOutItem'
+        });
+      } else {
+        options.push({
+          name: 'Restock',
+          action: 'restock'
+        });
+      }
+      options.push({
+        name: 'Delete',
+        action: 'deleteItem'
+      });
+      return options;
+    },
     async onSuccessSubmit() {
       this.$store.commit('overlay/updateModel', {
         title: 'Success!',
@@ -93,16 +103,16 @@ export default {
           });
       } else return false;
     },
-    sellOutItem(item) {
+    changeAvailability(item, isAvailable) {
       this.ping()
         .then(user => {
           if (user.isAuthenticated) {
             let payload = {
               categoryId: this.categoryId,
-              product: item,
+              product: { ...item },
               productId: item.id
             };
-            payload.product.isAvailable = false;
+            payload.product.isAvailable = isAvailable;
             this.updateTenantCategoryItem(payload)
               .then(() => {
                 this.onSuccessSubmit();
