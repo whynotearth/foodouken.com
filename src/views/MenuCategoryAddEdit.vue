@@ -152,10 +152,7 @@ export default {
           if (user.isAuthenticated) {
             let payload = {
               tenantSlug: this.params.tenantSlug,
-              category: {
-                tenantSlug: this.params.tenantSlug,
-                ...this.category
-              }
+              category: this.category
             };
             this.edit ? this.editItem(payload) : this.newItem(payload);
           }
