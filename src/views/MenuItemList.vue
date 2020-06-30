@@ -71,10 +71,10 @@ export default {
       });
       return options;
     },
-    async onSuccessSubmit() {
+    async onSuccessSubmit(message) {
       this.$store.commit('overlay/updateModel', {
         title: 'Success!',
-        message: 'Congratulations on selling out your product!'
+        message: message
       });
 
       await this.fetchTenantCategoryItems(this.categoryId);
@@ -113,9 +113,12 @@ export default {
               productId: item.id
             };
             payload.product.isAvailable = isAvailable;
+            let message = isAvailable
+              ? 'Product has been re-stocked!'
+              : 'Congratulations on selling out your product!';
             this.updateTenantCategoryItem(payload)
               .then(() => {
-                this.onSuccessSubmit();
+                this.onSuccessSubmit(message);
               })
               .catch(error => {
                 this.apiError = error.response.data.title
