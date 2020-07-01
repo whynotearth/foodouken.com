@@ -17,7 +17,7 @@
           Name is required
         </span>
       </MaterialInput>
-      <Dropdown
+      <!-- <Dropdown
         v-model="category"
         :options="getCategories"
         placeholder="Category"
@@ -32,7 +32,7 @@
         <template #option="{ option }">
           {{ option.name }}
         </template>
-      </Dropdown>
+      </Dropdown> -->
       <MaterialInput
         v-model.number="$v.item.price.$model"
         label="Price"
@@ -58,7 +58,7 @@
     </div>
     <hr class="border-white border-opacity-12 my-8" />
 
-    <VariantManager
+    <!-- <VariantManager
       title="Choose please!"
       buttonTitle="Add variation"
       v-model="item.variations"
@@ -69,15 +69,15 @@
       buttonTitle="Add extras"
       v-model="item.attributes"
     />
-    <hr class="border-white border-opacity-12 my-8" />
+    <hr class="border-white border-opacity-12 my-8" /> -->
 
-    <div class="mx-4 flex space-x-4">
+    <!-- <div class="mx-4 flex space-x-4">
       <BaseToggleSwitch v-model="item.isAvailable" />
       <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
         Product available
       </span>
     </div>
-    <hr class="border-white border-opacity-12 my-8" />
+    <hr class="border-white border-opacity-12 my-8" /> -->
 
     <!-- <div class="mx-4">
       <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
@@ -90,7 +90,7 @@
       />
     </div>
     <hr class="border-white border-opacity-12 my-8" /> -->
-    <div class="my-8 mx-4 text-sm text-error">
+    <!-- <div class="my-8 mx-4 text-sm text-error">
       <span v-if="$v.$invalid && submitError">
         Please fill out the form properly.
       </span>
@@ -104,7 +104,7 @@
         padding="p-2"
         @clicked="submit"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
