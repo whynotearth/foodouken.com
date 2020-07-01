@@ -69,13 +69,18 @@
                         key="open"
                         v-if="isActive === 'open'"
                         v-model="selectedDayOption.openingTime"
+                        @change="checkTimeDifference"
                       />
                       <TimePicker
                         key="close"
                         v-if="isActive === 'close'"
                         v-model="selectedDayOption.closingTime"
+                        @change="checkTimeDifference"
                       />
                     </transition>
+                    <div v-if="isClosingBeforeOpening" class="mt-10 text-error text-xs">
+                      <p>Closing time can't be before opening time!</p>
+                    </div>
                   </div>
                 </div>
                 <div class="px-4 my-4">
@@ -109,7 +114,8 @@ export default {
   },
   data() {
     return {
-      isActive: 'open'
+      isActive: 'open',
+      isClosingBeforeOpening: false
     };
   },
   components: {
@@ -123,12 +129,21 @@ export default {
       this.isActive = key;
     },
     async saveHours() {
-      await this.$emit('update:selectedDay', {
-        ...this.selectedDay,
-        openingTime: this.selectedDayOption.openingTime,
-        closingTime: this.selectedDayOption.closingTime
-      });
-      this.$emit('closeModal');
+      if (!this.isClosingBeforeOpening) {
+        await this.$emit('update:selectedDay', {
+          ...this.selectedDay,
+          openingTime: this.selectedDayOption.openingTime,
+          closingTime: this.selectedDayOption.closingTime === '00:00:00' ? '23:59:59' : this.selectedDayOption.closingTime
+        });
+        this.$emit('closeModal');
+      }
+    },
+    checkTimeDifference() {
+      const [openingHour, openingMinute] = this.selectedDayOption.openingTime.split(':').map(each => Number(each));
+      const [closingHour, closingMinute] = this.selectedDayOption.closingTime.split(':').map(each => Number(each));
+
+
+      this.isClosingBeforeOpening = closingHour - openingHour < 0 ? true : closingHour - openingHour === 0 && openingMinute > closingMinute ? true : false;
     }
   },
   computed: {
