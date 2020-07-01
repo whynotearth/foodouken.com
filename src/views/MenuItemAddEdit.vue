@@ -17,7 +17,7 @@
           Name is required
         </span>
       </MaterialInput>
-      <!-- <Dropdown
+      <Dropdown
         v-model="category"
         :options="getCategories"
         placeholder="Category"
@@ -32,7 +32,7 @@
         <template #option="{ option }">
           {{ option.name }}
         </template>
-      </Dropdown> -->
+      </Dropdown>
       <MaterialInput
         v-model.number="$v.item.price.$model"
         label="Price"
@@ -62,22 +62,22 @@
       title="Choose please!"
       buttonTitle="Add variation"
       v-model="item.variations"
-    />
+    /> -->
     <hr class="border-white border-opacity-12 my-8" />
-    <VariantManager
+    <!-- <VariantManager
       title="Customise"
       buttonTitle="Add extras"
       v-model="item.attributes"
-    />
-    <hr class="border-white border-opacity-12 my-8" /> -->
+    /> -->
+    <hr class="border-white border-opacity-12 my-8" />
 
     <!-- <div class="mx-4 flex space-x-4">
       <BaseToggleSwitch v-model="item.isAvailable" />
       <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
         Product available
       </span>
-    </div>
-    <hr class="border-white border-opacity-12 my-8" /> -->
+    </div> -->
+    <hr class="border-white border-opacity-12 my-8" />
 
     <!-- <div class="mx-4">
       <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
@@ -90,7 +90,7 @@
       />
     </div>
     <hr class="border-white border-opacity-12 my-8" /> -->
-    <!-- <div class="my-8 mx-4 text-sm text-error">
+    <div class="my-8 mx-4 text-sm text-error">
       <span v-if="$v.$invalid && submitError">
         Please fill out the form properly.
       </span>
@@ -104,7 +104,7 @@
         padding="p-2"
         @clicked="submit"
       />
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -198,101 +198,101 @@ export default {
       'deleteTenantCategoryItem'
     ]),
     init() {
-      // // TODO: Add loader till all requests are finished loading
-      // this.edit = this.itemId !== undefined ? true : false;
-      // this.fetchTenantCategories(this.tenantSlug);
-      // if (this.edit) {
-      //   this.fetchTenantCategoryItemById({
-      //     categoryId: this.categoryId,
-      //     productId: this.itemId
-      //   })
-      //     .then(item => {
-      //       this.item = item;
-      //       this.category = item.category;
-      //     })
-      //     .catch(error => {
-      //       this.apiError = error.response.data
-      //         ? error.response.data
-      //         : 'Failed to fetch item details, please refresh.';
-      //       throw error;
-      //     });
-      // } else {
-      //   this.fetchTenantCategoryById({
-      //     tenantSlug: this.tenantSlug,
-      //     categoryId: this.categoryId
-      //   })
-      //     .then(category => {
-      //       this.category = category;
-      //     })
-      //     .catch(error => {
-      //       throw error;
-      //     });
-      // }
+      // TODO: Add loader till all requests are finished loading
+      this.edit = this.itemId !== undefined ? true : false;
+      this.fetchTenantCategories(this.tenantSlug);
+      if (this.edit) {
+        this.fetchTenantCategoryItemById({
+          categoryId: this.categoryId,
+          productId: this.itemId
+        })
+          .then(item => {
+            this.item = item;
+            this.category = item.category;
+          })
+          .catch(error => {
+            this.apiError = error.response.data
+              ? error.response.data
+              : 'Failed to fetch item details, please refresh.';
+            throw error;
+          });
+      } else {
+        this.fetchTenantCategoryById({
+          tenantSlug: this.tenantSlug,
+          categoryId: this.categoryId
+        })
+          .then(category => {
+            this.category = category;
+          })
+          .catch(error => {
+            throw error;
+          });
+      }
     },
     async onSuccessSubmit() {
-      // this.$store.commit('overlay/updateModel', {
-      //   title: 'Success!',
-      //   message: 'Your product has been saved!'
-      // });
+      this.$store.commit('overlay/updateModel', {
+        title: 'Success!',
+        message: 'Your product has been saved!'
+      });
 
-      // await sleep(1000);
+      await sleep(1000);
 
-      // await this.$router.push({
-      //   name: 'MenuItemList',
-      //   params: { categoryId: this.categoryId }
-      // });
+      await this.$router.push({
+        name: 'MenuItemList',
+        params: { categoryId: this.categoryId }
+      });
 
-      // this.$store.commit('overlay/updateModel', {
-      //   title: '',
-      //   message: ''
-      // });
+      this.$store.commit('overlay/updateModel', {
+        title: '',
+        message: ''
+      });
     },
     submit() {
-      // this.$v.$touch();
-      // if (this.$v.$invalid) {
-      //   this.submitError = true;
-      //   return false;
-      // }
-      // this.ping()
-      //   .then(user => {
-      //     if (user.isAuthenticated) {
-      //       // this.cleanFormData();
-      //       let payload = {
-      //         categoryId: this.category.id,
-      //         product: this.item
-      //       };
-      //       this.edit ? this.editItem(payload) : this.newItem(payload);
-      //     }
-      //   })
-      //   .catch(error => {
-      //     this.$router.push({ name: 'Welcome' });
-      //     throw error;
-      //   });
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitError = true;
+        return false;
+      }
+      this.ping()
+        .then(user => {
+          if (user.isAuthenticated) {
+            // this.cleanFormData();
+            let payload = {
+              categoryId: this.category.id,
+              product: this.item
+            };
+            this.edit ? this.editItem(payload) : this.newItem(payload);
+          }
+        })
+        .catch(error => {
+          this.$router.push({ name: 'Welcome' });
+          throw error;
+        });
     },
     newItem(payload) {
-      // this.createTenantCategoryItem(payload)
-      //   .then(() => {
-      //     this.onSuccessSubmit();
-      //   })
-      //   .catch(error => {
-      //     this.apiError = error.response.data
-      //       ? error.response.data
-      //       : 'Something went wrong, try again.';
-      //     throw error;
-      //   });
+      this.createTenantCategoryItem(payload)
+        .then(() => {
+          this.onSuccessSubmit();
+        })
+        .catch(error => {
+          this.apiError = error.response.data
+            ? error.response.data
+            : 'Something went wrong, try again.';
+          throw error;
+        });
     },
     editItem(payload) {
-      // payload.productId = this.itemId;
-      // this.updateTenantCategoryItem(payload)
-      //   .then(() => {
-      //     this.onSuccessSubmit();
-      //   })
-      //   .catch(error => {
-      //     this.apiError = error.response.data
-      //       ? error.response.data
-      //       : 'Something went wrong, try again.';
-      //     throw error;
-      //   });
+      payload.productId = this.itemId;
+      this.updateTenantCategoryItem(payload)
+        .then(() => {
+          this.onSuccessSubmit();
+        })
+        .catch(error => {
+          this.apiError = error.response.data
+            ? error.response.data
+            : 'Something went wrong, try again.';
+          throw error;
+        });
     }
     // TODO: Check for empty variants and customisations
     // cleanFormData() {
