@@ -79,7 +79,7 @@
                       />
                     </transition>
                     <div v-if="isClosingBeforeOpening" class="mt-10 text-error text-xs">
-                      <p>Closing time can't be before opening time!</p>
+                      <p>Closing time can't be before or as same as opening time!</p>
                     </div>
                   </div>
                 </div>
@@ -143,7 +143,7 @@ export default {
       const [closingHour, closingMinute] = this.selectedDayOption.closingTime.split(':').map(each => Number(each));
 
 
-      this.isClosingBeforeOpening = closingHour - openingHour < 0 ? true : closingHour - openingHour === 0 && openingMinute > closingMinute ? true : false;
+      this.isClosingBeforeOpening = closingHour - openingHour < 0 ? true : closingHour - openingHour === 0 && openingMinute >= closingMinute ? true : false;
     }
   },
   computed: {
