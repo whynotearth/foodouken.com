@@ -1,114 +1,21 @@
 <template>
   <div class="w-full">
-    <ImageUpload v-model="images" />
-    <hr class="border-white border-opacity-12 my-8" />
-
-    <div class="mx-4">
-      <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
-        Item info
+    <br /><br />
+    <MaterialInput
+      v-model="$v.item.name.$model"
+      label="Item name"
+      labelBg="bg-background"
+      :error="$v.item.name.$error"
+    >
+      <span v-if="$v.item.name.$error" class="text-red-600 text-xs">
+        Name is required
       </span>
-      <MaterialInput
-        v-model="$v.item.name.$model"
-        label="Item name"
-        labelBg="bg-background"
-        :error="$v.item.name.$error"
-      >
-        <span v-if="$v.item.name.$error" class="text-red-600 text-xs">
-          Name is required
-        </span>
-      </MaterialInput>
-      <Dropdown
-        v-model="category"
-        :options="getCategories"
-        placeholder="Category"
-        :tight="true"
-        background="border bg-background border-white border-opacity-38"
-      >
-        <template #title="{ selectedOption }">
-          <span v-if="selectedOption">
-            {{ selectedOption.name }}
-          </span>
-        </template>
-        <template #option="{ option }">
-          {{ option.name }}
-        </template>
-      </Dropdown>
-      <MaterialInput
-        v-model.number="$v.item.price.$model"
-        label="Price"
-        labelBg="bg-background"
-        type="number"
-        step="0.01"
-        :error="$v.item.price.$error"
-      >
-        <template v-if="$v.item.price.$error">
-          <span v-if="!$v.item.price.required" class="text-red-600 text-xs">
-            Price is required.
-          </span>
-          <span v-if="!$v.item.price.decimal" class="text-red-600 text-xs">
-            Price should be a valid number.
-          </span>
-        </template>
-      </MaterialInput>
-      <TextArea
-        v-model="item.description"
-        label="Description"
-        labelBg="bg-background"
-      />
-    </div>
-    <hr class="border-white border-opacity-12 my-8" />
-
-    <VariantManager
-      title="Choose please!"
-      buttonTitle="Add variation"
-      v-model="item.variations"
-    />
-    <hr class="border-white border-opacity-12 my-8" />
-    <VariantManager
-      title="Customise"
-      buttonTitle="Add extras"
-      v-model="item.attributes"
-    />
-    <hr class="border-white border-opacity-12 my-8" />
-
-    <div class="mx-4 flex space-x-4">
-      <BaseToggleSwitch v-model="item.isAvailable" />
-      <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
-        Product available
-      </span>
-    </div>
-    <hr class="border-white border-opacity-12 my-8" />
-
-    <!-- <div class="mx-4">
-      <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
-        Inventory
-      </span>
-      <MaterialInput
-        v-model.number="item.inventory"
-        label="Available"
-        labelBg="bg-background"
-      />
-    </div>
-    <hr class="border-white border-opacity-12 my-8" /> -->
-    <div class="my-8 mx-4 text-sm text-error">
-      <span v-if="$v.$invalid && submitError">
-        Please fill out the form properly.
-      </span>
-      <BaseAPIErrorDisplay :error="apiError" />
-    </div>
-
-    <div class="px-4 mb-8 max-w-sm mx-auto">
-      <Button
-        title="Save item"
-        class="rounded-full"
-        padding="p-2"
-        @clicked="submit"
-      />
-    </div>
+    </MaterialInput>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import VariantManager from '@/components/menu/VariantManager.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
