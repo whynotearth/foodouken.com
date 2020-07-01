@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <!-- <ImageUpload v-model="images" /> -->
+    <ImageUpload v-model="images" />
     <hr class="border-white border-opacity-12 my-8" />
 
     <div class="mx-4">
@@ -58,25 +58,25 @@
     </div>
     <hr class="border-white border-opacity-12 my-8" />
 
-    <!-- <VariantManager
+    <VariantManager
       title="Choose please!"
       buttonTitle="Add variation"
       v-model="item.variations"
-    /> -->
+    />
     <hr class="border-white border-opacity-12 my-8" />
-    <!-- <VariantManager
+    <VariantManager
       title="Customise"
       buttonTitle="Add extras"
       v-model="item.attributes"
-    /> -->
+    />
     <hr class="border-white border-opacity-12 my-8" />
 
-    <!-- <div class="mx-4 flex space-x-4">
+    <div class="mx-4 flex space-x-4">
       <BaseToggleSwitch v-model="item.isAvailable" />
       <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
         Product available
       </span>
-    </div> -->
+    </div>
     <hr class="border-white border-opacity-12 my-8" />
 
     <!-- <div class="mx-4">
@@ -109,7 +109,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import VariantManager from '@/components/menu/VariantManager.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
