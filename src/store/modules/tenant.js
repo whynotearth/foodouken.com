@@ -106,7 +106,15 @@ const actions = {
       notificationTypes: getters.getSelectedNotificationTypes,
       paymentMethodTypes: getters.getSelectedPaymentMethods,
       companySlug: process.env.VUE_APP_COMPANY_SLUG,
-      businessHours: getters.getBusinessHours,
+      businessHours: getters.getBusinessHours.map(businessHour => {
+        return {
+          ...businessHour,
+          closingTime:
+            businessHour.closingTime === '00:00:00'
+              ? '23:59:59'
+              : businessHour.closingTime
+        };
+      }),
       logoUrl: getters.getLogo
     };
 
