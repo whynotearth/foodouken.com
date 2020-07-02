@@ -1,11 +1,11 @@
 import { httpClient } from '@/services/httpClient';
 
 const notificationTypes = [
-  {
-    name: 'Text',
-    key: 'phone',
-    id: 'text'
-  },
+  // {
+  //   name: 'Text',
+  //   key: 'phone',
+  //   id: 'text'
+  // },
   // {
   //   name: 'Whatsapp',
   //   key: 'phone',
