@@ -2,6 +2,12 @@
 
 import { register } from 'register-service-worker';
 
+const notifyUserAboutUpdate = worker => {
+  if (confirm('Update available! Click to update foodouken')) {
+    worker.postMessage({ type: 'SKIP_WAITING' });
+  }
+};
+
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready() {
@@ -19,8 +25,9 @@ if (process.env.NODE_ENV === 'production') {
     updatefound() {
       console.log('New content is downloading.');
     },
-    updated() {
+    updated(registration) {
       console.log('New content is available; please refresh.');
+      notifyUserAboutUpdate(registration.waiting);
     },
     offline() {
       console.log(
@@ -31,4 +38,15 @@ if (process.env.NODE_ENV === 'production') {
       console.error('Error during service worker registration:', error);
     }
   });
+
+  let refreshing;
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) {
+        return;
+      }
+      window.location.reload();
+      refreshing = true;
+    });
+  }
 }
