@@ -62,12 +62,14 @@
       title="Choose please!"
       buttonTitle="Add variation"
       v-model="item.variations"
+      :error="$v.item.$dirty && $v.item.variations.$error"
     />
     <hr class="border-white border-opacity-12 my-8" />
     <VariantManager
       title="Customise"
       buttonTitle="Add extras"
       v-model="item.attributes"
+      :error="$v.item.$dirty && $v.item.attributes.$error"
     />
     <hr class="border-white border-opacity-12 my-8" />
 
@@ -142,6 +144,26 @@ export default {
       price: {
         required,
         decimal
+      },
+      variations: {
+        $each: {
+          name: {
+            required
+          },
+          price: {
+            required
+          }
+        }
+      },
+      attributes: {
+        $each: {
+          name: {
+            required
+          },
+          price: {
+            required
+          }
+        }
       }
     }
   },

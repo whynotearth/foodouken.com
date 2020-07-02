@@ -24,12 +24,14 @@
                 v-model="variant.name"
                 :label="`Option ${index + 1}`"
                 class="w-2/3 mx-2"
+                :error="error && !variant.name"
               />
               <MaterialInput
                 v-model.number="variant.price"
                 label="Price"
                 class="w-1/3"
                 type="number"
+                :error="error && (Number(variant.price) < 0 || Number(variant.price === NaN) || variant.price === '')"
               />
               <Delete
                 @click="removeVariant(index)"
@@ -76,6 +78,9 @@ export default {
     variants: {
       type: Array,
       default: () => []
+    },
+    error: {
+      type: Boolean
     }
   },
   data() {
