@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="mb-4 relative text-white text-opacity-54"
-    v-click-outside="hideDropdown"
-  >
+  <div class="mb-4 relative text-white text-opacity-54">
     <div
       @click="toggleDropdown"
       class="w-full mb-2 rounded shadow cursor-pointer"
