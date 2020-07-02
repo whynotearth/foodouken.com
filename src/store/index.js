@@ -11,22 +11,16 @@ import tenant from './modules/tenant';
 import overlay from './modules/overlay';
 import VuexPersistence from 'vuex-persist';
 
-const vuexLocal = new VuexPersistence({
-  storage: window.localStorage,
-  modules: ['tenant'],
-  key: 'localstore'
-});
-
 const vuexSession = new VuexPersistence({
   storage: window.sessionStorage,
-  modules: ['auth'],
-  key: 'sessionstore'
+  modules: ['auth', 'tenant'],
+  key: 'vuexSessionStore'
 });
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  plugins: [vuexLocal.plugin, vuexSession.plugin],
+  plugins: [vuexSession.plugin],
   modules: {
     home,
     category,
