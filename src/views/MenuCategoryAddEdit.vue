@@ -29,9 +29,7 @@
       <span v-if="$v.$invalid && submitError">
         Please fill out the form properly.
       </span>
-      <span v-if="apiError">
-        {{ apiError }}
-      </span>
+      <BaseAPIErrorDisplay :error="apiError" />
     </div>
 
     <div class="px-4 mb-8 max-w-sm mx-auto">
@@ -50,6 +48,8 @@ import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Button from '@/components/Button';
+import BaseAPIErrorDisplay from '@/components/BaseAPIErrorDisplay';
+
 import { mapActions } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
 import { sleep } from '@/helpers.js';
@@ -60,7 +60,8 @@ export default {
     ImageUpload,
     MaterialInput,
     TextArea,
-    Button
+    Button,
+    BaseAPIErrorDisplay
   },
   validations: {
     category: {
@@ -77,7 +78,7 @@ export default {
         categoryId: this.$route.params.categoryId
       },
       submitError: false,
-      apiError: '',
+      apiError: null,
       category: {
         name: '',
         description: '',
@@ -120,6 +121,9 @@ export default {
             this.category = category;
           })
           .catch(error => {
+            this.apiError = error.response.data
+              ? error.response.data
+              : 'Failed to fetch category details, please refresh.';
             throw error;
           });
       }
@@ -168,8 +172,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });
@@ -181,8 +185,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });

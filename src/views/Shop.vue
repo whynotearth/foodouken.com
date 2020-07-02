@@ -2,7 +2,7 @@
   <div class="h-full">
     <hero-section :heroData="orgData" />
     <hr class="my-8 border-gray-700" />
-    <section class="flex lg:flex-row flex-col-reverse my-4 min-h-screen">
+    <section class="flex lg:flex-row flex-col-reverse my-4 lg:min-h-screen">
       <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
         <category-holder />
         <transition name="fade" mode="out-in">
