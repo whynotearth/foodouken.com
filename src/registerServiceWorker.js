@@ -26,8 +26,8 @@ if (process.env.NODE_ENV === 'production') {
       console.log('New content is downloading.');
     },
     updated(registration) {
-      console.log('New content is available; please refresh.');
       notifyUserAboutUpdate(registration.waiting);
+      console.log('New content is available; please refresh.');
     },
     offline() {
       console.log(
