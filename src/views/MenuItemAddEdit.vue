@@ -62,14 +62,14 @@
       title="Choose please!"
       buttonTitle="Add variation"
       v-model="item.variations"
-      :error="$v.item.$dirty && $v.item.variations.$error"
+      ref="variations"
     />
     <hr class="border-white border-opacity-12 my-8" />
     <VariantManager
       title="Customise"
       buttonTitle="Add extras"
       v-model="item.attributes"
-      :error="$v.item.$dirty && $v.item.attributes.$error"
+      ref="attributes"
     />
     <hr class="border-white border-opacity-12 my-8" />
 
@@ -144,26 +144,6 @@ export default {
       price: {
         required,
         decimal
-      },
-      variations: {
-        $each: {
-          name: {
-            required
-          },
-          price: {
-            required
-          }
-        }
-      },
-      attributes: {
-        $each: {
-          name: {
-            required
-          },
-          price: {
-            required
-          }
-        }
       }
     }
   },
@@ -270,7 +250,11 @@ export default {
     },
     submit() {
       this.$v.$touch();
-      if (this.$v.$invalid) {
+      console.log(this.$refs);
+      
+      this.$refs.variations.$v.$touch();
+      this.$refs.attributes.$v.$touch();
+      if (this.$v.$invalid || this.$refs.variations.$v.$invalid || this.$refs.attributes.$v.$invalid) {
         this.submitError = true;
         return false;
       }

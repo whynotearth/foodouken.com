@@ -24,14 +24,14 @@
                 v-model="variant.name"
                 :label="`Option ${index + 1}`"
                 class="w-2/3 mx-2"
-                :error="error && !variant.name"
+                :error="$v.variants.$each[index].name.$error"
               />
               <MaterialInput
                 v-model.number="variant.price"
                 label="Price"
                 class="w-1/3"
                 type="number"
-                :error="error && (Number(variant.price) < 0 || Number(variant.price === NaN) || variant.price === '')"
+                :error="$v.variants.$each[index].price.$error"
               />
               <Delete
                 @click="removeVariant(index)"
@@ -58,6 +58,7 @@ import MaterialInput from '@/components/inputs/MaterialInput';
 import Button from '@/components/Button';
 import down from '@/assets/down.png';
 import Delete from '@/assets/delete.svg';
+import { required, decimal } from 'vuelidate/lib/validators';
 
 export default {
   name: 'VariantManager',
@@ -65,6 +66,19 @@ export default {
   model: {
     prop: 'variants',
     event: 'updateVariants'
+  },
+  validations: {
+    variants: {
+      $each: {
+        name: {
+          required
+        },
+        price: {
+          required,
+          decimal
+        }
+      }
+    }
   },
   props: {
     title: {
@@ -78,9 +92,6 @@ export default {
     variants: {
       type: Array,
       default: () => []
-    },
-    error: {
-      type: Boolean
     }
   },
   data() {
