@@ -90,14 +90,13 @@
       />
     </div>
     <hr class="border-white border-opacity-12 my-8" /> -->
-    <div class="my-8 mx-4 text-sm text-red-600">
+    <div class="my-8 mx-4 text-sm text-error">
       <span v-if="$v.$invalid && submitError">
         Please fill out the form properly.
       </span>
-      <span v-if="apiError">
-        {{ apiError }}
-      </span>
+      <BaseAPIErrorDisplay :error="apiError" />
     </div>
+
     <div class="px-4 mb-8 max-w-sm mx-auto">
       <Button
         title="Save item"
@@ -117,6 +116,7 @@ import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import BaseToggleSwitch from '@/components/inputs/BaseToggleSwitch';
+import BaseAPIErrorDisplay from '@/components/BaseAPIErrorDisplay';
 
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
@@ -131,7 +131,8 @@ export default {
     TextArea,
     Dropdown,
     Button,
-    BaseToggleSwitch
+    BaseToggleSwitch,
+    BaseAPIErrorDisplay
   },
   validations: {
     item: {
@@ -165,7 +166,7 @@ export default {
         // inventory: ''
       },
       submitError: false,
-      apiError: ''
+      apiError: null
     };
   },
   created() {
@@ -209,8 +210,8 @@ export default {
             this.category = item.category;
           })
           .catch(error => {
-            this.apiError = error.response.data.title
-              ? error.response.data.title
+            this.apiError = error.response.data
+              ? error.response.data
               : 'Failed to fetch item details, please refresh.';
             throw error;
           });
@@ -273,8 +274,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });
@@ -286,8 +287,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });
