@@ -25,13 +25,6 @@
           :src="embedUrl"
           allowfullscreen
         ></iframe>
-        <div
-          @click="option = 'Enter location manually'"
-          class="cursor-pointer tg-body-mobile text-white text-opacity-54"
-        >
-          <p>If this address is not your current address.</p>
-          <p>Please enter your location manually.</p>
-        </div>
       </div>
     </div>
     <div v-else>

@@ -28,38 +28,36 @@
           />
         </div>
       </div>
-      <div v-else-if="key === 'user-not-allowed'">
+      <div v-else-if="key === 'user-did-not-give-permission'">
+        <h5 class="tg-mobile-h3 mb-4">Opps!</h5>
         <h6 class="tg-body-mobile bg-surface text-white text-opacity-54">
-          You need to enable location sharing to use Foodouken.
+          You need to enable location sharing to use Foodouken. <br />
+          Visit your browser settings.
         </h6>
         <div class="mt-8 tg-color-label-mobile flex justify-end">
           <Button
-            buttonBg="bg-secondary"
-            class="text-white text-opacity-54 tg-color-label-mobile"
+            class="text-white text-opacity-54 tg-color-label-mobile rounded-full shadow-6dp"
             :isRipple="false"
-            width="w-auto"
             padding="px-6 py-3"
-            title="Close"
+            title="Find Out How"
+            target="_blank"
+            :href="'https://www.computerhope.com/issues/ch001918.htm'"
             @clicked="onCancel"
           />
         </div>
       </div>
       <div v-else-if="key === 'unable-to-retrive-address'" class="">
+        <h5 class="tg-mobile-h3 mb-4">Opps!</h5>
         <h6 class="tg-body-mobile bg-surface text-white text-opacity-54">
-          Sometimes google can crush too.
-          <br />
-          We couldn't get your address.
-          <br />
-          Please fill manual address.
+          There was a problem finding you. <br />
+          Please enter address manually.
         </h6>
         <div class="mt-8 tg-color-label-mobile flex justify-end">
           <Button
-            buttonBg="bg-secondary"
-            class="text-white text-opacity-54 tg-color-label-mobile"
+            class="text-white text-opacity-54 tg-color-label-mobile rounded-full"
             :isRipple="false"
-            width="w-auto"
             padding="px-6 py-3"
-            title="Close"
+            title="Enter Address Manually"
             @clicked="onCancel"
           />
         </div>
@@ -96,7 +94,7 @@ export default {
     geoError(error) {
       switch (error.code) {
         case 1: //   1: permission denied
-          this.key = 'user-not-allowed';
+          this.key = 'user-did-not-give-permission';
           break;
         case 0: //   0: unknown error
         case 2: //   2: position unavailable (error response from location provider)
@@ -119,10 +117,13 @@ export default {
     },
     useLocationProvider() {
       axios
-        .post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.VUE_APP_MAPS_API_KEY}`, {
-          key: process.env.VUE_APP_MAPS_API_KEY,
-          considerIp: true
-        })
+        .post(
+          `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.VUE_APP_MAPS_API_KEY}`,
+          {
+            key: process.env.VUE_APP_MAPS_API_KEY,
+            considerIp: true
+          }
+        )
         .then(response => {
           if (response.data && response.data.location) {
             const { lat, lng } = response.data.location;
