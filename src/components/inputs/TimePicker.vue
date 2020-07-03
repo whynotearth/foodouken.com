@@ -80,9 +80,15 @@ export default {
     this.hours[0].list = this.setHours();
     this.mins[0].list = this.setMins();
 
-    const { hour: getHour, min: getMin, postfix } = this.extractTimeFrom24H(
+    let { hour: getHour, min: getMin, postfix } = this.extractTimeFrom24H(
       this.value
     );
+
+    if (this.value === '23:59:59') {
+      getHour = '12';
+      getMin = '00';
+      postfix = 'AM';
+    }
 
     this.hours[0].currentIndex = this.hours[0].list.findIndex(
       hour => hour === String(getHour)
