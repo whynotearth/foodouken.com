@@ -119,11 +119,14 @@ export default {
     },
     useLocationProvider() {
       axios
-        .get('https://freegeoip.app/json/')
+        .post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.VUE_APP_MAPS_API_KEY}`, {
+          key: process.env.VUE_APP_MAPS_API_KEY,
+          considerIp: true
+        })
         .then(response => {
-          if (response.data && response.data.latitude && response.data.longitude) {
-            const { latitude, longitude } = response.data;
-            this.onSuccess(latitude, longitude);
+          if (response.data && response.data.location) {
+            const { lat, lng } = response.data.location;
+            this.onSuccess(lat, lng);
           } else {
             throw new Error('Unable to retrive location');
           }
