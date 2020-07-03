@@ -1,6 +1,11 @@
 <template>
   <div class="w-full">
     <div class="w-full bg-secondary rounded-lg shadow mb-2">
+      <FindLocation
+        @onCancel="option = 'Enter location manually'"
+        v-if="option === 'Share location'"
+        v-model="locationFromComponent"
+      />
       <RadioInput v-model="option" value="Share location" class="p-5" />
       <hr class="border-gray-700" />
       <RadioInput
@@ -9,24 +14,25 @@
         class="p-5"
       />
     </div>
-    <div
-      v-if="option === 'Share location'"
-      class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
-    >
-      <iframe
+    <div v-if="option === 'Share location'">
+      <div
         v-if="embedUrl.length > 0"
-        class="w-full rounded border-none"
-        frameborder="0"
-        :src="embedUrl"
-        allowfullscreen
-      ></iframe>
-      <p
-        v-if="locationError.length > 0 && location.length === 0"
-        class="text-red-600 cursor-pointer"
-        @click="getCoordinates"
+        class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
       >
-        {{ locationError }} (retry)
-      </p>
+        <iframe
+          class="w-full rounded border-none"
+          frameborder="0"
+          :src="embedUrl"
+          allowfullscreen
+        ></iframe>
+        <div
+          @click="option = 'Enter location manually'"
+          class="cursor-pointer tg-body-mobile text-white text-opacity-54"
+        >
+          <p>If this address is not your current address.</p>
+          <p>Please enter your location manually.</p>
+        </div>
+      </div>
     </div>
     <div v-else>
       <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
@@ -94,20 +100,22 @@ import RadioInput from '@/components/inputs/RadioInput.vue';
 import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
+import FindLocation from '@/components/inputs/FindLocation.vue';
 
 export default {
   name: 'CustomerAddress',
   components: {
     MaterialInput,
     RadioInput,
-    CheckoutNavBar
+    CheckoutNavBar,
+    FindLocation
   },
   data() {
     return {
       submitError: false,
-      locationError: '',
       registerError: '',
-      embedUrl: ''
+      embedUrl: '',
+      locationFromComponent: {}
     };
   },
   validations: {
@@ -116,11 +124,6 @@ export default {
     },
     town: {
       required
-    }
-  },
-  created() {
-    if (this.option === 'Share location') {
-      this.getCoordinates();
     }
   },
   computed: {
@@ -236,25 +239,19 @@ export default {
     decrementPage() {
       const pageToGo = this.page - 1;
       this.pageChangeWrapper(pageToGo);
-    },
-    getCoordinates() {
-      navigator.geolocation.getCurrentPosition(this.success, this.error);
-    },
-    success(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      this.location = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-      this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.VUE_APP_MAPS_API_KEY}&q=${latitude},${longitude}`;
-    },
-    error() {
-      this.locationError =
-        'Location failed please check your settings or enter your address manually below';
     }
   },
   watch: {
-    option: function(val) {
-      if (val === 'Share location') {
-        this.getCoordinates();
+    locationFromComponent: {
+      deep: true,
+      handler(value) {
+        const { latitude, longitude } = value;
+        if (latitude && longitude) {
+          this.updateGoogleLocation(
+            `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`
+          );
+          this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.VUE_APP_MAPS_API_KEY}&q=${latitude},${longitude}`;
+        }
       }
     }
   }
