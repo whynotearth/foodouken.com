@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center items-center fixed w-screen h-screen top-0 left-0 z-50"
+    class="flex justify-center items-center fixed w-screen h-screen top-0 left-0 z-50 bg-black bg-opacity-38"
     v-if="openModal"
   >
     <div class="bg-secondary shadow-24dp p-4 rounded-lg">
@@ -30,7 +30,7 @@
       </div>
       <div v-else-if="key === 'user-not-allowed'">
         <h6 class="tg-body-mobile bg-surface text-white text-opacity-54">
-          User not allowed go browser settings
+          You need to enable location sharing to use Foodouken.
         </h6>
         <div class="mt-8 tg-color-label-mobile flex justify-end">
           <Button
