@@ -119,11 +119,11 @@ export default {
     },
     useLocationProvider() {
       axios
-        .get('http://ip-api.com/json')
+        .get('https://freegeoip.app/json/')
         .then(response => {
-          if (response.data && response.data.lat && response.data.lon) {
-            const { lat, lon } = response.data;
-            this.onSuccess(lat, lon);
+          if (response.data && response.data.latitude && response.data.longitude) {
+            const { latitude, longitude } = response.data;
+            this.onSuccess(latitude, longitude);
           } else {
             throw new Error('Unable to retrive location');
           }
