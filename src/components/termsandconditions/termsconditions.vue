@@ -46,13 +46,14 @@
 }
 
 .modal-container {
-  width: 500px;
+  width: 60vh;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #437784;
   border-radius: 5px;
   transition: all 0.3s ease;
   font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
 }
 
 .modal-header h3 {

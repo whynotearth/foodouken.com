@@ -60,18 +60,22 @@
         </li>
       </ul>
     </section>
+    <termsconditions />
     <CreditFooter />
   </div>
 </template>
 
 <script>
 import CreditFooter from '@/components/CreditFooter.vue';
+import termsconditions from '@/components/termsandconditions/termsconditions.vue';
+
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
   components: {
-    CreditFooter
+    CreditFooter,
+    termsconditions
   },
   created() {
     this.fetchHomeData();
