@@ -29,7 +29,7 @@
         </div>
       </div>
       <div v-else-if="key === 'user-did-not-give-permission'">
-        <h5 class="tg-mobile-h3 mb-4">Opps!</h5>
+        <h5 class="tg-mobile-h3 mb-4">Oops!</h5>
         <h6 class="tg-body-mobile bg-surface text-white text-opacity-54">
           You need to enable location sharing to use Foodouken. <br />
           Visit your browser settings.
@@ -41,13 +41,13 @@
             padding="px-6 py-3"
             title="Find Out How"
             target="_blank"
-            :href="'https://www.computerhope.com/issues/ch001918.htm'"
+            :href="'https://docs.buddypunch.com/en/articles/919258-how-to-enable-location-services-for-chrome-safari-and-android-ios-devices-gps-setting'"
             @clicked="onCancel"
           />
         </div>
       </div>
       <div v-else-if="key === 'unable-to-retrive-address'" class="">
-        <h5 class="tg-mobile-h3 mb-4">Opps!</h5>
+        <h5 class="tg-mobile-h3 mb-4">Oops!</h5>
         <h6 class="tg-body-mobile bg-surface text-white text-opacity-54">
           There was a problem finding you. <br />
           Please enter address manually.
