@@ -62,7 +62,7 @@ const actions = {
     commit('changeFormsLoading', true);
     commit('removeToken', false);
     let address;
-    if (getters.getAddressOption === 'Use my location') {
+    if (getters.getAddressOption === 'Share location') {
       address = getters.getGoogleLocation;
     } else {
       address = `Apartment: ${getters.getApartment}, Floor: ${getters.getFloor}, Building: ${getters.getBuildingName}, Street: ${getters.getStreet}, Town: ${getters.getTown}, Parking: ${getters.getParking}`;
