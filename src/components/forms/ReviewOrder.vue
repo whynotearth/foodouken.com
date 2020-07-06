@@ -112,7 +112,7 @@ export default {
         type: '',
         value: ''
       };
-      if (this.getAddressOption === 'Use my location') {
+      if (this.getAddressOption === 'Share location') {
         address.type = 'link';
         address.value = this.getGoogleLocation;
         return address;

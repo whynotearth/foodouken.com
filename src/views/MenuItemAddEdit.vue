@@ -62,12 +62,14 @@
       title="Choose please!"
       buttonTitle="Add variation"
       v-model="item.variations"
+      ref="variations"
     />
     <hr class="border-white border-opacity-12 my-8" />
     <VariantManager
       title="Customise"
       buttonTitle="Add extras"
       v-model="item.attributes"
+      ref="attributes"
     />
     <hr class="border-white border-opacity-12 my-8" />
 
@@ -248,7 +250,9 @@ export default {
     },
     submit() {
       this.$v.$touch();
-      if (this.$v.$invalid) {
+      this.$refs.variations.$v.$touch();
+      this.$refs.attributes.$v.$touch();
+      if (this.$v.$invalid || this.$refs.variations.$v.$invalid || this.$refs.attributes.$v.$invalid) {
         this.submitError = true;
         return false;
       }
