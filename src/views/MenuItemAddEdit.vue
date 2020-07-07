@@ -56,6 +56,7 @@
         labelBg="bg-background"
       />
     </div>
+    <!--
     <hr class="border-white border-opacity-12 my-8" />
 
     <VariantManager
@@ -71,6 +72,7 @@
       v-model="item.attributes"
       ref="attributes"
     />
+    -->
     <hr class="border-white border-opacity-12 my-8" />
 
     <div class="mx-4 flex space-x-4">
@@ -112,7 +114,7 @@
 
 <script>
 import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
-import VariantManager from '@/components/menu/VariantManager.vue';
+// import VariantManager from '@/components/menu/VariantManager.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
@@ -128,7 +130,7 @@ export default {
   name: 'MenuItemAddEdit',
   components: {
     ImageUpload,
-    VariantManager,
+    // VariantManager,
     MaterialInput,
     TextArea,
     Dropdown,
@@ -250,9 +252,13 @@ export default {
     },
     submit() {
       this.$v.$touch();
-      this.$refs.variations.$v.$touch();
-      this.$refs.attributes.$v.$touch();
-      if (this.$v.$invalid || this.$refs.variations.$v.$invalid || this.$refs.attributes.$v.$invalid) {
+      // this.$refs.variations.$v.$touch();
+      // this.$refs.attributes.$v.$touch();
+      if (
+        this.$v.$invalid// ||
+        // this.$refs.variations.$v.$invalid ||
+        // this.$refs.attributes.$v.$invalid
+      ) {
         this.submitError = true;
         return false;
       }
