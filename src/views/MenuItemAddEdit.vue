@@ -255,7 +255,7 @@ export default {
       // this.$refs.variations.$v.$touch();
       // this.$refs.attributes.$v.$touch();
       if (
-        this.$v.$invalid// ||
+        this.$v.$invalid // ||
         // this.$refs.variations.$v.$invalid ||
         // this.$refs.attributes.$v.$invalid
       ) {
