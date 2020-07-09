@@ -62,6 +62,11 @@ export default {
     labelBg: {
       type: String
     }
+  },
+  filters: {
+    trim: function(string) {
+      return string.trim();
+    }
   }
 };
 </script>
