@@ -12,7 +12,7 @@
       :type="type"
       min="0"
       :step="step"
-      :value="value"
+      :value="value | trim"
       @blur="$emit('input', $event.target.value)"
       :pattern="pattern"
       :placeholder="placeholder || label"
@@ -65,6 +65,11 @@ export default {
     },
     labelBg: {
       type: String
+    }
+  },
+  filters: {
+    trim: function(string) {
+      return string.trim()
     }
   }
 };
