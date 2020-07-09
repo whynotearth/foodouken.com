@@ -12,7 +12,7 @@
       :type="type"
       min="0"
       :step="step"
-      :value="value"
+      :value="value | trim"
       @blur="$emit('input', $event.target.value)"
       :placeholder="placeholder || label"
     />
