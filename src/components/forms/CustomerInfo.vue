@@ -31,6 +31,8 @@
       <material-input
         v-model="$v.phone.$model"
         label="Phone number"
+        type="number"
+        pattern='pattern="[0-9]*'
         :error="$v.phone.$dirty && (!$v.phone.required || !$v.phone.minLength)"
       >
         <span

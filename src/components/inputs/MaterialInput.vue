@@ -14,6 +14,7 @@
       :step="step"
       :value="value"
       @blur="$emit('input', $event.target.value)"
+      :pattern="pattern"
       :placeholder="placeholder || label"
     />
     <label
@@ -42,6 +43,9 @@ export default {
       default: 'Label'
     },
     placeholder: {
+      type: String
+    },
+    pattern: {
       type: String
     },
     type: {
