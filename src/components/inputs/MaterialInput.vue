@@ -64,8 +64,8 @@ export default {
     }
   },
   filters: {
-    trim: function(string) {
-      return string.trim();
+    trim: function(value) {
+      return value.trim();
     }
   }
 };
