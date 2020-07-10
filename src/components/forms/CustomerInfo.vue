@@ -69,7 +69,7 @@ import TextArea from '@/components/inputs/TextArea.vue';
 import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
-import DuplicateAccount from '@/components/inputs/DuplicateAccount.vue';
+import DuplicateAccount from '@/components/DuplicateAccount.vue';
 
 export default {
   name: 'CustomerInfo',
@@ -161,11 +161,9 @@ export default {
         })
         .catch(error => {
           this.registerError = error.response.data[0].description;
-          if (error.response.status === 400) {
-            if (error.response.data[0].code == "DuplicateUserName"){
-              //this enables the DuplicateAccount componet on Customer Info
-              this.isDuplicate = true;
-            }
+          if (error.response.data[0].code == "DuplicateUserName"){
+            //this enables the DuplicateAccount component on CustomerInfo
+            this.isDuplicate = true;
           }
         });
     },

@@ -11,7 +11,7 @@
       class="flex justify-center items-center fixed w-screen h-screen top-0 left-0 z-50 bg-black bg-opacity-38"
     >
       <div class="bg-secondary shadow-24dp p-4 rounded-lg">
-        <div v-if="key === 'duplicate-account'">
+        <div>
           <h6 class="tg-body-mobile bg-surface text-white text-opacity-54">
             You already have an account <br />
             please login.
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     goToLogin() {
-      this.$router.push({ path: '/auth/login' });
+      this.$router.push({ name: 'LogIn' });
     },
     onCancel() {
        this.$emit('onCancel');
