@@ -69,3 +69,7 @@ For more detailed assistance Visit **[New contributor guide](https://github.com/
 
 - Branches will get auto deleted upon merge.
 - When using `text-opacity-{opacity}` utilities, make sure to provide a `text-{color}` class too, do not rely on base color.
+
+## License
+
+Licensed under the [GNU Affero General Public License v3.0](LICENSE).
