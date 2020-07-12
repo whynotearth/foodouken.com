@@ -23,7 +23,7 @@
   :center="{lat:locationFromComponent.latitude, lng:locationFromComponent.longitude}"
   :zoom="12"
   :options="mapOptions"
-  @bounds_changed="printAlert"
+  @center_changed="centerChanged"
   map-type-id="terrain"
 >
   <GmapMarker
@@ -232,9 +232,15 @@ export default {
       'updateGoogleLocation',
       'pageChange'
     ]),
-    printAlert(e) {
-      this.markers[0].position.lat = e.Za.i;
-          this.markers[0].position.lng  = e.Ua.i;
+     centerChanged(e) {
+
+
+    var coordString = e.toString().slice(1,-1).replace(/ /g,'');
+    var commaPos = coordString.indexOf(',');
+    var coordinatesLat = parseFloat(coordString.substring(0, commaPos));
+    var coordinatesLong = parseFloat(coordString.substring(commaPos + 1, coordString.length));
+    this.markers[0].position.lat = coordinatesLat;
+    this.markers[0].position.lng = coordinatesLong;
     },
     submit() {
       if (this.option !== 'Share location') {
