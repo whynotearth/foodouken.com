@@ -19,12 +19,20 @@
         v-if="embedUrl.length > 0"
         class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
       >
-        <iframe
-          class="w-full rounded border-none"
-          frameborder="0"
-          :src="embedUrl"
-          allowfullscreen
-        ></iframe>
+        <GmapMap class="w-64 h-64"
+  :center="{lat:locationFromComponent.latitude, lng:locationFromComponent.longitude}"
+  :zoom="12"
+  map-type-id="terrain"
+>
+  <GmapMarker
+    :key="index"
+    v-for="(m, index) in markers"
+    :position="m.position"
+    :clickable="true"
+    :draggable="true"
+    @click="center=m.position"
+  />
+</GmapMap>
       </div>
     </div>
     <div v-else>
@@ -108,7 +116,13 @@ export default {
       submitError: false,
       registerError: '',
       embedUrl: '',
-      locationFromComponent: {}
+      locationFromComponent: {},
+      markers: [{
+            position: {
+              lat: 10,
+              lng: 10
+            }
+          }]
     };
   },
   validations: {
@@ -240,6 +254,8 @@ export default {
       handler(value) {
         const { latitude, longitude } = value;
         if (latitude && longitude) {
+          this.markers[0].position.lat = latitude;
+          this.markers[0].position.lng  = longitude;
           this.updateGoogleLocation(
             `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`
           );
