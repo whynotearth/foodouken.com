@@ -19,23 +19,27 @@
         v-if="embedUrl.length > 0"
         class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
       >
+        <div class="flex -mt-5">
+          <RadioInput v-model="mapType" value="Map" class="flex-1/2 p-5" />
+          <RadioInput v-model="mapType" value="Satellite" class="flex-1/2 p-5" />
+        </div>
         <GmapMap class="w-full h-64 rounded border-none"
-  :center="{lat:locationFromComponent.latitude, lng:locationFromComponent.longitude}"
-  :zoom="12"
-  :options="mapOptions"
-  @center_changed="centerChanged"
-  map-type-id="terrain"
->
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in markers"
-    :position="m.position"
-    :clickable="true"
-    :draggable="true"
-    :maxZoom="12"
-    @click="center=m.position"
-  />
-</GmapMap>
+          :center="{lat:locationFromComponent.latitude, lng:locationFromComponent.longitude}"
+          :zoom="12"
+          :options="mapOptions"
+          @center_changed="centerChanged"
+          :map-type-id="mapTypeId"
+        >
+          <GmapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            :maxZoom="12"
+            @click="center=m.position"
+          />
+        </GmapMap>
       </div>
     </div>
     <div v-else>
@@ -121,11 +125,12 @@ export default {
       embedUrl: '',
       locationFromComponent: {},
       markers: [{
-            position: {
-              lat: 10,
-              lng: 10
-            }
+        position: {
+          lat: null,
+          lng: null
+        }
       }],
+      mapType: 'Map',
       mapOptions: {
         zoomControl: false,
         streetViewControl: false,
@@ -163,6 +168,13 @@ export default {
         this.updateAddressOption(value);
       }
     },
+    mapTypeId: function () {
+      if (this.mapType === 'Map'){
+        return 'terrain'
+      } else {
+        return 'satellite'
+      }
+    },
     town: {
       get() {
         return this.getTown;
@@ -189,7 +201,7 @@ export default {
     },
     buildingName: {
       get() {
-        return this.getBuildingName;
+        return this.getMapId;
       },
       set(value) {
         this.updateBuildingName(value);
@@ -233,7 +245,7 @@ export default {
       'updateGoogleLocation',
       'pageChange'
     ]),
-     centerChanged(e) {
+    centerChanged(e) {
        var coordString = e.toString().slice(1,-1).replace(/ /g,'');
        var commaPos = coordString.indexOf(',');
        var coordinatesLat = parseFloat(coordString.substring(0, commaPos));
@@ -275,9 +287,9 @@ export default {
           this.markers[0].position.lat = latitude;
           this.markers[0].position.lng  = longitude;
           this.updateGoogleLocation(
-            `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`
+            `https://www.google.com/maps/search/?api=1&query=${this.markers[0].position.lat},${this.markers[0].position.lng}`
           );
-          this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.VUE_APP_MAPS_API_KEY}&q=${latitude},${longitude}`;
+          this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.VUE_APP_MAPS_API_KEY}&q=${this.markers[0].position.lat},${this.markers[0].position.lng}`;
         }
       }
     }
