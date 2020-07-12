@@ -19,9 +19,11 @@
         v-if="embedUrl.length > 0"
         class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
       >
-        <GmapMap class="w-64 h-64"
+        <GmapMap class="w-full h-64 rounded border-none"
   :center="{lat:locationFromComponent.latitude, lng:locationFromComponent.longitude}"
   :zoom="12"
+  :options="mapOptions"
+  @bounds_changed="printAlert"
   map-type-id="terrain"
 >
   <GmapMarker
@@ -30,6 +32,7 @@
     :position="m.position"
     :clickable="true"
     :draggable="true"
+    :maxZoom="12"
     @click="center=m.position"
   />
 </GmapMap>
@@ -122,7 +125,13 @@ export default {
               lat: 10,
               lng: 10
             }
-          }]
+      }],
+      mapOptions: {
+        zoomControl: true,
+        streetViewControl: false,
+        fullscreenControlOptions: true,
+        disableDefaultUI: true,
+      }
     };
   },
   validations: {
@@ -223,6 +232,10 @@ export default {
       'updateGoogleLocation',
       'pageChange'
     ]),
+    printAlert(e) {
+      this.markers[0].position.lat = e.Za.i;
+          this.markers[0].position.lng  = e.Ua.i;
+    },
     submit() {
       if (this.option !== 'Share location') {
         this.$v.$touch();
