@@ -127,10 +127,11 @@ export default {
             }
       }],
       mapOptions: {
-        zoomControl: true,
+        zoomControl: false,
         streetViewControl: false,
         fullscreenControlOptions: true,
-        disableDefaultUI: true,
+        disableDefaultUI: false,
+        mapTypeControl: false,
       }
     };
   },
@@ -233,14 +234,12 @@ export default {
       'pageChange'
     ]),
      centerChanged(e) {
-
-
-    var coordString = e.toString().slice(1,-1).replace(/ /g,'');
-    var commaPos = coordString.indexOf(',');
-    var coordinatesLat = parseFloat(coordString.substring(0, commaPos));
-    var coordinatesLong = parseFloat(coordString.substring(commaPos + 1, coordString.length));
-    this.markers[0].position.lat = coordinatesLat;
-    this.markers[0].position.lng = coordinatesLong;
+       var coordString = e.toString().slice(1,-1).replace(/ /g,'');
+       var commaPos = coordString.indexOf(',');
+       var coordinatesLat = parseFloat(coordString.substring(0, commaPos));
+       var coordinatesLong = parseFloat(coordString.substring(commaPos + 1, coordString.length));
+       this.markers[0].position.lat = coordinatesLat;
+       this.markers[0].position.lng = coordinatesLong;
     },
     submit() {
       if (this.option !== 'Share location') {
