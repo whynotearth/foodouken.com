@@ -1,7 +1,7 @@
 <p align="center">
-    <img src="https://github.com/whynotearth/foodouken.com/blob/staging/src/assets/logo.png?raw=true" width="600" alt="Foodouken">
+    <img src="https://github.com/whynotearth/foodouken.com/blob/staging/src/assets/logo.png?raw=true" width="200" alt="Foodouken">
 </p>
-------
+
 # foodouken.com
 
 https://www.youtube.com/watch?v=NPwSwzjbK3c&t
