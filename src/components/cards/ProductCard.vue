@@ -9,7 +9,7 @@
       class="p-1/2 w-20 h-full object-cover rounded-l-lg"
     />
     <p class="my-auto">
-      <span class="mx-4 text-gray-400 my-1 inline-block text-lg">
+      <span class="mx-4 text-gray-400 my-1 inline-block text-lg break-words">
         {{ product.name }}
       </span>
       <br />
