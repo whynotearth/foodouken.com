@@ -78,9 +78,16 @@
                         @change="checkTimeDifference"
                       />
                     </transition>
-                    <div v-if="isClosingBeforeOpening" class="mt-10 text-error text-xs">
-                      <p>Closing time can't be before or as same as opening time!</p>
-                      <p>There should be at least 1 hour difference between them.</p>
+                    <div
+                      v-if="isClosingBeforeOpening"
+                      class="mt-10 text-error text-xs"
+                    >
+                      <p>
+                        Closing time can't be before or as same as opening time!
+                      </p>
+                      <p>
+                        There should be at least 1 hour difference between them.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -134,17 +141,34 @@ export default {
         await this.$emit('update:selectedDay', {
           ...this.selectedDay,
           openingTime: this.selectedDayOption.openingTime,
-          closingTime: this.selectedDayOption.closingTime === '00:00:00' ? '23:59:59' : this.selectedDayOption.closingTime
+          closingTime:
+            this.selectedDayOption.closingTime === '00:00:00'
+              ? '23:59:59'
+              : this.selectedDayOption.closingTime
         });
         this.$emit('closeModal');
       }
     },
     checkTimeDifference() {
-      const [openingHour, openingMinute] = this.selectedDayOption.openingTime.split(':').map(each => Number(each));
-      const [closingHour, closingMinute] = this.selectedDayOption.closingTime.split(':').map(each => Number(each));
+      const [
+        openingHour,
+        openingMinute
+      ] = this.selectedDayOption.openingTime
+        .split(':')
+        .map(each => Number(each));
+      const [
+        closingHour,
+        closingMinute
+      ] = this.selectedDayOption.closingTime
+        .split(':')
+        .map(each => Number(each));
 
-
-      this.isClosingBeforeOpening = closingHour - openingHour < 1 ? true : closingHour - openingHour === 1 && openingMinute > closingMinute ? true : false;
+      this.isClosingBeforeOpening =
+        closingHour - openingHour < 1
+          ? true
+          : closingHour - openingHour === 1 && openingMinute > closingMinute
+          ? true
+          : false;
     }
   },
   computed: {

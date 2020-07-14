@@ -41,7 +41,9 @@
             padding="px-6 py-3"
             title="Find Out How"
             target="_blank"
-            :href="'https://docs.buddypunch.com/en/articles/919258-how-to-enable-location-services-for-chrome-safari-and-android-ios-devices-gps-setting'"
+            :href="
+              'https://docs.buddypunch.com/en/articles/919258-how-to-enable-location-services-for-chrome-safari-and-android-ios-devices-gps-setting'
+            "
             @clicked="onCancel"
           />
         </div>
