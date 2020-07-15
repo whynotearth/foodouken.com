@@ -56,15 +56,15 @@ const state = {
     email: '',
     phone: '',
     description: '',
-    logoUrl: '',
-    isActive: ''
+    logoUrl: ''
   },
   selectedNotificationType: [...defaultNotificationTypes],
   selectedPaymentMethods: [...defaultPaymentMethods],
   businessHours: [...defaultBusinessHours],
   page: 1,
   notificationTypes,
-  paymentMethods
+  paymentMethods,
+  isActive: null
 };
 
 const getters = {
@@ -96,7 +96,7 @@ const getters = {
     return state.businessHours;
   },
   getIsActive(state) {
-    return state.businessInfo.isActive;
+    return state.isActive;
   }
 };
 
@@ -204,7 +204,7 @@ const mutations = {
     state.businessHours = payload;
   },
   updateIsActive(state, payload) {
-    state.businessInfo.isActive = payload;
+    state.isActive = payload;
   },
   resetCreateTenantForm(state) {
     state.businessInfo.name = '';

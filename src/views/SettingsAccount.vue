@@ -28,7 +28,7 @@
           <p class="text-base">
             Site Activation <br />
             <span class="text-sm font-light text-gray-500">
-              Current Status - {{ getStatus() }}
+              Current Status - {{ getStatus }}
             </span>
           </p>
           <BaseToggleSwitch
@@ -66,7 +66,10 @@ export default {
   computed: {
     ...mapGetters({
       getIsActive: 'tenant/getIsActive'
-    })
+    }),
+    getStatus() {
+      return this.getIsActive ? 'Active' : 'Draft Mode';
+    }
   },
   methods: {
     ...mapActions('tenant', ['fetchUserTenants', 'changeActiveStatus']),
@@ -89,14 +92,9 @@ export default {
         params: { tenantSlug: tenant.slug, tenant: tenant }
       });
     },
-    getStatus() {
-      return this.getIsActive ? 'Active' : 'Draft Mode';
-    },
     changeStatus(event, slug) {
       this.changeActiveStatus({ slug: slug, isActive: event })
-        .then(() => {
-          this.getStatus();
-        })
+        .then(() => {})
         .catch(error => {
           this.apiError = error.response.data.title
             ? error.response.data.title
