@@ -56,7 +56,8 @@ const state = {
     email: '',
     phone: '',
     description: '',
-    logoUrl: ''
+    logoUrl: '',
+    isActive: ''
   },
   selectedNotificationType: [...defaultNotificationTypes],
   selectedPaymentMethods: [...defaultPaymentMethods],
@@ -93,6 +94,9 @@ const getters = {
   },
   getBusinessHours(state) {
     return state.businessHours;
+  },
+  getIsActive(state) {
+    return state.businessInfo.isActive;
   }
 };
 
@@ -150,6 +154,24 @@ const actions = {
           }
         );
     });
+  },
+  changeActiveStatus({ commit }, payload) {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .post(`/companies/${companySlug}/tenants/${payload.slug}/active`, {
+          isActive: payload.isActive
+        })
+        .then(
+          response => {
+            commit('updateIsActive', payload.isActive);
+            resolve(response.data);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
   }
 };
 
@@ -180,6 +202,9 @@ const mutations = {
   },
   updateBusinessHours(state, payload) {
     state.businessHours = payload;
+  },
+  updateIsActive(state, payload) {
+    state.businessInfo.isActive = payload;
   },
   resetCreateTenantForm(state) {
     state.businessInfo.name = '';
