@@ -155,6 +155,11 @@ export default {
         }
       ]
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    if (to.params.isActive) {
+      next();
+    }
   }
 };
 </script>

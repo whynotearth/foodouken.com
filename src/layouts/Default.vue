@@ -14,9 +14,14 @@
           ✊
         </BaseSiteBanner>
         <div class="flex justify-end cursor-pointer mr-3">
-          <PlaceHolderAvatar v-if="isAuthenticated" @click="performRedirect" />
+          <img
+            class="w-10 h-10"
+            src="../assets/round-avatar.png"
+            v-if="isAuthenticated"
+            @click="performRedirect"
+          />
           <span
-            class="text-sm md:text-lg login-text"
+            class="text-sm md:text-lg text-button"
             v-else
             @click="performRedirect"
           >
@@ -35,14 +40,12 @@
 import Spinner from '@/components/Spinner.vue';
 import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
 import { mapGetters, mapActions } from 'vuex';
-import PlaceHolderAvatar from '@/assets/placeholder_avatar.svg';
 
 export default {
   name: 'DefaultLayout',
   components: {
     Spinner,
-    BaseSiteBanner,
-    PlaceHolderAvatar
+    BaseSiteBanner
   },
   data() {
     return {
@@ -76,9 +79,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.login-text {
-  color: #0e9ec2;
-}
-</style>
