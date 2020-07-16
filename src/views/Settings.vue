@@ -30,7 +30,7 @@ export default {
     ...mapActions('auth', ['logout']),
     signOut() {
       this.logout().then(() => {
-        this.$router.push({ name: 'Welcome' });
+        this.$router.push({ name: 'Home' });
       });
     }
   }
