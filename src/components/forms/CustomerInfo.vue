@@ -161,9 +161,11 @@ export default {
         })
         .catch(error => {
           this.registerError = error.response.data[0].description;
-          if (error.response.data[0].code == "DuplicateUserName"){
-            //this enables the DuplicateAccount component on CustomerInfo
-            this.isDuplicate = true;
+          if (error){
+            if (error.response.data[0].code == "DuplicateUserName"){
+              //this enables the DuplicateAccount component on CustomerInfo
+              this.isDuplicate = true;
+            }
           }
         });
     },
