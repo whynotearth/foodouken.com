@@ -29,7 +29,10 @@
           class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
         >
           <router-link
-            :to="{ name: 'Shop', params: { slug: tenant.slug } }"
+            :to="{
+              name: 'Shop',
+              params: { slug: tenant.slug, isActive: tenant.isActive }
+            }"
             class="bg-secondary rounded-md overflow-hidden flex flex-col  h-full"
           >
             <div
@@ -40,6 +43,11 @@
                 :src="tenant.logoUrl"
                 class="absolute w-full object-cover"
                 :alt="tenant.name"
+              />
+              <img
+                src="../assets/coming-soon.png"
+                v-if="!tenant.isActive"
+                class="absolute w-full h-full object-cover"
               />
             </div>
             <h3 class="font-bold text-white text-opacity-95 px-5 pt-5 text-xl">
@@ -88,6 +96,11 @@ export default {
       tenants: 'home/getTenants',
       loading: 'home/getLoading'
     })
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.params.isActive) {
+      next();
+    }
   },
   metaInfo() {
     return {
