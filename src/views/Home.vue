@@ -41,6 +41,11 @@
                 class="absolute w-full object-cover"
                 :alt="tenant.name"
               />
+              <img
+                src="../assets/coming-soon.png"
+                v-if="!tenant.isActive"
+                class="absolute w-full h-full object-cover"
+              />
             </div>
             <h3 class="font-bold text-white text-opacity-95 px-5 pt-5 text-xl">
               {{ tenant.name }}

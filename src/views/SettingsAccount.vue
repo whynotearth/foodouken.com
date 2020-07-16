@@ -23,6 +23,20 @@
             Foodouken
           </template>
         </MenuItem>
+        <hr class="hr-divider" />
+        <div class="flex justify-between py-2 px-1">
+          <p class="text-base">
+            Site Activation <br />
+            <span class="text-sm font-light text-gray-500">
+              Current Status - {{ getStatus }}
+            </span>
+          </p>
+          <BaseToggleSwitch
+            :value="tenant.isActive"
+            :key="tenant.slug"
+            @change="changeStatus($event, tenant.slug)"
+          />
+        </div>
       </div>
     </transition-group>
   </div>
@@ -30,11 +44,12 @@
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
-import { mapActions } from 'vuex';
+import BaseToggleSwitch from '@/components/inputs/BaseToggleSwitch.vue';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'SettingsAccount',
-  components: { MenuItem },
+  components: { MenuItem, BaseToggleSwitch },
   data() {
     return {
       apiError: '',
@@ -48,8 +63,17 @@ export default {
     this.tenants = [];
     this.apiError = '';
   },
+  computed: {
+    ...mapGetters({
+      getIsActive: 'tenant/getIsActive'
+    }),
+    getStatus() {
+      return this.getIsActive ? 'Active' : 'Draft Mode';
+    }
+  },
   methods: {
-    ...mapActions('tenant', ['fetchUserTenants']),
+    ...mapActions('tenant', ['fetchUserTenants', 'changeActiveStatus']),
+    ...mapMutations(['updateIsActive']),
     init() {
       this.fetchUserTenants()
         .then(tenants => {
@@ -67,7 +91,23 @@ export default {
         name: 'MenuCategoryList',
         params: { tenantSlug: tenant.slug, tenant: tenant }
       });
+    },
+    changeStatus(event, slug) {
+      this.changeActiveStatus({ slug: slug, isActive: event })
+        .then(() => {})
+        .catch(error => {
+          this.apiError = error.response.data.title
+            ? error.response.data.title
+            : 'Something went wrong, try again.';
+          throw error;
+        });
     }
   }
 };
 </script>
+
+<style scoped>
+.hr-divider {
+  background-color: #1f1f1f;
+}
+</style>
