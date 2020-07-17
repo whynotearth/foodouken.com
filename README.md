@@ -1,4 +1,10 @@
+<p align="center">
+    <img src="https://github.com/whynotearth/foodouken.com/blob/staging/src/assets/logo.png?raw=true" width="200" alt="Foodouken">
+</p>
+
 # foodouken.com
+
+https://www.youtube.com/watch?v=NPwSwzjbK3c&t
 
 In light of the recent COVID-19 Pandemic, my team and I were looking for a way to support the local economy. Subsequently, we are creating a food delivery app to not only increase business for local food dispensaries but to also provide those of you living in Siem Reap with an easy and convenient means to connect with nearby vendors. The app – Foodouken – is a free food delivery app which was made in Siem Reap, for Siem Reap as a means to help local bussiness and our personal friends, the service will remain free for the duration of the COVID-19 pandemic.
 
@@ -67,3 +73,7 @@ For more detailed assistance Visit **[New contributor guide](https://github.com/
 
 - Branches will get auto deleted upon merge.
 - When using `text-opacity-{opacity}` utilities, make sure to provide a `text-{color}` class too, do not rely on base color.
+
+## License
+
+Licensed under the [GNU Affero General Public License v3.0](LICENSE).

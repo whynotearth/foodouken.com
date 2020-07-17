@@ -5,7 +5,11 @@ export const settingRoutes = [
     component: () => import('@/views/Settings.vue'),
     meta: {
       layout: () => import('@/layouts/TenantLayout.vue'),
-      requiresAuth: true
+      requiresAuth: true,
+      appBar: {
+        title: 'Settings',
+        backRoute: { name: 'Home' }
+      }
     }
   },
   {
@@ -14,7 +18,11 @@ export const settingRoutes = [
     component: () => import('@/views/SettingsAccount.vue'),
     meta: {
       layout: () => import('@/layouts/TenantLayout.vue'),
-      requiresAuth: true
+      requiresAuth: true,
+      appBar: {
+        title: 'My Account',
+        backRoute: { name: 'Settings' }
+      }
     }
   },
   {
@@ -23,7 +31,11 @@ export const settingRoutes = [
     component: () => import('@/views/SettingsBusiness.vue'),
     meta: {
       layout: () => import('@/layouts/TenantLayout.vue'),
-      requiresAuth: true
+      requiresAuth: true,
+      appBar: {
+        title: 'My Business',
+        backRoute: { name: 'Settings' }
+      }
     }
   }
 ];

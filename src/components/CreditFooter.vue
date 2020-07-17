@@ -9,7 +9,7 @@
         <a
           class="underline"
           target="_blank"
-          href="https://patreon.com/paulchrisluke"
+          href="https://hub.foodouken.com/foodouken-open-beta-restaurant-sign-up"
           rel="noopener"
         >
           Foodouken.com

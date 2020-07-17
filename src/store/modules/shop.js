@@ -17,17 +17,20 @@ const getters = {
   getOrgData(state) {
     return state.orgData;
   },
-  getOpeningHours(state) {
-    return state.orgData.custom.openingHours;
+  getBusinessHours(state) {
+    return state.orgData.businessHours;
   },
   getLoading(state) {
     return state.loading;
   },
   getDeliveryFee(state) {
-    return state.orgData.custom.deliveryFee;
+    return state.orgData.deliveryFee;
   },
-  getTaxRate(state) {
-    return state.orgData.custom.taxRate;
+  getTaxRate() {
+    return 0;
+  },
+  getPaymentMethodTypes(state) {
+    return state.orgData.paymentMethodTypes;
   }
 };
 

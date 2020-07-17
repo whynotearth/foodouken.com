@@ -25,7 +25,7 @@ const state = {
       time: '',
       totalTime: ''
     },
-    paymentMethod: 'Cash'
+    paymentMethod: ''
   },
   page: 1,
   form: false,
@@ -60,8 +60,9 @@ const getters = {
 const actions = {
   register({ commit, getters }) {
     commit('changeFormsLoading', true);
+    commit('removeToken', false);
     let address;
-    if (getters.getAddressOption === 'Use my location') {
+    if (getters.getAddressOption === 'Share location') {
       address = getters.getGoogleLocation;
     } else {
       address = `Apartment: ${getters.getApartment}, Floor: ${getters.getFloor}, Building: ${getters.getBuildingName}, Street: ${getters.getStreet}, Town: ${getters.getTown}, Parking: ${getters.getParking}`;
@@ -92,6 +93,22 @@ const actions = {
       httpClient.get('/authentication/ping').then(
         response => {
           commit('changeFormsLoading', false);
+          resolve(response.data);
+        },
+        error => {
+          commit('changeFormsLoading', false);
+          reject(error);
+        }
+      );
+    });
+  },
+  logout({ commit }) {
+    commit('changeFormsLoading', true);
+    return new Promise((resolve, reject) => {
+      httpClient.post(`/authentication/logout`).then(
+        response => {
+          commit('changeFormsLoading', false);
+          commit('removeToken', false);
           resolve(response.data);
         },
         error => {
@@ -183,6 +200,9 @@ const mutations = {
   },
   setToken(state, payload) {
     httpClient.defaults.headers.common['authorization'] = 'Bearer ' + payload;
+  },
+  removeToken() {
+    delete httpClient.defaults.headers.common['authorization'];
   }
 };
 

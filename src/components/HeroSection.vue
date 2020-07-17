@@ -1,11 +1,14 @@
 <template>
   <div class="text-center">
     <div class="mt-8">
-      <img
-        :src="heroData.logo"
-        alt="Logo image"
-        class="h-48 w-48 m-auto rounded-full"
-      />
+      <transition name="fade">
+        <img
+          v-if="heroData.logoUrl"
+          :src="heroData.logoUrl"
+          alt="Logo image"
+          class="h-48 w-48 m-auto rounded-full"
+        />
+      </transition>
     </div>
     <h1 class="text-white md:text-6xl text-5xl font-bold">
       {{ heroData.name }}

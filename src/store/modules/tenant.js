@@ -1,11 +1,11 @@
 import { httpClient } from '@/services/httpClient';
 
 const notificationTypes = [
-  {
-    name: 'Text',
-    key: 'phone',
-    id: 'text'
-  },
+  // {
+  //   name: 'Text',
+  //   key: 'phone',
+  //   id: 'text'
+  // },
   // {
   //   name: 'Whatsapp',
   //   key: 'phone',
@@ -30,13 +30,13 @@ const paymentMethods = [
 ];
 
 const days = [
+  'Sunday',
   'Monday',
   'Tuesday',
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday',
-  'Sunday'
+  'Saturday'
 ];
 
 const defaultNotificationTypes = ['email'];
@@ -55,14 +55,16 @@ const state = {
     name: '',
     email: '',
     phone: '',
-    description: ''
+    description: '',
+    logoUrl: ''
   },
   selectedNotificationType: [...defaultNotificationTypes],
   selectedPaymentMethods: [...defaultPaymentMethods],
   businessHours: [...defaultBusinessHours],
   page: 1,
   notificationTypes,
-  paymentMethods
+  paymentMethods,
+  isActive: null
 };
 
 const getters = {
@@ -78,6 +80,9 @@ const getters = {
   getDescription(state) {
     return state.businessInfo.description;
   },
+  getLogo(state) {
+    return state.businessInfo.logoUrl;
+  },
   page(state) {
     return state.page;
   },
@@ -89,11 +94,14 @@ const getters = {
   },
   getBusinessHours(state) {
     return state.businessHours;
+  },
+  getIsActive(state) {
+    return state.isActive;
   }
 };
 
 const actions = {
-  createTenant({ getters, state }) {
+  createTenant({ getters }) {
     const registerData = {
       name: getters.getName,
       email: getters.getEmail,
@@ -102,7 +110,8 @@ const actions = {
       notificationTypes: getters.getSelectedNotificationTypes,
       paymentMethodTypes: getters.getSelectedPaymentMethods,
       companySlug: process.env.VUE_APP_COMPANY_SLUG,
-      businessHours: state.businessHours
+      businessHours: getters.getBusinessHours,
+      logoUrl: getters.getLogo
     };
 
     return new Promise((resolve, reject) => {
@@ -110,6 +119,52 @@ const actions = {
         .post(`/companies/${registerData.companySlug}/tenants`, registerData)
         .then(
           response => {
+            resolve(response.data);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  },
+  fetchUserTenants() {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient.get(`/companies/${companySlug}/tenants/mytenants`).then(
+        response => {
+          resolve(response.data);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+  },
+  userOwnsTenant(context, tenantSlug) {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .get(`/companies/${companySlug}/tenants/owns/${tenantSlug}`)
+        .then(
+          response => {
+            resolve(response.data);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  },
+  changeActiveStatus({ commit }, payload) {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .post(`/companies/${companySlug}/tenants/${payload.slug}/active`, {
+          isActive: payload.isActive
+        })
+        .then(
+          response => {
+            commit('updateIsActive', payload.isActive);
             resolve(response.data);
           },
           error => {
@@ -133,6 +188,9 @@ const mutations = {
   updateDescription(state, payload) {
     state.businessInfo.description = payload;
   },
+  updateLogo(state, payload) {
+    state.businessInfo.logoUrl = payload;
+  },
   pageChange(state, payload) {
     state.page = payload;
   },
@@ -145,11 +203,15 @@ const mutations = {
   updateBusinessHours(state, payload) {
     state.businessHours = payload;
   },
+  updateIsActive(state, payload) {
+    state.isActive = payload;
+  },
   resetCreateTenantForm(state) {
     state.businessInfo.name = '';
     state.businessInfo.email = '';
     state.businessInfo.phone = '';
     state.businessInfo.description = '';
+    state.businessInfo.logoUrl = '';
     state.selectedNotificationType = defaultNotificationTypes;
     state.paymentMethodTypes = defaultPaymentMethods;
     state.businessHours = defaultBusinessHours;

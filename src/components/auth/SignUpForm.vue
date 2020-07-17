@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen w-screen flex items-stretch justify-center items-center">
-    <div class="h-full w-full flex flex-col justify-between">
+  <div class="">
+    <div class="min-h-screen w-full flex flex-col justify-between">
       <div>
         <StepperTop
           class="clear-margin"
@@ -17,6 +17,11 @@
               ></component>
             </keep-alive>
           </transition>
+          <div v-if="errors" class="px-4 text-error text-xs">
+            <div v-for="(error, key) in errors" :key="key">
+              <p v-for="(detail, key) in error" :key="key">{{ detail }}</p>
+            </div>
+          </div>
         </div>
       </div>
       <StepperBottom
@@ -81,7 +86,8 @@ export default {
           step: 'payment-methods',
           name: 'Payment Methods'
         }
-      ]
+      ],
+      errors: null
     };
   },
   computed: {
@@ -90,8 +96,16 @@ export default {
       return this.navigation[this.page - 1].step;
     }
   },
+  created() {
+    if (
+      !this.$route.query.signUpStarted &&
+      this.$route.params.step !== 'business-info'
+    ) {
+      this.$router.replace({ params: { step: 'business-info' } });
+    }
+  },
   methods: {
-    ...mapMutations('tenant', ['pageChange']),
+    ...mapMutations('tenant', ['pageChange', 'resetCreateTenantForm']),
     ...mapActions('tenant', ['createTenant']),
     ...mapActions('auth', ['ping']),
     previousStep() {
@@ -125,7 +139,9 @@ export default {
             params: { slug: res }
           });
         })
-        .catch(() => {});
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
     }
   },
   watch: {

@@ -25,6 +25,13 @@
     </div>
     <hr class="border-white border-opacity-12 my-8" />
 
+    <div class="my-8 mx-4 text-sm text-red-600">
+      <span v-if="$v.$invalid && submitError">
+        Please fill out the form properly.
+      </span>
+      <BaseAPIErrorDisplay :error="apiError" />
+    </div>
+
     <div class="px-4 mb-8 max-w-sm mx-auto">
       <Button
         title="Save category"
@@ -41,6 +48,8 @@ import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Button from '@/components/Button';
+import BaseAPIErrorDisplay from '@/components/BaseAPIErrorDisplay';
+
 import { mapActions } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
 import { sleep } from '@/helpers.js';
@@ -51,7 +60,8 @@ export default {
     ImageUpload,
     MaterialInput,
     TextArea,
-    Button
+    Button,
+    BaseAPIErrorDisplay
   },
   validations: {
     category: {
@@ -68,11 +78,12 @@ export default {
         categoryId: this.$route.params.categoryId
       },
       submitError: false,
-      apiError: '',
+      apiError: null,
       category: {
         name: '',
         description: '',
-        imageUrl: ''
+        imageUrl:
+          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png'
       }
     };
   },
@@ -88,10 +99,10 @@ export default {
     images: {
       //FIXME: ImageUpload component should handle strings, the solution below is a temporary fix.
       get() {
-        return [{ url: this.category.imageUrl }];
+        return [{ secure_url: this.category.imageUrl }];
       },
       set(value) {
-        this.category.imageUrl = value[0].url;
+        this.category.imageUrl = value[0] ? value[0].secure_url : '';
       }
     }
   },
@@ -110,6 +121,9 @@ export default {
             this.category = category;
           })
           .catch(error => {
+            this.apiError = error.response.data
+              ? error.response.data
+              : 'Failed to fetch category details, please refresh.';
             throw error;
           });
       }
@@ -142,10 +156,7 @@ export default {
           if (user.isAuthenticated) {
             let payload = {
               tenantSlug: this.params.tenantSlug,
-              category: {
-                tenantSlug: this.params.tenantSlug,
-                ...this.category
-              }
+              category: this.category
             };
             this.edit ? this.editItem(payload) : this.newItem(payload);
           }
@@ -161,8 +172,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });
@@ -174,8 +185,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });

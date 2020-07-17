@@ -11,7 +11,7 @@
       >
         <Close />
       </button>
-      <img class="my-auto" :src="image.url" alt="image" />
+      <img class="my-auto" :src="image.secure_url" alt="image" />
       <button
         class="p-4 absolute right-0 bottom-0"
         @click.prevent="deleteImage"

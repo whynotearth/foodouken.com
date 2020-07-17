@@ -67,6 +67,24 @@ const mutations = {
   },
   loadTenants(state, payload) {
     state.tenants = payload;
+    /* Start Impression Datalayer for future use */
+    var impressionArr = [];
+    payload.forEach(function (value, i) {
+       impressionArr.push({
+          id: value.slug,
+          name: value.name,
+          list: "homepage",
+          position: i+1
+      });
+    });
+    window.dataLayer.push({
+      'ecommerce': {
+        'currencyCode': 'USD',
+        'impressions': [
+          impressionArr
+        ]
+      }
+    });
   },
   changeHomeLoading(state, payload) {
     state.loading = payload;

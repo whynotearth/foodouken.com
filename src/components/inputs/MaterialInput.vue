@@ -11,8 +11,10 @@
       :id="idName"
       :type="type"
       min="0"
+      :step="step"
       :value="value"
       @blur="$emit('input', $event.target.value)"
+      :pattern="pattern"
       :placeholder="placeholder || label"
     />
     <label
@@ -43,9 +45,16 @@ export default {
     placeholder: {
       type: String
     },
+    pattern: {
+      type: String
+    },
     type: {
       type: String,
       default: 'text'
+    },
+    step: {
+      type: String,
+      default: '1'
     },
     error: {
       default: Boolean

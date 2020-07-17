@@ -38,14 +38,15 @@
         label="Price"
         labelBg="bg-background"
         type="number"
+        step="0.01"
         :error="$v.item.price.$error"
       >
         <template v-if="$v.item.price.$error">
           <span v-if="!$v.item.price.required" class="text-red-600 text-xs">
             Price is required.
           </span>
-          <span v-if="!$v.item.price.numeric" class="text-red-600 text-xs">
-            Price should be a number.
+          <span v-if="!$v.item.price.decimal" class="text-red-600 text-xs">
+            Price should be a valid number.
           </span>
         </template>
       </MaterialInput>
@@ -55,19 +56,31 @@
         labelBg="bg-background"
       />
     </div>
+    <!--
     <hr class="border-white border-opacity-12 my-8" />
 
     <VariantManager
       title="Choose please!"
       buttonTitle="Add variation"
       v-model="item.variations"
+      ref="variations"
     />
     <hr class="border-white border-opacity-12 my-8" />
     <VariantManager
       title="Customise"
       buttonTitle="Add extras"
       v-model="item.attributes"
+      ref="attributes"
     />
+    -->
+    <hr class="border-white border-opacity-12 my-8" />
+
+    <div class="mx-4 flex space-x-4">
+      <BaseToggleSwitch v-model="item.isAvailable" />
+      <span class="tg-h3-mobile text-white text-opacity-54 my-6 inline-block">
+        Product available
+      </span>
+    </div>
     <hr class="border-white border-opacity-12 my-8" />
 
     <!-- <div class="mx-4">
@@ -81,14 +94,13 @@
       />
     </div>
     <hr class="border-white border-opacity-12 my-8" /> -->
-    <div class="my-8 mx-4 text-sm text-red-600">
+    <div class="my-8 mx-4 text-sm text-error">
       <span v-if="$v.$invalid && submitError">
         Please fill out the form properly.
       </span>
-      <span v-if="apiError">
-        {{ apiError }}
-      </span>
+      <BaseAPIErrorDisplay :error="apiError" />
     </div>
+
     <div class="px-4 mb-8 max-w-sm mx-auto">
       <Button
         title="Save item"
@@ -102,24 +114,29 @@
 
 <script>
 import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
-import VariantManager from '@/components/menu/VariantManager.vue';
+// import VariantManager from '@/components/menu/VariantManager.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
+import BaseToggleSwitch from '@/components/inputs/BaseToggleSwitch';
+import BaseAPIErrorDisplay from '@/components/BaseAPIErrorDisplay';
+
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
-import { required, numeric } from 'vuelidate/lib/validators';
+import { required, decimal } from 'vuelidate/lib/validators';
 
 export default {
   name: 'MenuItemAddEdit',
   components: {
     ImageUpload,
-    VariantManager,
+    // VariantManager,
     MaterialInput,
     TextArea,
     Dropdown,
-    Button
+    Button,
+    BaseToggleSwitch,
+    BaseAPIErrorDisplay
   },
   validations: {
     item: {
@@ -128,7 +145,7 @@ export default {
       },
       price: {
         required,
-        numeric
+        decimal
       }
     }
   },
@@ -147,11 +164,13 @@ export default {
         description: '',
         variations: [],
         attributes: [],
-        imageUrl: ''
+        imageUrl:
+          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png',
+        isAvailable: true
         // inventory: ''
       },
       submitError: false,
-      apiError: ''
+      apiError: null
     };
   },
   created() {
@@ -164,10 +183,10 @@ export default {
     ...mapGetters('menu', ['getCategories']),
     images: {
       get() {
-        return [{ url: this.item.imageUrl }];
+        return [{ secure_url: this.item.imageUrl }];
       },
       set(value) {
-        this.item.imageUrl = value[0].url;
+        this.item.imageUrl = value[0] ? value[0].secure_url : '';
       }
     }
   },
@@ -185,16 +204,6 @@ export default {
       // TODO: Add loader till all requests are finished loading
       this.edit = this.itemId !== undefined ? true : false;
       this.fetchTenantCategories(this.tenantSlug);
-      this.fetchTenantCategoryById({
-        tenantSlug: this.tenantSlug,
-        categoryId: this.categoryId
-      })
-        .then(category => {
-          this.category = category;
-        })
-        .catch(error => {
-          throw error;
-        });
       if (this.edit) {
         this.fetchTenantCategoryItemById({
           categoryId: this.categoryId,
@@ -202,9 +211,23 @@ export default {
         })
           .then(item => {
             this.item = item;
+            this.category = item.category;
           })
           .catch(error => {
-            this.apiError = error.response.data;
+            this.apiError = error.response.data
+              ? error.response.data
+              : 'Failed to fetch item details, please refresh.';
+            throw error;
+          });
+      } else {
+        this.fetchTenantCategoryById({
+          tenantSlug: this.tenantSlug,
+          categoryId: this.categoryId
+        })
+          .then(category => {
+            this.category = category;
+          })
+          .catch(error => {
             throw error;
           });
       }
@@ -229,7 +252,13 @@ export default {
     },
     submit() {
       this.$v.$touch();
-      if (this.$v.$invalid) {
+      // this.$refs.variations.$v.$touch();
+      // this.$refs.attributes.$v.$touch();
+      if (
+        this.$v.$invalid // ||
+        // this.$refs.variations.$v.$invalid ||
+        // this.$refs.attributes.$v.$invalid
+      ) {
         this.submitError = true;
         return false;
       }
@@ -238,10 +267,9 @@ export default {
           if (user.isAuthenticated) {
             // this.cleanFormData();
             let payload = {
-              categoryId: this.categoryId,
+              categoryId: this.category.id,
               product: this.item
             };
-            delete payload.product.image;
             this.edit ? this.editItem(payload) : this.newItem(payload);
           }
         })
@@ -256,8 +284,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });
@@ -269,8 +297,8 @@ export default {
           this.onSuccessSubmit();
         })
         .catch(error => {
-          this.apiError = error.response.data.title
-            ? error.response.data.title
+          this.apiError = error.response.data
+            ? error.response.data
             : 'Something went wrong, try again.';
           throw error;
         });

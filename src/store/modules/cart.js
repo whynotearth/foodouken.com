@@ -43,7 +43,7 @@ const actions = {
   incrementCartProduct({ commit }, product) {
     commit('incrementCartProduct', product);
   },
-  decrementCartProduct({ commit }, product) {
+  decrementCartProduct({ commit, state }, product) {
     let cartItem = state.cartItems.filter(ci => ci.product === product)[0];
     if (!cartItem || cartItem.count < 1) {
       return;
@@ -54,7 +54,7 @@ const actions = {
       commit('decrementCartProduct', product);
     }
   },
-  removeCartProduct({ commit }, product) {
+  removeCartProduct({ commit, state }, product) {
     let cartItem = state.cartItems.filter(ci => ci.product === product)[0];
     if (!cartItem || cartItem.count < 1) {
       return;
@@ -105,7 +105,7 @@ const mutations = {
   },
   decrementCartProduct(state, product) {
     let cartItem = state.cartItems.filter(ci => ci.product == product)[0];
-    cartItem.count--;
+    cartItem.count = cartItem.count - 1;
   },
   removeCartProduct(state, product) {
     state.cartItems = state.cartItems.filter(ci => ci.product != product);

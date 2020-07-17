@@ -2,7 +2,7 @@
   <div class="h-full">
     <hero-section :heroData="orgData" />
     <hr class="my-8 border-gray-700" />
-    <section class="flex lg:flex-row flex-col-reverse my-4 min-h-screen">
+    <section class="flex lg:flex-row flex-col-reverse my-4 lg:min-h-screen">
       <div class="lg:w-8/12 lg:border-r border-white lg:pr-8">
         <category-holder />
         <transition name="fade" mode="out-in">
@@ -73,6 +73,7 @@ export default {
   },
   created() {
     this.fetchShopData(this.$route.params.slug);
+    this.resetCartItems();
   },
   methods: {
     triggerFormWrapper(value) {
@@ -97,7 +98,8 @@ export default {
       this.$refs.checkoutFormContainer.scrollIntoView();
     },
     ...mapActions('shop', ['fetchShopData']),
-    ...mapMutations('form', ['triggerForm'])
+    ...mapMutations('form', ['triggerForm']),
+    ...mapMutations('cart', ['resetCartItems'])
   },
   computed: {
     ...mapGetters({
@@ -128,7 +130,7 @@ export default {
           property: 'og:url',
           content: window.location.host + this.$route.fullPath
         },
-        { property: 'og:image', content: this.orgData.logo },
+        { property: 'og:image', content: this.orgData.logoUrl },
         {
           property: 'og:description',
           content: this.orgData.description
@@ -140,11 +142,11 @@ export default {
           name: 'twitter:description',
           content: this.orgData.description
         },
-        { name: 'twitter:image', content: this.orgData.logo },
+        { name: 'twitter:image', content: this.orgData.logoUrl },
         // Google / Schema.org markup:
         { itemprop: 'name', content: this.orgData.name },
         { itemprop: 'description', content: this.orgData.description },
-        { itemprop: 'image', content: this.orgData.logo }
+        { itemprop: 'image', content: this.orgData.logoUrl }
       ],
       script: [
         {
@@ -153,6 +155,11 @@ export default {
         }
       ]
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    if (to.params.isActive) {
+      next();
+    }
   }
 };
 </script>

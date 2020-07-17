@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div class="grid xs:grid-cols-1 sm:grid-cols-2 gap-6">
+  <div class="grid xs:grid-cols-1 sm:grid-cols-2 gap-6">
+    <template v-for="product in getProducts">
       <product-card
+        v-if="product.isAvailable"
         :product="product"
-        v-for="product in getProducts"
         :key="product.id"
         @productClicked="changeSelectedProduct(product)"
       />
-    </div>
+    </template>
   </div>
 </template>
 
@@ -43,5 +43,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

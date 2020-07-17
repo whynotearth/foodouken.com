@@ -25,6 +25,7 @@
 <script>
 import AuthButtons from '@/components/auth/AuthButtons';
 import foodoukenLogo from '@/assets/foodouken.png';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'LogIn',
@@ -35,6 +36,21 @@ export default {
     return {
       foodoukenLogo
     };
+  },
+  async created() {
+    if (this.$route.query.token) {
+      await this.updateToken(this.$route.query.token);
+    }
+
+    this.ping().then(response => {
+      if (response.isAuthenticated) {
+        this.$router.push({ name: 'Account' });
+      }
+    });
+  },
+  methods: {
+    ...mapActions('auth', ['ping']),
+    ...mapMutations('auth', ['updateToken'])
   }
 };
 </script>

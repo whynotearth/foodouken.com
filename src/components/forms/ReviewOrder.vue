@@ -112,7 +112,7 @@ export default {
         type: '',
         value: ''
       };
-      if (this.getAddressOption === 'Use my location') {
+      if (this.getAddressOption === 'Share location') {
         address.type = 'link';
         address.value = this.getGoogleLocation;
         return address;
@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     ...mapMutations('form', ['pageChange']),
-    ...mapActions('form', ['ping', 'register', 'submit']),
+    ...mapActions('form', ['ping', 'register', 'submit', 'logout']),
     pageChangeWrapper(page) {
       this.$emit('pageChange', page);
       this.pageChange(page);
@@ -180,6 +180,7 @@ export default {
           this.submit(formData)
             .then(() => {
               this.pageChangeWrapper(6);
+              this.logout();
             })
             .catch(() => {
               this.orderError = 'Something went wrong, please try again';
