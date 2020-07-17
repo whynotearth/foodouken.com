@@ -202,7 +202,11 @@ export default {
     goBack() {
       this.$router.push({
         name: 'Shop',
-        params: { slug: this.$route.params.slug }
+        params: {
+          slug: this.$route.params.slug,
+          isActive: true,
+          fromShopDetail: true
+        }
       });
     }
   },

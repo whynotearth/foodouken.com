@@ -13,7 +13,7 @@ import VuexPersistence from 'vuex-persist';
 
 const vuexSession = new VuexPersistence({
   storage: window.sessionStorage,
-  modules: ['auth', 'tenant'],
+  modules: ['auth', 'tenant', 'cart'],
   key: 'vuexSessionStore'
 });
 
