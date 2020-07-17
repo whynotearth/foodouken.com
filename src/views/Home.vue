@@ -24,12 +24,11 @@
         class="flex flex-wrap w-full items-stretch justify-center h-full mx-auto"
       >
         <li
-          v-for="tenant in tenants"
+          v-for="tenant in activeTenants"
           :key="tenant.slug"
           class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
         >
           <router-link
-            v-if="tenant.isActive"
             :to="{
               name: 'Shop',
               params: { slug: tenant.slug, isActive: tenant.isActive }
@@ -38,9 +37,21 @@
           >
             <tenant-card :tenant="tenant" />
           </router-link>
+        </li>
+      </ul>
+    </section>
+    <hr class="my-8 border-gray-700" />
+    <section class="flex my-4 lg:max-w-3xl xl:max-w-5xl mx-auto">
+      <ul
+        class="flex flex-wrap w-full items-stretch justify-center h-full mx-auto"
+      >
+        <li
+          v-for="tenant in inActiveTenants"
+          :key="tenant.slug"
+          class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
+        >
           <div
-            v-else
-            class="bg-secondary rounded-md overflow-hidden flex flex-col  h-full cursor-pointer"
+            class="bg-secondary rounded-md overflow-hidden flex flex-col  h-full"
           >
             <tenant-card :tenant="tenant" />
           </div>
@@ -76,7 +87,13 @@ export default {
       home: 'home/getHomeData',
       tenants: 'home/getTenants',
       loading: 'home/getLoading'
-    })
+    }),
+    activeTenants() {
+      return this.tenants.filter(el => el.isActive);
+    },
+    inActiveTenants() {
+      return this.tenants.filter(el => !el.isActive);
+    }
   },
   metaInfo() {
     return {

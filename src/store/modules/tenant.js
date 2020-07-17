@@ -64,7 +64,7 @@ const state = {
   page: 1,
   notificationTypes,
   paymentMethods,
-  isActive: null
+  isActive: false
 };
 
 const getters = {
@@ -127,11 +127,12 @@ const actions = {
         );
     });
   },
-  fetchUserTenants() {
+  fetchUserTenants({ commit }) {
     let companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
       httpClient.get(`/companies/${companySlug}/tenants/mytenants`).then(
         response => {
+          commit('updateIsActive', response.data[0].isActive);
           resolve(response.data);
         },
         error => {
