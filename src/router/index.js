@@ -45,19 +45,19 @@ router.beforeEach((to, from, next) => {
     });
 });
 
-router.options.scrollBehavior = function(to, from , savedPosition) {
+router.options.scrollBehavior = function(to, from, savedPosition) {
   if (savedPosition) {
     //if going to the previous page with the back button or left swipe on mobile you are on the content you were last viewing
-    return savedPosition
- }
- if (to.hash) {
-   //prevent the page from scrolling up when someone clicks "Order Now"
-   if (document.URL.indexOf("/shop/") != -1) {
-     //if were not on the /shop/ page then scroll to top of page on next view
-     return { selector: to.hash }
-   }
+    return savedPosition;
   }
-  return { x: 0, y: 0 }
-}
+  if (to.hash) {
+    //prevent the page from scrolling up when someone clicks "Order Now"
+    if (document.URL.indexOf('/shop/') != -1) {
+      //if were not on the /shop/ page then scroll to top of page on next view
+      return { selector: to.hash };
+    }
+  }
+  return { x: 0, y: 0 };
+};
 
 export default router;
