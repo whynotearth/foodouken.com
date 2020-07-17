@@ -5,6 +5,7 @@
         v-if="product.isAvailable"
         :product="product"
         :key="product.id"
+        @productClicked="changeSelectedProduct(product)"
       />
     </template>
   </div>
@@ -19,8 +20,26 @@ export default {
   components: {
     ProductCard
   },
+  data() {
+    return {
+      selectedProduct: null
+    };
+  },
   computed: {
-    ...mapGetters('category', ['getProducts'])
+    ...mapGetters('category', ['getSelectedCategory', 'getProducts'])
+  },
+  methods: {
+    changeSelectedProduct(product) {
+      this.selectedProduct = product;
+      this.$router.push({
+        name: 'ShopProductDetail',
+        params: {
+          slug: this.$route.params.slug,
+          categoryId: this.getSelectedCategory.id,
+          productId: product.id
+        }
+      });
+    }
   }
 };
 </script>

@@ -34,10 +34,12 @@ export default {
     Category
   },
   created() {
-    this.fetchCategories(this.$route.params.slug).then(categories => {
-      if (categories && categories.length > 0) {
-        this.fetchCategoryProducts(categories[0].id);
-      }
+    this.fetchCategories(this.$route.params.slug).then(() => {
+      this.fetchCategoryProducts(
+        this.getSelectedCategory && this.getSelectedCategory.id
+          ? this.getSelectedCategory.id
+          : this.getCategories[0].id
+      );
     });
   },
   methods: {

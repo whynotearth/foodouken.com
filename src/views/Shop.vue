@@ -73,7 +73,9 @@ export default {
   },
   created() {
     this.fetchShopData(this.$route.params.slug);
-    this.resetCartItems();
+    if (!this.$route.params.fromShopDetail) {
+      this.resetCartItems();
+    }
   },
   methods: {
     triggerFormWrapper(value) {

@@ -1,9 +1,13 @@
 <template>
   <div class="flex items-center text-gray-500 font-bold">
-    <transition name="fade">
-      <div class="flex">
+    <transition name="fade" mode="in-out" :duration="2000">
+      <div
+        class="cursor-pointer rounded-full h-5 w-5 p-1 border-2 border-gray-500 inline-block align-baseline"
+        @click="increment"
+        v-if="value === 0"
+      ></div>
+      <div class="flex" v-else>
         <div
-          v-show="value !== 0"
           class="cursor-pointer w-6 select-none"
           @click="decrement"
           :class="buttonClasses"
@@ -15,7 +19,7 @@
             draggable="false"
           />
         </div>
-        <div class="" v-show="value !== 0">
+        <div class="">
           <input
             type="number"
             name="quantity"
@@ -26,15 +30,20 @@
             :class="counterClasses"
           />
         </div>
+        <div
+          class="cursor-pointer w-6 select-none"
+          @click="increment"
+          :class="buttonClasses"
+        >
+          <img
+            :src="plus"
+            alt="+"
+            class="pointer-events-none"
+            draggable="false"
+          />
+        </div>
       </div>
     </transition>
-    <div
-      class="cursor-pointer w-6 select-none"
-      @click="increment"
-      :class="buttonClasses"
-    >
-      <img :src="plus" alt="+" class="pointer-events-none" draggable="false" />
-    </div>
   </div>
 </template>
 

@@ -3,13 +3,18 @@ import { httpClient } from '@/services/httpClient';
 const state = {
   menuItems: [],
   categories: [],
-  loading: false
+  loading: false,
+  menuItem: null,
+  selectedCategoryId: null
 };
 
 const getters = {
   getMenuItems: state => state.menuItems,
   getCategories: state => state.categories,
-  getMenuLoading: state => state.loading
+  getMenuLoading: state => state.loading,
+  getMenuItem: state => state.menuItem,
+  getSelectedCategory: state =>
+    state.categories.find(category => category.id === state.selectedCategoryId)
 };
 
 const actions = {
@@ -102,6 +107,7 @@ const actions = {
         response => {
           commit('updateMenuItems', response.data);
           commit('changeMenuLoading', false);
+          commit('updateSelectedCategoryId', categoryId);
           resolve(response.data);
         },
         error => {
@@ -119,6 +125,7 @@ const actions = {
         .then(
           response => {
             commit('changeMenuLoading', false);
+            commit('updateMenuItem', response.data);
             resolve(response.data);
           },
           error => {
@@ -188,6 +195,12 @@ const mutations = {
   },
   changeMenuLoading(state, payload) {
     state.loading = payload;
+  },
+  updateMenuItem(state, payload) {
+    state.menuItem = payload;
+  },
+  updateSelectedCategoryId(state, payload) {
+    state.selectedCategoryId = payload;
   }
 };
 
