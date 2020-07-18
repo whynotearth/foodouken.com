@@ -3,9 +3,6 @@
     <slot name="image">
       <img class="w-40 m-auto mb-6 md:w-64" :src="Hadooken" />
     </slot>
-    <!-- <h1
-      class="mb-4 text-2xl font-bold tracking-wider text-gray-300 md:text-4xl"
-    > -->
     <h1 class="mb-4 tg-h1-mobile">
       <slot name="heading"></slot>
     </h1>

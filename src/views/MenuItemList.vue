@@ -8,7 +8,7 @@
       <template #action>
         <RouterLink :to="{ name: 'MenuItemAdd' }" v-slot="{ navigate }">
           <Button
-            class="px-6 uppercase bg-blue-500 rounded-full cursor-pointer "
+            class="px-6 uppercase bg-blue-500 rounded-full cursor-pointer"
             isRipple
             @click="navigate"
           >

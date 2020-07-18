@@ -13,7 +13,7 @@
             @click="navigate"
           >
             <div class="flex items-center">
-              <span>
+              <span class="text-3xl">
                 +
               </span>
               <span class="flex-grow px-6 font-light">
