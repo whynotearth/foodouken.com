@@ -1,30 +1,59 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
-    <span v-if="apiError" class="my-8 mx-4 text-sm text-red-600">
-      {{ apiError }}
-    </span>
-    <MenuItem
-      v-for="category in getCategories"
-      :key="category.id"
-      :name="category.name"
-      :image="category.imageUrl"
-      :options="menuItemOptions"
-      @clicked="showItems(category)"
-      @edit="editCategory(category.id)"
-      @delete="deleteCategory(category)"
-    />
+  <div>
+    <MenuEmptyState v-if="showEmptyState">
+      <template #heading>Manage Your Menu</template>
+      <template #description>
+        Update your menu categories here.
+      </template>
+      <template #action>
+        <RouterLink :to="{ name: 'MenuCategoryAdd' }" v-slot="{ navigate }">
+          <Button
+            class="p-2 uppercase bg-blue-500 rounded-full cursor-pointer ripple"
+            @click="navigate"
+          >
+            <div class="flex items-center">
+              <span>
+                <img class="w-8" :src="Plus" />
+              </span>
+              <span class="flex-grow px-6 font-light">
+                Add New Menu Items
+              </span>
+            </div>
+          </Button>
+        </RouterLink>
+      </template>
+    </MenuEmptyState>
+    <div v-else class="grid grid-cols-1 gap-2 my-4 md:grid-cols-3">
+      <span v-if="apiError" class="mx-4 my-8 text-sm text-red-600">
+        {{ apiError }}
+      </span>
+
+      <MenuItem
+        v-for="category in getCategories"
+        :key="category.id"
+        :name="category.name"
+        :image="category.imageUrl"
+        :options="menuItemOptions"
+        @clicked="showItems(category)"
+        @edit="editCategory(category.id)"
+        @delete="deleteCategory(category)"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
+import MenuEmptyState from '@/components/menu/MenuEmptyState.vue';
+import Plus from '@/assets/plus.png';
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { sleep } from '@/helpers.js';
 
 export default {
   name: 'MenuCategoryList',
   components: {
-    MenuItem
+    MenuItem,
+    MenuEmptyState
   },
   data() {
     return {
@@ -39,7 +68,8 @@ export default {
           name: 'Delete',
           action: 'delete'
         }
-      ]
+      ],
+      Plus
     };
   },
   created() {
@@ -49,7 +79,19 @@ export default {
     this.updateCategories([]);
   },
   computed: {
-    ...mapGetters('menu', ['getCategories'])
+    ...mapGetters('menu', ['getCategories', 'getMenuLoading']),
+
+    showEmptyState() {
+      if (this.getMenuLoading) {
+        return false;
+      }
+
+      if (this.getCategories.length === 0) {
+        return true;
+      }
+
+      return false;
+    }
   },
   methods: {
     ...mapMutations('menu', ['updateCategories']),

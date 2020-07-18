@@ -1,49 +1,90 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
-    <span v-if="apiError" class="m-4 text-sm text-red-600">
-      {{ apiError }}
-    </span>
-    <MenuItem
-      v-for="item in getMenuItems"
-      :key="item.id"
-      :name="item.name"
-      :image="item.imageUrl"
-      :options="menuItemOptions(item)"
-      @clicked="editItem(item.id)"
-      @sellOutItem="changeAvailability(item, false)"
-      @restock="changeAvailability(item, true)"
-      @deleteItem="deleteItem(item.id)"
-    >
-      <template #subHeading>
-        {{ !item.isAvailable ? 'Unavailable -' : '' }}
-        ${{ item.price }} -
-        {{ item.category.name }}
+  <div>
+    <MenuEmptyState v-if="showEmptyState">
+      <template #heading>Manage Your Menu</template>
+      <template #description>
+        Add, view, or edit the menu items you are offering.
       </template>
-    </MenuItem>
+      <template #action>
+        <RouterLink :to="{ name: 'MenuItemAdd' }" v-slot="{ navigate }">
+          <Button
+            class="p-2 uppercase bg-blue-500 rounded-full cursor-pointer ripple"
+            @click="navigate"
+          >
+            <div class="flex items-center">
+              <span>
+                <img class="w-8" :src="Plus" />
+              </span>
+              <span class="flex-grow px-6 font-light">
+                Add New Menu Items
+              </span>
+            </div>
+          </Button>
+        </RouterLink>
+      </template>
+    </MenuEmptyState>
+    <div class="grid grid-cols-1 gap-2 my-4 md:grid-cols-3">
+      <span v-if="apiError" class="m-4 text-sm text-red-600">
+        {{ apiError }}
+      </span>
+      <MenuItem
+        v-for="item in getMenuItems"
+        :key="item.id"
+        :name="item.name"
+        :image="item.imageUrl"
+        :options="menuItemOptions(item)"
+        @clicked="editItem(item.id)"
+        @sellOutItem="changeAvailability(item, false)"
+        @restock="changeAvailability(item, true)"
+        @deleteItem="deleteItem(item.id)"
+      >
+        <template #subHeading>
+          {{ !item.isAvailable ? 'Unavailable -' : '' }}
+          ${{ item.price }} -
+          {{ item.category.name }}
+        </template>
+      </MenuItem>
+    </div>
   </div>
 </template>
 
 <script>
 import MenuItem from '@/components/menu/MenuItem';
+import MenuEmptyState from '@/components/menu/MenuEmptyState.vue';
+import Plus from '@/assets/plus.png';
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
 
 export default {
   name: 'MenuItemList',
   components: {
-    MenuItem
+    MenuItem,
+    MenuEmptyState
   },
   data() {
     return {
       categoryId: this.$route.params.categoryId,
-      apiError: ''
+      apiError: '',
+      Plus
     };
   },
   created() {
     this.fetchTenantCategoryItems(this.categoryId);
   },
   computed: {
-    ...mapGetters('menu', ['getMenuItems'])
+    ...mapGetters('menu', ['getMenuItems', 'getMenuLoading']),
+
+    showEmptyState() {
+      if (this.getMenuLoading) {
+        return false;
+      }
+
+      if (this.getMenuItems.length === 0) {
+        return true;
+      }
+
+      return false;
+    }
   },
   methods: {
     ...mapActions('auth', ['ping']),
