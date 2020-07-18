@@ -28,7 +28,7 @@
           <p class="text-base">
             Site Activation <br />
             <span class="text-sm font-light text-gray-500">
-              Current Status - {{ getStatus }}
+              Current Status - {{ getStatus(tenant) }}
             </span>
           </p>
           <BaseToggleSwitch
@@ -45,7 +45,7 @@
 <script>
 import MenuItem from '@/components/menu/MenuItem';
 import BaseToggleSwitch from '@/components/inputs/BaseToggleSwitch.vue';
-import { mapActions, mapMutations, mapGetters } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'SettingsAccount',
@@ -63,18 +63,13 @@ export default {
     this.tenants = [];
     this.apiError = '';
   },
-  computed: {
-    ...mapGetters({
-      getIsActive: 'tenant/getIsActive'
-    }),
-    getStatus() {
-      return this.getIsActive ? 'Active' : 'Draft Mode';
-    }
-  },
   methods: {
     ...mapActions('tenant', ['fetchUserTenants', 'changeActiveStatus']),
     ...mapMutations(['updateIsActive']),
     init() {
+      this._fetchUserTenants();
+    },
+    _fetchUserTenants() {
       this.fetchUserTenants()
         .then(tenants => {
           this.tenants = tenants;
@@ -86,6 +81,9 @@ export default {
           throw error;
         });
     },
+    getStatus(tenant) {
+      return tenant.isActive ? 'Active' : 'Draft Mode';
+    },
     manageTenant(tenant) {
       this.$router.push({
         name: 'MenuCategoryList',
@@ -94,7 +92,7 @@ export default {
     },
     changeStatus(event, slug) {
       this.changeActiveStatus({ slug: slug, isActive: event })
-        .then(() => {})
+        .then(this._fetchUserTenants)
         .catch(error => {
           this.apiError = error.response.data.title
             ? error.response.data.title
