@@ -8,12 +8,13 @@
       <template #action>
         <RouterLink :to="{ name: 'MenuCategoryAdd' }" v-slot="{ navigate }">
           <Button
-            class="p-2 uppercase bg-blue-500 rounded-full cursor-pointer ripple"
+            class="px-6 uppercase bg-blue-500 rounded-full cursor-pointer"
+            isRipple
             @click="navigate"
           >
             <div class="flex items-center">
               <span>
-                <img class="w-8" :src="Plus" />
+                +
               </span>
               <span class="flex-grow px-6 font-light">
                 Add New Menu Items

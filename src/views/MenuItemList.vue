@@ -8,12 +8,13 @@
       <template #action>
         <RouterLink :to="{ name: 'MenuItemAdd' }" v-slot="{ navigate }">
           <Button
-            class="p-2 uppercase bg-blue-500 rounded-full cursor-pointer ripple"
+            class="px-6 uppercase bg-blue-500 rounded-full cursor-pointer "
+            isRipple
             @click="navigate"
           >
             <div class="flex items-center">
-              <span>
-                <img class="w-8" :src="Plus" />
+              <span class="text-3xl">
+                +
               </span>
               <span class="flex-grow px-6 font-light">
                 Add New Menu Items
@@ -52,6 +53,7 @@
 import MenuItem from '@/components/menu/MenuItem';
 import MenuEmptyState from '@/components/menu/MenuEmptyState.vue';
 import Plus from '@/assets/plus.png';
+import Add from '@/assets/add.png';
 import { mapGetters, mapActions } from 'vuex';
 import { sleep } from '@/helpers.js';
 
@@ -65,7 +67,8 @@ export default {
     return {
       categoryId: this.$route.params.categoryId,
       apiError: '',
-      Plus
+      Plus,
+      Add
     };
   },
   created() {
