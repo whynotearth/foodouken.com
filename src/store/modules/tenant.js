@@ -124,7 +124,7 @@ const actions = {
     });
   },
   fetchUserTenants({ commit }) {
-    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    const companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
       httpClient.get(`/companies/${companySlug}/tenants/mytenants`).then(
         response => {
@@ -170,7 +170,7 @@ const actions = {
     });
   },
   fetchTenantDetails(conext, payload) {
-    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    const companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
       httpClient
         .get(`/companies/${companySlug}/tenants/${payload.slug}`)
@@ -183,7 +183,7 @@ const actions = {
     });
   },
   changePromotionStatus(context, payload) {
-    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    const companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
       httpClient
         .patch(`/companies/${companySlug}/tenants/${payload.slug}`, {

@@ -4,7 +4,7 @@
       <h3 class="mx-4 tg-h3-mobile text-white text-opacity-84">
         Account Settings
       </h3>
-      <settings-button title="My Account" to-link="Account"></settings-button>
+      <settings-button title="My Account" :to="{ name: 'Account' }" />
     </div>
     <hr class="border-gray-700" />
     <div class="my-6">
@@ -12,12 +12,16 @@
         <h3 class="mx-4 capitalize tg-h3-mobile text-white text-opacity-84">
           {{ tenant.name }}
         </h3>
-        <settings-button title="Dashboard" to-link="Dashboard" />
-        <settings-button title="Menu" to-link="Menu" />
+        <settings-button title="Dashboard" :to="{ name: 'Dashboard' }" />
+        <settings-button title="Menu" :to="{ name: 'Menu' }" />
         <settings-button
           title="Promotions"
-          to-link="Promotion"
-          :params-obj="{ slug: tenant.slug }"
+          :to="{
+            name: 'Promotion',
+            params: {
+              slug: tenant.slug
+            }
+          }"
         />
       </div>
     </div>
@@ -55,9 +59,6 @@ export default {
     ...mapActions('auth', ['logout']),
     ...mapActions('tenant', ['fetchUserTenants']),
     init() {
-      this._fetchUserTenants();
-    },
-    _fetchUserTenants() {
       this.fetchUserTenants()
         .then(tenants => {
           this.tenants = tenants;
