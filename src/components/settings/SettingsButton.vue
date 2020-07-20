@@ -1,7 +1,10 @@
 <template>
   <div class="tg-body-mobile text-white text-opacity-84">
     <slot :linkStyling="linkStyling">
-      <router-link :to="{ name: toLink }" :class="linkStyling">
+      <router-link
+        :to="{ name: toLink, params: paramsObj }"
+        :class="linkStyling"
+      >
         <span v-if="title" class="mr-2">
           {{ title }}
         </span>
@@ -32,6 +35,12 @@ export default {
     toLink: {
       type: String,
       default: '/'
+    },
+    paramsObj: {
+      type: Object,
+      default: function() {
+        return {};
+      }
     }
   },
   data() {

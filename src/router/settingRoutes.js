@@ -37,5 +37,18 @@ export const settingRoutes = [
         backRoute: { name: 'Settings' }
       }
     }
+  },
+  {
+    path: '/settings/promotion',
+    name: 'Promotion',
+    component: () => import('@/views/Promotion.vue'),
+    meta: {
+      layout: () => import('@/layouts/TenantLayout.vue'),
+      requiresAuth: true,
+      appBar: {
+        title: 'Promotions',
+        backRoute: { name: 'Settings' }
+      }
+    }
   }
 ];

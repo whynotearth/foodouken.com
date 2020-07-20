@@ -1,6 +1,26 @@
 <template>
   <div>
-    <settings-button title="My Account" to-link="Account"></settings-button>
+    <div class="mt-6">
+      <h3 class="mx-4 tg-h3-mobile text-white text-opacity-84">
+        Account Settings
+      </h3>
+      <settings-button title="My Account" to-link="Account"></settings-button>
+    </div>
+    <hr class="border-gray-700" />
+    <div class="my-6">
+      <div v-for="tenant in tenants" :key="tenant.slug">
+        <h3 class="mx-4 capitalize tg-h3-mobile text-white text-opacity-84">
+          {{ tenant.name }}
+        </h3>
+        <settings-button title="Dashboard" to-link="Dashboard" />
+        <settings-button title="Menu" to-link="Menu" />
+        <settings-button
+          title="Promotions"
+          to-link="Promotion"
+          :params-obj="{ slug: tenant.slug }"
+        />
+      </div>
+    </div>
     <!-- <settings-button title="My Business" to-link="Business"></settings-button> -->
     <settings-button v-slot="{ linkStyling }">
       <button @click.prevent="signOut()" :class="linkStyling">
@@ -23,11 +43,32 @@ export default {
   },
   data() {
     return {
-      arrowForward
+      arrowForward,
+      tenants: [],
+      apiError: ''
     };
+  },
+  created() {
+    this.init();
   },
   methods: {
     ...mapActions('auth', ['logout']),
+    ...mapActions('tenant', ['fetchUserTenants']),
+    init() {
+      this._fetchUserTenants();
+    },
+    _fetchUserTenants() {
+      this.fetchUserTenants()
+        .then(tenants => {
+          this.tenants = tenants;
+        })
+        .catch(error => {
+          this.apiError = error.response.data.title
+            ? error.response.data.title
+            : 'Something went wrong, try again.';
+          throw error;
+        });
+    },
     signOut() {
       this.logout().then(() => {
         this.$router.push({ name: 'Home' });

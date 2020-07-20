@@ -168,6 +168,37 @@ const actions = {
           }
         );
     });
+  },
+  fetchTenantDetails(conext, payload) {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .get(`/companies/${companySlug}/tenants/${payload.slug}`)
+        .then(response => {
+          resolve(response.data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  changePromotionStatus(context, payload) {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .patch(`/companies/${companySlug}/tenants/${payload.slug}`, {
+          hasPromotion: payload.hasPromotion,
+          promotionPercent: payload.promotionPercent
+        })
+        .then(
+          response => {
+            resolve(response.data);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
   }
 };
 
