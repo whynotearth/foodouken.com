@@ -64,7 +64,6 @@ const state = {
   page: 1,
   notificationTypes,
   paymentMethods,
-  isActive: false
 };
 
 const getters = {
@@ -94,9 +93,6 @@ const getters = {
   },
   getBusinessHours(state) {
     return state.businessHours;
-  },
-  getIsActive(state) {
-    return state.isActive;
   }
 };
 
@@ -156,7 +152,7 @@ const actions = {
         );
     });
   },
-  changeActiveStatus({ commit }, payload) {
+  changeActiveStatus(context, payload) {
     let companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
       httpClient
@@ -165,7 +161,6 @@ const actions = {
         })
         .then(
           response => {
-            commit('updateIsActive', payload.isActive);
             resolve(response.data);
           },
           error => {
