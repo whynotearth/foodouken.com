@@ -21,6 +21,7 @@ export const settingRoutes = [
       requiresAuth: true,
       appBar: {
         title: 'My Account',
+        icon: 'hamburger',
         backRoute: { name: 'Settings' }
       }
     }
@@ -47,6 +48,7 @@ export const settingRoutes = [
       requiresAuth: true,
       appBar: {
         title: 'Promotions',
+        icon: 'hamburger',
         backRoute: { name: 'Settings' }
       }
     }

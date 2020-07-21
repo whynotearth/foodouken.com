@@ -12,7 +12,7 @@
         label="Discount"
         type="number"
         :value="tenant.promotionPercent"
-        @input="getPromoValue"
+        @input="getPromotionValue"
       />
       <hr class="border-white border-opacity-12" />
       <div class="flex justify-between py-2 px-1">
@@ -81,7 +81,7 @@ export default {
           throw error;
         });
     },
-    getPromoValue(value) {
+    getPromotionValue(value) {
       this.promoValue = value;
     }
   }

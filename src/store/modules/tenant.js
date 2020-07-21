@@ -123,12 +123,11 @@ const actions = {
         );
     });
   },
-  fetchUserTenants({ commit }) {
+  fetchUserTenants() {
     const companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
       httpClient.get(`/companies/${companySlug}/tenants/mytenants`).then(
         response => {
-          commit('updateIsActive', response.data[0].isActive);
           resolve(response.data);
         },
         error => {
