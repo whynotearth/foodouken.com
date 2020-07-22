@@ -12,14 +12,22 @@
         <h3 class="mx-4 capitalize tg-h3-mobile text-white text-opacity-84">
           {{ tenant.name }}
         </h3>
-        <settings-button title="Dashboard" :to="{ name: 'Dashboard' }" />
-        <settings-button title="Menu" :to="{ name: 'Menu' }" />
+        <!-- <settings-button title="Dashboard" :to="{ name: 'Dashboard' }" /> -->
+        <settings-button
+          title="Menu"
+          :to="{
+            name: 'MenuCategoryList',
+            params: {
+              tenantSlug: tenant.slug
+            }
+          }"
+        />
         <settings-button
           title="Promotions"
           :to="{
             name: 'Promotion',
             params: {
-              slug: tenant.slug
+              tenantSlug: tenant.slug
             }
           }"
         />

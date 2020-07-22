@@ -8,7 +8,7 @@ export const settingRoutes = [
       requiresAuth: true,
       appBar: {
         title: 'Settings',
-        backRoute: { name: 'Home' }
+        backRoute: { name: 'Account' }
       }
     }
   },

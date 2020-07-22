@@ -44,7 +44,7 @@ export default {
     return {
       tenant: {},
       apiError: '',
-      promoValue: 0
+      promotionValue: 0
     };
   },
   created() {
@@ -53,11 +53,11 @@ export default {
   methods: {
     ...mapActions('tenant', ['fetchTenantDetails', 'changePromotionStatus']),
     async init() {
-      let slug = this.$route.params.slug;
+      let slug = this.$route.params.tenantSlug;
       this.fetchTenantDetails({ slug: slug })
         .then(tenant => {
           this.tenant = tenant;
-          this.promoValue = tenant.promotionPercent;
+          this.promotionValue = tenant.promotionPercent;
         })
         .catch(error => {
           this.apiError = error.response.data.title
@@ -70,7 +70,7 @@ export default {
       let paylod = {
         slug: this.tenant.slug,
         hasPromotion: value,
-        promotionPercent: this.promoValue
+        promotionPercent: this.promotionValue
       };
       this.changePromotionStatus(paylod)
         .then(this.init)
@@ -82,7 +82,7 @@ export default {
         });
     },
     getPromotionValue(value) {
-      this.promoValue = value;
+      this.promotionValue = value;
     }
   }
 };
