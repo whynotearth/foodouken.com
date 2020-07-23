@@ -124,7 +124,7 @@ const actions = {
     });
   },
   fetchUserTenants() {
-    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    const companySlug = process.env.VUE_APP_COMPANY_SLUG;
     return new Promise((resolve, reject) => {
       httpClient.get(`/companies/${companySlug}/tenants/mytenants`).then(
         response => {
@@ -141,6 +141,54 @@ const actions = {
     return new Promise((resolve, reject) => {
       httpClient
         .get(`/companies/${companySlug}/tenants/owns/${tenantSlug}`)
+        .then(
+          response => {
+            resolve(response.data);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  },
+  changeActiveStatus(context, payload) {
+    let companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .post(`/companies/${companySlug}/tenants/${payload.slug}/active`, {
+          isActive: payload.isActive
+        })
+        .then(
+          response => {
+            resolve(response.data);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  },
+  fetchTenantDetails(conext, payload) {
+    const companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .get(`/companies/${companySlug}/tenants/${payload.slug}`)
+        .then(response => {
+          resolve(response.data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  changePromotionStatus(context, payload) {
+    const companySlug = process.env.VUE_APP_COMPANY_SLUG;
+    return new Promise((resolve, reject) => {
+      httpClient
+        .patch(`/companies/${companySlug}/tenants/${payload.slug}`, {
+          hasPromotion: payload.hasPromotion,
+          promotionPercent: payload.promotionPercent
+        })
         .then(
           response => {
             resolve(response.data);
@@ -180,6 +228,9 @@ const mutations = {
   },
   updateBusinessHours(state, payload) {
     state.businessHours = payload;
+  },
+  updateIsActive(state, payload) {
+    state.isActive = payload;
   },
   resetCreateTenantForm(state) {
     state.businessInfo.name = '';

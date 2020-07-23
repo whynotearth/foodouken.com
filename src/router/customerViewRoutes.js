@@ -9,6 +9,12 @@ export const customerViewRoutes = [
     path: '/shop/:slug/:orderingStepSlug?',
     name: 'Shop',
     component: () => import('@/views/Shop.vue'),
-    meta: { layout: () => import('@/layouts/ShopLayout.vue') }
+    meta: {
+      layout: () => import('@/layouts/ShopLayout.vue'),
+      appBar: {
+        title: 'Shop',
+        newItem: { name: 'Account' }
+      }
+    }
   }
 ];
