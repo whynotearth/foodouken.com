@@ -44,6 +44,7 @@ const actions = {
     commit('incrementCartProduct', product);
   },
   decrementCartProduct({ commit, state }, product) {
+    delete product.discountPrice;
     let cartItem = state.cartItems.filter(ci => ci.product === product)[0];
     if (!cartItem || cartItem.count < 1) {
       return;
@@ -55,6 +56,7 @@ const actions = {
     }
   },
   removeCartProduct({ commit, state }, product) {
+    delete product.discountPrice;
     let cartItem = state.cartItems.filter(ci => ci.product === product)[0];
     if (!cartItem || cartItem.count < 1) {
       return;

@@ -20,7 +20,13 @@
     />
     <div class="mx-2 w-full flex flex-col truncate">
       <span class="text-gray-400 truncate">{{ cartItem.product.name }} </span>
-      <span class="text-gray-500">${{ cartItem.product.price }}</span>
+      <div v-if="cartItem.product.discountPercent">
+        <span class="line-through text-gray-500 mr-1">
+          ${{ cartItem.product.originalPrice }}
+        </span>
+        <span class="text-gray-500">${{ cartItem.product.price }}</span>
+      </div>
+      <span v-else class="text-gray-500">${{ cartItem.product.price }}</span>
     </div>
     <div class="flex items-center text-gray-500 font-bold text-lg">
       <div class="cursor-pointer w-6 select-none" @click="decrement">
