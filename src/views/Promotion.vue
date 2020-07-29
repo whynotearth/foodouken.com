@@ -21,7 +21,7 @@
           Promotion Status <br />
           <span class="text-sm font-light text-gray-500">
             Current Status -
-            {{ tenant.hasPromotion ? 'Actived' : 'Inactivated' }}
+            {{ tenant.hasPromotion ? 'Activaed' : 'Inactivated' }}
           </span>
         </p>
         <BaseToggleSwitch :value="tenant.hasPromotion" @change="changeStatus" />
