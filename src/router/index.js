@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
     });
 });
 
-<<<<<<< HEAD
+/* HEAD
 router.options.scrollBehavior = function(to, from, savedPosition) {
   if (savedPosition) {
     //if going to the previous page with the back button or left swipe on mobile you are on the content you were last viewing
@@ -62,5 +62,7 @@ router.options.scrollBehavior = function(to, from, savedPosition) {
 };
 
 =======
->>>>>>> parent of 2f624d9... Merge pull request #305 from whynotearth/saved-position-and-scrollToTop-on-router
+ parent of 2f624d9... Merge pull request #305 from whynotearth/saved-position-and-scrollToTop-on-router
 export default router;
+
+*/
