@@ -34,18 +34,18 @@
         </template>
       </Dropdown>
       <MaterialInput
-        v-model.number="$v.item.price.$model"
+        v-model.number="$v.item[getPrice].$model"
         label="Price"
         labelBg="bg-background"
         type="number"
         step="0.01"
-        :error="$v.item.price.$error"
+        :error="$v.item[getPrice].$error"
       >
-        <template v-if="$v.item.price.$error">
-          <span v-if="!$v.item.price.required" class="text-red-600 text-xs">
+        <template v-if="$v.item[getPrice].$error">
+          <span v-if="!$v.item[getPrice].required" class="text-red-600 text-xs">
             Price is required.
           </span>
-          <span v-if="!$v.item.price.decimal" class="text-red-600 text-xs">
+          <span v-if="!$v.item[getPrice].decimal" class="text-red-600 text-xs">
             Price should be a valid number.
           </span>
         </template>
@@ -56,6 +56,7 @@
         labelBg="bg-background"
       />
     </div>
+    <!--
     <hr class="border-white border-opacity-12 my-8" />
 
     <VariantManager
@@ -71,6 +72,7 @@
       v-model="item.attributes"
       ref="attributes"
     />
+    -->
     <hr class="border-white border-opacity-12 my-8" />
 
     <div class="mx-4 flex space-x-4">
@@ -112,7 +114,7 @@
 
 <script>
 import ImageUpload from '@/components/imageUpload/ImageUpload.vue';
-import VariantManager from '@/components/menu/VariantManager.vue';
+// import VariantManager from '@/components/menu/VariantManager.vue';
 import MaterialInput from '@/components/inputs/MaterialInput';
 import TextArea from '@/components/inputs/TextArea';
 import Dropdown from '@/components/Dropdown';
@@ -128,7 +130,7 @@ export default {
   name: 'MenuItemAddEdit',
   components: {
     ImageUpload,
-    VariantManager,
+    // VariantManager,
     MaterialInput,
     TextArea,
     Dropdown,
@@ -140,6 +142,10 @@ export default {
     item: {
       name: {
         required
+      },
+      originalPrice: {
+        required,
+        decimal
       },
       price: {
         required,
@@ -159,6 +165,7 @@ export default {
       item: {
         name: '',
         price: '',
+        originalPrice: '',
         description: '',
         variations: [],
         attributes: [],
@@ -186,6 +193,9 @@ export default {
       set(value) {
         this.item.imageUrl = value[0] ? value[0].secure_url : '';
       }
+    },
+    getPrice() {
+      return this.item.discountPercent === 0 ? 'price' : 'originalPrice';
     }
   },
   methods: {
@@ -250,9 +260,13 @@ export default {
     },
     submit() {
       this.$v.$touch();
-      this.$refs.variations.$v.$touch();
-      this.$refs.attributes.$v.$touch();
-      if (this.$v.$invalid || this.$refs.variations.$v.$invalid || this.$refs.attributes.$v.$invalid) {
+      // this.$refs.variations.$v.$touch();
+      // this.$refs.attributes.$v.$touch();
+      if (
+        this.$v.$invalid // ||
+        // this.$refs.variations.$v.$invalid ||
+        // this.$refs.attributes.$v.$invalid
+      ) {
         this.submitError = true;
         return false;
       }
@@ -286,6 +300,9 @@ export default {
     },
     editItem(payload) {
       payload.productId = this.itemId;
+      if (payload.product.discountPercent !== 0) {
+        payload.product.price = payload.product.originalPrice;
+      }
       this.updateTenantCategoryItem(payload)
         .then(() => {
           this.onSuccessSubmit();

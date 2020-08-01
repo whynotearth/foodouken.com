@@ -3,7 +3,7 @@
     <div class="container mx-auto flex flex-wrap">
       <div class="flex-start mr-3 flex-shrink-0">
         <router-link class="inline-block align-middle" :to="toLink">
-          <img :src="arrowBack" />
+          <img :src="getIcon" />
         </router-link>
       </div>
       <transition name="fade" mode="out-in">
@@ -34,6 +34,7 @@
 
 <script>
 import arrowBack from '@/assets/arrow-back.png';
+import menu from '@/assets/menu.png';
 
 export default {
   name: 'BaseAppBarHeader',
@@ -49,12 +50,16 @@ export default {
     action: {
       type: Object,
       default: () => {}
+    },
+    icon: {
+      type: String,
+      default: 'back'
     }
   },
-  data() {
-    return {
-      arrowBack
-    };
+  computed: {
+    getIcon() {
+      return this.icon === 'back' ? arrowBack : menu;
+    }
   },
   methods: {
     emitAction() {

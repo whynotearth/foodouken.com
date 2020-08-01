@@ -14,8 +14,10 @@
       :step="step"
       :value="value"
       @blur="$emit('input', $event.target.value)"
+      :pattern="pattern"
       :placeholder="placeholder || label"
     />
+    <span v-if="symbol" :style="getSymbol" class="input-symbol right"></span>
     <label
       :for="idName"
       class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
@@ -44,6 +46,9 @@ export default {
     placeholder: {
       type: String
     },
+    pattern: {
+      type: String
+    },
     type: {
       type: String,
       default: 'text'
@@ -61,12 +66,35 @@ export default {
     },
     labelBg: {
       type: String
+    },
+    symbol: {
+      type: String,
+      default: null
+    }
+  },
+  computed: {
+    getSymbol() {
+      return {
+        '--symbol': `'${this.symbol}'`
+      };
     }
   }
 };
 </script>
 
 <style scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .input {
   transition: border 0.2s ease-in-out;
   z-index: 2;
@@ -93,5 +121,25 @@ export default {
 
 .input:focus::placeholder {
   color: transparent;
+}
+
+.right {
+  top: 50%;
+  right: 5px;
+}
+
+.input-symbol input {
+  padding-right: 18px;
+  text-align: end;
+}
+
+.input-symbol:before {
+  position: absolute;
+  top: 25%;
+  content: var(--symbol);
+}
+
+.input-symbol.right::before {
+  right: 6px;
 }
 </style>

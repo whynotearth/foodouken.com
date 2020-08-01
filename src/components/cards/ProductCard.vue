@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="product"
     @click="addCartProduct(product)"
     class="product-card bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer transition duration-300 transform hover:opacity-75"
   >
@@ -8,15 +9,21 @@
       alt="Product image"
       class="p-1/2 w-20 h-full object-cover rounded-l-lg"
     />
-    <p class="my-auto">
-      <span class="mx-4 text-gray-400 my-1 inline-block text-lg">
+    <div class="my-auto">
+      <p class="mx-4 text-gray-400 my-1 text-base md:text-lg break-words">
         {{ product.name }}
-      </span>
-      <br />
-      <span class="mx-4 text-gray-500 my-1 inline-block">
-        ${{ product.price }}
-      </span>
-    </p>
+      </p>
+      <div v-if="product.discountPercent > 0" class="mx-4 text-xs sm:text-sm">
+        <span class="rounded text-white bg-button px-1 my-1">
+          {{ product.discountPercent }}% OFF
+        </span>
+        <div class="text-gray-500 my-1">
+          <span class="line-through mr-1">${{ product.originalPrice }}</span>
+          <span>${{ product.price }}</span>
+        </div>
+      </div>
+      <p v-else class="mx-4 text-gray-500  my-1 block">${{ product.price }}</p>
+    </div>
     <div class="relative flex-grow">
       <div
         class="ripple absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
