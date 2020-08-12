@@ -39,6 +39,17 @@
         </div>
       </div>
     </transition-group>
+    <div
+      class="w-full text-center border-dashed border rounded-lg border-gray-500 p-2"
+    >
+      <router-link
+        tag="button"
+        :to="{ name: 'SignUp', params: { step: 'business-info' } }"
+        class="uppercase outline-none text-center"
+      >
+        Set Up Your food Business
+      </router-link>
+    </div>
   </div>
 </template>
 
