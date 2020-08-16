@@ -34,18 +34,18 @@
         </template>
       </Dropdown>
       <MaterialInput
-        v-model.number="$v.item.price.$model"
+        v-model.number="$v.item[getPrice].$model"
         label="Price"
         labelBg="bg-background"
         type="number"
         step="0.01"
-        :error="$v.item.price.$error"
+        :error="$v.item[getPrice].$error"
       >
-        <template v-if="$v.item.price.$error">
-          <span v-if="!$v.item.price.required" class="text-red-600 text-xs">
+        <template v-if="$v.item[getPrice].$error">
+          <span v-if="!$v.item[getPrice].required" class="text-red-600 text-xs">
             Price is required.
           </span>
-          <span v-if="!$v.item.price.decimal" class="text-red-600 text-xs">
+          <span v-if="!$v.item[getPrice].decimal" class="text-red-600 text-xs">
             Price should be a valid number.
           </span>
         </template>
@@ -143,6 +143,9 @@ export default {
       name: {
         required
       },
+      originalPrice: {
+        decimal
+      },
       price: {
         required,
         decimal
@@ -161,11 +164,13 @@ export default {
       item: {
         name: '',
         price: '',
+        originalPrice: '',
+        discountPercent: 0,
         description: '',
         variations: [],
         attributes: [],
         imageUrl:
-          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png',
+          'https://res.cloudinary.com/whynotearth/image/upload/v1597549990/foodouken/foodouken_yki2um.png',
         isAvailable: true
         // inventory: ''
       },
@@ -188,6 +193,9 @@ export default {
       set(value) {
         this.item.imageUrl = value[0] ? value[0].secure_url : '';
       }
+    },
+    getPrice() {
+      return this.item.discountPercent === 0 ? 'price' : 'originalPrice';
     }
   },
   methods: {
@@ -292,6 +300,9 @@ export default {
     },
     editItem(payload) {
       payload.productId = this.itemId;
+      if (payload.product.discountPercent !== 0) {
+        payload.product.price = payload.product.originalPrice;
+      }
       this.updateTenantCategoryItem(payload)
         .then(() => {
           this.onSuccessSubmit();

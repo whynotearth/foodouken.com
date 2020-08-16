@@ -11,6 +11,7 @@
         class="mt-3"
         label="Discount"
         type="number"
+        symbol="%"
         :value="tenant.promotionPercent"
         @input="getPromotionValue"
       />
@@ -20,7 +21,7 @@
           Promotion Status <br />
           <span class="text-sm font-light text-gray-500">
             Current Status -
-            {{ tenant.hasPromotion ? 'Actived' : 'InActivated' }}
+            {{ tenant.hasPromotion ? 'Activated' : 'Inactivated' }}
           </span>
         </p>
         <BaseToggleSwitch :value="tenant.hasPromotion" @change="changeStatus" />
