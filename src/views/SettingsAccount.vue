@@ -90,8 +90,8 @@ export default {
         params: { tenantSlug: tenant.slug, tenant: tenant }
       });
     },
-    changeStatus(event, slug) {
-      this.changeActiveStatus({ slug: slug, isActive: event })
+    changeStatus(value, slug) {
+      this.changeActiveStatus({ slug: slug, isActive: value })
         .then(this._fetchUserTenants)
         .catch(error => {
           this.apiError = error.response.data.title

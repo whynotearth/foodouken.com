@@ -144,7 +144,6 @@ export default {
         required
       },
       originalPrice: {
-        required,
         decimal
       },
       price: {
@@ -166,6 +165,7 @@ export default {
         name: '',
         price: '',
         originalPrice: '',
+        discountPercent: 0,
         description: '',
         variations: [],
         attributes: [],
