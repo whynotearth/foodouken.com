@@ -1,8 +1,10 @@
-[{
+[
+  {
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
-        "namespace": "android_app",
-        "package_name": "com.foodouken.app",
-        "sha256_cert_fingerprints": ["SHA256: 91:96:94:B3:6E:D6:95:97:16:34:92:4D:6C:6D:2C:16:94:D0:9F:9B:31:EE:CE:2D:4D:39:14:1D:C6:A0:E8:E4"]
+      "namespace": "android_app",
+      "package_name": "com.foodouken.apps",
+      "sha256_cert_fingerprints": ["B0:AE:92:53:20:33:DE:70:A6:50:29:6B:3E:2A:55:FB:3D:34:53:9B:45:42:06:0E:97:4D:B5:2B:FF:43:88:A6","B0:D1:FB:E2:1B:F8:82:94:2A:70:AB:21:F5:69:0D:A1:17:2E:FF:4B:E9:BF:E9:8E:F0:66:DF:EF:C9:0F:B7:EA"]
     }
-}]
+  }
+]
