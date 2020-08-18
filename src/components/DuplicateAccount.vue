@@ -45,11 +45,6 @@ import Button from '@/components/Button.vue';
 export default {
   name: 'DuplicateAccount',
   components: { Button },
-  data() {
-    return {
-      key: 'duplicate-account',
-    };
-  },
   methods: {
     goToLogin() {
       this.$router.push({ name: 'LogIn' });
