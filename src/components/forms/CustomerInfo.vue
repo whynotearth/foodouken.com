@@ -1,6 +1,7 @@
 <template>
   <div class="w-full">
     <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
+      <DuplicateAccount v-if="isDuplicate" @onCancel="isDuplicate = false" />
       <material-input
         v-model="$v.name.$model"
         label="Name"
@@ -67,18 +68,22 @@ import TextArea from '@/components/inputs/TextArea.vue';
 import CheckoutNavBar from '@/components/forms/CheckoutNavBar.vue';
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 import { required, email, minLength } from 'vuelidate/lib/validators';
+import DuplicateAccount from '@/components/DuplicateAccount.vue';
+import { get } from 'lodash-es';
 
 export default {
   name: 'CustomerInfo',
   components: {
     MaterialInput,
     TextArea,
-    CheckoutNavBar
+    CheckoutNavBar,
+    DuplicateAccount
   },
   data() {
     return {
       submitError: false,
-      registerError: ''
+      registerError: '',
+      isDuplicate: false
     };
   },
   validations: {
@@ -155,7 +160,14 @@ export default {
           this.pageChangeWrapper(2);
         })
         .catch(error => {
-          this.registerError = error.response.data[0].description;
+          this.registerError = get(
+            error,
+            'response.data[0].description',
+            'Something went wrong, try again please'
+          );
+          const isDuplicateUserError =
+            get(error, 'response.data[0].code', null) === 'DuplicateUserName';
+          this.isDuplicate = isDuplicateUserError;
         });
     },
     pageChangeWrapper(page) {
