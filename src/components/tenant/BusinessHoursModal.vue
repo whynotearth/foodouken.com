@@ -18,7 +18,7 @@
                 />
               </span>
             </div>
-            <div>
+            <div :class="{ 'mt-5': !isSignUpFlow }">
               <div
                 class="flex justify-between items-center border-b border-white border-opacity-12 px-4 pb-4"
               >
@@ -118,6 +118,12 @@ export default {
   props: {
     selectedDay: {
       required: true
+    },
+    props: {
+      isSignUpFlow: {
+        type: Boolean,
+        default: true
+      }
     }
   },
   data() {

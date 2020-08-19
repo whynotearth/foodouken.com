@@ -31,6 +31,12 @@
             }
           }"
         />
+        <settings-button
+          title="Business Hours"
+          :to="{
+            name: 'ViewBusinessHours'
+          }"
+        />
       </div>
     </div>
     <!-- <settings-button title="My Business" to-link="Business"></settings-button> -->

@@ -38,6 +38,7 @@
       v-if="selectedIndex >= 0"
       @closeModal="closeModal"
       :selectedDay.sync="businessHours[selectedIndex]"
+      :isSignUpFlow="isSignUpFlow"
     />
   </div>
 </template>
@@ -52,6 +53,12 @@ export default {
   name: 'BusinessHours',
   components: {
     BusinessHoursModal
+  },
+  props: {
+    isSignUpFlow: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
