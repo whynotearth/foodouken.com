@@ -1,5 +1,5 @@
 <template>
-  <div class="time-picker-modal" v-if="selectedDayOption">
+  <div :id="_uid" class="time-picker-modal" v-if="selectedDayOption">
     <div
       class="absolute w-screen h-screen top-0 left-0 bg-background z-50"
       @click="$emit('closeModal')"
@@ -18,7 +18,7 @@
                 />
               </span>
             </div>
-            <div :class="{ 'mt-5': !isSignUpFlow }">
+            <div>
               <div
                 class="flex justify-between items-center border-b border-white border-opacity-12 px-4 pb-4"
               >
@@ -118,12 +118,6 @@ export default {
   props: {
     selectedDay: {
       required: true
-    },
-    props: {
-      isSignUpFlow: {
-        type: Boolean,
-        default: true
-      }
     }
   },
   data() {

@@ -58,6 +58,10 @@ export default {
     isSignUpFlow: {
       type: Boolean,
       default: true
+    },
+    tenantBusinessHours: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -79,7 +83,9 @@ export default {
     ...mapGetters('tenant', ['getBusinessHours']),
     businessHours: {
       get() {
-        return this.getBusinessHours;
+        return this.isSignUpFlow
+          ? this.getBusinessHours
+          : this.tenantBusinessHours;
       },
       set(value) {
         this.updateBusinessHours(value);

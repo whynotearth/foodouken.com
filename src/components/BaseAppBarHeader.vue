@@ -1,5 +1,5 @@
 <template>
-  <nav class="sticky top-0 w-full p-4 shadow-md z-100 bg-primary">
+  <nav class="sticky top-0 w-full p-4 shadow-md z-50 bg-primary">
     <div class="container mx-auto flex flex-wrap">
       <div class="flex-start mr-3 flex-shrink-0">
         <router-link class="inline-block align-middle" :to="toLink">

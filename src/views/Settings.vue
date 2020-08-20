@@ -8,7 +8,7 @@
     </div>
     <hr class="border-gray-700" />
     <div class="my-6">
-      <div v-for="tenant in tenants" :key="tenant.slug">
+      <div v-for="tenant in tenants" :key="tenant.slug" class="my-4">
         <h3 class="mx-4 capitalize tg-h3-mobile text-white text-opacity-84">
           {{ tenant.name }}
         </h3>
@@ -34,7 +34,10 @@
         <settings-button
           title="Business Hours"
           :to="{
-            name: 'ViewBusinessHours'
+            name: 'ViewBusinessHours',
+            params: {
+              tenantSlug: tenant.slug
+            }
           }"
         />
       </div>
