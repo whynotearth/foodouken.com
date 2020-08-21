@@ -3,7 +3,7 @@
     <div class="text-center">
       <div class="my-8">
         <div class="w-40 h-40 p-5 mx-auto rounded-full bg-logo">
-          <img :src="home.custom.logo" class="rounded-full lg:w-20 lg:h-20" alt="Logo image" />
+          <img :src="home.custom.logo" class="rounded-full" alt="Logo - Blobby from Foodouken" />
         </div>
       </div>
       <h1 class="text-4xl font-bold text-white">{{ home.title }}</h1>
