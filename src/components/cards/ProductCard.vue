@@ -2,31 +2,31 @@
   <div
     v-if="product"
     @click="addCartProduct(product)"
-    class="product-card bg-secondary flex flex-row shadow-md rounded-lg h-24 mb-4 cursor-pointer transition duration-300 transform hover:opacity-75"
+    class="flex flex-row h-24 mb-4 transition duration-300 transform rounded-lg shadow-md cursor-pointer product-card bg-secondary hover:opacity-75"
   >
     <img
       :src="product.imageUrl"
       alt="Product image"
-      class="p-1/2 w-20 h-full object-cover rounded-l-lg"
+      class="object-cover w-20 h-full rounded-l-lg p-1/2"
     />
     <div class="my-auto">
-      <p class="mx-4 text-gray-400 my-1 text-base md:text-lg break-words">
+      <p class="mx-4 my-1 text-base text-gray-400 break-words md:text-lg">
         {{ product.name }}
       </p>
       <div v-if="product.discountPercent > 0" class="mx-4 text-xs sm:text-sm">
-        <span class="rounded text-white bg-button px-1 my-1">
+        <span class="px-1 my-1 text-white rounded bg-button">
           {{ product.discountPercent }}% OFF
         </span>
-        <div class="text-gray-500 my-1">
-          <span class="line-through mr-1">${{ product.originalPrice }}</span>
-          <span>${{ product.price }}</span>
+        <div class="my-1 text-gray-500">
+          <span class="mr-1 line-through">${{ product.originalPrice | currencyFormat }}</span>
+          <span>${{ product.price | currencyFormat }}</span>
         </div>
       </div>
-      <p v-else class="mx-4 text-gray-500  my-1 block">${{ product.price }}</p>
+      <p v-else class="block mx-4 my-1 text-gray-500">${{ product.price | currencyFormat }}</p>
     </div>
     <div class="relative flex-grow">
       <div
-        class="ripple absolute flex justify-center items-center w-10 h-10 text-align-center border border-solid rounded-full btn-plus cursor-pointer select-none"
+        class="absolute flex items-center justify-center w-10 h-10 border border-solid rounded-full cursor-pointer select-none ripple text-align-center btn-plus"
       >
         <img
           src="@/assets/add.png"
@@ -51,6 +51,11 @@ export default {
   },
   methods: {
     ...mapActions('cart', ['addCartProduct'])
+  },
+  filters: {
+    currencyFormat: function (value) {
+      return value.toFixed(2)
+    }
   }
 };
 </script>
