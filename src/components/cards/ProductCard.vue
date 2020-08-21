@@ -18,11 +18,11 @@
           {{ product.discountPercent }}% OFF
         </span>
         <div class="my-1 text-gray-500">
-          <span class="mr-1 line-through">${{ product.originalPrice | currencyFormat }}</span>
-          <span>${{ product.price | currencyFormat }}</span>
+          <span class="mr-1 line-through">{{ product.originalPrice | formatPrice }}</span>
+          <span>{{ product.price | formatPrice }}</span>
         </div>
       </div>
-      <p v-else class="block mx-4 my-1 text-gray-500">${{ product.price | currencyFormat }}</p>
+      <p v-else class="block mx-4 my-1 text-gray-500">{{ product.price | formatPrice }}</p>
     </div>
     <div class="relative flex-grow">
       <div
@@ -53,8 +53,8 @@ export default {
     ...mapActions('cart', ['addCartProduct'])
   },
   filters: {
-    currencyFormat: function (value) {
-      return value.toFixed(2)
+    formatPrice: price => {
+      return `$${price.toFixed(2)}`;
     }
   }
 };
