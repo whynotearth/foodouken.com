@@ -83,10 +83,7 @@
 </template>
 
 <script>
-import cookie from '@/utils/cookie';
-
 import CreditFooter from '@/components/CreditFooter.vue';
-import SnackBar from '@/components/SnackBar.vue';
 import TenantCard from '@/components/tenant/TenantCard.vue';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -94,36 +91,17 @@ export default {
   name: 'Home',
   components: {
     CreditFooter,
-    SnackBar,
     TenantCard
-  },
-  data() {
-    return {
-      showPrivacySnackBar: true
-    };
   },
   created() {
     this.fetchHomeData();
   },
-  beforeMount() {
-    let showSnackBar = cookie.getCookie('privacy-snackbar');
-    //if bannerCookie === 1 that means user has seen the banner and dismissed it
-    if (showSnackBar == 1) {
-      this.showPrivacySnackBar = false;
-    } else {
-      this.showPrivacySnackBar = true;
-    }
-  },
+
   mounted() {
     this.fetchTenants();
   },
   methods: {
-    ...mapActions('home', ['fetchHomeData', 'fetchTenants']),
-    setSnackBarCookie() {
-      this.showPrivacySnackBar = false;
-      //set cookie with name 'snackbar'. Set value to 1 which means true. Set expiration to 7 days.
-      cookie.setCookie('privacy-snackbar', 1, 7);
-    }
+    ...mapActions('home', ['fetchHomeData', 'fetchTenants'])
   },
   computed: {
     ...mapGetters({
