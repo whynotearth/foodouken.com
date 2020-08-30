@@ -3,7 +3,11 @@
     <div class="text-center">
       <div class="my-8">
         <div class="w-40 h-40 p-5 mx-auto rounded-full bg-logo">
-          <img :src="home.custom.logo" class="rounded-full" alt="Logo - Blobby from Foodouken" />
+          <img
+            :src="home.custom.logo"
+            class="rounded-full"
+            alt="Logo - Blobby from Foodouken"
+          />
         </div>
       </div>
       <h1 class="text-4xl font-bold text-white">{{ home.title }}</h1>
@@ -57,28 +61,6 @@
       </ul>
     </section>
     <CreditFooter />
-    <SnackBar :showSnackBar="showPrivacySnackBar">
-      <div
-        class="flex items-center justify-between w-full h-12 p-4 leading-4 text-white tg-caption-mobile"
-      >
-        <p>
-          Gotta agree to
-          <a
-            class="underline cursor-pointer"
-            target="_blank"
-            href="https://hub.paulchrisluke.com/-temporary-slug-7a760197-2d5d-4314-876c-ade5923d6dd8"
-          >
-            terms and conditions
-          </a>
-        </p>
-        <p
-          class="uppercase cursor-pointer text-button"
-          @click="setSnackBarCookie"
-        >
-          Agree
-        </p>
-      </div>
-    </SnackBar>
   </div>
 </template>
 
