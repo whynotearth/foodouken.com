@@ -74,7 +74,7 @@ export default {
     setSnackBarCookie() {
       this.showPrivacySnackBar = false;
       //set cookie with name 'snackbar'. Set value to 1 which means true. Set expiration to 7 days.
-      cookie.setCookie('privacy-snackbar', 1, 7);
+      cookie.setCookie('privacy-snackbar', 1, 365);
     }
   }
 };
