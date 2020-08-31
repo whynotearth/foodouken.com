@@ -1,3 +1,6 @@
+process.env.VUE_APP_MOBILE = process.env.VUE_APP_BUILD == 'mobile' ? true : false;
+console.log(process.env.VUE_APP_MOBILE);
+
 module.exports = {
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');

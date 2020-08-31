@@ -12,6 +12,10 @@ import vClickOutside from 'v-click-outside';
 var dataLayer = dataLayer || [];
 require('typeface-open-sans');
 
+
+import { Plugins } from '@capacitor/core'
+const { SplashScreen } = Plugins
+
 Vue.use(SmoothPicker);
 Vue.use(Vuelidate);
 Vue.use(vClickOutside);
@@ -28,5 +32,11 @@ Vue.config.productionTip = false;
 new Vue({
   store,
   router,
-  render: h => h(App)
+  render: h => h(App),
+  mounted() {
+    console.log("platform is:" + process.env.VUE_APP_BUILD)
+    if( process.env.VUE_APP_MOBILE ){
+      SplashScreen.hide();
+    }
+  }
 }).$mount('#app');

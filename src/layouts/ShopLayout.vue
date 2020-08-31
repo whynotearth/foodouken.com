@@ -27,7 +27,7 @@
     <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
       <div v-show="!getLoading">
-        <BaseSiteBanner>
+        <BaseSiteBanner v-if="!isMobile">
           Foodouken is now in Open Beta
           <a
             href="https://www.reddit.com/r/opensource/comments/herzsw/we_are_foodukencom_an_opensource_food_delivery/?utm_medium=android_app&utm_source=share"
@@ -38,7 +38,7 @@
           ✊
         </BaseSiteBanner>
         <router-view
-          class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
+          class="min-h-screen px-4 pb-8 mx-auto md:px-8 max-w-screen-xxl"
         />
         <Footer />
         <CreditFooter />
@@ -67,7 +67,8 @@ export default {
   },
   data() {
     return {
-      isAuthenticated: false
+      isAuthenticated: false,
+      isMobile: process.env.VUE_APP_MOBILE === 'true'
     };
   },
   created() {

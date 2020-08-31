@@ -1,10 +1,13 @@
 <template>
-  <div class="mx-auto">
+  <div
+    class="mx-auto"
+  >
     <BaseAppBarHeader
       v-if="appBar"
       :title="appBar.title"
       :toLink="appBar.backRoute"
       :icon="appBar.icon"
+       v-bind:class="{'pt-8': isMobile}"
     >
       <template #menu v-if="appBar.newItem">
         <div class="flex-grow inline-block text-right">
@@ -29,6 +32,11 @@ export default {
   components: {
     BaseAppBarHeader,
     NewItemIcon
+  },
+  data() {
+    return {
+      isMobile: process.env.VUE_APP_MOBILE === 'true'
+    };
   },
   computed: {
     appBar() {
