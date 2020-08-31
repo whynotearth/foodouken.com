@@ -1,11 +1,11 @@
 <template>
-<transition
-      enter-active-class="transition ease-out duration-200 transform"
-      enter-class="opacity-0 scale-95"
-      enter-to-class="opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-150 transform"
-      leave-class="opacity-100 scale-100"
-      leave-to-class="opacity-0 scale-95"
+  <transition
+    enter-active-class="transition ease-out duration-200 transform"
+    enter-class="opacity-0 scale-95"
+    enter-to-class="opacity-100 scale-100"
+    leave-active-class="transition ease-in duration-150 transform"
+    leave-class="opacity-100 scale-100"
+    leave-to-class="opacity-0 scale-95"
   >
     <div
       class="flex justify-center items-center fixed w-screen h-screen top-0 left-0 z-50 bg-black bg-opacity-38"
@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-</transition>
+  </transition>
 </template>
 
 <script>
@@ -50,7 +50,7 @@ export default {
       this.$router.push({ name: 'LogIn' });
     },
     onCancel() {
-       this.$emit('onCancel');
+      this.$emit('onCancel');
     }
   }
 };

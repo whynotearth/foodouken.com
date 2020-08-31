@@ -24,9 +24,13 @@
         <span class="mr-1 text-gray-500 line-through">
           {{ cartItem.product.originalPrice | formatPrice }}
         </span>
-        <span class="text-gray-500">{{ cartItem.product.price | formatPrice }}</span>
+        <span class="text-gray-500">{{
+          cartItem.product.price | formatPrice
+        }}</span>
       </div>
-      <span v-else class="text-gray-500">{{ cartItem.product.price | formatPrice }}</span>
+      <span v-else class="text-gray-500">{{
+        cartItem.product.price | formatPrice
+      }}</span>
     </div>
     <div class="flex items-center text-lg font-bold text-gray-500">
       <div class="w-6 cursor-pointer select-none" @click="decrement">
