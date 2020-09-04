@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-down">
     <div
-      class="fixed rounded-md bottom-0 left-0 right-0 mx-4 bg-footer text-white"
+      class="fixed rounded-md bottom-0 left-0 right-0 mx-4 mb-2 bg-footer text-white"
       v-if="showSnackBar"
     >
       <slot></slot>
