@@ -60,19 +60,18 @@
         </li>
       </ul>
     </section>
-    <CreditFooter />
   </div>
 </template>
 
 <script>
-import CreditFooter from '@/components/CreditFooter.vue';
+// import CreditFooter from '@/components/CreditFooter.vue';
 import TenantCard from '@/components/tenant/TenantCard.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
   components: {
-    CreditFooter,
+    // CreditFooter,
     TenantCard
   },
   created() {

@@ -13,37 +13,26 @@
           </a>
           ✊
         </BaseSiteBanner>
-        <div class="flex justify-end cursor-pointer mr-3">
-          <img
-            class="w-10 h-10"
-            src="../assets/round-avatar.png"
-            v-if="isAuthenticated"
-            @click="performRedirect"
-          />
-          <span
-            class="text-sm md:text-lg text-button"
-            v-else
-            @click="performRedirect"
-          >
-            Login
-          </span>
-        </div>
+        <div class="flex justify-end cursor-pointer mr-3"></div>
         <router-view
-          class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
+          class="md:px-8 pb-8 mb-2 px-4 max-w-screen-xxl mx-auto min-h-screen"
         />
       </div>
     </transition>
+    <NavigationBottom />
   </div>
 </template>
 
 <script>
 import Spinner from '@/components/Spinner.vue';
+import NavigationBottom from '@/components/NavigationBottom';
 import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'DefaultLayout',
   components: {
+    NavigationBottom,
     Spinner,
     BaseSiteBanner
   },
