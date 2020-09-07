@@ -9,7 +9,7 @@ import VueMeta from 'vue-meta';
 import SmoothPicker from 'vue-smooth-picker';
 import 'vue-smooth-picker/dist/css/style.css';
 import vClickOutside from 'v-click-outside';
-import * as VueGoogleMaps from 'vue2-google-maps'
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 require('typeface-open-sans');
 
@@ -26,10 +26,10 @@ Vue.use(VueMeta, {
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyBCDf7x5JXtJhrxw5UwiXIOA_aEfnZ6Ms4',
-    libraries: 'places',
+    libraries: 'places'
   },
   installComponents: true
-})
+});
 
 Vue.config.productionTip = false;
 

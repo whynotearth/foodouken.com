@@ -21,11 +21,19 @@
       >
         <div class="flex -mt-5">
           <RadioInput v-model="mapType" value="Map" class="p-5 flex-1/2" />
-          <RadioInput v-model="mapType" value="Satellite" class="p-5 flex-1/2" />
+          <RadioInput
+            v-model="mapType"
+            value="Satellite"
+            class="p-5 flex-1/2"
+          />
         </div>
-        <GmapMap class="w-full h-64 border-none rounded"
+        <GmapMap
+          class="w-full h-64 border-none rounded"
           ref="gmap"
-          :center="{lat:locationFromComponent.latitude, lng:locationFromComponent.longitude}"
+          :center="{
+            lat: locationFromComponent.latitude,
+            lng: locationFromComponent.longitude
+          }"
           :zoom="12"
           :options="mapOptions"
           @idle="idle"
@@ -38,7 +46,7 @@
             :clickable="true"
             :draggable="true"
             :maxZoom="12"
-            @click="center=m.position"
+            @click="center = m.position"
           />
         </GmapMap>
       </div>
@@ -125,26 +133,25 @@ export default {
       registerError: '',
       embedUrl: '',
       locationFromComponent: {},
-      markers: [{
-        position: {
-          lat: null,
-          lng: null
+      markers: [
+        {
+          position: {
+            lat: null,
+            lng: null
+          }
         }
-      }],
+      ],
       mapType: 'Map',
       mapOptions: {
         zoomControl: false,
         streetViewControl: false,
         fullscreenControlOptions: true,
         disableDefaultUI: false,
-        mapTypeControl: false,
+        mapTypeControl: false
       }
     };
   },
-  mounted() {
-   
-
-  },
+  mounted() {},
   validations: {
     street: {
       required
@@ -173,11 +180,11 @@ export default {
         this.updateAddressOption(value);
       }
     },
-    mapTypeId: function () {
-      if (this.mapType === 'Map'){
-        return 'terrain'
+    mapTypeId: function() {
+      if (this.mapType === 'Map') {
+        return 'terrain';
       } else {
-        return 'satellite'
+        return 'satellite';
       }
     },
     town: {
@@ -251,10 +258,18 @@ export default {
       'pageChange'
     ]),
     idle() {
-      var coordString = this.$refs.gmap.$mapObject.getCenter().toString().slice(1,-1).replace(/ /g,'');
+      var coordString = this.$refs.gmap.$mapObject
+        .getCenter()
+        .toString()
+        .slice(1, -1)
+        .replace(/ /g, '');
       var commaPos = coordString.indexOf(',');
-      this.locationFromComponent.latitude = parseFloat(coordString.substring(0, commaPos));
-      this.locationFromComponent.longitude = parseFloat(coordString.substring(commaPos + 1, coordString.length));
+      this.locationFromComponent.latitude = parseFloat(
+        coordString.substring(0, commaPos)
+      );
+      this.locationFromComponent.longitude = parseFloat(
+        coordString.substring(commaPos + 1, coordString.length)
+      );
     },
     submit() {
       if (this.option !== 'Share location') {
@@ -288,7 +303,7 @@ export default {
         const { latitude, longitude } = value;
         if (latitude && longitude) {
           this.markers[0].position.lat = latitude;
-          this.markers[0].position.lng  = longitude;
+          this.markers[0].position.lng = longitude;
           this.updateGoogleLocation(
             `https://www.google.com/maps/search/?api=1&query=${this.markers[0].position.lat},${this.markers[0].position.lng}`
           );
