@@ -11,6 +11,8 @@ import 'vue-smooth-picker/dist/css/style.css';
 import vClickOutside from 'v-click-outside';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
+
+var dataLayer = dataLayer || [];
 require('typeface-open-sans');
 
 Vue.use(SmoothPicker);

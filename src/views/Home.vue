@@ -2,61 +2,61 @@
   <div>
     <div class="text-center">
       <div class="my-8">
-        <div class="bg-logo mx-auto h-40 w-40 p-5 rounded-full">
-          <img :src="home.custom.logo" alt="Logo image" />
+        <div class="w-40 h-40 p-5 mx-auto rounded-full bg-logo">
+          <img
+            :src="home.custom.logo"
+            class="rounded-full"
+            alt="Logo - Blobby from Foodouken"
+          />
         </div>
       </div>
-      <h1 class="text-white text-4xl font-bold">
-        {{ home.title }}
-      </h1>
-      <h2 class="text-2xl text-gray-500 font-semibold mb-8">
+      <h1 class="text-4xl font-bold text-white">{{ home.title }}</h1>
+      <h2 class="mb-8 text-2xl font-semibold text-gray-500">
         {{ home.description }}
       </h2>
       <p
-        class="text-gray-500 text-base mt-2 text-justify lg:text-center mx-auto max-w-lg"
+        class="max-w-lg mx-auto mt-2 text-base text-justify text-gray-500 lg:text-center"
       >
         {{ home.custom.description }}
       </p>
     </div>
     <hr class="my-8 border-gray-700" />
-    <section class="flex my-4 lg:max-w-3xl xl:max-w-5xl mx-auto">
+    <section class="flex mx-auto my-4 lg:max-w-3xl xl:max-w-5xl">
       <ul
-        class="flex flex-wrap w-full items-stretch justify-center h-full mx-auto"
+        class="flex flex-wrap items-stretch justify-center w-full h-full mx-auto"
       >
         <li
-          v-for="tenant in tenants"
+          v-for="tenant in activeTenants"
           :key="tenant.slug"
           class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
         >
           <router-link
-            :to="{ name: 'Shop', params: { slug: tenant.slug } }"
-            class="bg-secondary rounded-md overflow-hidden flex flex-col  h-full"
+            :to="{
+              name: 'Shop',
+              params: { slug: tenant.slug, isActive: tenant.isActive }
+            }"
+            class="flex flex-col h-full overflow-hidden rounded-md bg-secondary"
           >
-            <div
-              class="relative overflow-hidden w-full"
-              style="padding-bottom: 45%;"
-            >
-              <img
-                :src="tenant.logoUrl"
-                class="absolute w-full object-cover"
-                :alt="tenant.name"
-              />
-            </div>
-            <h3 class="font-bold text-white text-opacity-95 px-5 pt-5 text-xl">
-              {{ tenant.name }}
-            </h3>
-            <ul
-              class="text-sm text-gray-500 flex flex-wrap items-center mr-auto ml-0 self-end px-5 pb-5 mt-auto"
-            >
-              <li
-                v-for="(tag, i) in tenant.tags"
-                :key="i"
-                class="tag pr-2 py-2"
-              >
-                <span v-text="tag" class="px-3 py-1 rounded mx-auto bg-tag" />
-              </li>
-            </ul>
+            <tenant-card :tenant="tenant" />
           </router-link>
+        </li>
+      </ul>
+    </section>
+    <hr class="my-8 border-gray-700" />
+    <section class="flex mx-auto my-4 lg:max-w-3xl xl:max-w-5xl">
+      <ul
+        class="flex flex-wrap items-stretch justify-center w-full h-full mx-auto"
+      >
+        <li
+          v-for="tenant in inactiveTenants"
+          :key="tenant.slug"
+          class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
+        >
+          <div
+            class="flex flex-col h-full overflow-hidden rounded-md bg-secondary"
+          >
+            <tenant-card :tenant="tenant" />
+          </div>
         </li>
       </ul>
     </section>
@@ -66,16 +66,19 @@
 
 <script>
 import CreditFooter from '@/components/CreditFooter.vue';
+import TenantCard from '@/components/tenant/TenantCard.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
   components: {
-    CreditFooter
+    CreditFooter,
+    TenantCard
   },
   created() {
     this.fetchHomeData();
   },
+
   mounted() {
     this.fetchTenants();
   },
@@ -87,7 +90,13 @@ export default {
       home: 'home/getHomeData',
       tenants: 'home/getTenants',
       loading: 'home/getLoading'
-    })
+    }),
+    activeTenants() {
+      return this.tenants.filter(el => el.isActive);
+    },
+    inactiveTenants() {
+      return this.tenants.filter(el => !el.isActive);
+    }
   },
   metaInfo() {
     return {

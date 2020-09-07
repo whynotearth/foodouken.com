@@ -83,7 +83,7 @@ export default {
         name: '',
         description: '',
         imageUrl:
-          'https://res.cloudinary.com/whynotearth/image/upload/v1593327134/foodouken/tenant_upload/b6pit9hqniikb1jnz5px.png'
+          'https://res.cloudinary.com/whynotearth/image/upload/v1597549990/foodouken/foodouken_yki2um.png'
       }
     };
   },

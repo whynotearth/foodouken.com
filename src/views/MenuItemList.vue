@@ -16,7 +16,7 @@
     >
       <template #subHeading>
         {{ !item.isAvailable ? 'Unavailable -' : '' }}
-        ${{ item.price }} -
+        ${{ item.discountPercent !== 0 ? item.originalPrice : item.price }} -
         {{ item.category.name }}
       </template>
     </MenuItem>

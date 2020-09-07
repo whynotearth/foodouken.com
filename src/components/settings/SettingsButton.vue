@@ -1,10 +1,8 @@
 <template>
   <div class="tg-body-mobile text-white text-opacity-84">
     <slot :linkStyling="linkStyling">
-      <router-link :to="{ name: toLink }" :class="linkStyling">
-        <span v-if="title" class="mr-2">
-          {{ title }}
-        </span>
+      <router-link :to="to" :class="linkStyling">
+        <span v-if="title" class="mr-2">{{ title }}</span>
         <span v-if="subtitle" class="mr-2 text-white opacity-54">
           {{ subtitle }}
         </span>
@@ -29,10 +27,7 @@ export default {
       type: String,
       default: ''
     },
-    toLink: {
-      type: String,
-      default: '/'
-    }
+    to: Object
   },
   data() {
     return {

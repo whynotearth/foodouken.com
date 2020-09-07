@@ -8,7 +8,7 @@ export const settingRoutes = [
       requiresAuth: true,
       appBar: {
         title: 'Settings',
-        backRoute: { name: 'Home' }
+        backRoute: { name: 'Account' }
       }
     }
   },
@@ -21,6 +21,7 @@ export const settingRoutes = [
       requiresAuth: true,
       appBar: {
         title: 'My Account',
+        icon: 'hamburger',
         backRoute: { name: 'Settings' }
       }
     }
@@ -34,6 +35,20 @@ export const settingRoutes = [
       requiresAuth: true,
       appBar: {
         title: 'My Business',
+        backRoute: { name: 'Settings' }
+      }
+    }
+  },
+  {
+    path: '/settings/promotion',
+    name: 'Promotion',
+    component: () => import('@/views/Promotion.vue'),
+    meta: {
+      layout: () => import('@/layouts/TenantLayout.vue'),
+      requiresAuth: true,
+      appBar: {
+        title: 'Promotions',
+        icon: 'hamburger',
         backRoute: { name: 'Settings' }
       }
     }

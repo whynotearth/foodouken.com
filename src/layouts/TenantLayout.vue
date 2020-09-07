@@ -4,6 +4,7 @@
       v-if="appBar"
       :title="appBar.title"
       :toLink="appBar.backRoute"
+      :icon="appBar.icon"
     >
       <template #menu v-if="appBar.newItem">
         <div class="flex-grow inline-block text-right">

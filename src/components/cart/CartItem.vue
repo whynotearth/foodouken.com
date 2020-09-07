@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex flex-row my-2 px-2 relative items-center transition-all duration-300"
+    class="relative flex flex-row items-center px-2 my-2 transition-all duration-300"
   >
     <div
-      class="absolute top-0 left-0 bg-button rounded-full h-4 w-4 cursor-pointer select-none"
+      class="absolute top-0 left-0 w-4 h-4 rounded-full cursor-pointer select-none bg-button"
       @click="remove"
     >
       <img
@@ -15,19 +15,25 @@
     </div>
     <img
       :src="cartItem.product.imageUrl"
-      class="h-12 w-12 my-auto"
+      class="w-12 h-12 my-auto"
       alt="Product image"
     />
-    <div class="mx-2 w-full flex flex-col truncate">
+    <div class="flex flex-col w-full mx-2 truncate">
       <span class="text-gray-400 truncate">{{ cartItem.product.name }} </span>
-      <span class="text-gray-500">${{ cartItem.product.price }}</span>
+      <div v-if="cartItem.product.discountPercent">
+        <span class="mr-1 text-gray-500 line-through">
+          {{ cartItem.product.originalPrice | formatPrice }}
+        </span>
+        <span class="text-gray-500">{{ cartItem.product.price | formatPrice }}</span>
+      </div>
+      <span v-else class="text-gray-500">{{ cartItem.product.price | formatPrice }}</span>
     </div>
-    <div class="flex items-center text-gray-500 font-bold text-lg">
-      <div class="cursor-pointer w-6 select-none" @click="decrement">
+    <div class="flex items-center text-lg font-bold text-gray-500">
+      <div class="w-6 cursor-pointer select-none" @click="decrement">
         <img
           :src="minus"
           alt="-"
-          class="pointer-events-none py-4"
+          class="py-4 pointer-events-none"
           draggable="false"
         />
       </div>
@@ -36,13 +42,13 @@
         name="quantity"
         min="1"
         v-model.number="cartItem.count"
-        class="bg-transparent w-8 py-3 text-center font-bold text-white"
+        class="w-8 py-3 font-bold text-center text-white bg-transparent"
       />
-      <div class="cursor-pointer w-6 select-none" @click="increment">
+      <div class="w-6 cursor-pointer select-none" @click="increment">
         <img
           :src="plus"
           alt="+"
-          class="pointer-events-none py-4"
+          class="py-4 pointer-events-none"
           draggable="false"
         />
       </div>
@@ -79,6 +85,11 @@ export default {
     },
     remove() {
       this.$store.dispatch('cart/removeCartProduct', this.cartItem.product);
+    }
+  },
+  filters: {
+    formatPrice: price => {
+      return `$${price.toFixed(2)}`;
     }
   }
 };
