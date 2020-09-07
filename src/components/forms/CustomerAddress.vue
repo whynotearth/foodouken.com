@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="w-full bg-secondary rounded-lg shadow mb-2">
+    <div class="w-full mb-2 rounded-lg shadow bg-secondary">
       <FindLocation
         @onCancel="option = 'Enter location manually'"
         v-if="option === 'Share location'"
@@ -17,17 +17,18 @@
     <div v-if="option === 'Share location'">
       <div
         v-if="embedUrl.length > 0"
-        class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
+        class="w-full p-5 mb-2 rounded-lg shadow bg-secondary"
       >
         <div class="flex -mt-5">
-          <RadioInput v-model="mapType" value="Map" class="flex-1/2 p-5" />
-          <RadioInput v-model="mapType" value="Satellite" class="flex-1/2 p-5" />
+          <RadioInput v-model="mapType" value="Map" class="p-5 flex-1/2" />
+          <RadioInput v-model="mapType" value="Satellite" class="p-5 flex-1/2" />
         </div>
-        <GmapMap class="w-full h-64 rounded border-none"
+        <GmapMap class="w-full h-64 border-none rounded"
+          ref="gmap"
           :center="{lat:locationFromComponent.latitude, lng:locationFromComponent.longitude}"
           :zoom="12"
           :options="mapOptions"
-          @center_changed="centerChanged"
+          @idle="idle"
           :map-type-id="mapTypeId"
         >
           <GmapMarker
@@ -43,7 +44,7 @@
       </div>
     </div>
     <div v-else>
-      <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
+      <div class="px-2 pt-4 pb-1 rounded-lg shadow bg-secondary">
         <material-input
           v-model="buildingName"
           type="text"
@@ -139,6 +140,10 @@ export default {
         mapTypeControl: false,
       }
     };
+  },
+  mounted() {
+   
+
   },
   validations: {
     street: {
@@ -245,13 +250,11 @@ export default {
       'updateGoogleLocation',
       'pageChange'
     ]),
-    centerChanged(e) {
-       var coordString = e.toString().slice(1,-1).replace(/ /g,'');
-       var commaPos = coordString.indexOf(',');
-       var coordinatesLat = parseFloat(coordString.substring(0, commaPos));
-       var coordinatesLong = parseFloat(coordString.substring(commaPos + 1, coordString.length));
-       this.markers[0].position.lat = coordinatesLat;
-       this.markers[0].position.lng = coordinatesLong;
+    idle() {
+      var coordString = this.$refs.gmap.$mapObject.getCenter().toString().slice(1,-1).replace(/ /g,'');
+      var commaPos = coordString.indexOf(',');
+      this.locationFromComponent.latitude = parseFloat(coordString.substring(0, commaPos));
+      this.locationFromComponent.longitude = parseFloat(coordString.substring(commaPos + 1, coordString.length));
     },
     submit() {
       if (this.option !== 'Share location') {
