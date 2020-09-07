@@ -5,9 +5,17 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint && stylelint 'src/**/*.css' --fix"
+    "lint": "vue-cli-service lint && stylelint 'src/**/*.css' --fix",
+    "capacitor:build:staging": "vue-cli-service capacitor:build --mode mobile-staging",
+    "capacitor:serve:staging": "vue-cli-service capacitor:serve --mode mobile-staging",
+    "capacitor:build:production": "vue-cli-service capacitor:build --mode mobile-production",
+    "capacitor:serve:production": "vue-cli-service capacitor:serve --mode mobile-production"
   },
   "dependencies": {
+    "@capacitor/android": "^2.0.0",
+    "@capacitor/cli": "^2.0.0",
+    "@capacitor/core": "^2.0.0",
+    "@capacitor/ios": "^2.0.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "lodash-es": "^4.17.15",
@@ -40,6 +48,7 @@
     "prettier": "^1.19.1",
     "stylelint": "^13.5.0",
     "stylelint-config-standard": "^20.0.0",
+    "vue-cli-plugin-capacitor": "~2.0.0",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.11"
   }

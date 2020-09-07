@@ -1,7 +1,7 @@
 <template>
   <div
     id="app"
-    class="font-sans bg-background h-full text-white text-lg antialiased"
+    class="h-full font-sans text-lg antialiased text-white bg-background"
   >
     <component :is="this.$route.meta.layout || 'div'">
       <router-view />
@@ -9,8 +9,7 @@
     <transition name="fade">
       <div
         v-if="overlayModel.title || overlayModel.message"
-        class="w-full h-full fixed block top-0
-        left-0 z-110"
+        class="fixed top-0 left-0 block w-full h-full z-110"
       >
         <BaseOverlaySuccess
           :title="overlayModel.title"
@@ -18,9 +17,9 @@
         />
       </div>
     </transition>
-    <SnackBar :showSnackBar="showPrivacySnackBar">
+    <SnackBar v-if="!isMobile" :showSnackBar="showPrivacySnackBar">
       <div
-        class="flex items-center justify-between text-white w-full h-12 tg-caption-mobile leading-4 p-4"
+        class="flex items-center justify-between w-full h-12 p-4 leading-4 text-white tg-caption-mobile"
       >
         <p>
           Gotta agree to
@@ -33,7 +32,7 @@
           </a>
         </p>
         <p
-          class="text-button uppercase cursor-pointer"
+          class="uppercase cursor-pointer text-button"
           @click="setSnackBarCookie"
         >
           Agree
@@ -58,16 +57,22 @@ export default {
   },
   data() {
     return {
-      showPrivacySnackBar: true
+      showPrivacySnackBar: true,
+      isMobile: process.env.VUE_APP_MOBILE === 'true'
     };
   },
   beforeMount() {
-    let showSnackBar = cookie.getCookie('privacy-snackbar');
-    //if bannerCookie === 1 that means user has seen the banner and dismissed it
-    if (showSnackBar == 1) {
-      this.showPrivacySnackBar = false;
-    } else {
-      this.showPrivacySnackBar = true;
+      let showSnackBar = cookie.getCookie('privacy-snackbar');
+      //if bannerCookie === 1 that means user has seen the banner and dismissed it
+      if (showSnackBar == 1) {
+        this.showPrivacySnackBar = false;
+      } else {
+        this.showPrivacySnackBar = true;
+      }
+  },
+  mounted() {
+    if (this.isMobile) {
+      //add ios padding alert
     }
   },
   methods: {

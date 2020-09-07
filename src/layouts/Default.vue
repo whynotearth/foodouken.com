@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div
+    v-bind:class="{'safe-top safe-left safe-right safe-bottom mt-10': isMobile}"
+  >
     <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
       <div v-show="!getLoading">
-        <BaseSiteBanner>
+        <BaseSiteBanner  v-if="!isMobile">
           Foodouken is now in Open Beta
           <a
             href="https://www.reddit.com/r/opensource/comments/herzsw/we_are_foodukencom_an_opensource_food_delivery/?utm_medium=android_app&utm_source=share"
@@ -13,7 +15,7 @@
           </a>
           ✊
         </BaseSiteBanner>
-        <div class="flex justify-end cursor-pointer mr-3">
+        <div class="flex justify-end mr-3 cursor-pointer">
           <img
             class="w-10 h-10"
             src="../assets/round-avatar.png"
@@ -29,7 +31,7 @@
           </span>
         </div>
         <router-view
-          class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
+          class="min-h-screen px-4 pb-8 mx-auto md:px-8 max-w-screen-xxl"
         />
       </div>
     </transition>
@@ -50,7 +52,8 @@ export default {
   data() {
     return {
       isAuthenticated: false,
-      apiError: ''
+      apiError: '',
+      isMobile: process.env.VUE_APP_MOBILE === 'true'
     };
   },
   computed: {

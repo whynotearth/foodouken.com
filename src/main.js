@@ -15,6 +15,10 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 var dataLayer = dataLayer || [];
 require('typeface-open-sans');
 
+
+import {Plugins} from '@capacitor/core'
+const {SplashScreen} = Plugins
+
 Vue.use(SmoothPicker);
 Vue.use(Vuelidate);
 Vue.use(vClickOutside);
@@ -38,5 +42,10 @@ Vue.config.productionTip = false;
 new Vue({
   store,
   router,
-  render: h => h(App)
+  render: h => h(App),
+  mounted() {
+    if(process.env.VUE_APP_MOBILE){
+      SplashScreen.hide();
+    }
+  }
 }).$mount('#app');
