@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="w-full bg-secondary rounded-lg shadow mb-2">
+    <div class="w-full mb-2 rounded-lg shadow bg-secondary">
       <FindLocation
         @onCancel="option = 'Enter location manually'"
         v-if="option === 'Share location'"
@@ -17,18 +17,42 @@
     <div v-if="option === 'Share location'">
       <div
         v-if="embedUrl.length > 0"
-        class="w-full bg-secondary rounded-lg shadow mb-2 p-5"
+        class="w-full p-5 mb-2 rounded-lg shadow bg-secondary"
       >
-        <iframe
-          class="w-full rounded border-none"
-          frameborder="0"
-          :src="embedUrl"
-          allowfullscreen
-        ></iframe>
+        <div class="flex -mt-5">
+          <RadioInput v-model="mapType" value="Map" class="p-5 flex-1/2" />
+          <RadioInput
+            v-model="mapType"
+            value="Satellite"
+            class="p-5 flex-1/2"
+          />
+        </div>
+        <GmapMap
+          class="w-full h-64 border-none rounded"
+          ref="gmap"
+          :center="{
+            lat: locationFromComponent.latitude,
+            lng: locationFromComponent.longitude
+          }"
+          :zoom="12"
+          :options="mapOptions"
+          @idle="idle"
+          :map-type-id="mapTypeId"
+        >
+          <GmapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            :maxZoom="12"
+            @click="center = m.position"
+          />
+        </GmapMap>
       </div>
     </div>
     <div v-else>
-      <div class="bg-secondary px-2 pt-4 pb-1 rounded-lg shadow">
+      <div class="px-2 pt-4 pb-1 rounded-lg shadow bg-secondary">
         <material-input
           v-model="buildingName"
           type="text"
@@ -108,9 +132,26 @@ export default {
       submitError: false,
       registerError: '',
       embedUrl: '',
-      locationFromComponent: {}
+      locationFromComponent: {},
+      markers: [
+        {
+          position: {
+            lat: null,
+            lng: null
+          }
+        }
+      ],
+      mapType: 'Map',
+      mapOptions: {
+        zoomControl: false,
+        streetViewControl: false,
+        fullscreenControlOptions: true,
+        disableDefaultUI: false,
+        mapTypeControl: false
+      }
     };
   },
+  mounted() {},
   validations: {
     street: {
       required
@@ -139,6 +180,13 @@ export default {
         this.updateAddressOption(value);
       }
     },
+    mapTypeId: function() {
+      if (this.mapType === 'Map') {
+        return 'terrain';
+      } else {
+        return 'satellite';
+      }
+    },
     town: {
       get() {
         return this.getTown;
@@ -165,7 +213,7 @@ export default {
     },
     buildingName: {
       get() {
-        return this.getBuildingName;
+        return this.getMapId;
       },
       set(value) {
         this.updateBuildingName(value);
@@ -209,6 +257,20 @@ export default {
       'updateGoogleLocation',
       'pageChange'
     ]),
+    idle() {
+      var coordString = this.$refs.gmap.$mapObject
+        .getCenter()
+        .toString()
+        .slice(1, -1)
+        .replace(/ /g, '');
+      var commaPos = coordString.indexOf(',');
+      this.locationFromComponent.latitude = parseFloat(
+        coordString.substring(0, commaPos)
+      );
+      this.locationFromComponent.longitude = parseFloat(
+        coordString.substring(commaPos + 1, coordString.length)
+      );
+    },
     submit() {
       if (this.option !== 'Share location') {
         this.$v.$touch();
@@ -240,10 +302,12 @@ export default {
       handler(value) {
         const { latitude, longitude } = value;
         if (latitude && longitude) {
+          this.markers[0].position.lat = latitude;
+          this.markers[0].position.lng = longitude;
           this.updateGoogleLocation(
-            `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`
+            `https://www.google.com/maps/search/?api=1&query=${this.markers[0].position.lat},${this.markers[0].position.lng}`
           );
-          this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.VUE_APP_MAPS_API_KEY}&q=${latitude},${longitude}`;
+          this.embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.VUE_APP_MAPS_API_KEY}&q=${this.markers[0].position.lat},${this.markers[0].position.lng}`;
         }
       }
     }
