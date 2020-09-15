@@ -1,5 +1,5 @@
 <template>
-  <div class="time-picker-modal" v-if="selectedDayOption">
+  <div :id="_uid" class="time-picker-modal" v-if="selectedDayOption">
     <div
       class="absolute w-screen h-screen top-0 left-0 bg-background z-50"
       @click="$emit('closeModal')"

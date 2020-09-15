@@ -52,5 +52,19 @@ export const settingRoutes = [
         backRoute: { name: 'Settings' }
       }
     }
+  },
+  {
+    path: '/settings/business-hours',
+    name: 'ViewBusinessHours',
+    component: () => import('@/views/ViewBusinessHours.vue'),
+    meta: {
+      layout: () => import('@/layouts/TenantLayout.vue'),
+      requiresAuth: true,
+      appBar: {
+        title: 'Business Hours',
+        icon: 'hamburger',
+        backRoute: { name: 'Settings' }
+      }
+    }
   }
 ];
