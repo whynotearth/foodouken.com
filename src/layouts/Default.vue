@@ -4,7 +4,7 @@
     <transition name="fade">
       <div v-show="!getLoading">
         <BaseSiteBanner>
-          made with ❤️ in Cambodia
+          Made with ❤️ in Cambodia
         </BaseSiteBanner>
         <div class="flex justify-end cursor-pointer mr-3">
           <img
