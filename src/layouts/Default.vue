@@ -4,14 +4,7 @@
     <transition name="fade">
       <div v-show="!getLoading">
         <BaseSiteBanner>
-          Foodouken is now in Open Beta
-          <a
-            href="https://www.reddit.com/r/opensource/comments/herzsw/we_are_foodukencom_an_opensource_food_delivery/?utm_medium=android_app&utm_source=share"
-            class="underline"
-          >
-            #DeleteFoodPanda
-          </a>
-          ✊
+          made with <3 in Cambodia
         </BaseSiteBanner>
         <div class="flex justify-end cursor-pointer mr-3">
           <img
