@@ -28,7 +28,7 @@
     <transition name="fade">
       <div v-show="!getLoading">
         <BaseSiteBanner>
-          made with <3 in Cambodia
+          made with ❤️ in Cambodia
         </BaseSiteBanner>
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
