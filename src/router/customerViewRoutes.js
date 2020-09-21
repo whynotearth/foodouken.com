@@ -16,5 +16,11 @@ export const customerViewRoutes = [
         newItem: { name: 'Account' }
       }
     }
-  }
+  },
+{
+path: '/privacy-policy',
+name: 'Privacy Policy',
+component: () => import('@/views/PrivacyPolicy.vue'),
+meta: { layout: () => import('@/layouts/Default.vue') }
+}
 ];
