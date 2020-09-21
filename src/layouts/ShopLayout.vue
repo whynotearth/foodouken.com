@@ -27,9 +27,9 @@
     <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
       <div v-show="!getLoading">
-        <BaseSiteBanner>
+        <!-- <BaseSiteBanner>
           Made with ❤️ in Cambodia
-        </BaseSiteBanner>
+        </BaseSiteBanner> -->
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
         />
