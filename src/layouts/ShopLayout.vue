@@ -44,7 +44,7 @@
 import Footer from '@/components/Footer.vue';
 import Spinner from '@/components/Spinner.vue';
 import CreditFooter from '@/components/CreditFooter.vue';
-import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
+// import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
 import BaseAppBarHeader from '@/components/BaseAppBarHeader';
 
 import { mapGetters, mapActions } from 'vuex';
@@ -55,7 +55,7 @@ export default {
     Footer,
     Spinner,
     CreditFooter,
-    BaseSiteBanner,
+    // BaseSiteBanner,
     BaseAppBarHeader
   },
   data() {

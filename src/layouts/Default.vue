@@ -31,14 +31,14 @@
 
 <script>
 import Spinner from '@/components/Spinner.vue';
-import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
+// import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'DefaultLayout',
   components: {
-    Spinner,
-    BaseSiteBanner
+    Spinner
+    // BaseSiteBanner
   },
   data() {
     return {
