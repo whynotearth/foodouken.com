@@ -10,12 +10,34 @@
 </template>
 
 <script>
+import cookie from '@/utils/cookie';
 export default {
   name: 'SnackBar',
   props: {
     showSnackBar: {
       type: Boolean,
       required: true
+    }
+  },
+  data: function() {
+    return {
+      showSnackBar: false
+    };
+  },
+  beforeMount() {
+    var snackBarCookie = cookie.getCookie('snackBar');
+    //if snackBarCookie === 1 that means user has seen the snackBar and dismissed it
+    if (snackBarCookie == 1) {
+      this.showSnackBar = false;
+    } else {
+      this.showSnackBar = true;
+    }
+  },
+  methods: {
+    setsnackBarCookie: function() {
+      this.showSnackBar = false;
+      //set cookie with name 'snackBar'. Set value to 1 which means true. Set expiration to 7 days.
+      cookie.setCookie('snackBar', 1, 7);
     }
   }
 };
