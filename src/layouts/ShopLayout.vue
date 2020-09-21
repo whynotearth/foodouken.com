@@ -27,9 +27,9 @@
     <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
       <div v-show="!getLoading">
-        <BaseSiteBanner>
+        <!-- <BaseSiteBanner>
           Made with ❤️ in Cambodia
-        </BaseSiteBanner>
+        </BaseSiteBanner> -->
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
         />
@@ -44,7 +44,7 @@
 import Footer from '@/components/Footer.vue';
 import Spinner from '@/components/Spinner.vue';
 import CreditFooter from '@/components/CreditFooter.vue';
-import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
+// import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
 import BaseAppBarHeader from '@/components/BaseAppBarHeader';
 
 import { mapGetters, mapActions } from 'vuex';
@@ -55,7 +55,7 @@ export default {
     Footer,
     Spinner,
     CreditFooter,
-    BaseSiteBanner,
+    // BaseSiteBanner,
     BaseAppBarHeader
   },
   data() {
