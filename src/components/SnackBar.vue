@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import cookie from '@/utils/cookie';
 export default {
   name: 'SnackBar',
   props: {
@@ -25,19 +24,17 @@ export default {
     };
   },
   beforeMount() {
-    var snackBarCookie = cookie.getCookie('snackBar');
-    //if snackBarCookie === 1 that means user has seen the snackBar and dismissed it
-    if (snackBarCookie == 1) {
+    var snackBarStorage = localStorage.getItem('hasConsent');
+    if (snackBarStorage) {
       this.showSnackBar = false;
     } else {
       this.showSnackBar = true;
     }
   },
   methods: {
-    setsnackBarCookie: function() {
+    setSnackBarStorage: function() {
       this.showSnackBar = false;
-      //set cookie with name 'snackBar'. Set value to 1 which means true. Set expiration to 7 days.
-      cookie.setCookie('snackBar', 1, 7);
+      localStorage.setItem('hasConsent', true);
     }
   }
 };
