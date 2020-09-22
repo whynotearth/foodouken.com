@@ -3,21 +3,13 @@
     <div class="text-center">
       <div class="my-8">
         <div class="w-40 h-40 p-5 mx-auto rounded-full bg-logo">
-          <img
-            :src="home.custom.logo"
-            class="rounded-full"
-            alt="Logo - Blobby from Foodouken"
-          />
+          <img :src="home.custom.logo" class="rounded-full" alt="Logo - Blobby from Foodouken" />
         </div>
       </div>
       <h1 class="text-4xl font-bold text-white">{{ home.title }}</h1>
-      <h2 class="mb-8 text-2xl font-semibold text-gray-500">
-        Privacy Policy
-      </h2>
-      <div
-        class="max-w-lg mx-auto mt-2 text-base text-justify text-gray-500 lg:text-left"
-      >
-        <p>Last Modified: May 6, 2019</p>
+      <h2 class="mb-8 text-2xl font-semibold text-gray-500">Privacy Policy</h2>
+      <div class="max-w-lg mx-auto mt-2 text-base text-justify text-gray-500 lg:text-left">
+        <h2 class="font-bold">Last Modified: May 6, 2019</h2>
         <br />
         <p>
           We at meredith-core (aurelox llc dba meredith-core. and our
@@ -62,21 +54,20 @@
           Privacy.
         </p>
         <br />
-        <h2 class="font-bold">## 1. Information We Collect</h2>
+        <h2 class="font-bold">1. Information We Collect</h2>
+        <br />
+        <p></p>
+        <h2 class="font-bold">Our Use of the Subscription Service</h2>
         <br />
         <p>
-          **Our Use of the Subscription Service 
-          <br />
-          **We use our own Subscription Service to build webpages that people
+          We use our own Subscription Service to build webpages that people
           can visit to learn more about meredith-core. Information that we
           collect and manage using the Subscription Service for our own
           marketing belongs to us and is used, disclosed and protected according
           to this Privacy Policy.
         </p>
         <br />
-        <p>
-          **When You Visit our Websites**
-        </p>
+        <h2 class="font-bold">When You Visit our Websites</h2>
         <br />
         <p>
           You are free to explore the Websites without providing any Personal
@@ -85,9 +76,7 @@
           Information about yourself, and we collect Navigational Information.
         </p>
         <br />
-        <p>
-          **"Personal Information"**
-        </p>
+        <h2 class="font-bold">Personal Information</h2>
         <br />
         <p>
           This refers to any information that you voluntarily submit to us and
@@ -114,9 +103,8 @@
           party PCI-compliant service providers.
         </p>
         <br />
-        <p>
-          **Log Files**
-        </p>
+        <h2 class="font-bold">Log Files</h2>
+
         <br />
         <p>
           When you view content provided by us, we automatically collect
@@ -131,9 +119,7 @@
           phone number.
         </p>
         <br />
-        <p>
-          **Information we collect from third parties**
-        </p>
+        <h2 class="font-bold">Information we collect from third parties</h2>
         <br />
         <p>
           From time to time, we may receive Personal Information about you from
@@ -142,9 +128,7 @@
           available sources such as social media websites.
         </p>
         <br />
-        <p>
-          **Information About Children**
-        </p>
+        <h2 class="font-bold">Information About Children</h2>
         <br />
         <p>
           The Websites are not intended for or targeted at children under 18,
@@ -154,13 +138,9 @@
           that we may delete the information.
         </p>
         <br />
-        <h2 class="font-bold">
-          ## 2. How We Use Information We Collect
-        </h2>
+        <h2 class="font-bold">2. How We Use Information We Collect</h2>
         <br />
-        <p>
-          **Compliance with Our Privacy Policy**
-        </p>
+        <h2 class="font-bold">Compliance with Our Privacy Policy</h2>
         <br />
         <p>
           We use the information we collect only in compliance with this Privacy
@@ -169,17 +149,11 @@
           Policy.
         </p>
         <br />
-        <p>
-          **We Never Sell Personal Information**
-        </p>
+        <h2 class="font-bold">We Never Sell Personal Information</h2>
         <br />
-        <p>
-          We will never sell your Personal Information to any third party.
-        </p>
+        <p>We will never sell your Personal Information to any third party.</p>
         <br />
-        <p>
-          **Use of Personal Information**
-        </p>
+        <h2 class="font-bold">Use of Personal Information</h2>
         <br />
         <p>
           In addition to the uses identified elsewhere in this Privacy Policy,
@@ -208,10 +182,11 @@
           third party.
         </p>
         <br />
-        <p>
-          **Legal basis for processing Personal Information (EEA visitors
-          only)**
-        </p>
+        <h2 class="font-bold">
+          Legal basis for processing Personal Information (EEA visitors
+          only)
+        </h2>
+
         <br />
         <p>
           If you are a visitor located in the European Economic Area ("EEA"),
@@ -243,9 +218,7 @@
           are.
         </p>
         <br />
-        <p>
-          **Use of Navigational Information**
-        </p>
+        <h2 class="font-bold">Use of Navigational Information</h2>
         <br />
         <p>
           We use Navigational Information to operate and improve the Websites.
@@ -254,9 +227,7 @@
           about meredith-core.
         </p>
         <br />
-        <p>
-          **Customer Testimonials and Comments**
-        </p>
+        <h2 class="font-bold">Customer Testimonials and Comments</h2>
         <br />
         <p>
           We post customer testimonials and comments on our Websites, which may
@@ -264,9 +235,8 @@
           to posting the customer's name and testimonial.
         </p>
         <br />
-        <p>
-          **Use of Payment Information**
-        </p>
+        <h2 class="font-bold">Use of Payment Information</h2>
+
         <br />
         <p>
           If you give us Payment information, we use it solely to check your
@@ -277,9 +247,8 @@
           our behalf.
         </p>
         <br />
-        <p>
-          **Security of your Personal Information**
-        </p>
+        <h2 class="font-bold">Security of your Personal Information</h2>
+
         <br />
         <p>
           We use a variety of security technologies and procedures to help
@@ -291,9 +260,7 @@
           measures.
         </p>
         <br />
-        <p>
-          **Social Media Features**
-        </p>
+        <h2 class="font-bold">Social Media Features</h2>
         <br />
         <p>
           Our Websites include Social Media Features, such as the Facebook Like
@@ -307,9 +274,7 @@
           privacy policy and other policies of the companies providing them.
         </p>
         <br />
-        <p>
-          **External Websites**
-        </p>
+        <h2 class="font-bold">External Websites</h2>
         <br />
         <p>
           Our Websites provide links to other websites. We do not control, and
@@ -321,9 +286,8 @@
           have.
         </p>
         <br />
-        <p>
-          **Public Forums**
-        </p>
+        <h2 class="font-bold">Public Forums</h2>
+
         <br />
         <p>
           We offer publicly accessible message boards, blogs, and community
@@ -334,9 +298,7 @@
           request, as described in "Opting Out and Unsubscribing" below.
         </p>
         <br />
-        <p>
-          **Retention of Personal Information**
-        </p>
+        <h2 class="font-bold">Retention of Personal Information</h2>
         <br />
         <p>
           How long we keep information we collect about you depends on the type
@@ -378,13 +340,9 @@
           retained according to the relevant agreements with our customers.
         </p>
         <br />
-        <h2 class="font-bold">
-          ## 3. How we Share Information we Collect
-        </h2>
+        <h2 class="font-bold">3. How we Share Information we Collect</h2>
         <br />
-        <p>
-          **Service Providers**
-        </p>
+        <h2 class="font-bold">Service Providers</h2>
         <br />
         <p>
           We employ other companies and people to provide services to visitors
@@ -401,9 +359,7 @@
           policies.
         </p>
         <br />
-        <p>
-          **meredith-core Partners**
-        </p>
+        <h2 class="font-bold">meredith-core Partners</h2>
         <br />
         <p>
           In addition, we may share data with trusted partners to contact you
@@ -424,9 +380,7 @@
           our privacy and data protection policies.
         </p>
         <br />
-        <p>
-          **Corporate Events**
-        </p>
+        <h2 class="font-bold">Corporate Events</h2>
         <br />
         <p>
           If we (or our assets) are acquired by another company, whether by
@@ -438,9 +392,7 @@
           regarding your Personal Information.
         </p>
         <br />
-        <p>
-          **Compelled Disclosure**
-        </p>
+        <h2 class="font-bold">Compelled Disclosure</h2>
         <br />
         <p>
           We reserve the right to use or disclose your Personal Information if
@@ -450,13 +402,9 @@
           process.
         </p>
         <br />
-        <h2 class="font-bold">
-          ## 4. International Transfer of Information
-        </h2>
+        <h2 class="font-bold">4. International Transfer of Information</h2>
         <br />
-        <p>
-          **International Transfers within meredith-core’s Entities**
-        </p>
+        <h2 class="font-bold">International Transfers within meredith-core’s Entities</h2>
         <br />
         <p>
           To facilitate our global operations, we transfer information to the
@@ -478,9 +426,7 @@
           notice below for more information.
         </p>
         <br />
-        <p>
-          **International transfers to third parties**
-        </p>
+        <h2 class="font-bold">International transfers to third parties</h2>
         <br />
         <p>
           Some of the third parties described in this privacy policy, which
@@ -495,13 +441,9 @@
           Notice below.
         </p>
         <br />
-        <h2 class="font-bold">
-          ## 5. Cookies and Similar Technologies
-        </h2>
+        <h2 class="font-bold">5. Cookies and Similar Technologies</h2>
         <br />
-        <p>
-          **Cookies**
-        </p>
+        <h2 class="font-bold">Cookies</h2>
         <br />
         <p>
           meredith-core and its partners use cookies or similar technologies
@@ -510,9 +452,7 @@
           information about our user base as a whole.
         </p>
         <br />
-        <p>
-          **Navigational Information Collected by Our Customers**
-        </p>
+        <h2 class="font-bold">Navigational Information Collected by Our Customers</h2>
         <br />
         <p>
           Our customers can use the tools we provide, as well as tools provided
@@ -522,9 +462,7 @@
           information they collect or how they use it.
         </p>
         <br />
-        <p>
-          **Flash Cookies and Other Third Party Tracking Technologies**
-        </p>
+        <h2 class="font-bold">Flash Cookies and Other Third Party Tracking Technologies</h2>
         <br />
         <p>
           The Adobe Flash Player (and similar applications) use technology to
@@ -538,9 +476,7 @@
           you can manage them please visit our Cookie Policy.
         </p>
         <br />
-        <p>
-          **Advertising**
-        </p>
+        <h2 class="font-bold">Advertising</h2>
         <br />
         <p>
           We partner with a third party ad network to either display advertising
@@ -557,26 +493,18 @@
           will continue to receive generic ads.
         </p>
         <br />
-        <p>
-          **Third Party Tracking Technologies**
-        </p>
+        <h2 class="font-bold">Third Party Tracking Technologies</h2>
         <br />
         <p>
           The use of cookies and web beacons by any tracking utility company is
           not covered by our Privacy Policy or Cookie Policy.
         </p>
         <br />
-        <h2 class="font-bold">
-          ## 6. How to Access & Control Your Personal Data
-        </h2>
+        <h2 class="font-bold">6. How to Access & Control Your Personal Data</h2>
         <br />
-        <p>
-          **Reviewing, Correcting and Removing Your Personal Information**
-        </p>
+        <h2 class="font-bold">Reviewing, Correcting and Removing Your Personal Information</h2>
         <br />
-        <p>
-          You have the following data protection rights:
-        </p>
+        <p>You have the following data protection rights:</p>
         <br />
         <p>
           - You can request access, correction, updates or deletion of your
@@ -608,9 +536,7 @@
           notify you of the action we have taken.
         </p>
         <br />
-        <p>
-          **Anti-Spam Policy**
-        </p>
+        <h2 class="font-bold">Anti-Spam Policy</h2>
         <br />
         <p>
           Our Acceptable Use Policy, applies to us and to our customers and,
@@ -624,9 +550,7 @@
           Subscription Service.
         </p>
         <br />
-        <p>
-          **To Unsubscribe From Our Communications**
-        </p>
+        <h2 class="font-bold">To Unsubscribe From Our Communications</h2>
         <br />
         <p>
           You may unsubscribe from our marketing communications by clicking on
@@ -638,9 +562,7 @@
           with us or the Subscription Service.
         </p>
         <br />
-        <p>
-          **To Unsubscribe from Our Customers' Communications**
-        </p>
+        <h2 class="font-bold">To Unsubscribe from Our Customers' Communications</h2>
         <br />
         <p>
           Our customers are solely responsible for their own marketing emails
@@ -650,26 +572,20 @@
           bottom of their emails, or by contacting them directly.
         </p>
         <br />
-        <p>
-          **Contact**
-        </p>
+        <h2 class="font-bold">Contact</h2>
         <br />
-        <p>
-          Data Protection Officer (DPO)
-        </p>
+        <p>Data Protection Officer (DPO)</p>
         <br />
         <p>
           Meredith
-          <br />
-          meredith@whynot.earth
-          <br />
-          meredith-core, Inc. 908 Islander Way, Chattanooga, TN, 37402 USA,
+          <br />meredith@whynot.earth
+          <br />meredith-core, Inc. 908 Islander Way, Chattanooga, TN, 37402 USA,
           Attention: Privacy
         </p>
       </div>
     </div>
     <hr class="my-8 border-gray-700" />
-    <section class="flex mx-auto my-4 lg:max-w-3xl xl:max-w-5xl">
+    <!-- <section class="flex mx-auto my-4 lg:max-w-3xl xl:max-w-5xl">
       <ul
         class="flex flex-wrap items-stretch justify-center w-full h-full mx-auto"
       >
@@ -690,19 +606,15 @@
         </li>
       </ul>
     </section>
-    <hr class="my-8 border-gray-700" />
+    <hr class="my-8 border-gray-700" />-->
     <section class="flex mx-auto my-4 lg:max-w-3xl xl:max-w-5xl">
-      <ul
-        class="flex flex-wrap items-stretch justify-center w-full h-full mx-auto"
-      >
+      <ul class="flex flex-wrap items-stretch justify-center w-full h-full mx-auto">
         <li
           v-for="tenant in inactiveTenants"
           :key="tenant.slug"
           class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
         >
-          <div
-            class="flex flex-col h-full overflow-hidden rounded-md bg-secondary"
-          >
+          <div class="flex flex-col h-full overflow-hidden rounded-md bg-secondary">
             <tenant-card :tenant="tenant" />
           </div>
         </li>
