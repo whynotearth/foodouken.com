@@ -13,13 +13,13 @@
             v-if="isAuthenticated"
             @click="performRedirect"
           />
-          <span
+          <!-- <span
             class="text-sm md:text-lg text-button"
             v-else
             @click="performRedirect"
           >
             Login
-          </span>
+          </span> -->
         </div>
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
