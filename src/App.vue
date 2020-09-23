@@ -27,7 +27,7 @@
           <a
             class="underline cursor-pointer"
             target="_blank"
-            href="https://hub.paulchrisluke.com/-temporary-slug-7a760197-2d5d-4314-876c-ade5923d6dd8"
+            href="/privacy-policy"
           >
             terms and conditions
           </a>

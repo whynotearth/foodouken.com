@@ -17,10 +17,28 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+  data: function() {
+    return {
+      isSnackBar: false
+    };
+  },
+  beforeMount() {
+    var snackBarCookie = localStorage.getItem('hasConsent');
+    if (snackBarCookie) {
+      this.isSnackBar = false;
+    } else {
+      this.isSnackBar = true;
+    }
+  },
+  methods: {
+    setsnackBarCookie: function() {
+      this.isSnackBar = false;
+      localStorage.setItem('hasConsent', true);
+    }
   }
 };
 </script>
-
 <style scoped>
 .slide-down-leave-active {
   animation: slide-out-bottom 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;

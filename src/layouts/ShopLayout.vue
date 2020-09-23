@@ -17,9 +17,6 @@
               class="w-8 h-8 my-auto cursor-pointer"
               v-if="isAuthenticated"
             />
-            <span class="text-sm md:text-lg text-button" v-else>
-              Login
-            </span>
           </router-link>
         </div>
       </template>
