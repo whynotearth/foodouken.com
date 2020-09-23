@@ -17,10 +17,10 @@ export const customerViewRoutes = [
       }
     }
   },
-{
-path: '/privacy-policy',
-name: 'Privacy Policy',
-component: () => import('@/views/PrivacyPolicy.vue'),
-meta: { layout: () => import('@/layouts/Default.vue') }
-}
+  {
+    path: '/privacy-policy',
+    name: 'Privacy Policy',
+    component: () => import('@/views/PrivacyPolicy.vue'),
+    meta: { layout: () => import('@/layouts/Default.vue') }
+  }
 ];

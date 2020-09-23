@@ -24,13 +24,13 @@
       >
         <p>
           Gotta agree to
-          <a
+          <router-link
             class="underline cursor-pointer"
             target="_blank"
-            href="https://hub.paulchrisluke.com/-temporary-slug-7a760197-2d5d-4314-876c-ade5923d6dd8"
+            :to="{ name: 'Privacy Policy' }"
           >
             terms and conditions
-          </a>
+          </router-link>
         </p>
         <p
           class="text-button uppercase cursor-pointer"
@@ -46,7 +46,6 @@
 <script>
 import BaseOverlaySuccess from '@/components/BaseOverlaySuccess.vue';
 import SnackBar from '@/components/SnackBar.vue';
-import cookie from '@/utils/cookie';
 
 export default {
   name: 'App',
@@ -62,9 +61,9 @@ export default {
     };
   },
   beforeMount() {
-    let showSnackBar = cookie.getCookie('privacy-snackbar');
+    let showSnackBar = localStorage.getItem('hasConsent');
     //if bannerCookie === 1 that means user has seen the banner and dismissed it
-    if (showSnackBar == 1) {
+    if (showSnackBar) {
       this.showPrivacySnackBar = false;
     } else {
       this.showPrivacySnackBar = true;
@@ -74,7 +73,7 @@ export default {
     setSnackBarCookie() {
       this.showPrivacySnackBar = false;
       //set cookie with name 'snackbar'. Set value to 1 which means true. Set expiration to 7 days.
-      cookie.setCookie('privacy-snackbar', 1, 365);
+      localStorage.setItem('hasConsent', true)
     }
   }
 };
