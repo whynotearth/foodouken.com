@@ -46,7 +46,7 @@
 <script>
 import BaseOverlaySuccess from '@/components/BaseOverlaySuccess.vue';
 import SnackBar from '@/components/SnackBar.vue';
-import cookie from '@/utils/cookie';
+// import cookie from '@/utils/cookie';
 
 export default {
   name: 'App',
@@ -62,9 +62,9 @@ export default {
     };
   },
   beforeMount() {
-    let showSnackBar = cookie.getCookie('privacy-snackbar');
+    let showSnackBar = localStorage.getItem('hasConsent');
     //if bannerCookie === 1 that means user has seen the banner and dismissed it
-    if (showSnackBar == 1) {
+    if (showSnackBar) {
       this.showPrivacySnackBar = false;
     } else {
       this.showPrivacySnackBar = true;
@@ -74,7 +74,7 @@ export default {
     setSnackBarCookie() {
       this.showPrivacySnackBar = false;
       //set cookie with name 'snackbar'. Set value to 1 which means true. Set expiration to 7 days.
-      cookie.setCookie('privacy-snackbar', 1, 365);
+      localStorage.setItem('hasConsent', true)
     }
   }
 };
