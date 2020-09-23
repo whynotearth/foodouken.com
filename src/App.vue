@@ -24,13 +24,13 @@
       >
         <p>
           Gotta agree to
-          <a
+          <router-link
             class="underline cursor-pointer"
             target="_blank"
-            href="/privacy-policy"
+            :to="{ name: 'Privacy Policy' }"
           >
             terms and conditions
-          </a>
+          </router-link>
         </p>
         <p
           class="text-button uppercase cursor-pointer"
