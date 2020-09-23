@@ -584,56 +584,19 @@
         </p>
       </div>
     </div>
-    <hr class="my-8 border-gray-700" />
-    <!-- <section class="flex mx-auto my-4 lg:max-w-3xl xl:max-w-5xl">
-      <ul
-        class="flex flex-wrap items-stretch justify-center w-full h-full mx-auto"
-      >
-        <li
-          v-for="tenant in activeTenants"
-          :key="tenant.slug"
-          class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
-        >
-          <router-link
-            :to="{
-              name: 'Shop',
-              params: { slug: tenant.slug, isActive: tenant.isActive }
-            }"
-            class="flex flex-col h-full overflow-hidden rounded-md bg-secondary"
-          >
-            <tenant-card :tenant="tenant" />
-          </router-link>
-        </li>
-      </ul>
-    </section>
-    <hr class="my-8 border-gray-700" />-->
-    <section class="flex mx-auto my-4 lg:max-w-3xl xl:max-w-5xl">
-      <ul class="flex flex-wrap items-stretch justify-center w-full h-full mx-auto">
-        <li
-          v-for="tenant in inactiveTenants"
-          :key="tenant.slug"
-          class="w-full py-2 md:w-1/2 md:px-2 xl:w-1/3"
-        >
-          <div class="flex flex-col h-full overflow-hidden rounded-md bg-secondary">
-            <tenant-card :tenant="tenant" />
-          </div>
-        </li>
-      </ul>
-    </section>
+    
     <CreditFooter />
   </div>
 </template>
 
 <script>
 import CreditFooter from '@/components/CreditFooter.vue';
-import TenantCard from '@/components/tenant/TenantCard.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
   components: {
-    CreditFooter,
-    TenantCard
+    CreditFooter
   },
   created() {
     this.fetchHomeData();
