@@ -3,9 +3,9 @@
     <Spinner class="min-h-screen" v-if="getLoading" />
     <transition name="fade">
       <div v-show="!getLoading">
-        <BaseSiteBanner>
+        <!-- <BaseSiteBanner>
           Made with ❤️ in Cambodia
-        </BaseSiteBanner>
+        </BaseSiteBanner> -->
         <div class="flex justify-end cursor-pointer mr-3">
           <img
             class="w-10 h-10"
@@ -13,13 +13,13 @@
             v-if="isAuthenticated"
             @click="performRedirect"
           />
-          <span
+          <!-- <span
             class="text-sm md:text-lg text-button"
             v-else
             @click="performRedirect"
           >
             Login
-          </span>
+          </span> -->
         </div>
         <router-view
           class="md:px-8 pb-8 px-4 max-w-screen-xxl mx-auto min-h-screen"
@@ -31,14 +31,14 @@
 
 <script>
 import Spinner from '@/components/Spinner.vue';
-import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
+// import BaseSiteBanner from '@/components/BaseSiteBanner.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'DefaultLayout',
   components: {
-    Spinner,
-    BaseSiteBanner
+    Spinner
+    // BaseSiteBanner
   },
   data() {
     return {
