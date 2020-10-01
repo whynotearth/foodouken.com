@@ -1,19 +1,11 @@
 <template>
   <div
-    class="flex items-center justify-center text-white w-full h-12 text-xs leading-4"
+    class="flex items-center justify-center w-full h-12 text-xs leading-4 text-white"
   >
     <div>
       ⚡
       <span class="opacity-38">
-        powered by
-        <a
-          class="underline"
-          target="_blank"
-          href="https://hub.foodouken.com/foodouken-open-beta-restaurant-sign-up"
-          rel="noopener"
-        >
-          Foodouken.com
-        </a>
+        powered by aurelox llc
       </span>
     </div>
   </div>
