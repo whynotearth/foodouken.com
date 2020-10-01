@@ -6,7 +6,6 @@
       ⚡
       <span class="opacity-38">
         powered by aurelox llc
-        </a>
       </span>
     </div>
   </div>
