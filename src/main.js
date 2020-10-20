@@ -10,7 +10,7 @@ import SmoothPicker from 'vue-smooth-picker';
 import 'vue-smooth-picker/dist/css/style.css';
 import vClickOutside from 'v-click-outside';
 import * as VueGoogleMaps from 'vue2-google-maps';
-
+import Rollbar from 'rollbar';
 
 var dataLayer = dataLayer || [];
 require('typeface-open-sans');
@@ -34,6 +34,18 @@ Vue.use(VueGoogleMaps, {
 });
 
 Vue.config.productionTip = false;
+
+Vue.prototype.$rollbar = new Rollbar({
+  accessToken: '05b7f5cb9a5d4574ba92150f543a8922',
+  captureUncaught: true,
+  captureUnhandledRejections: true
+});
+
+Vue.config.errorHandler = (err, vm) => {
+  vm.$rollbar.error(err);
+  throw err;
+};
+
 
 new Vue({
   store,

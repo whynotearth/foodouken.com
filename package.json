@@ -12,6 +12,7 @@
     "core-js": "^3.6.4",
     "lodash-es": "^4.17.15",
     "register-service-worker": "^1.6.2",
+    "rollbar": "^2.19.4",
     "tailwindcss": "^1.4.6",
     "typeface-open-sans": "0.0.75",
     "v-click-outside": "^3.0.1",
