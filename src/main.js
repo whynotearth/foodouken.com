@@ -36,9 +36,12 @@ Vue.use(VueGoogleMaps, {
 Vue.config.productionTip = false;
 
 Vue.prototype.$rollbar = new Rollbar({
-  accessToken: '05b7f5cb9a5d4574ba92150f543a8922',
+  accessToken: '04f340e4322f438aa41f544423db8dc2',
   captureUncaught: true,
-  captureUnhandledRejections: true
+  captureUnhandledRejections: true,
+  payload: {
+    environment: process.env.NODE_ENV == "development" ? "staging" : "production"
+  }
 });
 
 Vue.config.errorHandler = (err, vm) => {
