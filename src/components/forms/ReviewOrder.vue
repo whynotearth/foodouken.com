@@ -2,10 +2,10 @@
   <div class="w-full">
     <cart />
     <div class="w-full text-left text-white">
-      <h4 class="text-4xl font-bold mb-5">Customer Details</h4>
+      <h4 class="mb-5 text-4xl font-bold">Customer Details</h4>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="home" alt="" />
-        <h6 class="text-gray-500 text-xl font-bold">Delivery Address</h6>
+        <h6 class="text-xl font-bold text-gray-500">Delivery Address</h6>
       </div>
       <div class="mb-5">
         <a
@@ -21,29 +21,29 @@
       </div>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="person" alt="" />
-        <h6 class="text-gray-500 text-xl font-bold">Customer Name</h6>
+        <h6 class="text-xl font-bold text-gray-500">Customer Name</h6>
       </div>
-      <p class=" mb-5">{{ getName }}</p>
+      <p class="mb-5 ">{{ getName }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="phone" alt="" />
-        <h6 class="text-gray-500 text-xl font-bold">Phone Number</h6>
+        <h6 class="text-xl font-bold text-gray-500">Phone Number</h6>
       </div>
-      <p class=" mb-5">{{ getPhone }}</p>
+      <p class="mb-5 ">{{ getPhone }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="email" alt="" />
-        <h6 class="text-gray-500 text-xl font-bold">Email</h6>
+        <h6 class="text-xl font-bold text-gray-500">Email</h6>
       </div>
-      <p class=" mb-5">{{ getEmail }}</p>
+      <p class="mb-5 ">{{ getEmail }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="dollar" alt="" />
-        <h6 class="text-gray-500 text-xl font-bold">Payment Method</h6>
+        <h6 class="text-xl font-bold text-gray-500">Payment Method</h6>
       </div>
-      <p class=" mb-5">{{ getPaymentMethod }}</p>
+      <p class="mb-5 ">{{ getPaymentMethod }}</p>
       <div class="flex">
         <img class="w-6 h-6 mr-6" :src="clock" alt="" />
-        <h6 class="text-gray-500 text-xl font-bold">Estimated Delivery Time</h6>
+        <h6 class="text-xl font-bold text-gray-500">Estimated Delivery Time</h6>
       </div>
-      <p class=" mb-5">
+      <p class="mb-5 ">
         {{ new Date(getTotalTime).toString().substring(0, 21) }}
       </p>
     </div>
@@ -106,7 +106,7 @@ export default {
       'getGoogleLocation'
     ]),
     ...mapGetters('cart', ['cartItems', 'subTotal', 'total', 'totalTax']),
-    ...mapGetters('shop', ['getDeliveryFee']),
+    ...mapGetters('shop', ['getDeliveryFee', 'getOrgData']),
     address() {
       let address = {
         type: '',
@@ -170,6 +170,30 @@ export default {
         message: this.getSpecialRequest,
         userTimeZoneOffset: new Date().getTimezoneOffset()
       };
+      var productPurchaseArr = [];
+      formData.orders.forEach((value) => {
+        productPurchaseArr.push({
+          name: value.name,
+          price: value.price,
+          quantity: value.count,
+          brand: this.getOrgData.name
+        });
+      });
+      window.dataLayer.push({
+        'event': 'purchase',
+        'ecommerce': {
+          'purchase': {
+            'actionField': {
+              'id': Math.floor(Math.random() * Math.floor(9999999999)),
+              'affiliation': 'Foodouken',
+              'revenue': formData.amount,
+              'tax':'0',
+              'shipping': '0'
+            },
+            'products': productPurchaseArr
+          }
+        }
+      });
       this.ping()
         .catch(() => {
           this.register().catch(error => {
