@@ -40,7 +40,7 @@ Vue.prototype.$rollbar = new Rollbar({
   captureUncaught: true,
   captureUnhandledRejections: true,
   payload: {
-    environment: process.env.NODE_ENV == "development" ? "staging" : "production"
+    environment: process.env.NODE_ENV != "production" ? "staging" : "production"
   }
 });
 
