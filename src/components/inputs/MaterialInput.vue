@@ -12,7 +12,7 @@
       :type="type"
       min="0"
       :step="step"
-      :value="value"
+      :value="value | trim"
       @blur="$emit('input', $event.target.value)"
       :pattern="pattern"
       :placeholder="placeholder || label"
@@ -77,6 +77,11 @@ export default {
       return {
         '--symbol': `'${this.symbol}'`
       };
+    }
+  },
+  filters: {
+    trim: function(value) {
+      return value.trim();
     }
   }
 };
