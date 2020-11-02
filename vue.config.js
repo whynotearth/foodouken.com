@@ -1,4 +1,5 @@
 module.exports = {
+  productionSourceMap: false,
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');
 
